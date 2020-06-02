@@ -197,8 +197,10 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
         List<Date> actualStartDatesList = new ArrayList<>();
         for (WebElement element : actualStartDatesElementsList) {
-            Date parse = new SimpleDateFormat("MM/dd/yyyy").parse(element.getText());
-            actualStartDatesList.add(parse);
+            if (!element.getText().isEmpty()) {
+                Date parse = new SimpleDateFormat("MM/dd/yyyy").parse(element.getText());
+                actualStartDatesList.add(parse);
+            }
         }
         Assert.assertEquals(actualStartDatesList, expectedStartDatesList, "Orders have been sorted incorrectly");
     }
@@ -262,11 +264,13 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat());
         for (int i = 1; i < ordersDatesList.size(); i++) {
 
-            final LocalDate previous = LocalDate.parse(ordersDatesList.get(i - 1), formatter);
-            final LocalDate next = LocalDate.parse(ordersDatesList.get(i), formatter);
-            verifyOrderNextTargetDateIsAfterDateStarted(dateBeforeCurrentDate, next);
-            if (previous.isEqual(next)) continue;
-            verifyOrderTargetDateIsWithinBoundaries(previous, next);
+            if (!ordersDatesList.get(i - 1).isEmpty() && !ordersDatesList.get(i).isEmpty()) {
+                final LocalDate previous = LocalDate.parse(ordersDatesList.get(i - 1), formatter);
+                final LocalDate next = LocalDate.parse(ordersDatesList.get(i), formatter);
+                verifyOrderNextTargetDateIsAfterDateStarted(dateBeforeCurrentDate, next);
+                if (previous.isEqual(next)) continue;
+                verifyOrderTargetDateIsWithinBoundaries(previous, next);
+            }
         }
     }
 
@@ -275,11 +279,13 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat());
         for (int i = 1; i < ordersDatesList.size(); i++) {
 
-            final LocalDate previous = LocalDate.parse(ordersDatesList.get(i - 1), formatter);
-            final LocalDate next = LocalDate.parse(ordersDatesList.get(i), formatter);
-            verifyOrderNextTargetDateIsAfterDateStarted(dateStarted, next);
-            if (previous.isEqual(next)) continue;
-            verifyOrderTargetDateIsWithinBoundaries(previous, next, dateFinished);
+            if (!ordersDatesList.get(i - 1).isEmpty() && !ordersDatesList.get(i).isEmpty()) {
+                final LocalDate previous = LocalDate.parse(ordersDatesList.get(i - 1), formatter);
+                final LocalDate next = LocalDate.parse(ordersDatesList.get(i), formatter);
+                verifyOrderNextTargetDateIsAfterDateStarted(dateStarted, next);
+                if (previous.isEqual(next)) continue;
+                verifyOrderTargetDateIsWithinBoundaries(previous, next, dateFinished);
+            }
         }
     }
 

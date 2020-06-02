@@ -36,6 +36,7 @@ public class VNextBOAddOnsPageSteps {
         }
         if (Utils.getText(addOnsPage.getIntegrationStatus(addOn)).equals(IntegrationStatus.OFF.name())) {
             WaitUtilsWebDriver.waitForElementNotToBeStale(addOnsPage.getAddOnsTurnOnButton(addOn), 5);
+            WaitUtilsWebDriver.waitABit(1000);
             Utils.clickElement(addOnsPage.getAddOnsTurnOnButton(addOn));
             confirmAddOnChange(addOn);
         }

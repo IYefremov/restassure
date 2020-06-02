@@ -27,4 +27,9 @@ public class VNextBOReactSearchPanelValidations {
         Assert.assertEquals(VNextBOReactSearchPanelSteps.getSearchInputFieldValue(), "",
                 "The search input field isn't empty");
     }
+
+    public static void verifySearchInputFieldValue(String value) {
+        Assert.assertEquals(VNextBOReactSearchPanelSteps.getSearchInputFieldValue(), value,
+                "The search input field doesn't contain the '" + value + "' text");
+    }
 }

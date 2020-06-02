@@ -238,8 +238,10 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
 
         List<Date> notSortedDates = new ArrayList<>();
         for (WebElement element : startDatesWebElementsList) {
-            Date parse = new SimpleDateFormat("MM/dd/yyyy").parse(element.getText());
-            notSortedDates.add(parse);
+            if (!element.getText().isEmpty()) {
+                Date parse = new SimpleDateFormat("MM/dd/yyyy").parse(element.getText());
+                notSortedDates.add(parse);
+            }
         }
         return notSortedDates.stream()
                 .sorted(Comparator.reverseOrder())
@@ -250,8 +252,10 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
 
         List<Date> notSortedDates = new ArrayList<>();
         for (WebElement element : startDatesWebElementsList) {
-            Date parse = new SimpleDateFormat("MM/dd/yyyy").parse(element.getText());
-            notSortedDates.add(parse);
+            if (!element.getText().isEmpty()) {
+                Date parse = new SimpleDateFormat("MM/dd/yyyy").parse(element.getText());
+                notSortedDates.add(parse);
+            }
         }
         return notSortedDates.stream().sorted().collect(Collectors.toList());
     }

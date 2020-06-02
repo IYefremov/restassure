@@ -44,4 +44,18 @@
             <class name="com.cyberiansoft.test.vnextbo.testcases.servicerequests.VNextBOSRSearchTestCases"/>
         </classes>
     </test>
+    <test name="Service Requests Search Tests">
+        <parameter name="userName" value="test.automation4@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.servicerequests.VNextBOSRLoadMoreTestCases"/>
+        </classes>
+    </test>
+    <test name="Service Requests Search Tests">
+        <parameter name="userName" value="test.automation4@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.servicerequests.VNextBOSRAdvancedSearchTestCases"/>
+        </classes>
+    </test>
 </suite>
