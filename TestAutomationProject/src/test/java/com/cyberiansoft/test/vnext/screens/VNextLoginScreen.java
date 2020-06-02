@@ -5,6 +5,7 @@ import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.utils.ControlUtils;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,7 +21,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Getter
 public class VNextLoginScreen extends VNextBaseScreen {
 
     @FindBy(xpath = "//div[@data-page='employees']")
@@ -52,6 +53,9 @@ public class VNextLoginScreen extends VNextBaseScreen {
 
     @FindBy(xpath = "//*[@data-autotests-id='search-cancel']")
     private WebElement cancelsearchbtn;
+
+    @FindBy(xpath = "//div[@class='simple-item-main-content']")
+    private List<WebElement> employeesNamesList;
 
     public VNextLoginScreen(WebDriver appiumdriver) {
         super(appiumdriver);
