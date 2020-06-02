@@ -196,11 +196,11 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	}
 	
 	public void selectWorkOrderForAction(String workOrderNumber) {
-		appiumdriver.findElementByAccessibilityId(workOrderNumber).findElement(MobileBy.className("XCUIElementTypeOther")).click();
+		workOrdersTable.findElementByAccessibilityId(workOrderNumber).findElement(MobileBy.iOSNsPredicateString("name contains 'EntityInfoButtonUnchecked'")).click();
 	}
 	
 	public SelectEmployeePopup clickWorkOrderForApproveButton(String workOrderNumber) {
-		appiumdriver.findElementByAccessibilityId(workOrderNumber).findElement(MobileBy.className("XCUIElementTypeOther")).click();
+		workOrdersTable.findElementByAccessibilityId(workOrderNumber).findElement(MobileBy.iOSNsPredicateString("name contains 'EntityInfoButtonUnchecked'")).click();
 		return new SelectEmployeePopup();
 	}
 	

@@ -23,7 +23,6 @@ import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequ
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -49,10 +48,14 @@ public class IOSServiceRequestsCreateWOAndInspectionTestCases extends IOSHDBaseT
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
         HomeScreen homeScreen = new HomeScreen();
-
+        final String defCustomerValue = homeScreen.getActiveCustomerValue();
         ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-        ServiceRequestSteps.startCreatingServicerequest(_003_Test_Customer,
-                ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE);
+        if (!defCustomerValue.equals(_003_Test_Customer.getCompany())) {
+            ServiceRequestSteps.startCreatingServicerequest(_003_Test_Customer,
+                    ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE);
+        } else
+            ServiceRequestSteps.startCreatingServicerequest(
+                    ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE);
         VehicleScreen vehicleScreen = new VehicleScreen();
         vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
         vehicleScreen.verifyMakeModelyearValues(serviceRequestData.getVihicleInfo().getVehicleMake(),
@@ -101,7 +104,7 @@ public class IOSServiceRequestsCreateWOAndInspectionTestCases extends IOSHDBaseT
         settingsScreen.clickHomeButton();
         CustomersScreen customersScreen = homeScreen.clickCustomersButton();
         customersScreen.swtchToWholesaleMode();
-        customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+        customersScreen.selectCustomerWithoutEditing(_003_Test_Customer.getCompany());
 
         ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
         ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_INSP_ONLY);
@@ -143,7 +146,7 @@ public class IOSServiceRequestsCreateWOAndInspectionTestCases extends IOSHDBaseT
         TeamInspectionsScreen teamInspectionsScreen = new TeamInspectionsScreen();
         teamInspectionsScreen.waitTeamInspectionsScreenLoaded();
         Assert.assertTrue(teamInspectionsScreen.isInspectionExists(inspectionNumber));
-        NavigationSteps.navigateBackScreen();
+        teamInspectionsScreen.clickBackServiceRequest();
         NavigationSteps.navigateBackScreen();
         NavigationSteps.navigateBackScreen();
     }
@@ -158,7 +161,7 @@ public class IOSServiceRequestsCreateWOAndInspectionTestCases extends IOSHDBaseT
 
         HomeScreen homeScreen = new HomeScreen();
         CustomersScreen customersScreen = homeScreen.clickCustomersButton();
-        customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+        customersScreen.selectCustomerWithoutEditing(_003_Test_Customer.getCompany());
 
         ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
         ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();

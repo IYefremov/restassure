@@ -100,6 +100,8 @@ public class RegularNotesScreen extends iOSRegularBaseScreen {
 	}
 	
 	public boolean isNotesPresent(String _notes) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("txtNotes")));
 		return appiumdriver.findElementsByAccessibilityId(_notes).size() > 0;
 	}
 
