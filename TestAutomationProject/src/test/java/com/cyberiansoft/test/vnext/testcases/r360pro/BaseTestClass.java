@@ -89,7 +89,7 @@ public class BaseTestClass {
 
         WebDriver chromeWebDriver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
         //chromeWebDriver.get("http://R360user:Geev9ied@77.120.104.171:8000");
-        chromeWebDriver.get("http://208.87.18.5:8000/");
+        chromeWebDriver.get("http://208.87.18.5:8082/");
 
         if (VNextEnvironmentInfo.getInstance().installNewBuild()) {
             String regCode = getRegistrationCode(licenseName);
