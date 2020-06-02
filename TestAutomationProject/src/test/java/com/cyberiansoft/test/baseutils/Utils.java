@@ -118,6 +118,14 @@ public class Utils {
         WaitUtilsWebDriver.waitABit(500);
     }
 
+    public static void clearUsingKeyboard(WebElement element) {
+        final Actions actions = new Actions(DriverBuilder.getInstance().getDriver());
+        actions.sendKeys(element, Keys.END).build().perform();
+        while (!Utils.getInputFieldValue(element).isEmpty()) {
+            actions.sendKeys(element, Keys.DELETE).build().perform();
+        }
+    }
+
     public static void clickWithJS(WebElement element) {
         ((JavascriptExecutor) DriverBuilder.getInstance().getDriver()).executeScript("arguments[0].click();", element);
     }
@@ -169,6 +177,10 @@ public class Utils {
     public static void selectOption(WebElement dropDown, List<WebElement> listBox, String selection) {
         waitForDropDownToBeOpened(dropDown);
         WaitUtilsWebDriver.waitForVisibilityOfAllOptions(listBox, 1);
+        clickMatchingOptionInDropDown(listBox, selection);
+    }
+
+    public static void clickMatchingOptionInDropDown(List<WebElement> listBox, String selection) {
         getMatchingOptionInListBox(listBox, selection)
                 .ifPresent((option) -> {
                     moveToElement(option);

@@ -14,6 +14,9 @@ public class VNextBOSRPage extends VNextBOBaseWebPage {
     @FindBy(id = "serviceRequests-view")
     private WebElement serviceRequestsView;
 
+    @FindBy(xpath = "//div[@class='LoadMoreButton']/button")
+    private WebElement loadMoreButton;
+
     public VNextBOSRPage() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);

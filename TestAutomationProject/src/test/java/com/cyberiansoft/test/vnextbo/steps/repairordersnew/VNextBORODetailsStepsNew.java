@@ -60,7 +60,7 @@ public class VNextBORODetailsStepsNew {
         ConditionWaiter.create(__ -> detailsWebPageNew.getReportProblemForPhaseActionButton().isEnabled()).execute();
         Utils.clickElement(detailsWebPageNew.getReportProblemForPhaseActionButton());
         VNextBOROReportProblemDialogStepsNew.reportProblemWithoutDescription(problemReason);
-        ConditionWaiter.create(__ -> detailsWebPageNew.phaseStatusDropDownByPhase(phase).equals("Problem")).execute();
+        ConditionWaiter.create(__ -> Utils.getText(detailsWebPageNew.phaseStatusDropDownByPhase(phase)).equals("Problem")).execute();
     }
 
     public static void reportProblemForServiceWithoutDescription(String service, String problemReason) {
@@ -72,7 +72,7 @@ public class VNextBORODetailsStepsNew {
         Utils.clickElement(detailsWebPageNew.getReportProblemForServiceActionButton());
         VNextBOROReportProblemDialogStepsNew.reportProblemWithoutDescription(problemReason);
         WaitUtilsWebDriver.waitForPageToBeLoaded();
-        ConditionWaiter.create(__ -> !Utils.getText(detailsWebPageNew.serviceStatusDropDownByService(service)).equals("Problem")).execute();
+        ConditionWaiter.create(__ -> Utils.getText(detailsWebPageNew.serviceStatusDropDownByService(service)).equals("Problem")).execute();
     }
 
     public static void openCompleteCurrentPhaseDialog(String phase) {
@@ -94,7 +94,7 @@ public class VNextBORODetailsStepsNew {
         Utils.clickElement(detailsWebPageNew.getReportProblemForPhaseActionButton());
         VNextBOROReportProblemDialogStepsNew.reportProblemWithDescription(problemReason, problemDescription);
         WaitUtilsWebDriver.waitForPageToBeLoaded();
-        ConditionWaiter.create(__ -> detailsWebPageNew.phaseStatusDropDownByPhase(phase).equals("Problem")).execute();
+        ConditionWaiter.create(__ -> Utils.getText(detailsWebPageNew.phaseStatusDropDownByPhase(phase)).equals("Problem")).execute();
     }
 
     public static void reportProblemForServiceWithDescription(String service, String problemReason, String problemDescription) {
@@ -106,7 +106,7 @@ public class VNextBORODetailsStepsNew {
         Utils.clickElement(detailsWebPageNew.getReportProblemForServiceActionButton());
         VNextBOROReportProblemDialogStepsNew.reportProblemWithDescription(problemReason, problemDescription);
         WaitUtilsWebDriver.waitForPageToBeLoaded();
-        ConditionWaiter.create(__ -> !Utils.getText(detailsWebPageNew.serviceStatusDropDownByService(service)).equals("Problem")).execute();
+        ConditionWaiter.create(__ -> Utils.getText(detailsWebPageNew.serviceStatusDropDownByService(service)).equals("Problem")).execute();
     }
 
     public static void resolveProblemOnPhaseLevel(String phase) {
