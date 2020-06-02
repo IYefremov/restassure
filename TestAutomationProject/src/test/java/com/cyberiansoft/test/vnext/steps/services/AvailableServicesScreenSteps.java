@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.steps.services;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.MatrixServiceData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
@@ -26,6 +27,7 @@ public class AvailableServicesScreenSteps {
         switchToAvailableServices();
         SearchSteps.textSearch(serviceName);
         servicesScreen.selectSingleService(serviceName);
+        BaseUtils.waitABit(500);
     }
 
     public static void clickAddServiceButton(String serviceName) {
