@@ -2,6 +2,8 @@ package com.cyberiansoft.test.vnextbo.steps.servicerequests.dialogs;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.dataclasses.vNextBO.servicerequests.VNextBOSRSearchData;
+import com.cyberiansoft.test.enums.TimeFrameValues;
 import com.cyberiansoft.test.vnextbo.screens.servicerequests.dialogs.VNextBOSRAdvancedSearchDialog;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOReactSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOReactSearchPanelValidations;
@@ -145,16 +147,16 @@ public class VNextBOSRAdvancedSearchDialogSteps {
         VNextBOReactSearchPanelValidations.verifySearchInputFieldValue(value);
     }
 
-    public static void setTimeFrame(String timeFrame) {
+    public static void setTimeFrame(TimeFrameValues timeFrame) {
         final WebElement timeFrameField = new VNextBOSRAdvancedSearchDialog().getTimeFrameField();
         WaitUtilsWebDriver.waitForElementToBeClickable(timeFrameField, 2);
-        new Select(timeFrameField).selectByVisibleText(timeFrame);
+        new Select(timeFrameField).selectByVisibleText(timeFrame.getName());
     }
 
-    public static void setTimeFrame(String timeFrame, String from, String to) {
-        setTimeFrame(timeFrame);
-        setFromDateField(from);
-        setToDateField(to);
+    public static void setCustomTimeFrame(VNextBOSRSearchData searchData) {
+        setTimeFrame(TimeFrameValues.TIMEFRAME_CUSTOM);
+        setFromDateField(searchData.getFromDate());
+        setToDateField(searchData.getToDate());
     }
 
     public static void setFromDateField(String from) {
@@ -183,6 +185,14 @@ public class VNextBOSRAdvancedSearchDialogSteps {
         Utils.clearAndType(new VNextBOSRAdvancedSearchDialog().getStockNumField(), stockNum);
     }
 
+    public static void setVinNum(String vinNum) {
+        Utils.clearAndType(new VNextBOSRAdvancedSearchDialog().getVinNumField(), vinNum);
+    }
+
+    public static void setSrNum(String vinNum) {
+        Utils.clearAndType(new VNextBOSRAdvancedSearchDialog().getSrNumField(), vinNum);
+    }
+
     public static void search() {
         clickSearchButton();
         VNextBOSRAdvancedSearchDialogValidations.verifyAdvancedSearchDialogIsClosed();
@@ -197,6 +207,10 @@ public class VNextBOSRAdvancedSearchDialogSteps {
     public static void clear() {
         clickClearButton();
         VNextBOReactSearchPanelValidations.verifyFilterInfoTextIsDisplayed();
+    }
+
+    public static String getVinErrorMessage() {
+        return Utils.getText(new VNextBOSRAdvancedSearchDialog().getVinNumError());
     }
 
     public static void clickClearButton() {

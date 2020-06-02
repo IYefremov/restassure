@@ -1,9 +1,9 @@
 package com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.dataclasses.vNextBO.alerts.VNextBOAlertMessages;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOPartsProvidersRequestFormDialogInteractions;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs.VNextBOPartsProvidersRequestFormDialog;
-import com.cyberiansoft.test.vnextbo.utils.VNextBOAlertMessages;
 import org.testng.Assert;
 
 import java.util.List;

@@ -194,5 +194,112 @@
       },
       "infoText": "Stock#: 123; Timeframe: Last Year;"
     }
+  ],
+  "verifyUserCanSearchByVinNum": [
+    {
+      "rowID": "verifyUserCanSearchByVinNum.01",
+      "description": "Test Case 125722:Verify user can search by \"VIN\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125722"
+        }
+      ],
+      "searchData": {
+        "fromDate": "05/26/2019",
+        "toDate": "05/26/2020",
+        "searchValues": [
+          "123",
+          "12345678901234567",
+          "123456789012345678",
+          "123I",
+          "O123",
+          "Q",
+          "TEST"
+        ]
+      },
+      "infoText": "VIN#: 123; Timeframe: Last Year;"
+    }
+  ],
+  "verifyUserCanSearchBySrNum": [
+    {
+      "rowID": "verifyUserCanSearchBySrNum.01",
+      "description": "Test Case 125719:Verify user can search by \"SR#\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125719"
+        }
+      ],
+      "searchData": {
+        "fromDate": "05/26/2019",
+        "toDate": "05/26/2020",
+        "srNum": "R-00054304",
+        "searchValues": [
+          "4304",
+          "R-0005",
+          "00543"
+        ]
+      },
+      "infoText": "SR#: R-00054304; FromDate: 05/26/2019; ToDate: 05/26/2020;"
+    }
+  ],
+  "verifyUserCanSearchByTimeFrameToday": [
+    {
+      "rowID": "verifyUserCanSearchByTimeFrameToday.01",
+      "description": "Test Case 125723:Verify user can search by timeframe \"Today\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125723"
+        }
+      ],
+      "infoText": "Timeframe: Today;"
+    }
+  ],
+  "verifyUserCanSearchByTimeFrameWeekToDate": [
+    {
+      "rowID": "verifyUserCanSearchByTimeFrameWeekToDate.01",
+      "description": "Test Case 125724:Verify user can search by timeframe \"Week To Date\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125724"
+        }
+      ],
+      "infoText": "Timeframe: Week To Date;"
+    }
+  ],
+  "verifyUserCanSearchByLastWeekTimeFrame": [
+    {
+      "rowID": "verifyUserCanSearchByLastWeekTimeFrame.01",
+      "description": "Test Case 125725:Verify user can search by timeframe \"Week To Date\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125725"
+        }
+      ],
+      "infoText": "Timeframe: Last Week;"
+    }
+  ],
+  "verifyUserCanSearchByMonthToDateTimeFrame": [
+    {
+      "rowID": "verifyUserCanSearchByMonthToDateTimeFrame.01",
+      "description": "Test Case 125726:Verify user can search by timeframe \"Month To Date\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125726"
+        }
+      ],
+      "infoText": "Timeframe: Month to Date;"
+    }
+  ],
+  "verifyUserCanSearchByLastMonthTimeFrame": [
+    {
+      "rowID": "verifyUserCanSearchByLastMonthTimeFrame.01",
+      "description": "Test Case 125727:Verify user can search by timeframe \"Last Month\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125727"
+        }
+      ],
+      "infoText": "Timeframe: Last Month;"
+    }
   ]
 }

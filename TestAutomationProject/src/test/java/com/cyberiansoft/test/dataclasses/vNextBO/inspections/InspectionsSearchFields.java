@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.utils;
+package com.cyberiansoft.test.dataclasses.vNextBO.inspections;
 
 import lombok.Getter;
 

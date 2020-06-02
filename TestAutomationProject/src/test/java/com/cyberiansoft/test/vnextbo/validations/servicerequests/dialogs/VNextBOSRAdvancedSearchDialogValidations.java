@@ -71,4 +71,9 @@ public class VNextBOSRAdvancedSearchDialogValidations {
                     "The employee in dropdown doesn't contain the '" + text + "' text");
         });
     }
+
+    public static void verifyVinErrorMessageIsDisplayed(String expected) {
+        Assert.assertEquals(VNextBOSRAdvancedSearchDialogSteps.getVinErrorMessage(), expected,
+                "The VIN error message hasn't been displayed");
+    }
 }

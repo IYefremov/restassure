@@ -1,9 +1,9 @@
 package com.cyberiansoft.test.dataclasses.vNextBO;
 
 import com.cyberiansoft.test.dataclasses.vNextBO.companyinfo.VNextBOCompanyInfoData;
+import com.cyberiansoft.test.dataclasses.vNextBO.inspections.InspectionsSearchFields;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsData;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementSearchData;
-import com.cyberiansoft.test.vnextbo.utils.InspectionsSearchFields;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 

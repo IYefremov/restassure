@@ -1,9 +1,9 @@
 package com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.dataclasses.vNextBO.alerts.VNextBOAlertMessages;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs.VNextBOChangePartsDialog;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs.VNextBOChangePartsDialogSteps;
-import com.cyberiansoft.test.vnextbo.utils.VNextBOAlertMessages;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 

@@ -4,6 +4,7 @@ import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBONewSmokeData;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOQuickNotesData;
 import com.cyberiansoft.test.dataclasses.vNextBO.deviceManagement.VNextBODeviceManagementData;
+import com.cyberiansoft.test.dataclasses.vNextBO.inspections.InspectionsSearchFields;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementData;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -34,7 +35,6 @@ import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORODetailsPageStep
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORONotesPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.utils.InspectionsSearchFields;
 import com.cyberiansoft.test.vnextbo.validations.VNextBONotesPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOAccountInfoBlockValidations;
 import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientsPageValidations;
