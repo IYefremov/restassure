@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.ConditionWaiter;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
@@ -84,6 +85,8 @@ public class HomeScreenSteps {
 
     public static void logOut() {
         VNextBaseScreen vNextBaseScreen = new VNextBaseScreen();
+        ConditionWaiter.create(__ -> vNextBaseScreen.getLogoutButton().isDisplayed()).execute();
+        ConditionWaiter.create(__ -> vNextBaseScreen.getLogoutButton().isEnabled()).execute();
         WaitUtils.click(vNextBaseScreen.getLogoutButton());
     }
 

@@ -246,4 +246,8 @@ public class VNextProTestCasesDataPaths {
     public String getServiceRequestsTestCasesDataPath() {
         return props.getProperty("service.requests");
     }
+
+    public String getSearchEmployeeOnLoginTestCasesDataPath() {
+        return props.getProperty("login.search.employee.td");
+    }
 }
