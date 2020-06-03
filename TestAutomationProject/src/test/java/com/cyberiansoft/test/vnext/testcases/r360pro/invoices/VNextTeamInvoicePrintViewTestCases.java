@@ -72,7 +72,7 @@ public class VNextTeamInvoicePrintViewTestCases extends BaseTestClass {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserSeeCorrectCustomerInfo(String rowID, String description, JSONObject testData) {
 
-        VNextInvoiceViewScreenValidations.verifyCustomerInfoIsDisplayed(testcustomer.getFullName(), "US");
+        VNextInvoiceViewScreenValidations.verifyCustomerInfoIsDisplayed(testcustomer.getFullName(), "AZ, US");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
