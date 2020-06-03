@@ -24,8 +24,8 @@ public class TopScreenPanelSteps {
 
     public static void openSearchPanel() {
 
-        ConditionWaiter.create(__ -> new VNextTopScreenPanel().getSearchButton().isDisplayed()).execute();
         WaitUtilsWebDriver.waitABit(1000);
+        ConditionWaiter.create(__ -> new VNextTopScreenPanel().getSearchButton().isDisplayed()).execute();
         new VNextTopScreenPanel().getSearchButton().click();
     }
 
