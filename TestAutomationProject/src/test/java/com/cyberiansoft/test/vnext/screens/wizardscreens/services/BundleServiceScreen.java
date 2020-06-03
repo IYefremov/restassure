@@ -26,7 +26,7 @@ public class BundleServiceScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@class='amount selected-services-amount']")
     private WebElement selectedServicesAmount;
 
-    @FindBy(xpath = "//*[@data-entity-service-id]")
+    @FindBy(xpath = "//*[contains(@data-autotests-id, 'services-list')]/div")
     private List<ServiceListItem> serviceList;
 
     public BundleServiceScreen() {

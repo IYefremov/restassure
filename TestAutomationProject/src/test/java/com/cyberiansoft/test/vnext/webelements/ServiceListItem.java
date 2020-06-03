@@ -10,7 +10,7 @@ public class ServiceListItem implements IWebElement {
     private String priceLocator = ".//div[contains(@class,'checkbox-item-subtitle checkbox-item-price')]";
     private String serviceNameLocator = ".//div[@class='checkbox-item-title']";
     private String serviceDescriptionLocator = ".//div[@class='checkbox-item-description']";
-    private String servicePartInfoLocator = ".//div[@class='part-info-desc-name']";
+    private String servicePartInfoLocator = ".//div[@class='checkbox-item-description']";
     private String addServiceLocator = ".//input[contains(@class, 'plus-checkbox')]";
     private String unSelectServiceLocator = ".//*[@action='delete-service']";
     private String matrixServiceLocator = ".//div[@class='checkbox-item-subtitle checkbox-item-price']";
