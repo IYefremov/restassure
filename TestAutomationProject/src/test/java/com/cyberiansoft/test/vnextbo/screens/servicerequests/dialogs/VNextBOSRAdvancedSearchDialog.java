@@ -110,6 +110,9 @@ public class VNextBOSRAdvancedSearchDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//input[@id='HasRecalls']/../span[@class='Checkbox-span']")
     private WebElement recallsCheckbox;
 
+    @FindBy(xpath = "//input[@id='VIN']/following-sibling::span")
+    private WebElement vinNumError;
+
     public HashMap<String, WebElement> getElementsWithPlaceholder() {
         return new HashMap<String, WebElement>() {{
             put("Has this text", hasThisTextField);

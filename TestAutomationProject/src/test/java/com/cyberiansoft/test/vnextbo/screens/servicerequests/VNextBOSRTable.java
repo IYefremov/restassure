@@ -35,6 +35,9 @@ public class VNextBOSRTable extends VNextBOSRPage {
     @FindBy(xpath = "//div[@name='Type_serviceRequestNameInfo']")
     private List<WebElement> srTypesList;
 
+    @FindBy(xpath = "//div[@name='Created_Progress']")
+    private List<WebElement> createdDatesList;
+
     public VNextBOSRTable() {
         super();
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);

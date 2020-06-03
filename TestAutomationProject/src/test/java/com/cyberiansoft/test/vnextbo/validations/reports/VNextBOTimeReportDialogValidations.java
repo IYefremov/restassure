@@ -1,9 +1,9 @@
 package com.cyberiansoft.test.vnextbo.validations.reports;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.dataclasses.vNextBO.alerts.VNextBOAlertMessages;
 import com.cyberiansoft.test.vnextbo.screens.reports.VNextBOTimeReportDialog;
 import com.cyberiansoft.test.vnextbo.steps.reports.VNextBOTimeReportDialogSteps;
-import com.cyberiansoft.test.vnextbo.utils.VNextBOAlertMessages;
 import org.testng.Assert;
 
 public class VNextBOTimeReportDialogValidations {

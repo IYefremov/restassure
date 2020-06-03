@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.reports;
 
+import com.cyberiansoft.test.dataclasses.vNextBO.alerts.VNextBOAlertMessages;
 import com.cyberiansoft.test.dataclasses.vNextBO.reports.VNextBOReportsData;
 import com.cyberiansoft.test.dataclasses.vNextBO.reports.VNextBOReportsDatesData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -9,7 +10,6 @@ import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuI
 import com.cyberiansoft.test.vnextbo.steps.reports.VNextBOReportsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.reports.VNextBOTimeReportDialogSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.utils.VNextBOAlertMessages;
 import com.cyberiansoft.test.vnextbo.validations.reports.VNextBOReportsPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.reports.VNextBOTimeReportDialogValidations;
 import org.json.simple.JSONObject;

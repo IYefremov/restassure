@@ -59,4 +59,7 @@ public class VNextBOSRSearchData {
 
     @JsonProperty("tag")
     private String tag;
+
+    @JsonProperty("searchValues")
+    private String[] searchValues;
 }
