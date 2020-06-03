@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens;
 
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
+import com.cyberiansoft.test.ios10_client.utils.AppiumWait;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -120,11 +121,12 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 
 	public void selectServiceRequest(String serviceRequestNumber) {
 		waitForServiceRequestScreenLoad();
-		WebElement seCell = serviceRequestsTable.findElementByAccessibilityId(serviceRequestNumber);
-		if (!seCell.isDisplayed()) {
-			swipeToElement(seCell);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 90);
+		WebElement srCell = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(serviceRequestNumber)));
+		if (!srCell.isDisplayed()) {
+			swipeToElement(srCell);
 		}
-		seCell.click();
+		srCell.click();
 	}
 	
 	public void selectEditServiceRequestAction() {
@@ -179,8 +181,13 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeButton[@name='decline little']").size() > 0;
 	}
 	
-	public boolean isServiceRequestExists(String srnumber) {
-		return Helpers.elementExists(MobileBy.name(srnumber));
+	public void isServiceRequestExists(String srNumber, boolean isExists) {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 90);
+		MobileElement srTable = (MobileElement) wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypeTable")));
+		if (isExists)
+			AppiumWait.getGeneralFluentWait(60, 300).until(driver -> srTable.findElements(MobileBy.AccessibilityId(srNumber)).size() > 0);
+		else
+			AppiumWait.getGeneralFluentWait(60, 300).until(driver -> srTable.findElements(MobileBy.AccessibilityId(srNumber)).size() < 1);
 	}
 	
 	public void selectCancelAction() {
@@ -188,9 +195,9 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	}
 
 	
-	public String getServiceRequestClient(String srnumber) {
+	public String getServiceRequestClient(String srNumber) {
 		MobileElement srTable = (MobileElement) appiumdriver.findElementByClassName("XCUIElementTypeTable");
-		return srTable.findElementByAccessibilityId(srnumber).findElementByAccessibilityId("labelServiceRequestClient").getAttribute("value");
+		return srTable.findElementByAccessibilityId(srNumber).findElementByAccessibilityId("labelServiceRequestClient").getAttribute("value");
 	}
 	
 	public String getServiceRequestDetails(String srnumber) {
@@ -199,7 +206,10 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	}
 	
 	public String getServiceRequestStatus(String srnumber) {
-        return waitForServiceRequestScreenLoad().findElement(MobileBy.AccessibilityId(srnumber)).findElement(MobileBy.className("XCUIElementTypeStaticText")).getAttribute("value");
+		WebElement srTable = waitForServiceRequestScreenLoad();
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 90);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(srnumber)));
+        return srTable.findElement(MobileBy.AccessibilityId(srnumber)).findElement(MobileBy.className("XCUIElementTypeStaticText")).getAttribute("value");
 	}
 	
 	public String getFirstServiceRequestNumber() {
@@ -250,7 +260,7 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 
 	public void saveAppointment() {
 		appiumdriver.findElementByAccessibilityId("Save").click();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 45);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Appointments")));
 	}
 	
@@ -284,15 +294,8 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	
 	public boolean isServiceRequestProposed(String serviceRequestNumber) {
 		waitForServiceRequestScreenLoad();
-		WebElement srCell = new FluentWait<AppiumDriver>(appiumdriver)
-				.withTimeout(Duration.ofSeconds(45))
-				.pollingEvery(Duration.ofMillis(500))
-				.ignoring(ElementClickInterceptedException.class)
-				.ignoring(WebDriverException.class)
-				.ignoring(AssertionError.class)
-				.ignoring(StaleElementReferenceException.class)
-				.ignoring(RuntimeException.class).until(ExpectedConditions.elementToBeClickable(serviceRequestsTable.findElementByAccessibilityId(serviceRequestNumber)));
-		//return serviceRequestsTable.findElementByAccessibilityId(serviceRequestNumber)
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 90);
+		WebElement srCell = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(serviceRequestNumber)));
 		return srCell.findElements(MobileBy.iOSNsPredicateString("name CONTAINS 'ButtonImageId_109'")).size() > 0;
 	}
 	

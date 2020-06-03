@@ -21,6 +21,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularQuestionsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularVehicleScreen;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
+import com.cyberiansoft.test.ios10_client.regularvalidations.RegularServiceRequestsScreenValidations;
 import com.cyberiansoft.test.ios10_client.testcases.regular.IOSRegularBaseTestCase;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
@@ -66,7 +67,6 @@ public class IOSServiceRequestsStatusReasonTestCases extends IOSRegularBaseTestC
         String serviceRequestNumber = serviceRequestSscreen.getFirstServiceRequestNumber();
         Assert.assertEquals(serviceRequestSscreen.getServiceRequestStatus(serviceRequestNumber), ServiceRequestStatus.SCHEDULED.getValue());
         serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
-        Assert.assertTrue(serviceRequestSscreen.isServiceRequestExists(serviceRequestNumber));
         Assert.assertTrue(serviceRequestSscreen.isCloseActionExists());
         serviceRequestSscreen.selectCloseAction();
         AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CLOSE_SERVICEREQUEST);
@@ -76,7 +76,7 @@ public class IOSServiceRequestsStatusReasonTestCases extends IOSRegularBaseTestC
         questionsScreen.answerQuestion2(answerQuestion);
         serviceRequestSscreen.clickCloseSR();
         serviceRequestSscreen.waitForServiceRequestScreenLoad();
-        Assert.assertFalse(serviceRequestSscreen.isServiceRequestExists(serviceRequestNumber));
+        RegularServiceRequestsScreenValidations.verifyServiceRequestPresent(serviceRequestNumber, false);
         serviceRequestSscreen.clickHomeButton();
     }
 
@@ -107,12 +107,11 @@ public class IOSServiceRequestsStatusReasonTestCases extends IOSRegularBaseTestC
         String serviceRequestNumber = serviceRequestSscreen.getFirstServiceRequestNumber();
         Assert.assertEquals(serviceRequestSscreen.getServiceRequestStatus(serviceRequestNumber), ServiceRequestStatus.SCHEDULED.getValue());
         serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
-        Assert.assertTrue(serviceRequestSscreen.isServiceRequestExists(serviceRequestNumber));
         Assert.assertTrue(serviceRequestSscreen.isCloseActionExists());
         serviceRequestSscreen.selectCloseAction();
         AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CLOSE_SERVICEREQUEST);
         serviceRequestSscreen.selectDoneReason(answerReason);
-        Assert.assertFalse(serviceRequestSscreen.isServiceRequestExists(serviceRequestNumber));
+        RegularServiceRequestsScreenValidations.verifyServiceRequestPresent(serviceRequestNumber, false);
         serviceRequestSscreen.clickHomeButton();
     }
 
@@ -165,8 +164,7 @@ public class IOSServiceRequestsStatusReasonTestCases extends IOSRegularBaseTestC
 
         AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_DECLINE_SERVICEREQUEST);
         serviceRequestSscreen.clickDoneCloseReasonDialog();
-        serviceRequestSscreen.waitForServiceRequestScreenLoad();
-        Assert.assertFalse(serviceRequestSscreen.isServiceRequestExists(serviceRequestNumber));
+        RegularServiceRequestsScreenValidations.verifyServiceRequestPresent(serviceRequestNumber, false);
         serviceRequestSscreen.clickHomeButton();
 
     }

@@ -113,7 +113,7 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         RegularServiceDetailsScreenValidations.verifyServiceTechnicianPercentageValue(workOrderData.getVehicleInfoData().getDefaultTechnician(),
                 workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianPercentageValue());
         RegularServiceDetailsScreenSteps.saveServiceDetails();
-        RegularAssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
+        RegularAssignTechniciansSteps.clickDoneButton();
         RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
         RegularNavigationSteps.navigateToServicesScreen();
         Assert.assertEquals(servicesScreen.getTotalAmaunt(),
@@ -281,7 +281,7 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         RegularVehicleInfoScreenSteps.clickTech();
         RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician());
         RegularServiceDetailsScreenSteps.saveServiceDetails();
-        RegularAssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
+        RegularAssignTechniciansSteps.clickDoneButton();
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreenSteps.switchToSelectedServices();
         RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getServiceData().getServiceName());
@@ -444,7 +444,7 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
             RegularServiceDetailsScreenSteps.selectServiceTechnician(serviceTechnician);
         RegularServiceDetailsScreenSteps.saveServiceDetails();
-        RegularAssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
+        RegularAssignTechniciansSteps.clickDoneButton();
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreenSteps.switchToSelectedServices();
 
@@ -532,7 +532,7 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
             RegularServiceDetailsScreenSteps.selectServiceTechnician(serviceTechnician);
         //selectedServiceDetailsScreen.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
         RegularServiceDetailsScreenSteps.saveServiceDetails();
-        RegularAssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
+        RegularAssignTechniciansSteps.clickDoneButton();
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreenSteps.switchToSelectedServices();
 
@@ -621,7 +621,7 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
             RegularServiceDetailsScreenSteps.selectServiceTechnician(serviceTechnician);
 
         RegularServiceDetailsScreenSteps.saveServiceDetails();
-        RegularAssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
+        RegularAssignTechniciansSteps.clickDoneButton();
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreenSteps.switchToSelectedServices();
 
