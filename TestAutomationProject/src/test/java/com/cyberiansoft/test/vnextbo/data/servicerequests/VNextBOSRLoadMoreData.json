@@ -1,0 +1,13 @@
+{
+  "verifyNewScopeOfServiceRequestsAreLoaded": [
+    {
+      "rowID": "verifyNewScopeOfServiceRequestsAreLoaded.01",
+      "description": "Test Case 125685:Verify new scope of Service Requests will be loaded and inserted at the bottom of list",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125685"
+        }
+      ]
+    }
+  ]
+}

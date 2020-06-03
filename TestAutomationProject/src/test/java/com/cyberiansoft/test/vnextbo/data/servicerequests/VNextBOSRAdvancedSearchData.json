@@ -1,0 +1,198 @@
+{
+  "verifyUserCanSearchByHasThisText": [
+    {
+      "rowID": "verifyUserCanSearchByHasThisText.01",
+      "description": "Test Case 125711:Verify user can find by \"Has this text\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125711"
+        }
+      ],
+      "searchData": {
+        "hasThisText": "test"
+      },
+      "infoText": "Has this text: test; Timeframe: Last Year;"
+    }
+  ],
+  "verifyTheHasThisTextFieldDuplicatesTheValueOfTheFreeTextSearch": [
+    {
+      "rowID": "verifyTheHasThisTextFieldDuplicatesTheValueOfTheFreeTextSearch.01",
+      "description": "Test Case 125712:Verify the \"Has this text\" field duplicate value of free text search value.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125712"
+        }
+      ],
+      "searchData": {
+        "hasThisText": "test123"
+      }
+    }
+  ],
+  "verifyUserCanSearchByCustomerUsingAutocomplete": [
+    {
+      "rowID": "verifyUserCanSearchByCustomerUsingAutocomplete.01",
+      "description": "Test Case 125713:Verify user can search by \"Customer\" using autocomplete",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125713"
+        }
+      ],
+      "searchData": {
+        "customer": "VD_Company"
+      },
+      "infoText": "Customer: VD_Company; Timeframe: Last Year;"
+    }
+  ],
+  "verifyUserCanSearchByOwnerUsingAutocomplete": [
+    {
+      "rowID": "verifyUserCanSearchByOwnerUsingAutocomplete.01",
+      "description": "Test Case 125714:Verify user can search by \"Owner\" using autocomplete",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125714"
+        }
+      ],
+      "searchData": {
+        "owner": "Bratan"
+      },
+      "infoText": "Owner: Bratan; Timeframe: Last Year;"
+    }
+  ],
+  "verifyUserCanSearchByAdvisorUsingAutocomplete": [
+    {
+      "rowID": "verifyUserCanSearchByAdvisorUsingAutocomplete.01",
+      "description": "Test Case 125715:Verify user can search by \"Advisor\" using autocomplete",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125715"
+        }
+      ],
+      "searchData": {
+        "advisor": "Advisor Bratana",
+        "fromDate": "05/26/2019",
+        "toDate": "05/26/2020",
+        "status": "Any"
+      },
+      "infoText": "Advisor: Advisor Bratana; FromDate: 05/26/2019; ToDate: 05/26/2020;"
+    }
+  ],
+  "verifyUserCanSearchByEmployeeUsingAutocomplete": [
+    {
+      "rowID": "verifyUserCanSearchByEmployeeUsingAutocomplete.01",
+      "description": "Test Case 125716:Verify user can search by \"Employee\" using autocomplete",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125716"
+        }
+      ],
+      "searchData": {
+        "employee": "Drake Ramores"
+      },
+      "infoText": "Employee: Drake Ramores; Timeframe: Last Year;"
+    }
+  ],
+  "verifyUserCanSearchByStatus": [
+    {
+      "rowID": "verifyUserCanSearchByAllActiveStatus.01",
+      "description": "Test Case 125733:Verify user can search by status \"All Active (all not closed)\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125733"
+        }
+      ],
+      "searchData": {
+        "status": "All Active (all not closed)"
+      },
+      "expectedStatus": "All Active (all not closed)",
+      "infoText": "Timeframe: Last Year; Status: All Active (all not closed);"
+    },
+    {
+      "rowID": "verifyUserCanSearchByAllOnHoldStatus.01",
+      "description": "Test Case 128171:Verify user can search by status \"All On Hold\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "128171"
+        }
+      ],
+      "searchData": {
+        "status": "All On Hold"
+      },
+      "expectedStatus": "OnHold",
+      "infoText": "Timeframe: Last Year; Status: All On Hold;"
+    },
+    {
+      "rowID": "verifyUserCanSearchByAllOnScheduledStatus.01",
+      "description": "Test Case 128172:Verify user can search by status \"All On Scheduled\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "128172"
+        }
+      ],
+      "searchData": {
+        "status": "All On Scheduled"
+      },
+      "expectedStatus": "Scheduled",
+      "infoText": "Timeframe: Last Year; Status: All On Scheduled;"
+    }
+  ],
+  "verifyUserCanSearchByTeam": [
+    {
+      "rowID": "verifyUserCanSearchByTeam.01",
+      "description": "Test Case 125717:Verify user can search by \"Team\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125717"
+        }
+      ],
+      "searchData": {
+        "team": "Test Team"
+      },
+      "infoText": "Team: Test Team; Timeframe: Last Year;"
+    }
+  ],
+  "verifyUserCanSearchByType": [
+    {
+      "rowID": "verifyUserCanSearchByType.01",
+      "description": "Test Case 125718:Verify user can search by \"SR Type\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125718"
+        }
+      ],
+      "searchData": {
+        "srType": "Rozstalnoy_SRT"
+      },
+      "infoText": "SR Type: Rozstalnoy_SRT; Timeframe: Last Year;"
+    }
+  ],
+  "verifyUserCanSearchByRoNum": [
+    {
+      "rowID": "verifyUserCanSearchByRoNum.01",
+      "description": "Test Case 125720:Verify user can search by \"RO#\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125720"
+        }
+      ],
+      "searchData": {
+        "roNum": "123"
+      },
+      "infoText": "RO#: 123; Timeframe: Last Year;"
+    }
+  ],
+  "verifyUserCanSearchByStockNum": [
+    {
+      "rowID": "verifyUserCanSearchByStockNum.01",
+      "description": "Test Case 125721:Verify user can search by \"Stock#\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125721"
+        }
+      ],
+      "searchData": {
+        "stockNum": "123"
+      },
+      "infoText": "Stock#: 123; Timeframe: Last Year;"
+    }
+  ]
+}
