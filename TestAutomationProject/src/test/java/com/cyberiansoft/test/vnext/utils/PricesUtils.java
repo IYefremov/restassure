@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnext.utils;
 
+import java.util.Locale;
+
 public class PricesUtils {
 
     public static Double getServicePriceValue(String servicePriceValue) {
@@ -16,6 +18,6 @@ public class PricesUtils {
     }
 
     public static String getFormattedServicePriceValue(float servicePrice) {
-        return "$" + String.format("%.2f", servicePrice);
+        return "$" + String.format(Locale.US, "%.2f", servicePrice);
     }
 }

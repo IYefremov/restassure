@@ -26,7 +26,7 @@ public class MatrixServiceDetailsScreen extends VNextBaseScreen {
     private WebElement availableButton;
     @FindBy(xpath = "//span[@action='selected']")
     private WebElement selectedButton;
-    @FindBy(xpath = "//div[@data-entity-service-id]")
+    @FindBy(xpath = "//*[contains(@data-autotests-id, 'services-list')]/div")
     private List<ServiceListItem> serviceListItems;
 
     public MatrixServiceDetailsScreen() {

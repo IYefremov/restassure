@@ -40,7 +40,6 @@ public class VNextTeamPartServiceBaseCase extends BaseTestClass {
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.AUTOMATION_MONITORING);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        SearchSteps.textSearch(basicPartService.getServiceName());
         PartServiceSteps.selectPartService(basicPartService);
         PartServiceSteps.confirmPartInfo();
         SelectedServicesScreenSteps.openServiceDetails("PREF: " + basicPartService.getPartName().getPartNameList().get(0));

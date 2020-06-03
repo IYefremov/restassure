@@ -194,7 +194,7 @@ public class BackOfficeUtils {
 	}
 
 	public static String getFormattedServicePriceValue(float servicePrice) {
-		return "$" + String.format("%,.2f", servicePrice);
+		return "$" + String.format(Locale.US, "%.2f", servicePrice);
 	}
 
 	public static String getFormattedServicePriceValue(String servicePrice) {
