@@ -46,6 +46,8 @@ public class RegularTeamInspectionsScreen extends RegularBaseTypeScreenWithTabs 
 	}
 	
 	public void clickOnInspection(String inspnumber) {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(inspnumber)));
 		inspectiontable.findElement(MobileBy.AccessibilityId(inspnumber)).click();
 	}
 	
