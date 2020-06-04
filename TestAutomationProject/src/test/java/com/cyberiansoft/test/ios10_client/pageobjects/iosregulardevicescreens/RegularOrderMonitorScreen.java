@@ -67,7 +67,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 
 	public void waitOrderMonitorScreenLoaded() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 120);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("MonitorOrderServicesList")));
 	}
 
@@ -162,7 +162,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElementByName(panelname).click();
 		status = appiumdriver.findElementByAccessibilityId("MonitorDetailsCell_Status").
 				findElements(MobileBy.className("XCUIElementTypeStaticText")).get(1).getAttribute("name");
-		appiumdriver.findElementByAccessibilityId("Done icon").click();
+		clickServiceDetailsCancelButton();
 		return status;
 	}
 
@@ -213,9 +213,8 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		return this;
 	}
 
-	public RegularOrderMonitorScreen clickServiceDetailsCancelButton() {
+	public void clickServiceDetailsCancelButton() {
 		appiumdriver.findElementByAccessibilityId("NavigationBarItemClose").click();
-		return this;
 	}
 
 	public boolean isStartServiceButtonPresent() {
@@ -272,6 +271,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 
 	public boolean isRepairPhaseExists() {
+		waitOrderMonitorScreenLoaded();
 		return appiumdriver.findElementsByAccessibilityId("Repair phase").size() > 0;
 	}
 

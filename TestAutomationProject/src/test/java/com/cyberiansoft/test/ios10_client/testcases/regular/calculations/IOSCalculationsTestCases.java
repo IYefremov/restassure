@@ -1318,7 +1318,6 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         RegularWorkOrdersSteps.saveWorkOrder();
         RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
         for (ServiceData serviceData : workOrderData.getServicesList()) {
             RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
         }
@@ -2132,7 +2131,7 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
     public void testWOVerifyThatCalculationIsCorrectForWOWithAllTypeOfServices(String rowID,
                                                                                String description, JSONObject testData) throws Exception {
 
-        final DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd, yyyy");
+        final DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM d, yyyy");
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
