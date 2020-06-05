@@ -8,6 +8,7 @@ import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.targetprocessintegration.dto.TestPlanRunDTO;
 import com.cyberiansoft.test.targetprocessintegration.model.TPIntegrationService;
 import com.cyberiansoft.test.vnext.config.VNextEnvironmentInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
@@ -72,20 +73,21 @@ public class BaseTestClass {
     @Parameters({"lic.name"})
     public void beforeSuite(String licenseName) {
 
-        Optional<String> testCaseIdFromMaven = Optional.ofNullable(System.getProperty("testPlanId"));
+        Optional<String> testPlanIdFromMaven = Optional.ofNullable(System.getProperty("testPlanId"));
         //Optional<String> testCaseIdFromMaven = Optional.ofNullable("97261");
-        if (testCaseIdFromMaven.isPresent()) {
+        if (testPlanIdFromMaven.isPresent()) {
             TPIntegrationService tpIntegrationService = new TPIntegrationService();
-            String testPlanId = testCaseIdFromMaven.get();
+            String testPlanId = testPlanIdFromMaven.get();
             try {
+                TestPlanRunDTO testPlanRunDTO = tpIntegrationService.createTestPlanRun(testPlanId);
+                TestServiceListener.setTestPlanRunId(testPlanRunDTO.getId().toString());
                 TestServiceListener.setTestToTestRunMap(
                         tpIntegrationService.testCaseToTestRunMapRecursively(
-                                tpIntegrationService.createTestPlanRun(testPlanId)));
+                                testPlanRunDTO));
             } catch (UnirestException | IOException e) {
                 e.printStackTrace();
             }
         }
-
 
         WebDriver chromeWebDriver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
         //chromeWebDriver.get("http://R360user:Geev9ied@77.120.104.171:8000");
