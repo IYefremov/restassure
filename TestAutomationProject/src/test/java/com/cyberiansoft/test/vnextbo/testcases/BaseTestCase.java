@@ -58,9 +58,10 @@ public class BaseTestCase {
                                 tpIntegrationService.testCaseToTestRunMapRecursively(tpIntegrationService.createTestPlanRun(testPlanId, releaseIdFromMaven.get())));
                     }
                 } else {
+                    TestPlanRunDTO testPlanRunDTO = tpIntegrationService.createTestPlanRun(testPlanId);
+                    TestListenerAllure.setTestPlanRunId(testPlanRunDTO.getId().toString());
                     TestListenerAllure.setTestToTestRunMap(
-                            tpIntegrationService.testCaseToTestRunMapRecursively(
-                                    tpIntegrationService.createTestPlanRun(testPlanId)));
+                            tpIntegrationService.testCaseToTestRunMapRecursively(testPlanRunDTO));
                 }
             } catch (UnirestException | IOException e) {
                 e.printStackTrace();
