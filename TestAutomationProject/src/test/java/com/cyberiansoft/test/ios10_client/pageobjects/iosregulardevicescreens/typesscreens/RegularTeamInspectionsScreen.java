@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens;
 
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
+import com.cyberiansoft.test.ios10_client.utils.AppiumWait;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
@@ -36,17 +37,17 @@ public class RegularTeamInspectionsScreen extends RegularBaseTypeScreenWithTabs 
 
 	public void waitTeamInspectionsScreenLoaded() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("InspectionsTable")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("InspectionsTable")));
 	}
 	
 	public void selectInspectionForAction(String inspnumber) {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		IOSElement inptable = (IOSElement) wait.until(ExpectedConditions.presenceOfElementLocated(By.name(inspnumber)));
 		inspectiontable.findElement(MobileBy.
 				AccessibilityId(inspnumber)).click();
 	}
 	
 	public void clickOnInspection(String inspnumber) {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(inspnumber)));
 		inspectiontable.findElement(MobileBy.AccessibilityId(inspnumber)).click();
 	}
 	
@@ -77,9 +78,14 @@ public class RegularTeamInspectionsScreen extends RegularBaseTypeScreenWithTabs 
 	}
 	
 	public void clickActionButton() {
-		waitTeamInspectionsScreenLoaded();
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Share"))).click(); 
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Refresh")));
+		wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Refresh")));
+		AppiumWait.getGeneralFluentWait(15, 500).until(driver -> {
+			appiumdriver.findElementByAccessibilityId("Share").click();
+			return true;
+		});
 	}
 	
 	public void clickApproveInspections() {

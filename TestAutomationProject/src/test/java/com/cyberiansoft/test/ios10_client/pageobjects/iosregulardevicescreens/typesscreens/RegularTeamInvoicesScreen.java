@@ -21,7 +21,8 @@ public class RegularTeamInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 	}
 
 	public void selectInvoice(String invoiceNumber) {
-		WaitUtils.elementShouldBeVisible(invoicesTable, true);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(invoiceNumber)));
 		invoicesTable.findElementByAccessibilityId(invoiceNumber).click();
 	}
 

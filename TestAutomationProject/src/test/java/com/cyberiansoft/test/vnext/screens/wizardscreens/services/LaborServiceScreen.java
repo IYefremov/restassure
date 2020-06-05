@@ -21,6 +21,6 @@ public class LaborServiceScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@action='save']")
     private WebElement saveButton;
 
-    @FindBy(xpath = "//*[@data-entity-service-id]")
+    @FindBy(xpath = "//*[@data-autotests-id='available-services-list']/div")
     private List<WebElement> serviceList;
 }

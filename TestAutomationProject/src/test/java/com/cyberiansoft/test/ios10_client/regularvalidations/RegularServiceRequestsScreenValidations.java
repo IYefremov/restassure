@@ -27,9 +27,6 @@ public class RegularServiceRequestsScreenValidations {
     public static void verifyServiceRequestPresent(String serviceRequestNumber, boolean isPresent) {
         RegularServiceRequestSteps.waitServiceRequestScreenLoaded();
         RegularServiceRequestsScreen serviceRequestsScreen = new RegularServiceRequestsScreen();
-        if (isPresent)
-            Assert.assertTrue(serviceRequestsScreen.isServiceRequestExists(serviceRequestNumber));
-        else
-            Assert.assertFalse(serviceRequestsScreen.isServiceRequestExists(serviceRequestNumber));
+        serviceRequestsScreen.isServiceRequestExists(serviceRequestNumber, isPresent);
     }
 }

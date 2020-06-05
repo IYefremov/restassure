@@ -223,7 +223,7 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
         final String defaultLocationValue = "Test Location ZZZ";
-        final DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd, yyyy");
+        final DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM d, yyyy");
 
 
         RegularHomeScreen homeScreen = new RegularHomeScreen();
@@ -653,7 +653,7 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
         for (MonitorServiceData monitorServiceData : repairPhaseOrderMonitorData.getMonitorServicesData()) {
             orderMonitorScreen.selectPanel(monitorServiceData.getMonitorService());
             Assert.assertEquals(orderMonitorScreen.getServiceStatusInPopup(monitorServiceData.getMonitorService().getServiceName()), OrderMonitorStatuses.COMPLETED.getValue());
-            orderMonitorScreen.waitOrderMonitorScreenLoaded();
+            ///orderMonitorScreen.waitOrderMonitorScreenLoaded();
         }
 
         orderMonitorScreen.clickBackButton();

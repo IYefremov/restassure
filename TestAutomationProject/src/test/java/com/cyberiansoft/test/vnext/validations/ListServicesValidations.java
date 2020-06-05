@@ -55,7 +55,7 @@ public class ListServicesValidations {
         SearchSteps.textSearch(serviceName);
         ServiceListItem serviceListItem = availableServicesScreen.getServiceListItem(serviceName);
         WaitUtils.getGeneralFluentWait().until(driver -> {
-            Assert.assertEquals(serviceListItem.getNumberOfAddedServices(), (int) expectedCount);
+            Assert.assertEquals(Integer.valueOf(serviceListItem.getNumberOfAddedServices()), expectedCount);
             return true;
         });
     }
