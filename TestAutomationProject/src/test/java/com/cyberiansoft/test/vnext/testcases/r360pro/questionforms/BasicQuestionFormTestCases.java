@@ -13,12 +13,12 @@ import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.questionform.QuestionFormSteps;
-import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
-import com.cyberiansoft.test.vnext.steps.services.LaborServiceSteps;
-import com.cyberiansoft.test.vnext.steps.services.QuestionServiceListSteps;
-import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.*;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
-import com.cyberiansoft.test.vnext.validations.*;
+import com.cyberiansoft.test.vnext.validations.GeneralValidations;
+import com.cyberiansoft.test.vnext.validations.PartServiceListValidations;
+import com.cyberiansoft.test.vnext.validations.QuestionServiceListValidations;
+import com.cyberiansoft.test.vnext.validations.ServiceDetailsValidations;
 import com.cyberiansoft.test.vnext.validations.questionforms.QuestionFormValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
@@ -260,7 +260,7 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
         QuestionFormSteps.answerGeneralQuestion(serviceQuestion);
         QuestionFormValidations.validateGeneralQuestionAnswer(serviceQuestion);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES, 1);
-        QuestionServiceListSteps.openServiceDetails(expectedNeedToSetupService.getServiceName());
+        SelectedServicesScreenSteps.openServiceDetails(expectedNeedToSetupService.getServiceName());
         ServiceDetailsValidations.verifyLaborServicesButtonPresent(false);
         ServiceDetailsScreenSteps.setPartInfo();
         ServiceDetailsValidations.verifyLaborServicesButtonPresent(true);
@@ -292,7 +292,7 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
         QuestionServiceListSteps.switchToNeedToSetupServiceView();
         QuestionServiceListValidations.validateServicePresent(firstExpectedNeedToSetupService.getServiceName());
         QuestionServiceListValidations.validateServicePresent(secondExpectedNeedToSetupService.getServiceName());
-        QuestionServiceListSteps.switchToSelectedServiceView();
+        /*QuestionServiceListSteps.switchToSelectedServiceView();
         QuestionServiceListValidations.validateServicePresent(expectedSelectedService.getServiceName());
         QuestionServiceListSteps.openServiceDetails(expectedSelectedService.getServiceName());
         ServiceDetailsValidations.verifyPartsServicePresent(false);
@@ -301,14 +301,14 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
         PartServiceListValidations.validateNoServicePresent();
         ScreenNavigationSteps.pressBackButton();
         LaborServiceSteps.confirmServiceDetails();
-        QuestionServiceListSteps.switchToNeedToSetupServiceView();
+        QuestionServiceListSteps.switchToNeedToSetupServiceView();*/
         QuestionServiceListSteps.openServiceDetails(firstExpectedNeedToSetupService.getServiceName());
         PartServiceSteps.selectPartServiceDetailsWithOpenedDetails(partServiceData);
         PartServiceSteps.confirmPartInfo();
         PartServiceSteps.confirmPartInfo();
         QuestionServiceListSteps.switchToSelectedServiceView();
         QuestionServiceListValidations.validateServicePresent(expectedSelectedService.getServiceName());
-        QuestionServiceListSteps.openServiceDetails(expectedSelectedService.getServiceName());
+        SelectedServicesScreenSteps.openServiceDetails(expectedSelectedService.getServiceName());
         ServiceDetailsValidations.verifyPartsServicePresent(false);
         LaborServiceSteps.addPartService();
         PartServiceSteps.switchToSelectedView();
@@ -372,7 +372,7 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
         inspectionData.getServicesList().forEach(serviceData -> {
             QuestionServiceListValidations.validateServicePresent(serviceData.getServiceName());
         });
-        QuestionServiceListSteps.openServiceDetails(expectedSelectedService.getServiceName());
+        SelectedServicesScreenSteps.openServiceDetails(expectedSelectedService.getServiceName());
         ServiceDetailsValidations.verifyPartsServicePresent(true);
         ServiceDetailsValidations.verifyLaborServicesButtonPresent(false);
         ServiceDetailsScreenSteps.openPartServiceDetails();

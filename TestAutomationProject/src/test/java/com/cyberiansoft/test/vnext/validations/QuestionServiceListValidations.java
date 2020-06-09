@@ -7,7 +7,7 @@ import org.testng.Assert;
 public class QuestionServiceListValidations {
     public static void validateServicePresent(String serviceName) {
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
-        WaitUtils.getGeneralFluentWait().until(driver -> {
+        WaitUtils.getGeneralFluentWait(10, 300).until(driver -> {
             Assert.assertNotEquals(availableServicesScreen.getServicesList().stream()
                     .filter(
                             serviceElement -> serviceElement.getServiceName().contains(serviceName)
