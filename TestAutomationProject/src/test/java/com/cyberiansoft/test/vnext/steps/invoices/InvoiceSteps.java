@@ -25,7 +25,7 @@ public class InvoiceSteps {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         String invoiceNumber = baseWizardScreen.getNewInspectionNumber();
         baseWizardScreen.saveInvoiceAsFinal();
-        BaseUtils.waitABit(10000);
+        BaseUtils.waitABit(20000);
         return invoiceNumber;
     }
 
@@ -33,7 +33,7 @@ public class InvoiceSteps {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         String invoiceNumber = baseWizardScreen.getNewInspectionNumber();
         baseWizardScreen.saveInvoiceAsDraft();
-        BaseUtils.waitABit(10000);
+        BaseUtils.waitABit(20000);
         return invoiceNumber;
     }
 

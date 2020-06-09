@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.steps.services;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
@@ -30,6 +31,7 @@ public class SelectedServicesScreenSteps {
         VNextSelectedServicesScreen selectedServicesScreen = new VNextSelectedServicesScreen();
         SelectedServicesScreenSteps.switchToSelectedService();
         selectedServicesScreen.getServiceListItem(serviceName).openServiceDetails();
+        BaseUtils.waitABit(500);
     }
 
     public static void switchToSelectedService() {
