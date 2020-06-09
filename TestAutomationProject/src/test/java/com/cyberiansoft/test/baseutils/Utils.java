@@ -91,6 +91,13 @@ public class Utils {
         WaitUtilsWebDriver.waitABit(500);
     }
 
+    public static void sendKeys(By by, String value) {
+        WaitUtilsWebDriver.waitForVisibility(by, 3);
+        final WebDriver driver = DriverBuilder.getInstance().getDriver();
+        new Actions(driver).sendKeys(driver.findElement(by), value).build().perform();
+        WaitUtilsWebDriver.waitABit(500);
+    }
+
     public static void clear(WebElement element) {
         try {
             WaitUtilsWebDriver.elementShouldBeClickable(element, true, 7);
@@ -120,6 +127,16 @@ public class Utils {
 
     public static void clearUsingKeyboard(WebElement element) {
         final Actions actions = new Actions(DriverBuilder.getInstance().getDriver());
+        actions.sendKeys(element, Keys.END).build().perform();
+        while (!Utils.getInputFieldValue(element).isEmpty()) {
+            actions.sendKeys(element, Keys.DELETE).build().perform();
+        }
+    }
+
+    public static void clearUsingKeyboard(By by) {
+        final WebDriver driver = DriverBuilder.getInstance().getDriver();
+        final WebElement element = driver.findElement(by);
+        final Actions actions = new Actions(driver);
         actions.sendKeys(element, Keys.END).build().perform();
         while (!Utils.getInputFieldValue(element).isEmpty()) {
             actions.sendKeys(element, Keys.DELETE).build().perform();
@@ -571,10 +588,14 @@ public class Utils {
     }
 
     public static String getText(By by) {
+        return getText(by, 10);
+    }
+
+    public static String getText(By by, int timeout) {
         try {
             final WebElement element = DriverBuilder.getInstance().getDriver().findElement(by);
             WaitUtilsWebDriver.waitForElementNotToBeStale(element);
-            return WaitUtilsWebDriver.waitForVisibility(element).getText();
+            return WaitUtilsWebDriver.waitForVisibility(element, timeout).getText();
         } catch (Exception e) {
             return "";
         }

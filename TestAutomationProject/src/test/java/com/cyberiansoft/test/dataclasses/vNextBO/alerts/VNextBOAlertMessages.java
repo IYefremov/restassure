@@ -14,5 +14,8 @@ public class VNextBOAlertMessages {
     public static String NO_RECORDS_FOUND = "No records found. Please refine search criteria ...";
 
     //SR advanced search dialog
-    public static String VIN_ERROR_MESSAGE = "Please use a valid VIN";
+    public static String VIN_ERROR = "Please use a valid VIN";
+    public static String FROM_DATE_ERROR = "From Date is required";
+    public static String TO_DATE_ERROR = "To Date is required";
+    public static String FROM_LESS_THAN_TO_ERROR = "From date should be less than To date";
 }

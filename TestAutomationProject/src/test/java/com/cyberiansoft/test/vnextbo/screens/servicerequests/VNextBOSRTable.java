@@ -20,6 +20,9 @@ public class VNextBOSRTable extends VNextBOSRPage {
     @FindBy(xpath = "//div[@name='StatusBadge_name']")
     private List<WebElement> statusesList;
 
+    @FindBy(xpath = "//div[@name='StatusBadge_letter']")
+    private List<WebElement> statusBadgeLettersList;
+
     @FindBy(xpath = "//div[@name='Id_Customer']")
     private List<WebElement> customersList;
 

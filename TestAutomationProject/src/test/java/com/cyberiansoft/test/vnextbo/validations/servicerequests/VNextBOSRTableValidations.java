@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.validations.servicerequests;
 
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.dataclasses.vNextBO.alerts.VNextBOAlertMessages;
+import com.cyberiansoft.test.dataclasses.vNextBO.servicerequests.VNextBOSRSearchData;
 import com.cyberiansoft.test.enums.DateUtils;
 import com.cyberiansoft.test.enums.ServiceRequestStatus;
 import com.cyberiansoft.test.vnextbo.steps.servicerequests.VNextBOSRTableSteps;
@@ -118,6 +119,78 @@ public class VNextBOSRTableValidations {
                 final boolean after = date.isAfter(CustomDateProvider.getLastMonthEndDate().minusMonths(1));
                 Assert.assertTrue(before && after, "The created order date should be between 00:00 of 1st day " +
                         "and 23:59 of the last day of the previous month");
+            });
+        }
+    }
+
+    public static void verifyLast30DaysTimeFrame() {
+        if (VNextBOSRTableSteps.getSRListSize() == 0) {
+            VNextBOSRTableValidations.verifyNotFoundNotificationIsDisplayed();
+        } else {
+            VNextBOSRTableSteps.getUniqueCreatedDatesFields().forEach(value -> {
+                final LocalDate date = LocalDate.parse(value, formatter);
+                final boolean equal = date.isEqual(CustomDateProvider.getCurrentDateLocalized());
+                final boolean after = date.isAfter(CustomDateProvider.getLastThirtyDaysStartDate());
+                Assert.assertTrue(equal || after, "The created order date should be " +
+                        "not less than from 00:00 30 days ago and up to the current date");
+            });
+        }
+    }
+
+    public static void verifyLast90DaysTimeFrame() {
+        if (VNextBOSRTableSteps.getSRListSize() == 0) {
+            VNextBOSRTableValidations.verifyNotFoundNotificationIsDisplayed();
+        } else {
+            VNextBOSRTableSteps.getUniqueCreatedDatesFields().forEach(value -> {
+                final LocalDate date = LocalDate.parse(value, formatter);
+                final boolean equal = date.isEqual(CustomDateProvider.getCurrentDateLocalized());
+                final boolean after = date.isAfter(CustomDateProvider.getThreeMonthsBeforeCurrentDate());
+                Assert.assertTrue(equal || after, "The created order date should be " +
+                        "not less than from 00:00 30 days ago and up to the current date");
+            });
+        }
+    }
+
+    public static void verifyYearToDateTimeFrame() {
+        if (VNextBOSRTableSteps.getSRListSize() == 0) {
+            VNextBOSRTableValidations.verifyNotFoundNotificationIsDisplayed();
+        } else {
+            VNextBOSRTableSteps.getUniqueCreatedDatesFields().forEach(value -> {
+                final LocalDate date = LocalDate.parse(value, formatter);
+                final boolean equal = date.isEqual(CustomDateProvider.getCurrentDateLocalized());
+                final boolean after = date.isAfter(CustomDateProvider.getYearStartDate());
+                Assert.assertTrue(equal || after, "The created order date should be " +
+                        "not less than 00:00 of the 1st day of the current year");
+            });
+        }
+    }
+
+    public static void verifyLastYearTimeFrame() {
+        if (VNextBOSRTableSteps.getSRListSize() == 0) {
+            VNextBOSRTableValidations.verifyNotFoundNotificationIsDisplayed();
+        } else {
+            VNextBOSRTableSteps.getUniqueCreatedDatesFields().forEach(value -> {
+                final LocalDate date = LocalDate.parse(value, formatter);
+                final boolean after = date.isAfter(CustomDateProvider.getLastYearStartDate());
+                final boolean before = date.isBefore(CustomDateProvider.getYearStartDate());
+                Assert.assertTrue(before && after, "The created order date should be " +
+                        "between 00:00 of 1st day and 23:59 of the last day of the previous year");
+            });
+        }
+    }
+
+    public static void verifyCustomTimeFrame(VNextBOSRSearchData searchData) {
+        if (VNextBOSRTableSteps.getSRListSize() == 0) {
+            VNextBOSRTableValidations.verifyNotFoundNotificationIsDisplayed();
+        } else {
+            VNextBOSRTableSteps.getUniqueCreatedDatesFields().forEach(value -> {
+                final LocalDate date = LocalDate.parse(value, formatter);
+                final boolean after = date.isAfter(LocalDate.parse(searchData.getFromDate(), formatter));
+                final boolean before = date.isBefore(LocalDate.parse(searchData.getToDate(), formatter));
+                final boolean equalFrom = date.isEqual(LocalDate.parse(searchData.getFromDate(), formatter));
+                final boolean equalTo = date.isEqual(LocalDate.parse(searchData.getToDate(), formatter));
+                Assert.assertTrue((equalFrom || after) && (equalTo || before), "The created order date should be " +
+                        "between 00:00 of " + searchData.getFromDate() + " and 23:59 of " + searchData.getToDate());
             });
         }
     }

@@ -102,6 +102,11 @@ public class WaitUtilsWebDriver {
         return getWait().until(ExpectedConditions.visibilityOf(DriverBuilder.getInstance().getDriver().findElement(xpath)));
     }
 
+    public static WebElement waitForVisibility(By xpath, int timeout) {
+        return getWebDriverWait(timeout)
+                .until(ExpectedConditions.visibilityOf(DriverBuilder.getInstance().getDriver().findElement(xpath)));
+    }
+
     public static void waitForInvisibility(WebElement element) {
         getWait().until(ExpectedConditions.invisibilityOf(element));
     }

@@ -1,11 +1,14 @@
 package com.cyberiansoft.test.vnextbo.testcases.servicerequests;
 
+import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.dataclasses.vNextBO.alerts.VNextBOAlertMessages;
 import com.cyberiansoft.test.dataclasses.vNextBO.servicerequests.VNextBOSRData;
 import com.cyberiansoft.test.dataclasses.vNextBO.servicerequests.VNextBOSRSearchData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.enums.ServiceRequestStatus;
 import com.cyberiansoft.test.enums.TimeFrameValues;
+import com.cyberiansoft.test.enums.servicerequests.SRPhase;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOReactSearchPanelSteps;
@@ -159,7 +162,7 @@ public class VNextBOSRAdvancedSearchTestCases extends BaseTestCase {
         VNextBOSRAdvancedSearchDialogSteps.search();
         VNextBOReactSearchPanelValidations.verifyFilterInfoTextIsDisplayed(data.getInfoText());
         VNextBOSRTableSteps.getUniqueStatusesFields().forEach(actual ->
-                VNextBOSRTableValidations.verifySRStatusIsDisplayed(actual, data.getExpectedStatus()));
+                VNextBOSRTableValidations.verifySRStatusIsDisplayed(actual, data.getExpectedValue()));
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -244,16 +247,16 @@ public class VNextBOSRAdvancedSearchTestCases extends BaseTestCase {
         VNextBOReactSearchPanelSteps.openAdvancedSearchForm();
         VNextBOSRAdvancedSearchDialogSteps.setVinNum(vinSearchValues[2]);
         VNextBOSRAdvancedSearchDialogSteps.clickSearchButton();
-        VNextBOSRAdvancedSearchDialogValidations.verifyVinErrorMessageIsDisplayed(VNextBOAlertMessages.VIN_ERROR_MESSAGE);
+        VNextBOSRAdvancedSearchDialogValidations.verifyVinErrorMessageIsDisplayed(VNextBOAlertMessages.VIN_ERROR);
         VNextBOSRAdvancedSearchDialogSteps.setVinNum(vinSearchValues[3]);
         VNextBOSRAdvancedSearchDialogSteps.clickSearchButton();
-        VNextBOSRAdvancedSearchDialogValidations.verifyVinErrorMessageIsDisplayed(VNextBOAlertMessages.VIN_ERROR_MESSAGE);
+        VNextBOSRAdvancedSearchDialogValidations.verifyVinErrorMessageIsDisplayed(VNextBOAlertMessages.VIN_ERROR);
         VNextBOSRAdvancedSearchDialogSteps.setVinNum(vinSearchValues[4]);
         VNextBOSRAdvancedSearchDialogSteps.clickSearchButton();
-        VNextBOSRAdvancedSearchDialogValidations.verifyVinErrorMessageIsDisplayed(VNextBOAlertMessages.VIN_ERROR_MESSAGE);
+        VNextBOSRAdvancedSearchDialogValidations.verifyVinErrorMessageIsDisplayed(VNextBOAlertMessages.VIN_ERROR);
         VNextBOSRAdvancedSearchDialogSteps.setVinNum(vinSearchValues[5]);
         VNextBOSRAdvancedSearchDialogSteps.clickSearchButton();
-        VNextBOSRAdvancedSearchDialogValidations.verifyVinErrorMessageIsDisplayed(VNextBOAlertMessages.VIN_ERROR_MESSAGE);
+        VNextBOSRAdvancedSearchDialogValidations.verifyVinErrorMessageIsDisplayed(VNextBOAlertMessages.VIN_ERROR);
 
         VNextBOSRAdvancedSearchDialogSteps.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR);
         VNextBOSRAdvancedSearchDialogSteps.setVinNum(vinSearchValues[6]);
@@ -331,5 +334,104 @@ public class VNextBOSRAdvancedSearchTestCases extends BaseTestCase {
         VNextBOSRAdvancedSearchDialogSteps.search();
         VNextBOReactSearchPanelValidations.verifyFilterInfoTextIsDisplayed(data.getInfoText());
         VNextBOSRTableValidations.verifyLastMonthTimeFrame();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByLast30DaysTimeFrame(String rowID, String description, JSONObject testData) {
+        VNextBOSRData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSRData.class);
+
+        VNextBOReactSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOSRAdvancedSearchDialogSteps.setTimeFrame(TimeFrameValues.TIMEFRAME_30_DAYS);
+        VNextBOSRAdvancedSearchDialogSteps.search();
+        VNextBOReactSearchPanelValidations.verifyFilterInfoTextIsDisplayed(data.getInfoText());
+        VNextBOSRTableValidations.verifyLast30DaysTimeFrame();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByLast90DaysTimeFrame(String rowID, String description, JSONObject testData) {
+        VNextBOSRData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSRData.class);
+
+        VNextBOReactSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOSRAdvancedSearchDialogSteps.setTimeFrame(TimeFrameValues.TIMEFRAME_90_DAYS);
+        VNextBOSRAdvancedSearchDialogSteps.search();
+        VNextBOReactSearchPanelValidations.verifyFilterInfoTextIsDisplayed(data.getInfoText());
+        VNextBOSRTableValidations.verifyLast90DaysTimeFrame();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByYearToDateTimeFrame(String rowID, String description, JSONObject testData) {
+        VNextBOSRData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSRData.class);
+
+        VNextBOReactSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOSRAdvancedSearchDialogSteps.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE);
+        VNextBOSRAdvancedSearchDialogSteps.search();
+        VNextBOReactSearchPanelValidations.verifyFilterInfoTextIsDisplayed(data.getInfoText());
+        VNextBOSRTableValidations.verifyYearToDateTimeFrame();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByLastYearTimeFrame(String rowID, String description, JSONObject testData) {
+        VNextBOSRData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSRData.class);
+
+        VNextBOReactSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOSRAdvancedSearchDialogSteps.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR);
+        VNextBOSRAdvancedSearchDialogSteps.search();
+        VNextBOReactSearchPanelValidations.verifyFilterInfoTextIsDisplayed(data.getInfoText());
+        VNextBOSRTableValidations.verifyLastYearTimeFrame();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByCustomTimeFrame(String rowID, String description, JSONObject testData) {
+        VNextBOSRData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSRData.class);
+
+        VNextBOReactSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOSRAdvancedSearchDialogSteps.setTimeFrame(TimeFrameValues.TIMEFRAME_CUSTOM);
+        VNextBOSRAdvancedSearchDialogSteps.clearFromDateField();
+        VNextBOSRAdvancedSearchDialogSteps.clickSearchButton();
+        VNextBOSRAdvancedSearchDialogValidations.verifyFromDateErrorMessageIsDisplayed(VNextBOAlertMessages.FROM_DATE_ERROR);
+        VNextBOSRAdvancedSearchDialogSteps.clearToDateField();
+        VNextBOSRAdvancedSearchDialogSteps.clickSearchButton();
+        VNextBOSRAdvancedSearchDialogValidations.verifyFromDateErrorMessageIsDisplayed(VNextBOAlertMessages.FROM_DATE_ERROR);
+        VNextBOSRAdvancedSearchDialogValidations.verifyToDateErrorMessageIsDisplayed(VNextBOAlertMessages.TO_DATE_ERROR);
+        VNextBOSRAdvancedSearchDialogSteps.setFromDateField(CustomDateProvider.getCurrentDateInFullFormat(true));
+        VNextBOSRAdvancedSearchDialogValidations.verifyFromDateErrorMessageIsNotDisplayed();
+        VNextBOSRAdvancedSearchDialogValidations.verifyToDateErrorMessageIsDisplayed(VNextBOAlertMessages.TO_DATE_ERROR);
+        VNextBOSRAdvancedSearchDialogSteps.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR);
+        VNextBOSRAdvancedSearchDialogValidations.verifyFromDateFieldIsNotDisplayed();
+        VNextBOSRAdvancedSearchDialogValidations.verifyToDateFieldIsNotDisplayed();
+        VNextBOSRAdvancedSearchDialogSteps.setCustomTimeFrame("05/30/2020", data.getSearchData().getToDate());
+        VNextBOSRAdvancedSearchDialogSteps.clickSearchButton();
+        VNextBOSRAdvancedSearchDialogValidations.verifyFromDateErrorMessageIsDisplayed(VNextBOAlertMessages.FROM_LESS_THAN_TO_ERROR);
+        VNextBOSRAdvancedSearchDialogSteps.setCustomTimeFrame(data.getSearchData());
+        VNextBOSRAdvancedSearchDialogSteps.search();
+        VNextBOSRTableValidations.verifyCustomTimeFrame(data.getSearchData());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByPhaseAcceptance(String rowID, String description, JSONObject testData) {
+        VNextBOSRData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSRData.class);
+
+        VNextBOReactSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOSRAdvancedSearchDialogSteps.setCustomTimeFrame(data.getSearchData());
+        VNextBOSRAdvancedSearchDialogSteps.setPhase(SRPhase.ACCEPTANCE.getValue());
+        VNextBOSRAdvancedSearchDialogSteps.search();
+        VNextBOReactSearchPanelValidations.verifyFilterInfoTextIsDisplayed(data.getInfoText());
+        VNextBOSRTableSteps.getUniqueStatusBadgeLettersFields().forEach(badge ->
+                VNextBOSRTableValidations.verifySRIsDisplayed(badge, data.getExpectedValue()));
+        VNextBOSRTableSteps.getUniqueStatusesFields().forEach(actual ->
+                VNextBOSRTableValidations.verifySRIsDisplayed(actual, ServiceRequestStatus.PROPOSED.getValue()));
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByPhase(String rowID, String description, JSONObject testData) {
+        VNextBOSRData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSRData.class);
+
+        VNextBOReactSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOSRAdvancedSearchDialogSteps.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR);
+        VNextBOSRAdvancedSearchDialogSteps.setPhase(data.getSearchData().getPhase());
+        VNextBOSRAdvancedSearchDialogSteps.search();
+        VNextBOReactSearchPanelValidations.verifyFilterInfoTextIsDisplayed(data.getInfoText());
+        VNextBOSRTableSteps.getUniqueStatusBadgeLettersFields().forEach(badge ->
+                VNextBOSRTableValidations.verifySRIsDisplayed(badge, data.getExpectedValue()));
     }
 }
