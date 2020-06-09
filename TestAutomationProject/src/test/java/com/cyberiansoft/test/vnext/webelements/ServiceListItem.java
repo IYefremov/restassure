@@ -36,7 +36,7 @@ public class ServiceListItem implements IWebElement {
     }
 
     public String getServicePartInfo() {
-        return WaitUtils.getGeneralFluentWait().until((driver) -> rootElement.findElement(By.xpath(servicePartInfoLocator)).getText().trim());
+        return rootElement.findElement(By.xpath(servicePartInfoLocator)).getText().trim();
     }
 
     public String getNumberOfAddedServices() {
