@@ -5,6 +5,9 @@ import com.cyberiansoft.test.dataclasses.TargetProcessTestCaseData;
 import com.cyberiansoft.test.dataclasses.TestCaseData;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
+import com.cyberiansoft.test.targetprocessintegration.dto.EntityStatesDTO;
+import com.cyberiansoft.test.targetprocessintegration.dto.EntityTypeDTO;
+import com.cyberiansoft.test.targetprocessintegration.dto.ProjectDTO;
 import com.cyberiansoft.test.targetprocessintegration.enums.TestCaseRunStatus;
 import com.cyberiansoft.test.targetprocessintegration.model.TPIntegrationService;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -14,6 +17,8 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import io.qameta.allure.Allure;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -31,6 +36,9 @@ public class TestServiceListener implements ITestListener, IInvokedMethodListene
     @Getter
     @Setter
     private static Map<String, String> testToTestRunMap = new HashMap<>();
+    @Getter
+    @Setter
+    private static String testPlanRunId;
 
     private TPIntegrationService tpIntegrationService = new TPIntegrationService();
 
@@ -115,7 +123,21 @@ public class TestServiceListener implements ITestListener, IInvokedMethodListene
 
     @Override
     public void onFinish(ITestContext context) {
-
+        if (!StringUtils.isEmpty(testPlanRunId)) {
+            TPIntegrationService tpIntegrationService = new TPIntegrationService();
+            try {
+                ProjectDTO projectDTO = tpIntegrationService.getTestPlanProject(testPlanRunId);
+                EntityStatesDTO entityStatesDTO = tpIntegrationService.getTestPlansEntityStates(projectDTO.getProject().getProcess().getId().toString());
+                EntityTypeDTO entityTypeDTO = entityStatesDTO.getItems()
+                        .stream()
+                        .filter(item -> item.getName().equals("Done"))
+                        .findAny()
+                        .orElseThrow(() -> new NoSuchElementException("Can't find test suite run status 'Done'"));
+                tpIntegrationService.setTestPlanRunStatus(testPlanRunId, entityTypeDTO.getId());
+            } catch (UnirestException | IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

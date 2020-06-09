@@ -21,7 +21,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class SingleSelectionServiceTests extends BaseTestClass {
-    @BeforeClass(description = "Team Monitoring Basic Flow Test")
+    @BeforeClass(description = "Single Selection Service Test Cases")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getServiceMultipleOptionDataPath();
     }
@@ -220,7 +220,7 @@ public class SingleSelectionServiceTests extends BaseTestClass {
         PartServiceSteps.selectPartServiceDetails(partServiceDamageData.getPartServiceData());
         PartServiceSteps.confirmPartInfo();
         ServiceDetailsScreenSteps.saveServiceDetails();
-        VisualScreenSteps.addServiceToPicture();
+        VisualScreenSteps.addNonDefaultDamage(partServiceDamageData, partServiceDamageData.getPartServiceData().getServiceName());
         ListServicesValidations.validateMessagePresent(true, "Service can be added once");
 
         InspectionSteps.cancelInspection();
@@ -292,7 +292,7 @@ public class SingleSelectionServiceTests extends BaseTestClass {
         PartServiceSteps.selectPartServiceDetails(partServiceDamageData.getPartServiceData());
         PartServiceSteps.confirmPartInfo();
         ServiceDetailsScreenSteps.saveServiceDetails();
-        VisualScreenSteps.addServiceToPicture();
+        VisualScreenSteps.addNonDefaultDamage(partServiceDamageData, partServiceDamageData.getPartServiceData().getServiceName());
         PartServiceSteps.selectPartServiceDetails(partServiceDamageData.getPartServiceData());
         PartServiceSteps.confirmPartInfo();
         ServiceDetailsScreenSteps.saveServiceDetails();

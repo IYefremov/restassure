@@ -4,12 +4,17 @@ import com.cyberiansoft.test.baseutils.AllureUtils;
 import com.cyberiansoft.test.dataclasses.TargetProcessTestCaseData;
 import com.cyberiansoft.test.dataclasses.TestCaseData;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.targetprocessintegration.dto.EntityStatesDTO;
+import com.cyberiansoft.test.targetprocessintegration.dto.EntityTypeDTO;
+import com.cyberiansoft.test.targetprocessintegration.dto.ProjectDTO;
 import com.cyberiansoft.test.targetprocessintegration.enums.TestCaseRunStatus;
 import com.cyberiansoft.test.targetprocessintegration.model.TPIntegrationService;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
 import org.codehaus.plexus.util.FileUtils;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.*;
 import org.testng.xml.XmlSuite;
 
@@ -26,6 +31,10 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
     @Getter
     @Setter
     private static Map<String, String> testToTestRunMap = new HashMap<>();
+    @Getter
+    @Setter
+    private static String testPlanRunId;
+
     private TPIntegrationService tpIntegrationService = new TPIntegrationService();
 
     @Override
@@ -124,6 +133,21 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
     @Override
     public void onFinish(ITestContext iTestContext) {
         super.onFinish(iTestContext);
+        if (!StringUtils.isEmpty(testPlanRunId)) {
+            TPIntegrationService tpIntegrationService = new TPIntegrationService();
+            try {
+                ProjectDTO projectDTO = tpIntegrationService.getTestPlanProject(testPlanRunId);
+                EntityStatesDTO entityStatesDTO = tpIntegrationService.getTestPlansEntityStates(projectDTO.getProject().getProcess().getId().toString());
+                EntityTypeDTO entityTypeDTO = entityStatesDTO.getItems()
+                        .stream()
+                        .filter(item -> item.getName().equals("Done"))
+                        .findAny()
+                        .orElseThrow(() -> new NoSuchElementException("Can't find test suite run status 'Done'"));
+                tpIntegrationService.setTestPlanRunStatus(testPlanRunId, entityTypeDTO.getId());
+            } catch (UnirestException | IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

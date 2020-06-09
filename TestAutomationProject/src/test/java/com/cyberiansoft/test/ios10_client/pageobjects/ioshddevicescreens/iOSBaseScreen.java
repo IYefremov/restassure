@@ -9,11 +9,9 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -59,8 +57,12 @@ public abstract class iOSBaseScreen {
 		//Swipe from Bottom to Top.
 		//TouchAction act = new TouchAction(appiumdriver);
 		//act.press(startx, starty).waitAction(2000) .moveTo(startx, endy).release().perform();
-		MobileElement table = (MobileElement) appiumdriver.
-				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/.."));
+
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 10);
+		MobileElement table = (MobileElement)  wait.until(ExpectedConditions.
+				presenceOfElementLocated(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/..")));
+		//MobileElement table = (MobileElement) appiumdriver.
+		//		findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/.."));
 		
 		TouchAction swipe = new TouchAction(appiumdriver).press(element(table, table.getSize().width/2, table.getSize().height-10))
                 .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2))).moveTo(element(table, table.getSize().width/2, 10)).release();

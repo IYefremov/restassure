@@ -58,6 +58,9 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@data-autotests-id='search-cancel']")
     private WebElement cancelSearchBtn;
 
+    @FindBy(xpath = "//*[@id='total']")
+    private WebElement totalPrice;
+
     public VNextBaseWizardScreen(WebDriver appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(appiumdriver, this);

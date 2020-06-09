@@ -1,0 +1,50 @@
+{
+  "testVerifyEmployeeSearchResultsSortedByLastName": [
+    {
+      "rowID": " testVerifyEmployeeSearchResultsSortedByLastName.01",
+      "description": "Test Case 92231: R360 client: Show employee search results sorted by LastName",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92231",
+          "testCaseTitle": "R360 client: Show employee search results sorted by LastName"
+        }
+      ]
+    }
+  ],
+  "testVerifyErrorMessageOnEnteringInvalidPassword": [
+    {
+      "rowID": " testVerifyErrorMessageOnEnteringInvalidPassword.01",
+      "description": "Test Case 92233: R360 client: verify displaying error message on entering invalid password",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92233",
+          "testCaseTitle": "R360 client: verify displaying error message on entering invalid password"
+        }
+      ]
+    }
+  ],
+  "testVerifyDisplayingEnterYourPasswordPopUpOnSelectingEmployee": [
+    {
+      "rowID": " testVerifyDisplayingEnterYourPasswordPopUpOnSelectingEmployee.01",
+      "description": "Test Case 92234: R360 client: verify displaying 'Enter your Password' pop-up on selecting employee",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92234",
+          "testCaseTitle": "R360 client: verify displaying 'Enter your Password' pop-up on selecting employee"
+        }
+      ]
+    }
+  ],
+  "testVerifyNothingFoundPlaceholderIsDisplayedIfNoEmployeeFound": [
+    {
+      "rowID": " testVerifyNothingFoundPlaceholderIsDisplayedIfNoEmployeeFound.01",
+      "description": "Test Case 92236: R360 client: 'Nothing found' placeholder should be displayed if no employee found",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92236",
+          "testCaseTitle": "R360 client: 'Nothing found' placeholder should be displayed if no employee found"
+        }
+      ]
+    }
+  ]
+}

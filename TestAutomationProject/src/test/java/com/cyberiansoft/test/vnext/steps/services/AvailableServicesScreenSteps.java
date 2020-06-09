@@ -62,6 +62,7 @@ public class AvailableServicesScreenSteps {
     public static void openServiceDetails(String serviceName) {
         AvailableServiceScreenInteractions.switchToAvailableServicesView();
         SearchSteps.textSearch(serviceName);
+        BaseUtils.waitABit(500);
         AvailableServiceScreenInteractions.openServiceDetails(serviceName);
     }
 

@@ -5,6 +5,7 @@ import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.utils.ControlUtils;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,38 +21,44 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Getter
 public class VNextLoginScreen extends VNextBaseScreen {
 
     @FindBy(xpath = "//div[@data-page='employees']")
-    private WebElement loginscreen;
+    private WebElement loginScreen;
 
     @FindBy(xpath = "//*[@data-autotests-id='employees-list']")
-    private WebElement employeeslist;
+    private WebElement employeesList;
 
     @FindBy(xpath = "//*[@action='main-db']/i")
-    private WebElement updatemaindbbtn;
+    private WebElement updateMainDbBtn;
 
     @FindBy(xpath = "//*[@action='vin-db']/i")
-    private WebElement updatevindbbtn;
+    private WebElement updateVinDbBtn;
+
+    @FindBy(xpath = "//div[@class='modal-password-username']/b")
+    private WebElement usernameField;
 
     @FindBy(xpath = "//input[@type='password']")
-    private WebElement passwordfld;
+    private WebElement passwordField;
 
     @FindBy(xpath = "//span[@class='modal-button ' and text()='Login']")
-    private WebElement loginbtn;
+    private WebElement loginBtn;
 
     @FindBy(xpath = "//span[@class='modal-button ' and text()='Cancel']")
-    private WebElement cancelbtn;
+    private WebElement cancelBtn;
 
     @FindBy(xpath = "//*[@data-autotests-id='search-icon']")
-    private WebElement searchicon;
+    private WebElement searchIcon;
 
     @FindBy(xpath = "//*[@data-autotests-id='search-input']")
-    private WebElement searchfld;
+    private WebElement searchField;
 
     @FindBy(xpath = "//*[@data-autotests-id='search-cancel']")
-    private WebElement cancelsearchbtn;
+    private WebElement cancelSearchBtn;
+
+    @FindBy(xpath = "//div[@class='simple-item-main-content']")
+    private List<WebElement> employeesNamesList;
 
     public VNextLoginScreen(WebDriver appiumdriver) {
         super(appiumdriver);
@@ -82,7 +89,7 @@ public class VNextLoginScreen extends VNextBaseScreen {
     }
 
     public void setUserLoginPassword(String userpsw) {
-        ControlUtils.setValue(passwordfld, userpsw);
+        ControlUtils.setValue(passwordField, userpsw);
     }
 
     public boolean isUserLoginPasswordDialogVisible() {
@@ -92,59 +99,59 @@ public class VNextLoginScreen extends VNextBaseScreen {
     public void selectEmployee(String username) {
         WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 25);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), '" + username + "')]")));
-        tapListElement(employeeslist, username);
+        tapListElement(employeesList, username);
     }
 
     public void tapLoginButton() {
         WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 15);
-        wait.until(ExpectedConditions.elementToBeClickable(loginbtn));
+        wait.until(ExpectedConditions.elementToBeClickable(loginBtn));
         //tap(loginbtn);
-        loginbtn.click();
+        loginBtn.click();
     }
 
     public void tapLoginDialogCancelButton() {
-        tap(cancelbtn);
+        tap(cancelBtn);
         waitUserListVisibility();
     }
 
     public void waitUserListVisibility() {
         WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 15);
-        wait.until(ExpectedConditions.visibilityOf(employeeslist));
+        wait.until(ExpectedConditions.visibilityOf(employeesList));
     }
 
     public void updateMainDB() {
-        tap(updatemaindbbtn);
+        tap(updateMainDbBtn);
         BaseUtils.waitABit(10000);
         VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationdlg.clickInformationDialogOKButton();
     }
 
     public void searchEmployee(String searchText) {
-        if (!searchfld.isDisplayed())
-            searchicon.click();
+        if (!searchField.isDisplayed())
+            searchIcon.click();
         BaseUtils.waitABit(1000);
         WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 15);
-        wait.until(ExpectedConditions.elementToBeClickable(searchfld)).clear();
-        searchfld.sendKeys(searchText + "\n");
+        wait.until(ExpectedConditions.elementToBeClickable(searchField)).clear();
+        searchField.sendKeys(searchText + "\n");
         BaseUtils.waitABit(1000);
     }
 
     public int getNumberOfEmployeesInTheList() {
-        return employeeslist.findElements(By.xpath(".//*[@class='employee-list-item']")).size();
+        return employeesList.findElements(By.xpath(".//*[@class='employee-list-item']")).size();
     }
 
     public boolean isEmployeepresentInTheList(String employeeName) {
-        return employeeslist.findElements(By.xpath(".//*[@class='item-title' and text()='" +
+        return employeesList.findElements(By.xpath(".//*[@class='item-title' and text()='" +
                 employeeName + "']")).size() > 0;
     }
 
     public boolean isNothingFoundTextDisplayed() {
-        return loginscreen.findElement(By.xpath(".//*[text()='Nothing found']")).isDisplayed();
+        return loginScreen.findElement(By.xpath(".//*[text()='Nothing found']")).isDisplayed();
     }
 
     public ArrayList<String> getEmployeeList() {
         ArrayList<String> employeesList = new ArrayList<>();
-        List<WebElement> employees = employeeslist.findElements(By.xpath(".//*[@class='employee-list-item']"));
+        List<WebElement> employees = this.employeesList.findElements(By.xpath(".//*[@class='employee-list-item']"));
         for (WebElement employeeItem : employees)
             employeesList.add(employeeItem.getText().trim());
         return employeesList;

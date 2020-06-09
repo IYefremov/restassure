@@ -106,7 +106,6 @@ public class IOSWorkOrdersTechSplitTestCases extends IOSRegularBaseTestCase {
         servicesScreen.clickTechnicianToolbarIcon();
         servicesScreen.changeTechnician("Dent", workOrderData.getServiceData().getServiceNewTechnician().getTechnicianFullName());
         RegularServicesScreenSteps.switchToSelectedServices();
-        RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
         RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getServiceData().getServiceName());
         selectedServiceDetailsScreen.clickTechniciansIcon();
         Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianSelected(workOrderData.getServiceData().getServiceDefaultTechnician().getTechnicianFullName()));
@@ -165,7 +164,7 @@ public class IOSWorkOrdersTechSplitTestCases extends IOSRegularBaseTestCase {
         RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getMatrixServiceData().getVehiclePartData().getServiceDefaultTechnician());
         RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getMatrixServiceData().getVehiclePartData().getServiceNewTechnician());
         RegularServiceDetailsScreenSteps.saveServiceDetails();
-        RegularAssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
+        RegularAssignTechniciansSteps.clickDoneButton();
 
         RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
         Assert.assertEquals(vehicleScreen.getTechnician(), workOrderData.getMatrixServiceData().getVehiclePartData().getServiceNewTechnician().getTechnicianFullName() +
@@ -350,7 +349,6 @@ public class IOSWorkOrdersTechSplitTestCases extends IOSRegularBaseTestCase {
 
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreenSteps.switchToSelectedServices();
-        RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
         for (ServiceData serviceData : workOrderData.getMoneyServices()) {
             RegularSelectedServicesSteps.openSelectedServiceDetails(serviceData.getServiceName());
             if (serviceData.getServicePrice2() != null)
@@ -400,7 +398,7 @@ public class IOSWorkOrdersTechSplitTestCases extends IOSRegularBaseTestCase {
         for (ServiceTechnician technician : workOrderData.getVehicleInfoData().getNewTechnicians())
             RegularServiceDetailsScreenSteps.selectServiceTechnician(technician);
         RegularServiceDetailsScreenSteps.saveServiceDetails();
-        RegularAssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
+        RegularAssignTechniciansSteps.clickDoneButton();
 
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreenSteps.switchToSelectedServices();
