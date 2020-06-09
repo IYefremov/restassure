@@ -23,7 +23,7 @@
           "serviceStatus": "Declined"
         },
         {
-          "serviceName": "Anastasia Labor Avarage Data",
+          "serviceName": "Expenses Service",
           "serviceStatus": "Skipped"
         }
       ]
@@ -52,7 +52,7 @@
           "serviceStatus": "Declined"
         },
         {
-          "serviceName": "Anastasia Labor Avarage Data",
+          "serviceName": "Expenses Service",
           "serviceStatus": "Skipped"
         }
       ]
@@ -82,7 +82,7 @@
           "serviceStatus": "Approved"
         },
         {
-          "serviceName": "Anastasia Labor Avarage Data",
+          "serviceName": "Expenses Service",
           "serviceStatus": "Approved"
         }
       ]
@@ -141,7 +141,7 @@
           "serviceName": "Aluminum Panel"
         },
         {
-          "serviceName": "Anastasia Labor Avarage Data",
+          "serviceName": "Expenses Service",
           "serviceStatus": "Skipped"
         }
       ],
@@ -171,7 +171,7 @@
           "serviceName": "Aluminum Panel"
         },
         {
-          "serviceName": "Anastasia Labor Avarage Data"
+          "serviceName": "Expenses Service"
         }
       ],
       "declineReason": "No repair needed"
@@ -219,7 +219,7 @@
           "serviceName": "Aluminum Panel"
         },
         {
-          "serviceName": "Anastasia Labor Avarage Data"
+          "serviceName": "Expenses Service"
         }
       ]
     }
@@ -248,7 +248,7 @@
           "serviceStatus": "Declined"
         },
         {
-          "serviceName": "Anastasia Labor Avarage Data",
+          "serviceName": "Expenses Service",
           "serviceStatus": "Declined"
         }
       ]
@@ -276,7 +276,7 @@
           "serviceName": "Aluminum Panel"
         },
         {
-          "serviceName": "Anastasia Labor Avarage Data"
+          "serviceName": "Expenses Service"
         }
       ]
     }
@@ -305,7 +305,7 @@
           "serviceStatus": "Declined"
         },
         {
-          "serviceName": "Anastasia Labor Avarage Data",
+          "serviceName": "Expenses Service",
           "serviceStatus": "Skipped"
         }
       ],
@@ -336,7 +336,7 @@
             "vehiclePartSeverity": "VERY LIGHT",
             "vehiclePartAdditionalServices": [
               {
-                "serviceName": "Anastasia Labor Avarage Data"
+                "serviceName": "Expenses Service"
               },
               {
                 "serviceName": "Battery Installation",

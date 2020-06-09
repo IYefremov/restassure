@@ -3,19 +3,20 @@ package com.cyberiansoft.test.vnext.testcases.r360pro.customers;
 import com.cyberiansoft.test.dataclasses.CustomerContact;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
+import com.cyberiansoft.test.vnext.steps.MenuSteps;
 import com.cyberiansoft.test.vnext.steps.commonobjects.TopScreenPanelSteps;
 import com.cyberiansoft.test.vnext.steps.commonobjects.dialogs.WarningDialogSteps;
 import com.cyberiansoft.test.vnext.steps.customers.CustomerContactsScreenSteps;
-import com.cyberiansoft.test.vnext.steps.customers.CustomerOptionsScreenSteps;
 import com.cyberiansoft.test.vnext.steps.customers.CustomersScreenSteps;
 import com.cyberiansoft.test.vnext.steps.customers.NewContactScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
+import com.cyberiansoft.test.vnext.validations.MenuValidations;
 import com.cyberiansoft.test.vnext.validations.commonobjects.VNextTopScreenPanelValidations;
 import com.cyberiansoft.test.vnext.validations.customers.CustomerContactsScreenValidations;
-import com.cyberiansoft.test.vnext.validations.customers.CustomerOptionsScreenValidation;
 import com.cyberiansoft.test.vnext.validations.customers.CustomersScreenValidation;
 import com.cyberiansoft.test.vnext.validations.customers.NewContactScreenValidations;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -44,10 +45,10 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
         TopScreenPanelSteps.fillSearchField(testwholesailcustomer.getCompany());
         CustomersScreenValidation.verifyCustomersAreFoundCorrectly(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
-        CustomerOptionsScreenValidation.verifyViewButtonIsDisplayed();
-        CustomerOptionsScreenValidation.verifySetAsDefaultButtonIsDisplayed();
-        CustomerOptionsScreenValidation.verifyCustomerContactsButtonIsDisplayed();
-        CustomerOptionsScreenSteps.openCustomerContacts();
+        MenuValidations.menuItemShouldBeVisible(MenuItems.VIEW, true);
+        MenuValidations.menuItemShouldBeVisible(MenuItems.SET_AS_DEFAULT, true);
+        MenuValidations.menuItemShouldBeVisible(MenuItems.CUSTOMER_CONTACTS, true);
+        MenuSteps.selectMenuItem(MenuItems.CUSTOMER_CONTACTS);
         VNextTopScreenPanelValidations.verifyBackIconIsDisplayed();
         VNextTopScreenPanelValidations.verifySearchIconIsDisplayed();
         CustomerContactsScreenValidations.verifyPlusButtonIsDisplayed();
@@ -65,7 +66,7 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
 
         TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
-        CustomerOptionsScreenSteps.openCustomerContacts();
+        MenuSteps.selectMenuItem(MenuItems.CUSTOMER_CONTACTS);
         TopScreenPanelSteps.openSearchPanel();
         TopScreenPanelSteps.cancelSearch();
         CustomerContactsScreenValidations.verifyContactsListIsDisplayed();
@@ -78,7 +79,7 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
 
         TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
-        CustomerOptionsScreenSteps.openCustomerContacts();
+        MenuSteps.selectMenuItem(MenuItems.CUSTOMER_CONTACTS);
         TopScreenPanelSteps.searchData(TEST_CONTACT_NAME);
         TopScreenPanelSteps.clearSearchField();
         VNextTopScreenPanelValidations.verifySearchFieldContainsCorrectValue("");
@@ -91,7 +92,7 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
 
         TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
-        CustomerOptionsScreenSteps.openCustomerContacts();
+        MenuSteps.selectMenuItem(MenuItems.CUSTOMER_CONTACTS);
         TopScreenPanelSteps.searchData(TEST_CONTACT_NAME);
         TopScreenPanelSteps.cancelSearch();
         CustomerContactsScreenValidations.verifyContactsWereFoundCorrectlyByName(TEST_CONTACT_NAME);
@@ -103,7 +104,7 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
 
         TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
-        CustomerOptionsScreenSteps.openCustomerContacts();
+        MenuSteps.selectMenuItem(MenuItems.CUSTOMER_CONTACTS);
         CustomerContactsScreenSteps.clickPlusButton();
         CustomerContactsScreenValidations.verifyXIconButtonIsDisplayed();
         CustomerContactsScreenValidations.verifyFromContactsIconAndButtonAreDisplayed();
@@ -119,7 +120,7 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
         contactData.setLastName(contactData.getLastName() + RandomStringUtils.randomAlphanumeric(5));
         TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
-        CustomerOptionsScreenSteps.openCustomerContacts();
+        MenuSteps.selectMenuItem(MenuItems.CUSTOMER_CONTACTS);
         CustomerContactsScreenSteps.clickPlusButton();
         CustomerContactsScreenSteps.clickNewContactButton();
         NewContactScreenSteps.setAllContactData(contactData);
@@ -139,7 +140,7 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
         contactData.setLastName(contactData.getLastName() + RandomStringUtils.randomAlphanumeric(5));
         TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
-        CustomerOptionsScreenSteps.openCustomerContacts();
+        MenuSteps.selectMenuItem(MenuItems.CUSTOMER_CONTACTS);
         CustomerContactsScreenSteps.clickPlusButton();
         CustomerContactsScreenSteps.clickNewContactButton();
         NewContactScreenSteps.setAllContactData(contactData);
@@ -159,7 +160,7 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
         contactData.setLastName(contactData.getLastName() + RandomStringUtils.randomAlphanumeric(5));
         TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
-        CustomerOptionsScreenSteps.openCustomerContacts();
+        MenuSteps.selectMenuItem(MenuItems.CUSTOMER_CONTACTS);
         CustomerContactsScreenSteps.clickPlusButton();
         CustomerContactsScreenSteps.clickNewContactButton();
         NewContactScreenSteps.setAllContactData(contactData);
@@ -176,7 +177,7 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
 
         TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
-        CustomerOptionsScreenSteps.openCustomerContacts();
+        MenuSteps.selectMenuItem(MenuItems.CUSTOMER_CONTACTS);
         TopScreenPanelSteps.searchData(TEST_CONTACT_NAME);
         CustomerContactsScreenSteps.tapOnFirstContact();
         CustomerContactsScreenValidations.verifyEditButtonIsDisplayed();
@@ -195,7 +196,7 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
         editedContactData.setLastName(editedContactData.getLastName() + RandomStringUtils.randomAlphanumeric(5));
         TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
-        CustomerOptionsScreenSteps.openCustomerContacts();
+        MenuSteps.selectMenuItem(MenuItems.CUSTOMER_CONTACTS);
         CustomerContactsScreenSteps.addNewContact(baseContact);
         TopScreenPanelSteps.searchData(baseContact.getLastName());
         CustomerContactsScreenSteps.tapOnFirstContact();
@@ -221,7 +222,7 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
         editedContactData.setLastName(editedContactData.getLastName() + RandomStringUtils.randomAlphanumeric(5));
         TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
-        CustomerOptionsScreenSteps.openCustomerContacts();
+        MenuSteps.selectMenuItem(MenuItems.CUSTOMER_CONTACTS);
         CustomerContactsScreenSteps.addNewContact(baseContact);
         TopScreenPanelSteps.searchData(baseContact.getLastName());
         CustomerContactsScreenSteps.tapOnFirstContact();
@@ -247,7 +248,7 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
         editedContactData.setLastName(editedContactData.getLastName() + RandomStringUtils.randomAlphanumeric(5));
         TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
-        CustomerOptionsScreenSteps.openCustomerContacts();
+        MenuSteps.selectMenuItem(MenuItems.CUSTOMER_CONTACTS);
         CustomerContactsScreenSteps.addNewContact(baseContact);
         TopScreenPanelSteps.searchData(baseContact.getLastName());
         CustomerContactsScreenSteps.tapOnFirstContact();

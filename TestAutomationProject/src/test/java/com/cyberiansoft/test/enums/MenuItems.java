@@ -18,6 +18,7 @@ public enum MenuItems {
     ARCHIVE("Archive"),
     CHANGE_CUSTOMER("Change Customer"),
     SET_AS_DEFAULT("Set as Default"),
+    CUSTOMER_CONTACTS("Customer Contacts"),
     ASSIGN_TECH("Assign Tech"),
     START("Start"),
     START_RO("Start RO"),
