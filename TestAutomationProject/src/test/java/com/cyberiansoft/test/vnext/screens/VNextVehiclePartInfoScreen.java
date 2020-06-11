@@ -115,7 +115,7 @@ public class VNextVehiclePartInfoScreen extends VNextBaseScreen {
 
 	private WebElement getSelectedServicesList() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		return wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(By.xpath(".//*[@data-autotests-id='all-services']"))));
+		return wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(By.xpath(".//*[@data-autotests-id='added-services-list']"))));
 	}
 
 	private List<WebElement> getServicesListItems() {
