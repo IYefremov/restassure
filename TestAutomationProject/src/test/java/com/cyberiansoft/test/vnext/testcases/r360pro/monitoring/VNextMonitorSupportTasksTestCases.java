@@ -9,6 +9,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.MonitorRole;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
@@ -33,28 +34,20 @@ import java.io.IOException;
 
 public class VNextMonitorSupportTasksTestCases extends BaseTestClass {
 
-    RoleSettingsDTO roleSettings;
-    VNextAPIHelper apiHelper;
+    RoleSettingsDTO roleSettings = new RoleSettingsDTO();
+    VNextAPIHelper apiHelper = new VNextAPIHelper();;
 
     @BeforeClass(description = "Support tasks in Monitor test cases")
     public void beforeClass() throws IOException {
-        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringBaseCaseDataPath();
 
-        apiHelper = new VNextAPIHelper();
-        roleSettings = new RoleSettingsDTO();
-        roleSettings.setMonitorCanAddService(true);
-        roleSettings.setMonitorCanEditService(false);
-        roleSettings.setMonitorCanRemoveService(true);
-        apiHelper.updateEmployeeRoleSettings("Employee", roleSettings);
+        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringBaseCaseDataPath();
+        updateEmployeeRoleSettings(true, false, true);
     }
 
     @AfterClass
     public void afterClass() throws IOException {
 
-        roleSettings.setMonitorCanAddService(true);
-        roleSettings.setMonitorCanEditService(false);
-        roleSettings.setMonitorCanRemoveService(true);
-        apiHelper.updateEmployeeRoleSettings("Employee", roleSettings);
+        updateEmployeeRoleSettings(true, false, true);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -87,10 +80,7 @@ public class VNextMonitorSupportTasksTestCases extends BaseTestClass {
         TaskDetailsScreenValidations.verifyAddNewTaskPageIsOpened();
         TopScreenPanelSteps.saveChanges();
 
-        roleSettings.setMonitorCanAddService(false);
-        roleSettings.setMonitorCanEditService(true);
-        roleSettings.setMonitorCanRemoveService(false);
-        apiHelper.updateEmployeeRoleSettings("Employee", roleSettings);
+        updateEmployeeRoleSettings(false, true, false);
 
         TopScreenPanelSteps.saveChanges();
         MonitorSteps.tapOnFirstOrder();
@@ -123,5 +113,13 @@ public class VNextMonitorSupportTasksTestCases extends BaseTestClass {
         TopScreenPanelSteps.saveChanges();
         TopScreenPanelSteps.resetSearch();
         TopScreenPanelSteps.goToThePreviousScreen();
+    }
+
+    private void updateEmployeeRoleSettings(boolean canAdd, boolean canEdit, boolean canRemove) throws IOException {
+
+        roleSettings.setMonitorCanAddService(canAdd);
+        roleSettings.setMonitorCanEditService(canEdit);
+        roleSettings.setMonitorCanRemoveService(canRemove);
+        apiHelper.updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, roleSettings);
     }
 }
