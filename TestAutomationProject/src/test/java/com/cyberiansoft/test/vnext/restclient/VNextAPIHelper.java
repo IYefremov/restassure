@@ -5,6 +5,7 @@ import com.cyberiansoft.test.dataclasses.r360.DeviceDTO;
 import com.cyberiansoft.test.dataclasses.r360.InspectionDTO;
 import com.cyberiansoft.test.dataclasses.r360.WorkOrderDTO;
 import com.cyberiansoft.test.globalutils.GlobalUtils;
+import com.cyberiansoft.test.vnext.enums.MonitorRole;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypeData;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypeData;
@@ -84,10 +85,10 @@ public class VNextAPIHelper {
         return res.body().getResult().get(0).getLocalNo();
     }
 
-    public static void updateEmployeeRoleSettings(String roleName, RoleSettingsDTO roleSettings) throws IOException {
+    public static void updateEmployeeRoleSettings(MonitorRole monitorRole, RoleSettingsDTO roleSettings) throws IOException {
 
         String userKey = loginUser();
-        String roleId = getRoleIdByRoleName("Basic " + userKey, roleName);
+        String roleId = getRoleIdByRoleName("Basic " + userKey, monitorRole.getRoleName());
         int status = ApiUtils.getQcApiService().updateEmployeeRoleSettings("Basic " + userKey, roleId, roleSettings).execute().code();
         if (status != 200) Assert.fail("Role settings haven't been updated due to the error");
     }
