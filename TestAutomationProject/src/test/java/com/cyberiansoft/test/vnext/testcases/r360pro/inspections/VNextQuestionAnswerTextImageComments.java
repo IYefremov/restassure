@@ -321,8 +321,6 @@ public class VNextQuestionAnswerTextImageComments extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-
-    //todo: add steps for changes Monitor role settings on BO!!!
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanAddCommentToQFInMonitor(String rowID,
                                                                     String description, JSONObject testData) throws IOException {
