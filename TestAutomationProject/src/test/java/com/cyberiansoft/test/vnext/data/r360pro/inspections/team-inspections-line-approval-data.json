@@ -141,7 +141,7 @@
           "serviceName": "Aluminum Panel"
         },
         {
-          "serviceName": "Expenses Service",
+          "serviceName": "Anastasia Labor Avarage Data",
           "serviceStatus": "Skipped"
         }
       ],
@@ -301,16 +301,15 @@
           "serviceStatus": "Approved"
         },
         {
-          "serviceName": "Labor Motor",
-          "serviceStatus": "Declined"
+          "serviceName": "Aluminum Panel"
         },
         {
-          "serviceName": "Expenses Service",
+          "serviceName": "Anastasia Labor Avarage Data",
           "serviceStatus": "Skipped"
         }
       ],
-      "inspPrice": "$165.89",
-      "inspApprovedPrice": "$9.00"
+      "inspPrice": "$14.86",
+      "inspApprovedPrice": "$11.25"
     }
   ],
   "testVerifyUserSeeOnlyTotalAmountForSelectedMatrixWhenApproveInspectionWithLineApprovalEqualsON": [
@@ -336,7 +335,7 @@
             "vehiclePartSeverity": "VERY LIGHT",
             "vehiclePartAdditionalServices": [
               {
-                "serviceName": "Expenses Service"
+                "serviceName": "Anastasia Labor Avarage Data"
               },
               {
                 "serviceName": "Battery Installation",

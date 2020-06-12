@@ -235,6 +235,10 @@ public class VNextProTestCasesDataPaths {
         return props.getProperty("monitoring.focusmode.button");
     }
 
+    public String getMonitoringAddDeleteServicesTestCasesDataPath() {
+        return props.getProperty("monitoring.adddelete.services");
+    }
+
     public String getInspectionQuestionAnswerTextImageCommentsTestCasesDataPath() {
         return props.getProperty("inspection.question.textimage.comments");
     }
