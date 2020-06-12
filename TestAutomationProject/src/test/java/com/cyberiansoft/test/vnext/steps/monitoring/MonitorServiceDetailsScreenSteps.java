@@ -6,6 +6,7 @@ import com.cyberiansoft.test.vnext.screens.monitoring.SelectServiceStatusScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.VNextMonitorServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.steps.GeneralListSteps;
 import com.cyberiansoft.test.vnext.steps.GeneralSteps;
+import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import org.apache.velocity.util.StringUtils;
 
 public class MonitorServiceDetailsScreenSteps {
@@ -21,6 +22,7 @@ public class MonitorServiceDetailsScreenSteps {
     public static void changeServiceTechnician(ServiceTechnician serviceTechnician) {
         VNextMonitorServiceDetailsScreen monitorServiceDetailsScreen = new VNextMonitorServiceDetailsScreen();
         monitorServiceDetailsScreen.getTechnicianFld().click();
+        SearchSteps.searchByText(serviceTechnician.getTechnicianFullName());
         GeneralListSteps.selectListItem(serviceTechnician.getTechnicianFullName());
     }
 
