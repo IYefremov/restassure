@@ -7,6 +7,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.MonitorRole;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
@@ -52,9 +53,9 @@ public class VNextMonitorFlagsAddDeleteServicesTestCases extends BaseTestClass {
         roleSettingsDTO.setMonitorCanAddService(true);
         roleSettingsDTO.setMonitorCanEditService(false);
         roleSettingsDTO.setMonitorCanRemoveService(true);
-        VNextAPIHelper.updateEmployeeRoleSettings("Employee", roleSettingsDTO);
-        VNextAPIHelper.updateEmployeeRoleSettings("Inspector", roleSettingsDTO);
-        VNextAPIHelper.updateEmployeeRoleSettings("Manager", roleSettingsDTO);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, roleSettingsDTO);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.INSPECTOR, roleSettingsDTO);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.MANAGER, roleSettingsDTO);
 
         HomeScreenSteps.openInspections();
         InspectionSteps.openInspectionMenu(inspectionId);
@@ -91,9 +92,9 @@ public class VNextMonitorFlagsAddDeleteServicesTestCases extends BaseTestClass {
         roleSettingsDTO.setMonitorCanAddService(false);
         roleSettingsDTO.setMonitorCanEditService(true);
         roleSettingsDTO.setMonitorCanRemoveService(false);
-        VNextAPIHelper.updateEmployeeRoleSettings("Employee", roleSettingsDTO);
-        VNextAPIHelper.updateEmployeeRoleSettings("Inspector", roleSettingsDTO);
-        VNextAPIHelper.updateEmployeeRoleSettings("Manager", roleSettingsDTO);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, roleSettingsDTO);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.INSPECTOR, roleSettingsDTO);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.MANAGER, roleSettingsDTO);
 
         HomeScreenSteps.openInspections();
         InspectionSteps.openInspectionMenu(inspectionId);
