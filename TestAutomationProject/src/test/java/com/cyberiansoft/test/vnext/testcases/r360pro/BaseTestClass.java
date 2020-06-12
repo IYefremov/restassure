@@ -22,6 +22,7 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -69,9 +70,9 @@ public class BaseTestClass {
     }
 
     @BeforeSuite
-    public void beforeSuite() {
+    @Parameters({"lic.name"})
+    public void beforeSuite(String licenseName) {
 
-        String licenseName = "OKramar_android3";
         Optional<String> testPlanIdFromMaven = Optional.ofNullable(System.getProperty("testPlanId"));
         //Optional<String> testCaseIdFromMaven = Optional.ofNullable("97261");
         if (testPlanIdFromMaven.isPresent()) {
