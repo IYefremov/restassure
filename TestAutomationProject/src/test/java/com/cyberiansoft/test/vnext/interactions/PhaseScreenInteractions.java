@@ -123,4 +123,15 @@ public class PhaseScreenInteractions {
         phasesScreen.getCompleteServicesButton().click();
     }
 
+    public static void openTaskForEdit(ServiceData serviceData) {
+
+        PhasesScreen phasesScreen = new PhasesScreen();
+        WaitUtils.collectionSizeIsGreaterThan(phasesScreen.getServiceElementsList(), 0);
+        WaitUtils.elementShouldBeVisible(phasesScreen.getRootElement(), true);
+        WaitUtils.waitUntilElementIsClickable(phasesScreen.getRootElement());
+        BaseUtils.waitABit(2000);
+        ServiceElement serviceElement = getServiceElements(serviceData.getServiceName());
+        serviceElement.getRootElement().findElement(By.xpath(serviceElement.getEditTaskActionButtonLocator())).click();
+    }
+
 }
