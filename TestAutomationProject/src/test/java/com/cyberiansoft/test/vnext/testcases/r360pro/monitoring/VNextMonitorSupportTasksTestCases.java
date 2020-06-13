@@ -12,18 +12,20 @@ import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.MonitorRole;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
+import com.cyberiansoft.test.vnext.enums.TaskStatus;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
+import com.cyberiansoft.test.vnext.interactions.PhaseScreenInteractions;
 import com.cyberiansoft.test.vnext.restclient.VNextAPIHelper;
 import com.cyberiansoft.test.vnext.restclient.monitorrolessettings.RoleSettingsDTO;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.commonobjects.TopScreenPanelSteps;
-import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
-import com.cyberiansoft.test.vnext.steps.monitoring.PhaseScreenSteps;
-import com.cyberiansoft.test.vnext.steps.monitoring.SelectTaskScreenSteps;
-import com.cyberiansoft.test.vnext.steps.monitoring.TaskDetailsScreenSteps;
+import com.cyberiansoft.test.vnext.steps.monitoring.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
+import com.cyberiansoft.test.vnext.validations.NotesValidations;
 import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
+import com.cyberiansoft.test.vnext.validations.monitor.SelectStatusScreenValidations;
+import com.cyberiansoft.test.vnext.validations.monitor.SelectTechnicianScreenValidations;
 import com.cyberiansoft.test.vnext.validations.monitor.TaskDetailsScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.AfterClass;
@@ -35,7 +37,8 @@ import java.io.IOException;
 public class VNextMonitorSupportTasksTestCases extends BaseTestClass {
 
     RoleSettingsDTO roleSettings = new RoleSettingsDTO();
-    VNextAPIHelper apiHelper = new VNextAPIHelper();;
+    VNextAPIHelper apiHelper = new VNextAPIHelper();
+    ;
 
     @BeforeClass(description = "Support tasks in Monitor test cases")
     public void beforeClass() throws IOException {
@@ -79,9 +82,7 @@ public class VNextMonitorSupportTasksTestCases extends BaseTestClass {
         SelectTaskScreenSteps.selectTestManualTask();
         TaskDetailsScreenValidations.verifyAddNewTaskPageIsOpened();
         TopScreenPanelSteps.saveChanges();
-
         updateEmployeeRoleSettings(false, true, false);
-
         TopScreenPanelSteps.saveChanges();
         MonitorSteps.tapOnFirstOrder();
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -98,17 +99,22 @@ public class VNextMonitorSupportTasksTestCases extends BaseTestClass {
         PhaseScreenValidations.validateServicePresent(serviceData, false);
         MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE);
         PhaseScreenValidations.validateServiceStatus(monitoringData.getOrderPhasesDto().get(0).getPhaseServices().get(1).getMonitorService());
-        PhaseScreenSteps.changeServiceStatusToActive(serviceData);
+        PhaseScreenSteps.openSelectStatusScreen(serviceData);
+        SelectStatusScreenValidations.verifySelectStatusScreenIsOpened();
+        SelectStatusScreenSteps.selectStatus(TaskStatus.ACTIVE);
         PhaseScreenValidations.validateServiceStatus(serviceData);
-
         TopScreenPanelSteps.saveChanges();
         MonitorSteps.tapOnFirstOrder();
         MenuSteps.selectMenuItem(MenuItems.EDIT);
-
-        PhaseScreenSteps.changeTaskTeamAndTechnician(serviceData, "01_TimeRep_team", "Aleksandr Filimonov");
+        PhaseScreenInteractions.openTaskForEdit(serviceData);
+        TaskDetailsScreenSteps.changeVendorTeam("01_TimeRep_team");
+        SelectTechnicianScreenValidations.verifySelectTechnicianScreenIsOpened();
+        SelectTechnicianScreenSteps.selectTechnician("Aleksandr Filimonov");
         TaskDetailsScreenValidations.verifyVendorTeamIsCorrect("01_TimeRep_team");
         TaskDetailsScreenValidations.verifyTechnicianIsCorrect("Aleksandr Filimonov");
         TaskDetailsScreenSteps.addNote("test note");
+        NotesValidations.verifyNotePresentInList("test note");
+        TopScreenPanelSteps.goToThePreviousScreen();
         TopScreenPanelSteps.goToThePreviousScreen();
         TopScreenPanelSteps.saveChanges();
         TopScreenPanelSteps.resetSearch();

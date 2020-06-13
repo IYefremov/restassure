@@ -10,7 +10,6 @@ import com.cyberiansoft.test.vnext.steps.GeneralListSteps;
 import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.MenuSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import com.cyberiansoft.test.vnext.validations.monitor.SelectStatusScreenValidations;
 import org.openqa.selenium.By;
 
 public class PhaseScreenSteps {
@@ -81,20 +80,10 @@ public class PhaseScreenSteps {
         WaitUtils.waitUntilElementIsClickable(availableServicesScreen.getAllServicesList().getRootElement());
     }
 
-    public static void changeServiceStatusToActive(ServiceData serviceData) {
+    public static void openSelectStatusScreen(ServiceData serviceData) {
 
         EditOrderSteps.openServiceMenu(serviceData);
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
-        SelectStatusScreenValidations.verifySelectStatusScreenIsOpened();
-        SelectStatusScreenSteps.selectActiveStatus();
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
-
-    public static void changeTaskTeamAndTechnician(ServiceData serviceData, String team, String technician) {
-
-        PhaseScreenInteractions.openTaskForEdit(serviceData);
-        TaskDetailsScreenSteps.changeVendorTeamWithTechnician(team, technician);
-    }
-
 }

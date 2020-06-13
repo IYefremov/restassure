@@ -16,7 +16,7 @@ public class NoteListMenuScreen extends MonitorScreen {
     @FindBy(xpath = "//div[@data-page=\"comments-list\"]")
     private WebElement rootElement;
 
-    @FindBy(xpath = "//*[@action=\"add-order-comment\"]")
+    @FindBy(xpath = "//*[contains(@action,'add')]")
     private WebElement addNewNoteButton;
 
     @FindBy(xpath = "//*[@action=\"view-commnet\"]")
