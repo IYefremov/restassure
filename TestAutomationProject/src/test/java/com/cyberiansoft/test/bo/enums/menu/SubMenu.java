@@ -14,6 +14,7 @@ public enum SubMenu {
     USERS("Users"),
     CLIENTS("Clients"),
     WORK_ORDER_TYPES("Work Order Types"),
+    REPAIR_LOCATIONS("Repair Locations"),
     COMPANY_INFO("Company Info");
 
     final private String value;

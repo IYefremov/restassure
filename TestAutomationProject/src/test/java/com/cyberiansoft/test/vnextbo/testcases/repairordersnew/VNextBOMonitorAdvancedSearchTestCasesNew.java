@@ -224,7 +224,7 @@ public class VNextBOMonitorAdvancedSearchTestCasesNew extends BaseTestCase {
 
         VNextBOROPageStepsNew.searchOrdersByTimeFrame("Month to Date");
         VNextBOROWebPageValidationsNew.verifyOrdersAfterSearchByTimeFrame(
-                CustomDateProvider.getLastMonthStartDate(), CustomDateProvider.getMonthStartDate());
+                CustomDateProvider.getLastMonthEndDate(), CustomDateProvider.getCurrentDateLocalized());
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
@@ -423,7 +423,7 @@ public class VNextBOMonitorAdvancedSearchTestCasesNew extends BaseTestCase {
 
     //Comment from previous test - //todo bug - the orders are not sorted properly. Needs clarifications/fixes from V. Dubinenko
     //test should be refactored, disabled for now
-    @Test(enabled = false, dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchBySortByArbitrationDatePriority(String rowID, String description, JSONObject testData) {
 
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);

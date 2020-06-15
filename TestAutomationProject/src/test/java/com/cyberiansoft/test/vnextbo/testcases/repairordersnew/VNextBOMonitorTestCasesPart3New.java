@@ -2,12 +2,19 @@ package com.cyberiansoft.test.vnextbo.testcases.repairordersnew;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.bo.enums.menu.Menu;
+import com.cyberiansoft.test.bo.enums.menu.SubMenu;
+import com.cyberiansoft.test.bo.steps.menu.BOMenuSteps;
+import com.cyberiansoft.test.bo.steps.monitor.repairlocations.BOEditPhaseDialogSteps;
+import com.cyberiansoft.test.bo.steps.monitor.repairlocations.BOLocationPhasesWindowSteps;
+import com.cyberiansoft.test.bo.steps.monitor.repairlocations.BORepairLocationsPageSteps;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
+import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBONotesDialogStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
@@ -22,15 +29,28 @@ import org.testng.annotations.Test;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
+
 public class VNextBOMonitorTestCasesPart3New extends BaseTestCase {
 
 	@BeforeClass
 	public void settingUp() {
 
 		JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorTD();
-		VNextBOLeftMenuInteractions.selectRepairOrdersMenu();
-		Utils.refreshPage();
-		VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
+        final String location = "Best Location Automation";
+        try {
+            VNextBOHomeWebPageSteps.clickLogo();
+            VNextBOHomeWebPageSteps.clickAccessReconProBOLink();
+            BOMenuSteps.open(Menu.MONITOR, SubMenu.REPAIR_LOCATIONS);
+            final String mainWindow = BORepairLocationsPageSteps.openPhasesLocationDialogByLocationName(location);
+            BOLocationPhasesWindowSteps.openEditDialogByPhaseName("PDR Station");
+            BOEditPhaseDialogSteps.setWorkStatusTracking("Service And Phase Levels");
+            BOEditPhaseDialogSteps.confirm();
+            Utils.closeAllNewWindowsExceptParentTab(mainWindow);
+        } catch (Exception ignored) {}
+        webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
+        VNextBOLeftMenuInteractions.selectRepairOrdersMenu();
+		VNextBOBreadCrumbInteractions.setLocation(location);
 		VNextBOROPageStepsNew.searchOrdersByOrderNumber("O-000-147163");
 		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
 	}
