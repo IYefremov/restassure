@@ -76,7 +76,7 @@ public class NotesSteps {
         notesScreen.clickScreenBackButton();
     }
 
-    public static void addRepairOrderNote() {
+    public static void addNote() {
         NoteListMenuScreen noteListMenuScreen = new NoteListMenuScreen();
         WaitUtils.waitUntilElementIsClickable(noteListMenuScreen.getAddNewNoteButton());
         noteListMenuScreen.getAddNewNoteButton().click();
@@ -96,7 +96,7 @@ public class NotesSteps {
             quickNotesList.add(notesScreen.getQuickNotesList().get(i).getText());
         }
         ScreenNavigationSteps.pressBackButton();
-        return  quickNotesList;
+        return quickNotesList;
     }
 
     public static String addQuickNotesFromListByCount(int count) {

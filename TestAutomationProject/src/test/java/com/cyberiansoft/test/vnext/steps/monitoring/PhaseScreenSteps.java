@@ -79,4 +79,11 @@ public class PhaseScreenSteps {
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         WaitUtils.waitUntilElementIsClickable(availableServicesScreen.getAllServicesList().getRootElement());
     }
+
+    public static void openSelectStatusScreen(ServiceData serviceData) {
+
+        EditOrderSteps.openServiceMenu(serviceData);
+        MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+    }
 }

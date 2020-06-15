@@ -33,6 +33,7 @@ public enum MenuItems {
     RESOLVE_PROBLEM("Resolve Problem"),
     FOCUS_MODE_ON("TURN OFF\nFocus mode"),
     FOCUS_MODE_OFF("TURN ON\nFocus mode"),
+    FOCUS_MODE("Focus mode"),
     TIME_REPORT("Time Report"),
     PAY("Pay"),
     PAY_CREDIT_CARD("Pay Credit Card"),
