@@ -183,6 +183,8 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	public boolean isWorkOrderExists(String workOrderID) {
 		waitTeamWorkOrdersScreenLoaded();
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("TeamOrdersTable")));
 		return teamOrdersTable.findElements(MobileBy.AccessibilityId(workOrderID)).size() > 0;
 	}
 	

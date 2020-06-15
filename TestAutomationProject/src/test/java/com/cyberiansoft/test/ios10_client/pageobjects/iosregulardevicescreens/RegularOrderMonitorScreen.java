@@ -304,13 +304,8 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 
 	public void checkMyWorkCheckbox() {
-		if (appiumdriver.findElementsByAccessibilityId("checkbox unchecked").size() > 0)
-			appiumdriver.findElementByAccessibilityId("checkbox unchecked").click();
-	}
-
-	public void uncheckMyWorkCheckbox() {
-		if (appiumdriver.findElementsByAccessibilityId("checkbox checked").size() > 0)
-			appiumdriver.findElementByAccessibilityId("checkbox checked").click();
+		waitOrderMonitorScreenLoaded();
+		appiumdriver.findElementByAccessibilityId("MyWorkCheckBox").click();
 	}
 
 	public void clickTech() {

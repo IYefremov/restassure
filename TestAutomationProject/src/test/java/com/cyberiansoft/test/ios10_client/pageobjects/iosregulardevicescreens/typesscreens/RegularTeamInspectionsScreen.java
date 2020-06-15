@@ -74,6 +74,8 @@ public class RegularTeamInspectionsScreen extends RegularBaseTypeScreenWithTabs 
 	
 	public boolean isInspectionExists(String inspectionID) {
 		waitTeamInspectionsScreenLoaded();
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("InspectionsTable")));
 		return inspectiontable.findElements(MobileBy.AccessibilityId(inspectionID)).size() > 0;
 	}
 	
