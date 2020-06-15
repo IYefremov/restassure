@@ -159,16 +159,34 @@ public class VNextBOSRAdvancedSearchDialogSteps {
         setToDateField(searchData.getToDate());
     }
 
+    public static void setCustomTimeFrame(String fromDate, String toDate) {
+        setTimeFrame(TimeFrameValues.TIMEFRAME_CUSTOM);
+        setFromDateField(fromDate);
+        setToDateField(toDate);
+    }
+
     public static void setFromDateField(String from) {
-        final VNextBOSRAdvancedSearchDialog advancedSearchDialog = new VNextBOSRAdvancedSearchDialog();
-        Utils.clearUsingKeyboard(advancedSearchDialog.getFromDateField());
-        Utils.sendKeys(advancedSearchDialog.getFromDateField(), from);
+        clearFromDateField();
+        Utils.sendKeys(new VNextBOSRAdvancedSearchDialog().getFromDateField(), from);
+    }
+
+    public static void clearFromDateField() {
+        Utils.clearUsingKeyboard(new VNextBOSRAdvancedSearchDialog().getFromDateField());
     }
 
     public static void setToDateField(String to) {
-        final VNextBOSRAdvancedSearchDialog advancedSearchDialog = new VNextBOSRAdvancedSearchDialog();
-        Utils.clearUsingKeyboard(advancedSearchDialog.getToDateField());
-        Utils.sendKeys(advancedSearchDialog.getToDateField(), to);
+        clearToDateField();
+        Utils.sendKeys(new VNextBOSRAdvancedSearchDialog().getToDateField(), to);
+    }
+
+    public static void clearToDateField() {
+        Utils.clearUsingKeyboard(new VNextBOSRAdvancedSearchDialog().getToDateField());
+    }
+
+    public static void setPhase(String status) {
+        final WebElement phaseField = new VNextBOSRAdvancedSearchDialog().getPhaseField();
+        WaitUtilsWebDriver.waitForElementToBeClickable(phaseField, 2);
+        new Select(phaseField).selectByVisibleText(status);
     }
 
     public static void setStatus(String status) {
@@ -211,6 +229,14 @@ public class VNextBOSRAdvancedSearchDialogSteps {
 
     public static String getVinErrorMessage() {
         return Utils.getText(new VNextBOSRAdvancedSearchDialog().getVinNumError());
+    }
+
+    public static String getFromDateErrorMessage() {
+        return Utils.getText(new VNextBOSRAdvancedSearchDialog().getFromDateError(), 1);
+    }
+
+    public static String getToDateErrorMessage() {
+        return Utils.getText(new VNextBOSRAdvancedSearchDialog().getToDateError(), 1);
     }
 
     public static void clickClearButton() {

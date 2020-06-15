@@ -103,7 +103,7 @@
       "searchData": {
         "status": "All Active (all not closed)"
       },
-      "expectedStatus": "All Active (all not closed)",
+      "expectedValue": "All Active (all not closed)",
       "infoText": "Timeframe: Last Year; Status: All Active (all not closed);"
     },
     {
@@ -117,7 +117,7 @@
       "searchData": {
         "status": "All On Hold"
       },
-      "expectedStatus": "OnHold",
+      "expectedValue": "OnHold",
       "infoText": "Timeframe: Last Year; Status: All On Hold;"
     },
     {
@@ -131,7 +131,7 @@
       "searchData": {
         "status": "All On Scheduled"
       },
-      "expectedStatus": "Scheduled",
+      "expectedValue": "Scheduled",
       "infoText": "Timeframe: Last Year; Status: All On Scheduled;"
     }
   ],
@@ -300,6 +300,130 @@
         }
       ],
       "infoText": "Timeframe: Last Month;"
+    }
+  ],
+  "verifyUserCanSearchByLast30DaysTimeFrame": [
+    {
+      "rowID": "verifyUserCanSearchByLast30DaysTimeFrame.01",
+      "description": "Test Case 125728:Verify user can search by timeframe \"Last 30 days\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125728"
+        }
+      ],
+      "infoText": "Timeframe: Last 30 days;"
+    }
+  ],
+  "verifyUserCanSearchByLast90DaysTimeFrame": [
+    {
+      "rowID": "verifyUserCanSearchByLast90DaysTimeFrame.01",
+      "description": "Test Case 125729:Verify user can search by timeframe \"Last 90 days\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125729"
+        }
+      ],
+      "infoText": "Timeframe: Last 90 days;"
+    }
+  ],
+  "verifyUserCanSearchByYearToDateTimeFrame": [
+    {
+      "rowID": "verifyUserCanSearchByYearToDateTimeFrame.01",
+      "description": "Test Case 125730:Verify user can search by timeframe \"Year To Date\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125730"
+        }
+      ],
+      "infoText": "Timeframe: Year To Date;"
+    }
+  ],
+  "verifyUserCanSearchByLastYearTimeFrame": [
+    {
+      "rowID": "verifyUserCanSearchByLastYearTimeFrame.01",
+      "description": "Test Case 125731:Verify user can search by timeframe \"Last Year\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125731"
+        }
+      ],
+      "infoText": "Timeframe: Last Year;"
+    }
+  ],
+  "verifyUserCanSearchByCustomTimeFrame": [
+    {
+      "rowID": "verifyUserCanSearchByCustomTimeFrame.01",
+      "description": "Test Case 125732:Verify user can search by timeframe \"Custom\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125732"
+        }
+      ],
+      "searchData": {
+        "fromDate": "04/29/2020",
+        "toDate": "05/29/2020"
+      }
+    }
+  ],
+  "verifyUserCanSearchByPhaseAcceptance": [
+    {
+      "rowID": "verifyUserCanSearchByPhaseAcceptance.01",
+      "description": "Test Case 125734:Verify user can search by phase \"Acceptance\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125734"
+        }
+      ],
+      "searchData": {
+        "fromDate": "05/27/2018",
+        "toDate": "05/27/2020"
+      },
+      "expectedValue": "A",
+      "infoText": "FromDate: 05/27/2018; ToDate: 05/27/2020; Phase: Acceptance;"
+    }
+  ],
+  "verifyUserCanSearchByPhase": [
+    {
+      "rowID": "verifyUserCanSearchByPhaseEstimating.01",
+      "description": "Test Case 128358:Verify user can search by phase \"Estimating\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "128358"
+        }
+      ],
+      "searchData": {
+        "phase": "Estimating"
+      },
+      "expectedValue": "E",
+      "infoText": "Timeframe: Last Year; Phase: Estimating;"
+    },
+    {
+      "rowID": "verifyUserCanSearchByPhaseWork.01",
+      "description": "Test Case 128359:Verify user can search by phase \"Work\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "128359"
+        }
+      ],
+      "searchData": {
+        "phase": "Work"
+      },
+      "expectedValue": "W",
+      "infoText": "Timeframe: Last Year; Phase: Work;"
+    },
+    {
+      "rowID": "verifyUserCanSearchByPhaseDelivery.01",
+      "description": "Test Case 128362:Verify user can search by phase \"Delivery\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "128362"
+        }
+      ],
+      "searchData": {
+        "phase": "Delivery"
+      },
+      "expectedValue": "D",
+      "infoText": "Timeframe: Last Year; Phase: Delivery;"
     }
   ]
 }

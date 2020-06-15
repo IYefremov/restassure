@@ -1,12 +1,14 @@
 package com.cyberiansoft.test.vnextbo.validations.servicerequests.dialogs;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.servicerequests.dialogs.VNextBOSRAdvancedSearchDialog;
 import com.cyberiansoft.test.vnextbo.steps.servicerequests.dialogs.VNextBOSRAdvancedSearchDialogSteps;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
+import java.util.List;
 import java.util.Map;
 
 public class VNextBOSRAdvancedSearchDialogValidations {
@@ -75,5 +77,33 @@ public class VNextBOSRAdvancedSearchDialogValidations {
     public static void verifyVinErrorMessageIsDisplayed(String expected) {
         Assert.assertEquals(VNextBOSRAdvancedSearchDialogSteps.getVinErrorMessage(), expected,
                 "The VIN error message hasn't been displayed");
+    }
+
+    public static void verifyFromDateFieldIsNotDisplayed() {
+        final List<WebElement> elements = DriverBuilder.getInstance().getDriver()
+                .findElements(new VNextBOSRAdvancedSearchDialog().getFromDateField());
+        Assert.assertEquals(elements.size(), 0, "The 'From Date' input field hasn't been displayed");
+    }
+
+    public static void verifyToDateFieldIsNotDisplayed() {
+        final List<WebElement> elements = DriverBuilder.getInstance().getDriver()
+                .findElements(new VNextBOSRAdvancedSearchDialog().getToDateField());
+        Assert.assertEquals(elements.size(), 0, "The 'To Date' input field hasn't been displayed");
+    }
+
+    public static void verifyFromDateErrorMessageIsDisplayed(String expected) {
+        Assert.assertEquals(VNextBOSRAdvancedSearchDialogSteps.getFromDateErrorMessage(), expected,
+                "The 'From Date' error message hasn't been displayed");
+    }
+
+    public static void verifyFromDateErrorMessageIsNotDisplayed() {
+        final List<WebElement> fromDateError = DriverBuilder.getInstance().getDriver()
+                .findElements(new VNextBOSRAdvancedSearchDialog().getFromDateError());
+        Assert.assertEquals(fromDateError.size(), 0, "The 'From Date' error message has been displayed");
+    }
+
+    public static void verifyToDateErrorMessageIsDisplayed(String expected) {
+        Assert.assertEquals(VNextBOSRAdvancedSearchDialogSteps.getToDateErrorMessage(), expected,
+                "The 'To Date' error message hasn't been displayed");
     }
 }
