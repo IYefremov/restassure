@@ -578,8 +578,7 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         BaseUtils.waitABit(2000);
         WizardScreenValidations.verifyScreenTotalPrice(workOrderData.getWorkOrderPrice());
         RegularNavigationSteps.navigateToOrderSummaryScreen();
-        RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
-        orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
+        RegularWorkOrderSummaryScreenSteps.setTotalSale(workOrderData.getWorkOrderTotalSale());
 
         RegularWorkOrdersSteps.saveWorkOrder();
         RegularNavigationSteps.navigateBackScreen();

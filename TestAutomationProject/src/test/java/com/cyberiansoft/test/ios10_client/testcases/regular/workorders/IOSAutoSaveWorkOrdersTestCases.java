@@ -196,7 +196,6 @@ public class IOSAutoSaveWorkOrdersTestCases extends IOSRegularBaseTestCase {
         RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
         Assert.assertTrue(myWorkOrdersScreen.isAutosavedWorkOrderExists());
         myWorkOrdersScreen.selectContinueWorkOrder();
-        vehicleScreen = new RegularVehicleScreen();
         Assert.assertEquals(vehicleScreen.getWorkOrderNumber(), workOrderNumber);
 
         DriverBuilder.getInstance().getAppiumDriver().closeApp();

@@ -315,8 +315,10 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void searchTechnician(String technician) {
-		appiumdriver.findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeNavigationBar' and name = 'Technicians'"))
-				.findElement(MobileBy.AccessibilityId("Search")).click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebElement techNavBar = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.
+				iOSNsPredicateString("type = 'XCUIElementTypeNavigationBar' and name = 'Technicians'")));
+		techNavBar.findElement(MobileBy.AccessibilityId("Search")).click();
 		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
 		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(technician+"\n");
 	}
