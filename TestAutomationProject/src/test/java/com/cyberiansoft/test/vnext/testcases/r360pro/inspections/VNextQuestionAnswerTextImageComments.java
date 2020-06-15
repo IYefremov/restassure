@@ -8,11 +8,14 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.MonitorRole;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.interactions.services.AvailableServiceScreenInteractions;
+import com.cyberiansoft.test.vnext.restclient.VNextAPIHelper;
+import com.cyberiansoft.test.vnext.restclient.monitorrolessettings.RoleSettingsDTO;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.commonobjects.TopScreenPanelSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
@@ -30,6 +33,7 @@ import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -317,14 +321,20 @@ public class VNextQuestionAnswerTextImageComments extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-
-    //todo: add steps for changes Monitor role settings on BO!!!
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanAddCommentToQFInMonitor(String rowID,
-                                                                    String description, JSONObject testData) {
+                                                                    String description, JSONObject testData) throws IOException {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         final String notestText = "Test 1";
+
+        RoleSettingsDTO roleSettingsDTO = new RoleSettingsDTO();
+        roleSettingsDTO.setMonitorCanAddService(true);
+        roleSettingsDTO.setMonitorCanEditService(false);
+        roleSettingsDTO.setMonitorCanRemoveService(true);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, roleSettingsDTO);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.INSPECTOR, roleSettingsDTO);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.MANAGER, roleSettingsDTO);
 
         HomeScreenSteps.openCreateMyWorkOrder();
         WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.AUTOTEST_QUESTIONS_FORMS, workOrderData);
@@ -347,11 +357,7 @@ public class VNextQuestionAnswerTextImageComments extends BaseTestClass {
 
         HomeScreenSteps.openMonitor();
         MonitorSteps.changeLocation("automationMonitoring");
-        SearchSteps.openSearchMenu();
-        SearchSteps.fillTextSearch(workOrderId);
-        SearchSteps.clickCommonFiltersToggle();
-        SearchSteps.selectStatus(RepairOrderStatus.All);
-        SearchSteps.search();
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
 
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.START_RO);
@@ -380,7 +386,32 @@ public class VNextQuestionAnswerTextImageComments extends BaseTestClass {
         QuestionFormSteps.saveQuestionForm();
         ServiceDetailsScreenSteps.saveServiceDetails();
 
-        EditOrderSteps.openServiceMenu(workOrderData.getMoneyServiceData());
+        roleSettingsDTO.setMonitorCanAddService(false);
+        roleSettingsDTO.setMonitorCanEditService(true);
+        roleSettingsDTO.setMonitorCanRemoveService(false);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, roleSettingsDTO);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.INSPECTOR, roleSettingsDTO);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.MANAGER, roleSettingsDTO);
+
+        WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();
+
+        HomeScreenSteps.openMonitor();
+        MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+
+        EditOrderSteps.openServiceDetails(workOrderData.getMoneyServiceData());
+        ServiceDetailsScreenSteps.openQuestionForm(workOrderData.getMoneyServiceData().getQuestionData().getQuestionSetionName());
+        questionsData.forEach(question -> {
+            QuestionFormSteps.clickQuestionNotes(question.getQuestionName());
+            NotesValidations.verifyNoteIsPresent(notestText);
+            NotesValidations.verifyNumberOfPicturesPresent(2);
+            TopScreenPanelSteps.goToThePreviousScreen();
+        });
+
+        QuestionFormSteps.saveQuestionForm();
+        ServiceDetailsScreenSteps.saveServiceDetails();
+        WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
     }
 

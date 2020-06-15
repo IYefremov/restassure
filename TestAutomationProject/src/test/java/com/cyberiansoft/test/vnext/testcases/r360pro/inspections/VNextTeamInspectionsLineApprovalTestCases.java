@@ -289,9 +289,10 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
         final String inspectionNumber = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.APPROVE);
-        for (ServiceData service : services) {
-            ApproveServicesSteps.setServiceStatus(service.getServiceName(), service.getServiceStatus());
-        }
+        services.forEach(serviceData -> {
+            if (serviceData.getServiceStatus() != null)
+                ApproveServicesSteps.setServiceStatus(serviceData.getServiceName(), serviceData.getServiceStatus());
+        });
 
         ApproveServicesSteps.saveApprovedServices();
         ApproveSteps.drawSignature();

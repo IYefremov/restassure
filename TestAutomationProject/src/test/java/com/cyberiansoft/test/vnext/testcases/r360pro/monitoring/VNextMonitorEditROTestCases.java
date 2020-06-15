@@ -53,7 +53,7 @@ public class VNextMonitorEditROTestCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanSwitchToInfoMode(String rowID,
-                                            String description, JSONObject testData) {
+                                                  String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderInfoDto expectedOrderInfo = workOrderData.getMonitoring().getOrderInfoDto();
@@ -86,7 +86,7 @@ public class VNextMonitorEditROTestCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanStartTheService(String rowID,
-                                                  String description, JSONObject testData) {
+                                                 String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         ServiceData serviceData = workOrderData.getServiceData();
@@ -110,7 +110,7 @@ public class VNextMonitorEditROTestCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanTypeTheNoteForService(String rowID,
-                                                 String description, JSONObject testData) {
+                                                       String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         ServiceData serviceData = workOrderData.getServiceData();
@@ -123,7 +123,7 @@ public class VNextMonitorEditROTestCases extends BaseTestClass {
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.openServiceMenu(serviceData);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
-        NotesSteps.addRepairOrderNote();
+        NotesSteps.addNote();
         NotesSteps.setRepairOrderNoteText(notesText);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
@@ -136,7 +136,7 @@ public class VNextMonitorEditROTestCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanAssignTheTechOnTheServiceLevel(String rowID,
-                                                 String description, JSONObject testData) {
+                                                                String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         ServiceData serviceData = workOrderData.getServiceData();
@@ -157,7 +157,7 @@ public class VNextMonitorEditROTestCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanAssignTheTechOnPhaseLevel(String rowID,
-                                                                String description, JSONObject testData) {
+                                                           String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderPhaseDto orderPhaseDto = workOrderData.getMonitoring().getOrderPhaseDto();

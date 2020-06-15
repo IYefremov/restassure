@@ -141,7 +141,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         MonitorSteps.openItem(workOrderId);
 
         MenuSteps.selectMenuItem(MenuItems.NOTES);
-        NotesSteps.addRepairOrderNote();
+        NotesSteps.addNote();
         NotesSteps.addQuickNote(quickNotes);
         ScreenNavigationSteps.pressBackButton();
         NotesValidations.verifyNotePresentInList(quickNotes);

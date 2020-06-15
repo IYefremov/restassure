@@ -76,6 +76,8 @@ public class ServiceDetailsScreenSteps {
     }
 
     public static void setServiceTextNotes(String textNote) {
+        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+        WaitUtils.waitUntilElementIsClickable(serviceDetailsScreen.getRootElement());
         openServiceNotes();
         NotesSteps.setNoteText(textNote);
         ScreenNavigationSteps.pressBackButton();

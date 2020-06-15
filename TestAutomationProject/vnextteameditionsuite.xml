@@ -3,7 +3,7 @@
     <listeners>
         <listener class-name="com.cyberiansoft.test.vnext.listeners.TestServiceListener"/>
     </listeners>
-    <parameter name="lic.name" value="OKramar_android2"  />
+    <parameter name="lic.name" value="OKramar_android"  />
     <test name="Tests for VNext client" group-by-instances="true">
         <classes>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionNotesTestCases"/>
@@ -64,12 +64,14 @@
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorEditROTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorStartPhaseServicesTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorFocusModeButtonTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorFlagsAddDeleteServicesTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextWholesaleCustomersTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextWholesaleCustomersContactsTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextWholesaleCustomersCreationNewContactsTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextTeamPresetCustomerTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.servicerequests.ServiceRequestsRegressionTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.login.SearchEmployeeOnLoginTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorSupportTasksTestCases"/>
         </classes>
     </test>
 </suite>

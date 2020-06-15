@@ -28,6 +28,12 @@ public class PhaseScreenSteps {
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 
+    public static void deleteService(ServiceData serviceData) {
+        EditOrderSteps.openServiceMenu(serviceData);
+        MenuSteps.selectMenuItem(MenuItems.DELETE);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+    }
+
     public static void completeService(ServiceData serviceData) {
         EditOrderSteps.openServiceMenu(serviceData);
         MenuSteps.selectMenuItem(MenuItems.COMPLETE);
@@ -72,5 +78,12 @@ public class PhaseScreenSteps {
         phasesScreen.getAllServicesButton().click();
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         WaitUtils.waitUntilElementIsClickable(availableServicesScreen.getAllServicesList().getRootElement());
+    }
+
+    public static void openSelectStatusScreen(ServiceData serviceData) {
+
+        EditOrderSteps.openServiceMenu(serviceData);
+        MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 }

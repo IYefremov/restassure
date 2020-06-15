@@ -13,12 +13,13 @@ public class ServiceElement implements IWebElement {
     private String nameLocator = ".//div[contains(@class,'icon-item-entity-name') or contains(@class,'icon-item-content-title') or contains(@class,'icon-item-phase-title')]";
     private String expandElementLocator = ".//*[@action='open-phase-services']";
     private String clockIconLocator = ".//*[@class='icon-svg ']";
-    private String startDateLocator = ".//div[contains(@class,'icon-item-content-title')][2]";
+    private String startDateLocator = ".//div[contains(@class,'icon-item-content-title')]/span[1]";
     private String technicianLocator = ".//div[@data-phase-tech]";
     private String checkElementLocator = ".//*[@action='check-item']";
     private String editElementLocator = ".//*[@action='edit-service']";
     private String notesElementLocator = ".//*[@data-service-notes]";
     private String startIconLocator = ".//div[@class='icon-item-content-title']/span[@class='icon-item-arrow']";
+    private String editTaskActionButtonLocator = ".//div[@action='edit-task']//span[@class='icon-item-arrow']";
 
     public ServiceElement(WebElement rootElement) {
         this.rootElement = rootElement;
