@@ -43,6 +43,10 @@ public class VNextBOSRTableSteps {
         return Utils.getText(new VNextBOSRTable().getStatusesList()).stream().distinct().collect(Collectors.toList());
     }
 
+    public static List<String> getUniqueStatusBadgeLettersFields() {
+        return Utils.getText(new VNextBOSRTable().getStatusBadgeLettersList()).stream().distinct().collect(Collectors.toList());
+    }
+
     public static List<String> getUniqueStockNumbersFields() {
         return Utils.getText(new VNextBOSRTable().getStockNumbersList()).stream().distinct().collect(Collectors.toList());
     }

@@ -4,6 +4,7 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -86,12 +87,6 @@ public class VNextBOSRAdvancedSearchDialog extends VNextBOBaseWebPage {
     @FindBy(id = "TimeFrameId")
     private WebElement timeFrameField;
 
-    @FindBy(xpath = "//div[@id='FromDate']//input")
-    private WebElement fromDateField;
-
-    @FindBy(xpath = "//div[@id='ToDate']//input")
-    private WebElement toDateField;
-
     @FindBy(id = "StatusId")
     private WebElement statusField;
 
@@ -112,6 +107,11 @@ public class VNextBOSRAdvancedSearchDialog extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//input[@id='VIN']/following-sibling::span")
     private WebElement vinNumError;
+
+    final By fromDateField = By.xpath("//div[@id='FromDate']//input");
+    final By toDateField = By.xpath("//div[@id='ToDate']//input");
+    final By fromDateError = By.xpath("//div[@id='FromDate']/following-sibling::span");
+    final By toDateError = By.xpath("//div[@id='ToDate']/following-sibling::span");
 
     public HashMap<String, WebElement> getElementsWithPlaceholder() {
         return new HashMap<String, WebElement>() {{
