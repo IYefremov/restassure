@@ -46,7 +46,7 @@ public class InspectionsQuestionFormTestCases extends BaseTestClass {
         QuestionFormValidations.verifyQuestionBackGroundIsRed(imageQuestion.getQuestionName());
         QuestionFormSteps.answerImageQuestion(imageQuestion);
         QuestionFormValidations.verifyImageQuestionIsAnswered(imageQuestion, 1);
-        QuestionFormSteps.clearSelectedQuestion(imageQuestion);
+        QuestionFormSteps.clearSelectedQuestion(imageQuestion.getQuestionName());
         QuestionFormValidations.verifyImageQuestionIsNotAnswered(imageQuestion);
         QuestionFormValidations.verifyQuestionBackGroundIsWhite(imageQuestion.getQuestionName());
         for (int i = 0; i < 4; i++) {
@@ -80,7 +80,7 @@ public class InspectionsQuestionFormTestCases extends BaseTestClass {
         QuestionFormSteps.answerSignatureQuestion(signatureQuestion);
         QuestionFormValidations.validateQuestionAnswered(questionsData, true);
         QuestionFormValidations.verifyQuestionBackGroundIsGreen(signatureQuestion.getQuestionName());
-        QuestionFormSteps.clearSelectedQuestion(questionsData);
+        QuestionFormSteps.clearSelectedQuestion(questionsData.getQuestionName());
         QuestionFormValidations.validateQuestionAnswered(questionsData, false);
         QuestionFormValidations.verifyQuestionBackGroundIsWhite(signatureQuestion.getQuestionName());
         InspectionSteps.cancelInspection();
@@ -108,7 +108,7 @@ public class InspectionsQuestionFormTestCases extends BaseTestClass {
         QuestionFormValidations.validateQuestionAnswered(questionsData, true);
         QuestionFormValidations.verifyQuestionBackGroundIsGreen(datePickerQuestion.getQuestionName());
         QuestionFormValidations.validateGeneralQuestionHasAnswer(datePickerQuestion.getQuestionName(), currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        QuestionFormSteps.clearSelectedQuestion(questionsData);
+        QuestionFormSteps.clearSelectedQuestion(questionsData.getQuestionName());
         QuestionFormValidations.validateQuestionAnswered(questionsData, false);
         QuestionFormValidations.verifyQuestionBackGroundIsWhite(datePickerQuestion.getQuestionName());
         InspectionSteps.cancelInspection();
@@ -135,7 +135,7 @@ public class InspectionsQuestionFormTestCases extends BaseTestClass {
         QuestionFormSteps.answerTimeQuestion(timePickerQuestion, currentTime.getHour(), currentTime.getMinute(), currentTime.getSecond());
         QuestionFormValidations.validateQuestionAnswered(questionsData, true);
         QuestionFormValidations.verifyQuestionBackGroundIsGreen(timePickerQuestion.getQuestionName());
-        QuestionFormSteps.clearSelectedQuestion(questionsData);
+        QuestionFormSteps.clearSelectedQuestion(questionsData.getQuestionName());
         QuestionFormValidations.validateQuestionAnswered(questionsData, false);
         QuestionFormValidations.verifyQuestionBackGroundIsWhite(timePickerQuestion.getQuestionName());
         InspectionSteps.cancelInspection();

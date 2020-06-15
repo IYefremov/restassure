@@ -86,7 +86,7 @@ public class SearchSteps {
     }
 
     public static void searchByTextAndStatus(String text, RepairOrderStatus status) {
-        BaseUtils.waitABit(20*1000);
+        BaseUtils.waitABit(35*1000);
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
         openSearchMenu();
         fillTextSearch(text);

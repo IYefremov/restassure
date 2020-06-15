@@ -54,7 +54,6 @@ public class RepairOrdersCommonFiltersPageSteps {
     public static void clearFilters() {
 
         new CommonFilterScreen().getClearFilter().click();
-        waitUntilRepairsOrdersPageIsOpened();
     }
 
     public static void setAllSearchFields(RepairOrdersSearchData searchData) {

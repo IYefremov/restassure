@@ -19,7 +19,7 @@ public class InspectionSteps {
     public static void createInspection(AppCustomer customer, InspectionTypes inspectionTypes) {
         CustomersScreenSteps.selectCustomer(customer);
         selectInspectionType(inspectionTypes);
-        VehicleInfoScreenSteps.setVIN("777777");
+        VehicleInfoScreenSteps.setVIN("77777777777777777");
     }
 
     public static void createInspection(AppCustomer customer, InspectionTypes inspectionTypes, InspectionData inspectionData) {
