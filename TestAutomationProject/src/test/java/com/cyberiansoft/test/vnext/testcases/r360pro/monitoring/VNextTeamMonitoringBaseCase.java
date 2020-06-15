@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
@@ -132,6 +133,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         AvailableServicesScreenSteps.selectServiceGroup(workOrderData.getDamageData().getDamageGroupName());
         AvailableServicesScreenSteps.selectServices(workOrderData.getDamageData().getMoneyServices());
         ScreenNavigationSteps.pressBackButton();
+        BaseUtils.waitABit(1000);
         final String workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
 
@@ -206,6 +208,9 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         RepairOrdersSearchData searchData = JSonDataParser.getTestDataFromJson(testData, RepairOrdersSearchData.class);
         RepairOrdersSearchData defaultFieldValues = JSonDataParser.getTestDataFromJson(JSONDataProvider.extractData_JSON(DEFAULT_FIELD_VALUES), RepairOrdersSearchData.class);
         HomeScreenSteps.openMonitor();
+
+        //todo: Rapair Order search timout 30 sec
+        BaseUtils.waitABit(45*1000);
         MonitorSteps.openCommonFiltersPage();
         RepairOrdersCommonFiltersPageValidations.verifyCommonFiltersScreenHasAllElements();
         RepairOrdersCommonFiltersPageValidations.verifyTimeFrameDropDownContainsCorrectOptions();
@@ -236,8 +241,9 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
 
         RepairOrdersSearchData searchData = JSonDataParser.getTestDataFromJson(testData, RepairOrdersSearchData.class);
         HomeScreenSteps.openMonitor();
+        //todo: Rapair Order search timout 30 sec
+        BaseUtils.waitABit(45*1000);
         MonitorSteps.openCommonFiltersPage();
-        RepairOrdersCommonFiltersPageValidations.verifyCommonFiltersScreenHasAllElements();
         RepairOrdersCommonFiltersPageValidations.verifyPriorityDropDownContainsCorrectOptions();
         RepairOrdersCommonFiltersPageSteps.selectPriority(searchData.getPriority());
         RepairOrdersCommonFiltersPageValidations.verifyPriorityFieldContainsCorrectValue(searchData.getPriority());

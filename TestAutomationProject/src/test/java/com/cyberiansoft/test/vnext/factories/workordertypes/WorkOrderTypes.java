@@ -14,6 +14,7 @@ public enum WorkOrderTypes {
     AUTOMATION_MONITORING("automationMonitoring"),
     AUTOTEST_QUESTIONS_FORMS("Autotest - Question forms"),
     AUTOMATION_WO_MONITOR("Automation_WO_Monitor"),
+    OLROM("Olrom"),
     AT_ENCH_QF_WO("AT_ENCH_QF_WO");
 
     private final String woType;
