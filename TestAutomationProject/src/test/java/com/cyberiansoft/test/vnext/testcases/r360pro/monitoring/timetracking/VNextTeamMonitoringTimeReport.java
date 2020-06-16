@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -7,9 +8,12 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
+import com.cyberiansoft.test.vnext.enums.MonitorRole;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
+import com.cyberiansoft.test.vnext.restclient.VNextAPIHelper;
+import com.cyberiansoft.test.vnext.restclient.monitorrolessettings.RoleSettingsDTO;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
@@ -20,6 +24,8 @@ import com.cyberiansoft.test.vnext.validations.TimeReportScreenVerifications;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
 
 public class VNextTeamMonitoringTimeReport extends BaseTestClass {
 
@@ -41,6 +47,7 @@ public class VNextTeamMonitoringTimeReport extends BaseTestClass {
         AvailableServicesScreenSteps.selectServiceGroup(workOrderData.getDamageData().getDamageGroupName());
         AvailableServicesScreenSteps.selectServices(workOrderData.getDamageData().getMoneyServices());
         ScreenNavigationSteps.pressBackButton();
+        BaseUtils.waitABit(1000);
         final String workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
         return workOrderId;
@@ -48,11 +55,17 @@ public class VNextTeamMonitoringTimeReport extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanSeeTimeReportOnServiceLevel(String rowID,
-                                                   String description, JSONObject testData) {
+                                                   String description, JSONObject testData) throws IOException {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         ServiceData serviceDto = workOrderData.getDamageData().getMoneyServices().get(1);
 
         final String workOrderId = createWorkOrder(workOrderData);
+
+        RoleSettingsDTO roleSettingsDTO = new RoleSettingsDTO();
+        roleSettingsDTO.setMonitorCanAddService(false);
+        roleSettingsDTO.setMonitorCanEditService(true);
+        roleSettingsDTO.setMonitorCanRemoveService(false);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, roleSettingsDTO);
 
         MonitorSteps.editOrder(workOrderId);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.TIME_REPORT, false);
@@ -90,11 +103,17 @@ public class VNextTeamMonitoringTimeReport extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanSeeTimeReportOnPhaseLevel(String rowID,
-                                                 String description, JSONObject testData) {
+                                                 String description, JSONObject testData) throws IOException {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
         final String workOrderId = createWorkOrder(workOrderData);
+
+        RoleSettingsDTO roleSettingsDTO = new RoleSettingsDTO();
+        roleSettingsDTO.setMonitorCanAddService(true);
+        roleSettingsDTO.setMonitorCanEditService(false);
+        roleSettingsDTO.setMonitorCanRemoveService(true);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, roleSettingsDTO);
 
         MonitorSteps.editOrder(workOrderId);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.TIME_REPORT, false);

@@ -11,10 +11,13 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderInfoDto;
+import com.cyberiansoft.test.vnext.enums.MonitorRole;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
+import com.cyberiansoft.test.vnext.restclient.VNextAPIHelper;
+import com.cyberiansoft.test.vnext.restclient.monitorrolessettings.RoleSettingsDTO;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.commonobjects.TopScreenPanelSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
@@ -30,6 +33,7 @@ import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -38,9 +42,13 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
     private String workOrderId = "";
 
     @BeforeClass(description = "Team Monitoring Base Case")
-    public void beforeClass() {
+    public void beforeClass() throws IOException {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringBaseCaseDataPath();
-
+        RoleSettingsDTO roleSettingsDTO = new RoleSettingsDTO();
+        roleSettingsDTO.setMonitorCanAddService(false);
+        roleSettingsDTO.setMonitorCanEditService(true);
+        roleSettingsDTO.setMonitorCanRemoveService(false);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, roleSettingsDTO);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -97,6 +105,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         AvailableServicesScreenSteps.selectServiceGroup(workOrderData.getDamageData().getDamageGroupName());
         AvailableServicesScreenSteps.selectServices(workOrderData.getDamageData().getMoneyServices());
         ScreenNavigationSteps.pressBackButton();
+        BaseUtils.waitABit(1000);
         final String workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
 

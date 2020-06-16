@@ -9,10 +9,13 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
+import com.cyberiansoft.test.vnext.enums.MonitorRole;
 import com.cyberiansoft.test.vnext.enums.PhaseName;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
+import com.cyberiansoft.test.vnext.restclient.VNextAPIHelper;
+import com.cyberiansoft.test.vnext.restclient.monitorrolessettings.RoleSettingsDTO;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
@@ -24,6 +27,8 @@ import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
 
 public class VNextTeamProblemEnforcement extends BaseTestClass {
     private String inspectionId = "";
@@ -49,9 +54,15 @@ public class VNextTeamProblemEnforcement extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifySystemEnforcesUserToResolveProblemBeforeServiceCompleteServiceLevelOnly(String rowID,
-                                                                                              String description, JSONObject testData) {
+                                                                                              String description, JSONObject testData) throws IOException {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         ServiceData serviceDto = workOrderData.getServiceData();
+
+        RoleSettingsDTO roleSettingsDTO = new RoleSettingsDTO();
+        roleSettingsDTO.setMonitorCanAddService(false);
+        roleSettingsDTO.setMonitorCanEditService(true);
+        roleSettingsDTO.setMonitorCanRemoveService(false);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, roleSettingsDTO);
 
         MonitorSteps.editOrder(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -75,9 +86,15 @@ public class VNextTeamProblemEnforcement extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifySystemEnforcesUserToResolveProblemBeforeServiceCompletePhaseLevelOnly(String rowID,
-                                                                                            String description, JSONObject testData) {
+                                                                                            String description, JSONObject testData) throws IOException {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
+
+        RoleSettingsDTO roleSettingsDTO = new RoleSettingsDTO();
+        roleSettingsDTO.setMonitorCanAddService(true);
+        roleSettingsDTO.setMonitorCanEditService(false);
+        roleSettingsDTO.setMonitorCanRemoveService(true);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, roleSettingsDTO);
 
         MonitorSteps.editOrder(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -101,10 +118,16 @@ public class VNextTeamProblemEnforcement extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifySystemEnforcesUserToResolveServiceProblemBeforeServiceOrPhaseCompletePhaseAndServiceLevel(String rowID,
-                                                                                                                String description, JSONObject testData) {
+                                                                                                                String description, JSONObject testData) throws IOException {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
         ServiceData serviceDto = workOrderData.getServiceData();
+
+        RoleSettingsDTO roleSettingsDTO = new RoleSettingsDTO();
+        roleSettingsDTO.setMonitorCanAddService(false);
+        roleSettingsDTO.setMonitorCanEditService(true);
+        roleSettingsDTO.setMonitorCanRemoveService(false);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, roleSettingsDTO);
 
         MonitorSteps.editOrder(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
