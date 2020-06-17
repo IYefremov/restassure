@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.validations;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.ServiceStatus;
+import com.cyberiansoft.test.enums.monitor.OrderPhaseStatuses;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
 import com.cyberiansoft.test.vnext.interactions.PhaseScreenInteractions;
 import org.testng.Assert;
@@ -40,6 +41,10 @@ public class PhaseScreenValidations {
 
     public static void validatePhaseStatus(OrderPhaseDto phaseDto, ServiceStatus serviceStatus) {
         Assert.assertEquals(PhaseScreenInteractions.getPhaseElement(phaseDto.getPhaseName()).getStatus(), serviceStatus.getStatus());
+    }
+
+    public static void validatePhaseStatus(OrderPhaseDto phaseDto, OrderPhaseStatuses orderPhaseStatuses) {
+        Assert.assertEquals(PhaseScreenInteractions.getPhaseElement(phaseDto.getPhaseName()).getStatus(), orderPhaseStatuses.getValue().toUpperCase());
     }
 
     public static void verifyTimetrachingShoudBeStartedOnPhase(OrderPhaseDto phaseDto, Boolean shouldBeStarted) {
