@@ -10,7 +10,7 @@ public class StatusSelectScreen extends VNextBaseScreen {
     @FindBy(xpath = "//div[@data-page='change-status']")
     private WebElement rootElement;
 
-    @FindBy(xpath = "//*[@action='select']")
+    @FindBy(xpath = "//*[@data-autotests-id='change-status']/div")
     private List<WebElement> statusList;
 
     public WebElement getStatusItemByText(String statusText){

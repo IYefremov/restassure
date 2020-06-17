@@ -35,6 +35,7 @@ public enum MenuItems {
     FOCUS_MODE_OFF("TURN ON\nFocus mode"),
     FOCUS_MODE("Focus mode"),
     TIME_REPORT("Time Report"),
+    HOME("Home"),
     PAY("Pay"),
     PAY_CREDIT_CARD("Pay Credit Card"),
     PAY_CASH_CHECK("Pay Cash/Check"),
