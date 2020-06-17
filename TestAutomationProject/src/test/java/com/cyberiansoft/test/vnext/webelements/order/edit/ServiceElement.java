@@ -20,6 +20,7 @@ public class ServiceElement implements IWebElement {
     private String notesElementLocator = ".//*[@data-service-notes]";
     private String startIconLocator = ".//div[@class='icon-item-content-title']/span[@class='icon-item-arrow']";
     private String editTaskActionButtonLocator = ".//div[@action='edit-task']//span[@class='icon-item-arrow']";
+    private String priceWithQuantityElement = ".//div[contains(@class, 'amount-part-received')]/div";
 
     public ServiceElement(WebElement rootElement) {
         this.rootElement = rootElement;
