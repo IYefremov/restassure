@@ -583,6 +583,8 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         RegularWorkOrdersSteps.saveWorkOrder();
         RegularNavigationSteps.navigateBackScreen();
 
+
+        BaseUtils.waitABit(10000);
         webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
@@ -1350,8 +1352,7 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         RegularServiceDetailsScreenSteps.saveServiceDetails();
         vehiclePartScreen.saveVehiclePart();
         priceMatrixScreen.clickSave();
-        RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
-        Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), workOrderData.getWorkOrderPrice());
+        RegularWizardScreenValidations.verifyScreenTotalPrice(workOrderData.getWorkOrderPrice());
         RegularWorkOrdersSteps.saveWorkOrder();
         RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
         Assert.assertEquals(myWorkOrdersScreen.getPriceValueForWO(workOrderNumber), workOrderData.getWorkOrderPrice());
@@ -2505,7 +2506,7 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         DriverBuilder.getInstance().getDriver().quit();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testInvoicesVerifyThatOnPrintOutOfAutoWorkListNetTemplateAllCalculationDataIsCorrect_ProdData(String rowID,
                                                                                                               String description, JSONObject testData) {
 

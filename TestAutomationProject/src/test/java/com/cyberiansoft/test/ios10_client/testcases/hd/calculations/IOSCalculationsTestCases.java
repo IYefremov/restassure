@@ -2586,7 +2586,7 @@ public class IOSCalculationsTestCases extends IOSHDBaseTestCase {
         DriverBuilder.getInstance().getDriver().quit();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testInvoicesVerifyThatOnPrintOutOfAutoWorkListNetTemplateAllCalculationDataIsCorrect_ProdData(String rowID,
                                                                                                               String description, JSONObject testData) {
 
