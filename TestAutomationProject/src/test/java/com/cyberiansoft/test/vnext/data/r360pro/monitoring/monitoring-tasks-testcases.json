@@ -1,0 +1,164 @@
+{
+  "verifyUserCanAddAndEditTasks": [
+    {
+      "rowID": "verifyUserCanAddAndEditTasks.01",
+      "description": "Test Case 94259: ReconPro - Monitor - Verify user can add and edit tasks",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "94259",
+          "testCaseTitle": "ReconPro - Monitor - Verify user can add and edit tasks"
+        }
+      ],
+      "workOrderData": {
+        "damageData": {
+          "damageGroupName": "Other",
+          "moneyServices": [
+            {
+              "serviceName": "olrom"
+            },
+            {
+              "serviceName": "Orom_Money_Service"
+            }
+          ]
+        },
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "monitoring": {
+          "orderPhasesDto": [
+            {
+              "phaseName": "AutomationServiceLevel",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Test_manual_task",
+                    "serviceStatus": "STARTED"
+                  }
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Test_manual_task",
+                    "serviceStatus": "COMPLETED"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "verifyAutoAssignTechToATask": [
+    {
+      "rowID": "verifyAutoAssignTechToATask.01",
+      "description": "Test Case 94260: Auto-assign tech to a Task",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "94260",
+          "testCaseTitle": "Auto-assign tech to a Task"
+        }
+      ],
+      "workOrderData": {
+        "damageData": {
+          "damageGroupName": "Other",
+          "moneyServices": [
+            {
+              "serviceName": "olrom"
+            },
+            {
+              "serviceName": "Orom_Money_Service"
+            }
+          ]
+        },
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "monitoring": {
+          "orderPhasesDto": [
+            {
+              "phaseName": "AutomationServiceLevel",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Test_manual_task",
+                    "serviceStatus": "STARTED",
+                    "serviceDefaultTechnician":
+                    {
+                      "technicianFirstName": "Employee",
+                      "technicianLastName": "Employee",
+                      "isSelected": true
+                    }
+                  }
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Test_manual_task",
+                    "serviceStatus": "COMPLETED"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "verifyEmployeeCanCanNotAddDeleteEditServicesDependsOnBoSettings": [
+    {
+      "rowID": "verifyEmployeeCanCanNotAddDeleteEditServicesDependsOnBoSettings.01",
+      "description": "Test Case 92340: ReconPro - Monitor - Verify employee with role \"Employee\" can/can't ADD/DELETE or EDIT services depends on BO settings",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92340",
+          "testCaseTitle": "ReconPro - Monitor - Verify employee with role \"Employee\" can/can't ADD/DELETE or EDIT services depends on BO settings"
+        }
+      ],
+      "workOrderData": {
+        "damageData": {
+          "damageGroupName": "Other",
+          "moneyServices": [
+            {
+              "serviceName": "olrom"
+            },
+            {
+              "serviceName": "Orom_Money_Service"
+            }
+          ]
+        },
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "monitoring": {
+          "orderPhasesDto": [
+            {
+              "phaseName": "AutomationServiceLevel",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "olrom",
+                    "serviceStatus": "ACTIVE",
+                    "serviceDefaultTechnician":
+                    {
+                      "technicianFirstName": "Employee",
+                      "technicianLastName": "Employee",
+                      "isSelected": true
+                    }
+                  }
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Test_manual_task",
+                    "serviceStatus": "COMPLETED"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

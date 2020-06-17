@@ -5,6 +5,9 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.ServiceStatus;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
 import com.cyberiansoft.test.vnext.interactions.PhaseScreenInteractions;
+import com.cyberiansoft.test.vnext.screens.monitoring.PhasesScreen;
+import com.cyberiansoft.test.vnext.webelements.order.edit.ServiceElement;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 
 public class PhaseScreenValidations {
@@ -81,5 +84,22 @@ public class PhaseScreenValidations {
             Assert.assertTrue(PhaseScreenInteractions.isServiceStartIconPresent(serviceData.getServiceName()));
         else
             Assert.assertFalse(PhaseScreenInteractions.isServiceStartIconPresent(serviceData.getServiceName()));
+    }
+
+    public static void verifyPlusButtonIsDisplayed(boolean shouldPresent) {
+
+        if (shouldPresent)
+            Assert.assertTrue(new PhasesScreen().getAddButton().isDisplayed(), "Red plus button hasn't been displayed");
+        else
+            Assert.assertFalse(new PhasesScreen().getAddButton().isDisplayed(), "Red plus button has been displayed");
+    }
+
+    public static void verifyServicePriceAndQuantityAreCorrect(String serviceName, String price, String quantity) {
+
+        ServiceElement serviceElement = PhaseScreenInteractions.getServiceElements(serviceName);
+        Assert.assertTrue(serviceElement.getRootElement()
+                        .findElement(By.xpath(serviceElement.getPriceWithQuantityElement()))
+                        .getText().contains("$" + price + " x " + quantity),
+                "Price or quantity hasn't been correct");
     }
 }
