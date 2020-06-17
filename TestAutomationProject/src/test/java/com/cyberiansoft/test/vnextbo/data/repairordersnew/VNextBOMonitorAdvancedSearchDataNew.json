@@ -544,7 +544,7 @@
           "testCaseTitle": "User can search by \"Days in Phase\" (\"Between\")"
         }
       ],
-      "daysInProcess": "Between",
+      "daysInProcess": "BETWEEN",
       "daysNumStart": "25"
     }
   ],
@@ -806,7 +806,7 @@
       "daysInProcess": "<",
       "daysInPhase": "<=",
       "daysNumStart": "25",
-      "flag": "White",
+      "flag": "Blue",
       "sortBy": "Priority, Oldest to Newest",
       "searchName": "AutotestSearch91470"
     }

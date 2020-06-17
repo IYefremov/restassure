@@ -418,7 +418,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
     public static void verifyOrdersTableContainsCorrectColumns() {
 
-        List<String> correctTitlesList = Arrays.asList("Order / Type / Department", "Customer / Vehicle", "VIN# / Stock# / RO# / PO# / Invoice",
+        List<String> correctTitlesList = Arrays.asList("Order / Type / Department", "Customer / Vehicle", "VIN# / Stock# / RO# / PO# / Invoice / Mileage",
                 "Order Amount\nVendor Amount", "Start Date / Target Date", "Technicians", "Current Phase / Days in Phase", "Completed (%)", "Other");
         List<String> columnsTitles = new VNextBOROWebPageNew().getRepairOrdersTableColumnsTitles().stream().
                 map(WebElement::getText).collect(Collectors.toList());

@@ -11,6 +11,7 @@ import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBORODetailsWeb
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBORODetailsValidationsNew;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
@@ -36,12 +37,18 @@ public class VNextBORODetailsStepsNew {
     }
 
     public static void expandPhaseByName(String phase) {
-
-        ConditionWaiter.create(30000, 1000, __ -> new VNextBORODetailsWebPageNew().expandPhaseButton(phase).isDisplayed()).execute();
-        ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().expandPhaseButton(phase).isEnabled()).execute();
-        Utils.clickElement(new VNextBORODetailsWebPageNew().expandPhaseButton(phase));
-        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        final VNextBORODetailsWebPageNew detailsWebPage = new VNextBORODetailsWebPageNew();
+        String style = WaitUtilsWebDriver.getWait().until((ExpectedCondition<String>) driver ->
+                Utils.getAttribute(detailsWebPage.expandPhaseButton(phase), "style"));
+        if (style.contains("display: none")) {
+            WaitUtilsWebDriver.waitABit(3000);
+            style = Utils.getAttribute(detailsWebPage.expandPhaseButton(phase), "style");
+        }
+        if (style.isEmpty()) {
+            Utils.clickElement(detailsWebPage.expandPhaseButton(phase));
+            WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+            WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        }
     }
 
     public static void collapsePhaseByName(String phase) {
@@ -178,6 +185,7 @@ public class VNextBORODetailsStepsNew {
             Utils.clickWithJS(detailsWebPage.dropDownOption(expectedStatus));
             WaitUtilsWebDriver.waitForPageToBeLoaded();
             WaitUtilsWebDriver.waitABit(5000);
+            WaitUtilsWebDriver.waitForElementNotToBeStale(detailsWebPage.serviceStatusDropDownByService(service));
             ConditionWaiter.create(__ -> detailsWebPage.serviceStatusDropDownByService(service).isEnabled()).execute();
             ConditionWaiter.create(__ -> Utils.getText(detailsWebPage.serviceStatusDropDownByService(service)).equals(expectedStatus)).execute();
         }

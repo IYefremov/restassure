@@ -63,7 +63,7 @@ public class VNextBOSRTableValidations {
         if (VNextBOSRTableSteps.getSRListSize() == 0) {
             VNextBOSRTableValidations.verifyNotFoundNotificationIsDisplayed();
         } else {
-            VNextBOSRTableSteps.getUniqueCreatedDatesFields().forEach(value -> verifySRContainingValueIsDisplayed(
+            VNextBOSRTableSteps.getUniqueCreatedDatesFields().forEach(value -> verifySRIsDisplayed(
                             value, CustomDateProvider.getCurrentDateInFullFormat(true)));
         }
     }

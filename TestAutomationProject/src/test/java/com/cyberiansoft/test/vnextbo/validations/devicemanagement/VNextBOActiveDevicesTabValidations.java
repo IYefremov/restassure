@@ -73,9 +73,9 @@ public class VNextBOActiveDevicesTabValidations extends VNextBODeviceManagementW
     public static void verifyReplaceButtonIsDisplayedForDevice(String deviceName) {
         final VNextBOActiveDevicesWebPage activeDevicesWebPage = new VNextBOActiveDevicesWebPage();
         final WebElement button = WaitUtilsWebDriver.waitForElementNotToBeStale(
-                activeDevicesWebPage.replaceButtonByDeviceName(deviceName), 5);
-        final boolean visible = WaitUtilsWebDriver.elementShouldBeVisible(button, true, 3);
-        Assert.assertTrue(visible, "Replace button hasn't been displayed");
+                activeDevicesWebPage.replaceButtonByDeviceName(deviceName));
+        WaitUtilsWebDriver.waitForVisibility(button, 3);
+        Assert.assertTrue(Utils.isElementDisplayed(button), "Replace button hasn't been displayed");
     }
 
     public static boolean isReplaceButtonDisplayedForDevice(String deviceName) {
