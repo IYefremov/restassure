@@ -35,6 +35,7 @@ public enum MenuItems {
     FOCUS_MODE_OFF("TURN ON\nFocus mode"),
     FOCUS_MODE("Focus mode"),
     TIME_REPORT("Time Report"),
+    HOME("Home"),
     PAY("Pay"),
     PAY_CREDIT_CARD("Pay Credit Card"),
     PAY_CASH_CHECK("Pay Cash/Check"),
@@ -45,8 +46,8 @@ public enum MenuItems {
     CREATE_WORK_ORDER("Create Work Order"),
     CREATE_INVOICE("Create Invoice"),
     CHANGE_PO("Change PO#"),
-    RESET_START_DATE("Reset Start Date");
-
+    RESET_START_DATE("Reset Start Date"),
+    HOME("Home");
 
     @Getter
     private String menuItemDataName;

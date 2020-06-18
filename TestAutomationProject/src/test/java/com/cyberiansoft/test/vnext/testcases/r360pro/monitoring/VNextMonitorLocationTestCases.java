@@ -47,7 +47,7 @@ public class VNextMonitorLocationTestCases extends BaseTestClass {
                                                                                                          String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         String defLocation = workOrderData.getMonitoring().getLocation();
-        final String location = "1111 Automation";
+        final String location = "slavikp";
 
         HomeScreenSteps.openMonitor();
         MonitorSteps.changeLocation(location);

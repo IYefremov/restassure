@@ -43,7 +43,7 @@ public class WorkOrdersQuestionFormTestCases extends BaseTestClass {
         QuestionFormValidations.verifyQuestionBackGroundIsRed(imageQuestion.getQuestionName());
         QuestionFormSteps.answerImageQuestion(imageQuestion);
         QuestionFormValidations.verifyImageQuestionIsAnswered(imageQuestion, 1);
-        QuestionFormSteps.clearSelectedQuestion(imageQuestion);
+        QuestionFormSteps.clearSelectedQuestion(imageQuestion.getQuestionName());
         QuestionFormValidations.verifyImageQuestionIsNotAnswered(imageQuestion);
         QuestionFormValidations.verifyQuestionBackGroundIsWhite(imageQuestion.getQuestionName());
         for (int i = 0; i < 4; i++) {
@@ -77,7 +77,7 @@ public class WorkOrdersQuestionFormTestCases extends BaseTestClass {
         QuestionFormSteps.answerSignatureQuestion(signatureQuestion);
         QuestionFormValidations.validateQuestionAnswered(questionsData, true);
         QuestionFormValidations.verifyQuestionBackGroundIsGreen(signatureQuestion.getQuestionName());
-        QuestionFormSteps.clearSelectedQuestion(questionsData);
+        QuestionFormSteps.clearSelectedQuestion(questionsData.getQuestionName());
         QuestionFormValidations.validateQuestionAnswered(questionsData, false);
         QuestionFormValidations.verifyQuestionBackGroundIsWhite(signatureQuestion.getQuestionName());
         InspectionSteps.cancelInspection();
@@ -105,7 +105,7 @@ public class WorkOrdersQuestionFormTestCases extends BaseTestClass {
         QuestionFormValidations.validateQuestionAnswered(questionsData, true);
         QuestionFormValidations.verifyQuestionBackGroundIsGreen(datePickerQuestion.getQuestionName());
         QuestionFormValidations.validateGeneralQuestionHasAnswer(datePickerQuestion.getQuestionName(), currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        QuestionFormSteps.clearSelectedQuestion(questionsData);
+        QuestionFormSteps.clearSelectedQuestion(questionsData.getQuestionName());
         QuestionFormValidations.validateQuestionAnswered(questionsData, false);
         QuestionFormValidations.verifyQuestionBackGroundIsWhite(datePickerQuestion.getQuestionName());
         InspectionSteps.cancelInspection();
@@ -132,10 +132,29 @@ public class WorkOrdersQuestionFormTestCases extends BaseTestClass {
         QuestionFormSteps.answerTimeQuestion(timePickerQuestion, currentTime.getHour(), currentTime.getMinute(), currentTime.getSecond());
         QuestionFormValidations.validateQuestionAnswered(questionsData, true);
         QuestionFormValidations.verifyQuestionBackGroundIsGreen(timePickerQuestion.getQuestionName());
-        QuestionFormSteps.clearSelectedQuestion(questionsData);
+        QuestionFormSteps.clearSelectedQuestion(questionsData.getQuestionName());
         QuestionFormValidations.validateQuestionAnswered(questionsData, false);
         QuestionFormValidations.verifyQuestionBackGroundIsWhite(timePickerQuestion.getQuestionName());
         InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyWorkOrdersQuestionFormsLogicalQuestion(String rowID, String description, JSONObject testData) {
+
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        LogicalQuestionData logicalQuestionData = workOrderData.getQuestionScreenData().getQuestionData().getLogicalQuestionData();
+
+        HomeScreenSteps.openCreateMyWorkOrder();
+        WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.OLROM, workOrderData);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
+        QuestionFormValidations.verifyQuestionsScreenIsDisplayed();
+        QuestionFormValidations.verifyQuestionIsDisplayed(logicalQuestionData.getQuestionName());
+        QuestionFormSteps.answerLogicalQuestion(logicalQuestionData);
+        QuestionFormSteps.clearSelectedQuestion(logicalQuestionData.getQuestionName());
+        QuestionFormSteps.answerLogicalQuestion(logicalQuestionData);
+
+        WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
     }
 }

@@ -50,6 +50,8 @@ public class VNextTeamWorkOrdersTechniciansTestCases extends BaseTestClass {
     public void testVerifyUserCanSeparateAmountOfWOWithLaborServiceForTwoTechnicians(String rowID, String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        final String serviceGroup = "Other";
+
         HomeScreenSteps.openCreateTeamWorkOrder();
         WorkOrderSteps.createWorkOrder(testwholesailcustomer, WorkOrderTypes.AUTOMATION_WO_MONITOR, workOrderData);
         VehicleInfoScreenInteractions.openTechnicianList();
@@ -58,12 +60,15 @@ public class VNextTeamWorkOrdersTechniciansTestCases extends BaseTestClass {
         TechScreenValidations.verifyTechnicianIsSelectedWithCorrectPercentage("Test Test", "50");
         TopScreenPanelSteps.saveChanges();
         TopScreenPanelSteps.goToTheNextScreen();
-        AvailableServicesScreenSteps.openServicesList();
+        AvailableServicesScreenSteps.selectServiceGroup(serviceGroup);
         AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServices().get(0));
         TopScreenPanelSteps.goToThePreviousScreen();
         TopScreenPanelSteps.goToTheNextScreen();
         TopScreenPanelSteps.goToTheNextScreen();
         String wONumber = WorkOrderSteps.saveWorkOrder();
+        WorkOrderSteps.switchToMyWorkOrdersView();
+        WorkOrderSteps.switchToTeamWorkOrdersView();
+        SearchSteps.textSearchTeam(wONumber);
         WorkOrderSteps.openMenu(wONumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VehicleInfoScreenInteractions.openTechnicianList();
@@ -79,6 +84,8 @@ public class VNextTeamWorkOrdersTechniciansTestCases extends BaseTestClass {
     public void testVerifyUserCanSplitValueCustomAndSeeConfirmationWindow(String rowID, String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        final String serviceGroup = "Other";
+
         HomeScreenSteps.openCreateTeamWorkOrder();
         WorkOrderSteps.createWorkOrder(testwholesailcustomer, WorkOrderTypes.AUTOMATION_WO_MONITOR, workOrderData);
         VehicleInfoScreenInteractions.openTechnicianList();
@@ -87,7 +94,7 @@ public class VNextTeamWorkOrdersTechniciansTestCases extends BaseTestClass {
         TechScreenValidations.verifyTechnicianIsSelectedWithCorrectPercentage("Test Test", "50");
         TopScreenPanelSteps.saveChanges();
         TopScreenPanelSteps.goToTheNextScreen();
-        AvailableServicesScreenSteps.openServicesList();
+        AvailableServicesScreenSteps.selectServiceGroup(serviceGroup);
         AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServices().get(0));
         TopScreenPanelSteps.goToThePreviousScreen();
         TopScreenPanelSteps.goToTheNextScreen();

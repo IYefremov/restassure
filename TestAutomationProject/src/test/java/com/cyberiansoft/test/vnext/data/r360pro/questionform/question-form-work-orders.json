@@ -86,5 +86,28 @@
         }
       }
     }
+  ],
+  "testVerifyWorkOrdersQuestionFormsLogicalQuestion": [
+    {
+      "rowID": " testVerifyWorkOrdersQuestionFormsLogicalQuestion.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "97128",
+          "testCaseTitle": "ReconPro - Work Orders - Question Forms - Logical type"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "questionScreenData": {
+        "questionData": {
+          "logicalQuestionData": {
+            "questionName": "Add new categorizations ?",
+            "logicalAnswer": "No"
+          }
+        }
+      }
+    }
   ]
 }

@@ -143,6 +143,7 @@ public class RegularQuestionsScreen extends RegularBaseWizardScreen {
     }
 
     public void answerLogicalQuestion(QuestionsData questionsData) {
+        BaseUtils.waitABit(1000);
         appiumdriver.findElement(MobileBy.AccessibilityId(questionsData.getQuestionName())).findElement(MobileBy.className("XCUIElementTypeButton")).click();
         if (questionsData.isLogicalQuestionValue()) {
             appiumdriver.findElement(MobileBy.AccessibilityId(questionsData.getQuestionName())).findElement(MobileBy.className("XCUIElementTypeButton")).click();

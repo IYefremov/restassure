@@ -105,17 +105,17 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
 
         QuestionFormSteps.answerGeneralPredefinedQuestion(multiAnswerPredefinedQuestion, true);
         QuestionFormValidations.validateGeneralQuestionAnswer(multiAnswerPredefinedQuestion);
-        QuestionFormSteps.clearSelectedQuestion(multiAnswerPredefinedQuestion);
+        QuestionFormSteps.clearSelectedQuestion(multiAnswerPredefinedQuestion.getQuestionName());
         QuestionFormValidations.validateQuestionAnswered(multiAnswerPredefinedQuestion, false);
 
         QuestionFormSteps.answerGeneralPredefinedQuestion(singleAnswerPredefinedQuestion, false);
         QuestionFormValidations.validateGeneralQuestionAnswer(singleAnswerPredefinedQuestion);
-        QuestionFormSteps.clearSelectedQuestion(singleAnswerPredefinedQuestion);
+        QuestionFormSteps.clearSelectedQuestion(singleAnswerPredefinedQuestion.getQuestionName());
         QuestionFormValidations.validateQuestionAnswered(singleAnswerPredefinedQuestion, false);
 
         QuestionFormSteps.answerGeneralTextQuestion(textQuestion);
         QuestionFormValidations.validateTextQuestionAnswer(textQuestion);
-        QuestionFormSteps.clearSelectedQuestion(textQuestion);
+        QuestionFormSteps.clearSelectedQuestion(textQuestion.getQuestionName());
         QuestionFormValidations.validateQuestionAnswered(textQuestion, false);
 
         InspectionSteps.cancelInspection();
@@ -292,7 +292,7 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
         QuestionServiceListSteps.switchToNeedToSetupServiceView();
         QuestionServiceListValidations.validateServicePresent(firstExpectedNeedToSetupService.getServiceName());
         QuestionServiceListValidations.validateServicePresent(secondExpectedNeedToSetupService.getServiceName());
-        /*QuestionServiceListSteps.switchToSelectedServiceView();
+        QuestionServiceListSteps.switchToSelectedServiceView();
         QuestionServiceListValidations.validateServicePresent(expectedSelectedService.getServiceName());
         QuestionServiceListSteps.openServiceDetails(expectedSelectedService.getServiceName());
         ServiceDetailsValidations.verifyPartsServicePresent(false);
@@ -301,7 +301,7 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
         PartServiceListValidations.validateNoServicePresent();
         ScreenNavigationSteps.pressBackButton();
         LaborServiceSteps.confirmServiceDetails();
-        QuestionServiceListSteps.switchToNeedToSetupServiceView();*/
+        QuestionServiceListSteps.switchToNeedToSetupServiceView();
         QuestionServiceListSteps.openServiceDetails(firstExpectedNeedToSetupService.getServiceName());
         PartServiceSteps.selectPartServiceDetailsWithOpenedDetails(partServiceData);
         PartServiceSteps.confirmPartInfo();
