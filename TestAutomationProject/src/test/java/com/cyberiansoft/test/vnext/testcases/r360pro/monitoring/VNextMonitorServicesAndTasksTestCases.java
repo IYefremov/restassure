@@ -5,6 +5,7 @@ import com.cyberiansoft.test.dataclasses.Monitoring;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.TestCaseData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
+import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
@@ -23,6 +24,7 @@ import com.cyberiansoft.test.vnext.steps.monitoring.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
+import com.cyberiansoft.test.vnext.validations.HomeScreenValidation;
 import com.cyberiansoft.test.vnext.validations.NotesValidations;
 import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
 import com.cyberiansoft.test.vnext.validations.monitor.SelectStatusScreenValidations;
@@ -36,15 +38,15 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class VNextMonitorSupportTasksTestCases extends BaseTestClass {
+public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
 
     RoleSettingsDTO roleSettings = new RoleSettingsDTO();
     VNextAPIHelper apiHelper = new VNextAPIHelper();
 
-    @BeforeClass(description = "Support tasks in Monitor test cases")
+    @BeforeClass(description = "Monitor services and tasks test cases")
     public void beforeClass() throws IOException {
 
-        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringTasksTestCasesDataPath();
+        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringServicesTasksTestCasesDataPath();
         updateEmployeeRoleSettings(true, false, true);
     }
 
@@ -240,6 +242,46 @@ public class VNextMonitorSupportTasksTestCases extends BaseTestClass {
         TopScreenPanelSteps.goToThePreviousScreen();
     }
 
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
+    public void verifyHomeButtonIsAvailableFromPhasePartsInfoPages(String rowID, String description, JSONObject testData) throws IOException {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+        PartServiceData partServiceData = workOrderData.getDamageData().getPartServiceData();
+
+        HomeScreenSteps.openCreateMyWorkOrder();
+        WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.AUTOMATION_WO_MONITOR, workOrderData);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.selectServiceGroup(workOrderData.getDamageData().getDamageGroupName());
+        AvailableServicesScreenSteps.selectService(workOrderData.getDamageData().getMoneyServices().get(0).getServiceName());
+        ScreenNavigationSteps.pressBackButton();
+        final String workOrderId = WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
+        BaseUtils.waitABit(30000);
+
+        HomeScreenSteps.openMonitor();
+        SearchSteps.openSearchFilters();
+        SearchSteps.clearFilters();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MonitorSteps.startRepairOrder(workOrderId);
+        MonitorSteps.tapOnFirstOrder();
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+
+        PhaseScreenSteps.addPartService(partServiceData);
+        navigateToHomeScreenAndReturnBackToMonitor();
+
+        EditOrderSteps.switchToInfo();
+        navigateToHomeScreenAndReturnBackToMonitor();
+
+        EditOrderSteps.switchToParts();
+        navigateToHomeScreenAndReturnBackToMonitor();
+
+        TopScreenPanelSteps.saveChanges();
+        TopScreenPanelSteps.resetSearch();
+        TopScreenPanelSteps.goToThePreviousScreen();
+    }
+
     private void updateEmployeeRoleSettings(boolean canAdd, boolean canEdit, boolean canRemove) throws IOException {
 
         roleSettings.setMonitorCanAddService(canAdd);
@@ -251,6 +293,17 @@ public class VNextMonitorSupportTasksTestCases extends BaseTestClass {
     private void reopenOrderPhaseScreen() {
 
         TopScreenPanelSteps.saveChanges();
+        MonitorSteps.tapOnFirstOrder();
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+    }
+
+    private void navigateToHomeScreenAndReturnBackToMonitor() {
+
+        MonitorSteps.clickQuickActionsButton();
+        MenuSteps.selectMenuItem(MenuItems.HOME);
+        HomeScreenValidation.verifyHomeScreenIsOpened();
+
+        HomeScreenSteps.openMonitor();
         MonitorSteps.tapOnFirstOrder();
         MenuSteps.selectMenuItem(MenuItems.EDIT);
     }

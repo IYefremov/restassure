@@ -46,8 +46,8 @@ public enum MenuItems {
     CREATE_WORK_ORDER("Create Work Order"),
     CREATE_INVOICE("Create Invoice"),
     CHANGE_PO("Change PO#"),
-    RESET_START_DATE("Reset Start Date");
-
+    RESET_START_DATE("Reset Start Date"),
+    HOME("Home");
 
     @Getter
     private String menuItemDataName;
