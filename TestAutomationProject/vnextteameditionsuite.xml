@@ -71,7 +71,7 @@
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextTeamPresetCustomerTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.servicerequests.ServiceRequestsRegressionTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.login.SearchEmployeeOnLoginTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorSupportTasksTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorServicesAndTasksTestCases"/>
         </classes>
     </test>
 </suite>

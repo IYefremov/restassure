@@ -160,5 +160,41 @@
         }
       }
     }
+  ],
+  "verifyHomeButtonIsAvailableFromPhasePartsInfoPages": [
+    {
+      "rowID": "verifyHomeButtonIsAvailableFromPhasePartsInfoPages.01",
+      "description": "Test Case 92330: Verify the \"Home\" button is available from the \"Phase\" page, \"Parts\" page and \"RO Info\" page.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92330",
+          "testCaseTitle": "Verify the \"Home\" button is available from the \"Phase\" page, \"Parts\" page and \"RO Info\" page."
+        }
+      ],
+      "workOrderData": {
+        "damageData": {
+          "damageGroupName": "Other",
+          "moneyServices": [
+            {
+              "serviceName": "olrom"
+            }
+          ],
+          "partServiceData": {
+            "serviceName": "Part",
+            "category": "Body",
+            "subCategory": "Bumper",
+            "partName": {
+              "partNameList": [
+                "Bumper"
+              ]
+            },
+            "partPosition": "Right"
+          }
+        },
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        }
+      }
+    }
   ]
 }
