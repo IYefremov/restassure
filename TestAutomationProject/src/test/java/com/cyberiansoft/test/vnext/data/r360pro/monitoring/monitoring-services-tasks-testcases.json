@@ -147,12 +147,6 @@
                       "isSelected": true
                     }
                   }
-                },
-                {
-                  "monitorService": {
-                    "serviceName": "Test_manual_task",
-                    "serviceStatus": "COMPLETED"
-                  }
                 }
               ]
             }
@@ -193,6 +187,106 @@
         },
         "vihicleInfo": {
           "vinNumber": "7777777777777"
+        }
+      }
+    }
+  ],
+  "verifyInspectorCanCanNotAddDeleteEditServicesDependsOnBoSettings": [
+    {
+      "rowID": "verifyInspectorCanCanNotAddDeleteEditServicesDependsOnBoSettings.01",
+      "description": "Test Case 92341: ReconPro - Monitor - Verify employee with role \"Inspector\" can/can't ADD/EDIT/REMOVE services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92341",
+          "testCaseTitle": "ReconPro - Monitor - Verify employee with role \"Inspector\" can/can't ADD/EDIT/REMOVE services"
+        }
+      ],
+      "workOrderData": {
+        "damageData": {
+          "damageGroupName": "Other",
+          "moneyServices": [
+            {
+              "serviceName": "olrom"
+            },
+            {
+              "serviceName": "Orom_Money_Service"
+            }
+          ]
+        },
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "monitoring": {
+          "orderPhasesDto": [
+            {
+              "phaseName": "AutomationServiceLevel",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "olrom",
+                    "serviceStatus": "ACTIVE",
+                    "serviceDefaultTechnician":
+                    {
+                      "technicianFirstName": "Employee",
+                      "technicianLastName": "Employee",
+                      "isSelected": true
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "verifyManagerCanCanNotAddDeleteEditServicesDependsOnBoSettings": [
+    {
+      "rowID": "verifyManagerCanCanNotAddDeleteEditServicesDependsOnBoSettings.01",
+      "description": "Test Case 92342: Verify employee with role \"Manager\" can/can't ADD/EDIT/REMOVE services depends on BO settings",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92342",
+          "testCaseTitle": "Verify employee with role \"Manager\" can/can't ADD/EDIT/REMOVE services depends on BO settings"
+        }
+      ],
+      "workOrderData": {
+        "damageData": {
+          "damageGroupName": "Other",
+          "moneyServices": [
+            {
+              "serviceName": "olrom"
+            },
+            {
+              "serviceName": "Orom_Money_Service"
+            }
+          ]
+        },
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "monitoring": {
+          "orderPhasesDto": [
+            {
+              "phaseName": "AutomationServiceLevel",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "olrom",
+                    "serviceStatus": "ACTIVE",
+                    "serviceDefaultTechnician":
+                    {
+                      "technicianFirstName": "Employee",
+                      "technicianLastName": "Employee",
+                      "isSelected": true
+                    }
+                  }
+                }
+              ]
+            }
+          ]
         }
       }
     }
