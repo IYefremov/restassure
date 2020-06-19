@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.core.BrowserType;
@@ -35,6 +36,8 @@ public class BaseTestClass {
     protected static EnvironmentType environmentType;
     protected static String deviceUrl;
     @Getter
+    protected static BrowserType browserType;
+    @Getter
     protected static Employee employee;
 
     public BaseTestClass() {
@@ -56,6 +59,12 @@ public class BaseTestClass {
         employee.setEmployeeFirstName("Employee");
         employee.setEmployeeLastName("Employee");
         employee.setEmployeePassword("12345");
+
+        Optional<String> browserParam = Optional.ofNullable(System.getProperty("browser"));
+        if (browserParam.isPresent())
+            browserType = BaseUtils.getBrowserType(browserParam.get());
+        else
+            browserType = BrowserType.CHROME;
 
         Optional<String> deviceURLParam = Optional.ofNullable(System.getProperty("clientWebURL"));
         if (deviceURLParam.isPresent())
@@ -129,7 +138,7 @@ public class BaseTestClass {
 
 
     private String getRegistrationCode(String licenseName) {
-        DriverBuilder.getInstance().setDriver(BrowserType.CHROME);
+        DriverBuilder.getInstance().setDriver(browserType);
 
         WebDriver chromeDriver = DriverBuilder.getInstance().getDriver();
 

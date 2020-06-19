@@ -98,7 +98,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
             if (new InspectionTypeData(inspectionType).isCanBeFinalDraft())
                 clickSaveViaMenuAsFinal();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        WaitUtils.elementShouldBeVisible(inspectionsScreen.getInspectionsScreen(), true);
+        WaitUtils.elementShouldBeVisible(inspectionsScreen.getInspectionsScreen(), true, 90);
     }
 
     public VNextWorkOrdersScreen saveWorkOrderViaMenu() {
@@ -107,7 +107,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
             if (new WorkOrderTypeData(workOrderType).isCanBeDraft())
                 clickSaveViaMenuAsFinal();
         VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
-        WaitUtils.elementShouldBeVisible(workOrdersScreen.getRootElement(), true);
+        WaitUtils.elementShouldBeVisible(workOrdersScreen.getRootElement(), true, 90);
         workOrdersScreen.clearSearchField();
         return workOrdersScreen;
     }
