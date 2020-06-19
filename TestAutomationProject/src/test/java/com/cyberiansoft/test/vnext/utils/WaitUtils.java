@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class WaitUtils {
 
     private static final int durationInSeconds = 45;
+    private static final int elementVisibilityDefTimeout = 60;
     private static final int pullingIntervalInMils = 300;
 
     public static void collectionSizeIsGreaterThan(List<?> list, Integer expectedSize) {
@@ -41,8 +42,12 @@ public class WaitUtils {
     }
 
     public static void elementShouldBeVisible(WebElement element, Boolean shoulBeVisible) {
+        elementShouldBeVisible(element, shoulBeVisible, elementVisibilityDefTimeout);
+    }
+
+    public static void elementShouldBeVisible(WebElement element, Boolean shoulBeVisible, int timeOut) {
         getGeneralFluentWait()
-                .withTimeout(Duration.ofSeconds(60))
+                .withTimeout(Duration.ofSeconds(timeOut))
                 .until((webDriver) -> {
                     if (shoulBeVisible)
                         try {
@@ -63,10 +68,6 @@ public class WaitUtils {
     public static WebElement waitUntilElementIsClickable(final By locator) {
         getGeneralFluentWait().until(ExpectedConditions.elementToBeClickable(locator));
         return ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(locator);
-    }
-
-    public static void waitUntilElementIsClickable(final By locator, WebDriver appiumdriver) {
-        waitUntilElementIsClickable(locator);
     }
 
     public static WebElement waitUntilElementIsClickable(final WebElement webElement) {
