@@ -55,6 +55,55 @@ public class DriverBuilder {
         return instance;
     }
 
+
+    //todo: refactor!!!!
+    @SneakyThrows
+    public final void setAzureDriver(String azureURL) {
+
+        DesiredCapabilities webcap = null;
+        ChromeOptions selenoidChromeOptions = new ChromeOptions();
+        Map<String, Object> prefs = new HashMap<>();
+        //1-Allow, 2-Block, 0-default
+        prefs.put("profile.default_content_setting_values.notifications", 1);
+        selenoidChromeOptions.setExperimentalOption("prefs", prefs);
+        selenoidChromeOptions.addArguments("--window-size=1800,1000");
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setBrowserName("chrome");
+        capabilities.setVersion("78.0");
+        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVideo", false);
+        capabilities.setCapability("sessionTimeout", "2m");
+        capabilities.setCapability("name", "SessionName");
+
+        capabilities.setCapability(ChromeOptions.CAPABILITY, selenoidChromeOptions);
+        webcap = capabilities;
+        RemoteWebDriver driver = new RemoteWebDriver(
+                URI.create(azureURL).toURL(),
+                capabilities
+        );
+        driver.setFileDetector(new LocalFileDetector());
+        webDriver.set(driver);
+        sessionId.set(((RemoteWebDriver) webDriver.get()).getSessionId().toString());
+        if (webcap != null) {
+            sessionBrowser.set(webcap.getBrowserName());
+            sessionVersion.set(webcap.getVersion());
+        }
+        getDriver().manage().timeouts().implicitlyWait(IMPLICIT_TIMEOUT, TimeUnit.SECONDS);
+        try {
+            getDriver().manage().window().maximize();
+        } catch (WebDriverException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                getDriver().manage().window().setPosition(new Point(0, 0));
+                getDriver().manage().window().setSize(new Dimension(1920, 1080));
+            } catch (Exception e) {
+                setWindowSizeAfterDelay();
+            }
+        }
+    }
+
+    //todo: refactor!!!!
     @SneakyThrows
     public final void setDriver(BrowserType browserType) {
 
