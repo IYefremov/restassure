@@ -33,6 +33,7 @@ public class BaseTestClass {
     protected static WholesailCustomer testwholesailcustomer;
     protected static String deviceOfficeUrl;
     protected static EnvironmentType environmentType;
+    protected static String deviceUrl;
     @Getter
     protected static Employee employee;
 
@@ -56,7 +57,13 @@ public class BaseTestClass {
         employee.setEmployeeLastName("Employee");
         employee.setEmployeePassword("12345");
 
-        Optional<String> boURLParam = Optional.ofNullable(System.getProperty("testNewBOURL"));
+        Optional<String> deviceURLParam = Optional.ofNullable(System.getProperty("clientWebURL"));
+        if (deviceURLParam.isPresent())
+            deviceUrl = deviceURLParam.get();
+        else
+            deviceUrl = "http://208.87.18.5:8082/";
+
+        Optional<String> boURLParam = Optional.ofNullable(System.getProperty("testBOURL"));
         if (boURLParam.isPresent())
             deviceOfficeUrl = boURLParam.get();
         else {
@@ -91,7 +98,7 @@ public class BaseTestClass {
 
         WebDriver chromeWebDriver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
         //chromeWebDriver.get("http://R360user:Geev9ied@77.120.104.171:8000");
-        chromeWebDriver.get("http://208.87.18.5:8082/");
+        chromeWebDriver.get(deviceUrl);
 
         if (VNextEnvironmentInfo.getInstance().installNewBuild()) {
             String regCode = getRegistrationCode(licenseName);
