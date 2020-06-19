@@ -148,10 +148,11 @@ public class BaseTestClass {
 
 
     private String getRegistrationCode(String licenseName) {
-        DriverBuilder.getInstance().setDriver(browserType);
-
+        if (browserType.equals(BrowserType.CHROME)) {
+            DriverBuilder.getInstance().setDriver(browserType);
+        } else
+            DriverBuilder.getInstance().setAzureDriver("http://aqc-linux2.westus.cloudapp.azure.com:4444/wd/hub");
         WebDriver chromeDriver = DriverBuilder.getInstance().getDriver();
-
         BackOfficeLoginWebPage loginPage = new BackOfficeLoginWebPage(chromeDriver);
         ActiveDevicesWebPage activeDevicesWebPage = new ActiveDevicesWebPage(chromeDriver);
 

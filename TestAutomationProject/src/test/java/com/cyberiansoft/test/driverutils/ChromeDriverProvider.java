@@ -21,6 +21,8 @@ public enum ChromeDriverProvider {
     private WebDriver chromeWebDriver;
     private WebDriver chromeMobileWebDriver;
 
+    //todo: refactor!!!!
+    @SneakyThrows
     public WebDriver getChromeWebDriver() {
         if (chromeWebDriver == null || ((ChromeDriver) chromeMobileWebDriver).getSessionId() == null) {
             WebDriverManager.chromedriver().setup();
@@ -58,7 +60,7 @@ public enum ChromeDriverProvider {
             }
 
         } else {
-            if (chromeMobileWebDriver == null || ((ChromeDriver) chromeMobileWebDriver).getSessionId() == null) {
+            if (chromeMobileWebDriver == null || ((RemoteWebDriver) chromeMobileWebDriver).getSessionId() == null) {
                 WebDriverManager.chromedriver().setup();
 
                 Map<String, Object> deviceMetrics = new HashMap<>();
@@ -88,7 +90,7 @@ public enum ChromeDriverProvider {
                 capabilities.setCapability(ChromeOptions.CAPABILITY, selenoidChromeOptions);
                 //chromeOptions.addArguments("--user-data-dir=C:/AutoProfile1");
                 chromeMobileWebDriver = new RemoteWebDriver(
-                        URI.create("http://localhost:4444/wd/hub").toURL(),
+                        URI.create("http://aqc-linux2.westus.cloudapp.azure.com:4444/wd/hub").toURL(),
                         capabilities
                 );
             }
