@@ -24,6 +24,7 @@ import com.cyberiansoft.test.vnext.steps.monitoring.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.validations.HomeScreenValidation;
 import com.cyberiansoft.test.vnext.validations.NotesValidations;
 import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
@@ -31,6 +32,7 @@ import com.cyberiansoft.test.vnext.validations.monitor.SelectStatusScreenValidat
 import com.cyberiansoft.test.vnext.validations.monitor.SelectTechnicianScreenValidations;
 import com.cyberiansoft.test.vnext.validations.monitor.TaskDetailsScreenValidations;
 import org.json.simple.JSONObject;
+import org.openqa.selenium.By;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -47,19 +49,22 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
     public void beforeClass() throws IOException {
 
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringServicesTasksTestCasesDataPath();
-        updateEmployeeRoleSettings(true, false, true);
     }
 
     @BeforeMethod()
     public void beforeTest() throws IOException {
 
-        updateEmployeeRoleSettings(true, false, true);
+        updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, true, false, true);
+        updateEmployeeRoleSettings(MonitorRole.INSPECTOR, true, false, true);
+        updateEmployeeRoleSettings(MonitorRole.MANAGER, true, false, true);
     }
 
     @AfterClass
     public void afterClass() throws IOException {
 
-        updateEmployeeRoleSettings(true, false, true);
+        updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, true, false, true);
+        updateEmployeeRoleSettings(MonitorRole.INSPECTOR, true, false, true);
+        updateEmployeeRoleSettings(MonitorRole.MANAGER, true, false, true);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -91,7 +96,7 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         SelectTaskScreenSteps.selectTestManualTask();
         TaskDetailsScreenValidations.verifyAddNewTaskPageIsOpened();
         TopScreenPanelSteps.saveChanges();
-        updateEmployeeRoleSettings(false, true, false);
+        updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, false, true, false);
         TopScreenPanelSteps.saveChanges();
         MonitorSteps.tapOnFirstOrder();
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -156,7 +161,7 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         PhaseScreenSteps.addTask();
         SelectTaskScreenSteps.selectTestManualTask();
         TaskDetailsScreenSteps.changeTechnician("1111 2222");
-        updateEmployeeRoleSettings(false, true, false);
+        updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, false, true, false);
         reopenOrderPhaseScreen();
         ServiceData serviceData = monitoringData.getOrderPhasesDto().get(0).getPhaseServices().get(0).getMonitorService();
         PhaseScreenSteps.startService(serviceData);
@@ -227,7 +232,7 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         PhaseScreenSteps.addServices();
         AvailableServicesScreenSteps.clickAddServiceButton(workOrderData.getDamageData().getMoneyServices().get(0).getServiceName());
         TopScreenPanelSteps.saveChanges();
-        updateEmployeeRoleSettings(false, true, false);
+        updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, false, true, false);
         reopenOrderPhaseScreen();
         PhaseScreenValidations.verifyPlusButtonIsDisplayed(false);
         PhaseScreenInteractions.openServiceDetails(PhaseScreenInteractions.getServiceElements(serviceData.getServiceName()));
@@ -282,16 +287,127 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         TopScreenPanelSteps.goToThePreviousScreen();
     }
 
-    private void updateEmployeeRoleSettings(boolean canAdd, boolean canEdit, boolean canRemove) throws IOException {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    public void verifyInspectorCanCanNotAddDeleteEditServicesDependsOnBoSettings(String rowID, String description, JSONObject testData) throws IOException {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+        Monitoring monitoringData = workOrderData.getMonitoring();
+
+        HomeScreenSteps.reLoginWithAnotherUser(inspector);
+        HomeScreenSteps.openCreateMyWorkOrder();
+        WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.AUTOMATION_WO_MONITOR, workOrderData);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.selectServiceGroup(workOrderData.getDamageData().getDamageGroupName());
+        AvailableServicesScreenSteps.selectService(workOrderData.getDamageData().getMoneyServices().get(1).getServiceName());
+        ScreenNavigationSteps.pressBackButton();
+        final String workOrderId = WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
+        BaseUtils.waitABit(30000);
+
+        HomeScreenSteps.openMonitor();
+        SearchSteps.openSearchFilters();
+        SearchSteps.clearFilters();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MonitorSteps.startRepairOrder(workOrderId);
+        MonitorSteps.tapOnFirstOrder();
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        PhaseScreenSteps.addServices();
+        AvailableServicesScreenSteps.clickAddServiceButton(workOrderData.getDamageData().getMoneyServices().get(0).getServiceName());
+        TopScreenPanelSteps.saveChanges();
+        ServiceData serviceData = monitoringData.getOrderPhasesDto().get(0).getPhaseServices().get(0).getMonitorService();
+        PhaseScreenValidations.validateServicePresent(serviceData, true);
+        reopenOrderPhaseScreen();
+        PhaseScreenSteps.deleteService(serviceData);
+        reopenOrderPhaseScreen();
+        BaseUtils.waitABit(10000);
+        PhaseScreenValidations.validateServicePresent(serviceData, false);
+        PhaseScreenSteps.addServices();
+        AvailableServicesScreenSteps.clickAddServiceButton(workOrderData.getDamageData().getMoneyServices().get(0).getServiceName());
+        TopScreenPanelSteps.saveChanges();
+        updateEmployeeRoleSettings(MonitorRole.INSPECTOR, false, true, false);
+        reopenOrderPhaseScreen();
+        PhaseScreenValidations.verifyPlusButtonIsDisplayed(false);
+        PhaseScreenInteractions.openServiceDetails(PhaseScreenInteractions.getServiceElements(serviceData.getServiceName()));
+        ServiceDetailsScreenSteps.changeServicePrice("4");
+        ServiceDetailsScreenSteps.changeServiceQuantity("8");
+        TopScreenPanelSteps.saveChanges();
+        reopenOrderPhaseScreen();
+        //TODO: Below verification fails due to the bug 133519
+        PhaseScreenValidations.verifyServicePriceAndQuantityAreCorrect(serviceData.getServiceName(), "4.00", "8");
+        TopScreenPanelSteps.saveChanges();
+        TopScreenPanelSteps.resetSearch();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        HomeScreenSteps.reLoginWithAnotherUser(employee);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
+    public void verifyManagerCanCanNotAddDeleteEditServicesDependsOnBoSettings(String rowID, String description, JSONObject testData) throws IOException {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+        Monitoring monitoringData = workOrderData.getMonitoring();
+
+        HomeScreenSteps.reLoginWithAnotherUser(manager);
+        HomeScreenSteps.openCreateMyWorkOrder();
+        WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.AUTOMATION_WO_MONITOR, workOrderData);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.selectServiceGroup(workOrderData.getDamageData().getDamageGroupName());
+        AvailableServicesScreenSteps.selectService(workOrderData.getDamageData().getMoneyServices().get(1).getServiceName());
+        ScreenNavigationSteps.pressBackButton();
+        final String workOrderId = WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
+        BaseUtils.waitABit(30000);
+
+        HomeScreenSteps.openMonitor();
+        SearchSteps.openSearchFilters();
+        SearchSteps.clearFilters();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MonitorSteps.startRepairOrder(workOrderId);
+        MonitorSteps.tapOnFirstOrder();
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        PhaseScreenSteps.addServices();
+        AvailableServicesScreenSteps.clickAddServiceButton(workOrderData.getDamageData().getMoneyServices().get(0).getServiceName());
+        TopScreenPanelSteps.saveChanges();
+        ServiceData serviceData = monitoringData.getOrderPhasesDto().get(0).getPhaseServices().get(0).getMonitorService();
+        PhaseScreenValidations.validateServicePresent(serviceData, true);
+        reopenOrderPhaseScreen();
+        PhaseScreenSteps.deleteService(serviceData);
+        reopenOrderPhaseScreen();
+        BaseUtils.waitABit(10000);
+        PhaseScreenValidations.validateServicePresent(serviceData, false);
+        PhaseScreenSteps.addServices();
+        AvailableServicesScreenSteps.clickAddServiceButton(workOrderData.getDamageData().getMoneyServices().get(0).getServiceName());
+        TopScreenPanelSteps.saveChanges();
+        updateEmployeeRoleSettings(MonitorRole.MANAGER, false, true, false);
+        reopenOrderPhaseScreen();
+        PhaseScreenValidations.verifyPlusButtonIsDisplayed(false);
+        PhaseScreenInteractions.openServiceDetails(PhaseScreenInteractions.getServiceElements(serviceData.getServiceName()));
+        ServiceDetailsScreenSteps.changeServicePrice("4");
+        ServiceDetailsScreenSteps.changeServiceQuantity("8");
+        TopScreenPanelSteps.saveChanges();
+        reopenOrderPhaseScreen();
+        //TODO: Below verification fails due to the bug 133519
+        PhaseScreenValidations.verifyServicePriceAndQuantityAreCorrect(serviceData.getServiceName(), "4.00", "8");
+        TopScreenPanelSteps.saveChanges();
+        TopScreenPanelSteps.resetSearch();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        HomeScreenSteps.reLoginWithAnotherUser(employee);
+    }
+
+    private void updateEmployeeRoleSettings(MonitorRole role, boolean canAdd, boolean canEdit, boolean canRemove) throws IOException {
 
         roleSettings.setMonitorCanAddService(canAdd);
         roleSettings.setMonitorCanEditService(canEdit);
         roleSettings.setMonitorCanRemoveService(canRemove);
-        apiHelper.updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, roleSettings);
+        apiHelper.updateEmployeeRoleSettings(role, roleSettings);
     }
 
     private void reopenOrderPhaseScreen() {
 
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
         TopScreenPanelSteps.saveChanges();
         MonitorSteps.tapOnFirstOrder();
         MenuSteps.selectMenuItem(MenuItems.EDIT);

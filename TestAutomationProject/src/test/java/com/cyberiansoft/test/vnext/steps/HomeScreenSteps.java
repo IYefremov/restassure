@@ -2,11 +2,13 @@ package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.ConditionWaiter;
+import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
+import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.steps.commonobjects.dialogs.InformationDialogSteps;
 import com.cyberiansoft.test.vnext.steps.invoices.InvoiceSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -153,5 +155,12 @@ public class HomeScreenSteps {
         WaitUtils.click(homeScreen.getAddBtn());
         WaitUtils.click(homeScreen.getNewInvoiceBtn());
         InformationDialogSteps.clickOkButton();
+    }
+
+    public static void reLoginWithAnotherUser(Employee user) {
+
+        logOut();
+        VNextLoginScreen loginScreen = new VNextLoginScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        loginScreen.userLogin(user.getEmployeeName(), user.getEmployeePassword());
     }
 }

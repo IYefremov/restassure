@@ -39,6 +39,8 @@ public class BaseTestClass {
     protected static BrowserType browserType;
     @Getter
     protected static Employee employee;
+    protected static Employee inspector;
+    protected static Employee manager;
 
     public BaseTestClass() {
         testcustomer = new RetailCustomer();
@@ -53,12 +55,20 @@ public class BaseTestClass {
         testwholesailcustomer.setCompanyName("007 - Test Company1");
 
         employee = new Employee();
+        inspector = new Employee();
+        manager = new Employee();
         //employee.setEmployeeFirstName("Ivan");
         //employee.setEmployeeLastName("Yefremov1");
         //employee.setEmployeePassword("111111");
         employee.setEmployeeFirstName("Employee");
         employee.setEmployeeLastName("Employee");
         employee.setEmployeePassword("12345");
+        inspector.setEmployeeFirstName("AutoEmpl_Inspector");
+        inspector.setEmployeeLastName("ADD_EDIT_REMOVE");
+        inspector.setEmployeePassword("111111");
+        manager.setEmployeeFirstName("AutoEmpl_Manager");
+        manager.setEmployeeLastName("ADD_EDIT_REMOVE");
+        manager.setEmployeePassword("111111");
 
         Optional<String> browserParam = Optional.ofNullable(System.getProperty("browser"));
         if (browserParam.isPresent())
