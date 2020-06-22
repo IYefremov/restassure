@@ -33,10 +33,10 @@ public class BaseTestClass {
     protected static RetailCustomer testcustomer;
     protected static WholesailCustomer testwholesailcustomer;
     protected static String deviceOfficeUrl;
-    protected static EnvironmentType environmentType;
-    protected static String deviceUrl;
+    protected static EnvironmentType environmentType = EnvironmentType.QC;
+    protected static String deviceUrl = "http://208.87.18.5:8082/";
     @Getter
-    protected static BrowserType browserType;
+    protected static BrowserType browserType = BrowserType.CHROME;
     @Getter
     protected static Employee employee;
     protected static Employee inspector;
@@ -73,20 +73,14 @@ public class BaseTestClass {
         Optional<String> browserParam = Optional.ofNullable(System.getProperty("browser"));
         if (browserParam.isPresent())
             browserType = BaseUtils.getBrowserType(browserParam.get());
-        else
-            browserType = BrowserType.CHROME;
 
         Optional<String> testEnv = Optional.ofNullable(System.getProperty("testEnv"));
         if (testEnv.isPresent())
             environmentType = EnvironmentType.getEnvironmentType(testEnv.get());
-        else
-            environmentType = EnvironmentType.QC;
 
         Optional<String> deviceURLParam = Optional.ofNullable(System.getProperty("clientWebURL"));
         if (deviceURLParam.isPresent())
             deviceUrl = deviceURLParam.get();
-        else
-            deviceUrl = "http://208.87.18.5:8082/";
 
         Optional<String> boURLParam = Optional.ofNullable(System.getProperty("testBOURL"));
         if (boURLParam.isPresent())
