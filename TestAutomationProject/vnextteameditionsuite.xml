@@ -1,8 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Cyberiansoft VNext client tests" verbose="10" configfailurepolicy="continue">
-    <listeners>
+    <!--<listeners>
         <listener class-name="com.cyberiansoft.test.vnext.listeners.TestServiceListener"/>
-    </listeners>
+    </listeners>-->
     <parameter name="lic.name" value="OKramar_android2"  />
     <test name="Tests for VNext client" group-by-instances="true">
         <classes>
