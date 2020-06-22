@@ -76,6 +76,12 @@ public class BaseTestClass {
         else
             browserType = BrowserType.CHROME;
 
+        Optional<String> testEnv = Optional.ofNullable(System.getProperty("testEnv"));
+        if (testEnv.isPresent())
+            environmentType = EnvironmentType.getEnvironmentType(testEnv.get());
+        else
+            environmentType = EnvironmentType.QC;
+
         Optional<String> deviceURLParam = Optional.ofNullable(System.getProperty("clientWebURL"));
         if (deviceURLParam.isPresent())
             deviceUrl = deviceURLParam.get();
@@ -86,14 +92,10 @@ public class BaseTestClass {
         if (boURLParam.isPresent())
             deviceOfficeUrl = boURLParam.get();
         else {
-            Optional<String> testEnv = Optional.ofNullable(System.getProperty("testEnv"));
-            if (testEnv.isPresent())
-                environmentType = EnvironmentType.getEnvironmentType(testEnv.get());
-            else
-                environmentType = EnvironmentType.QC;
             deviceOfficeUrl = VNextClientEnvironmentUtils.getBackOfficeURL(environmentType);
         }
     }
+
 
     @BeforeSuite
     @Parameters({"lic.name"})
