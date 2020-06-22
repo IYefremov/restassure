@@ -10,10 +10,13 @@ import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderInfoDto;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
+import com.cyberiansoft.test.vnext.enums.MonitorRole;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
+import com.cyberiansoft.test.vnext.restclient.VNextAPIHelper;
+import com.cyberiansoft.test.vnext.restclient.monitorrolessettings.RoleSettingsDTO;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
@@ -27,12 +30,20 @@ import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 public class VNextMonitorEditROTestCases extends BaseTestClass {
     private String workOrderId = "";
 
     @BeforeClass(description = "Team Monitor Edit RO Test")
-    public void beforeClass() {
+    public void beforeClass() throws IOException {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringEditRODataPath();
+
+        RoleSettingsDTO roleSettingsDTO = new RoleSettingsDTO();
+        roleSettingsDTO.setMonitorCanAddService(false);
+        roleSettingsDTO.setMonitorCanEditService(true);
+        roleSettingsDTO.setMonitorCanRemoveService(false);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, roleSettingsDTO);
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);

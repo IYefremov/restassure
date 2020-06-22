@@ -103,8 +103,8 @@ public class VNextMonitoringSearchFiltersTestCases extends BaseTestClass {
         SearchSteps.openSearchMenu();
         SearchSteps.fillTextSearch(workOrderId);
         SearchSteps.clickCommonFiltersToggle();
-        SearchSteps.selectPriority(OrderPriority.NORMAL);
-        MonitorSearchValidations.validatePriorityValue(OrderPriority.NORMAL);
+        SearchSteps.selectPriority(OrderPriority.LOW);
+        MonitorSearchValidations.validatePriorityValue(OrderPriority.LOW);
         SearchSteps.search();
         MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
         ScreenNavigationSteps.pressBackButton();

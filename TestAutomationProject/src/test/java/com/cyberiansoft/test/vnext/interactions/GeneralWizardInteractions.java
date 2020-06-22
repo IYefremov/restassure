@@ -23,7 +23,10 @@ public class GeneralWizardInteractions {
     public static void setSearchText(String searchText) {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         WaitUtils.waitUntilElementIsClickable(baseWizardScreen.getSearchInput());
-        WaitUtils.click(baseWizardScreen.getSearchInput());
+        WaitUtils.getGeneralFluentWait(45, 500).until(driver -> {
+            baseWizardScreen.getSearchInput().click();
+            return true;
+        });
         baseWizardScreen.getSearchInput().clear();
         baseWizardScreen.getSearchInput().sendKeys(searchText);
     }

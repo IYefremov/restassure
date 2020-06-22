@@ -37,7 +37,7 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	public void waitMyWorkOrdersScreenLoaded() {
 		FluentWait<WebDriver>  wait = new WebDriverWait(appiumdriver, 60);
 		WebElement myWoTable =  wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("MyWorkOrdersTable")));
-		wait = new WebDriverWait(appiumdriver, 60);
+		wait = new WebDriverWait(appiumdriver, 90);
 		wait.until(ExpectedConditions.elementToBeClickable(myWoTable));
 	}
 
@@ -117,7 +117,8 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	public void selectWorkOrder(String workOrderId) {
 		waitMyWorkOrdersScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(mywotable.findElementByAccessibilityId(workOrderId))).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(workOrderId)));
+		appiumdriver.findElementByAccessibilityId(workOrderId).click();
 	}
 	
 	public void selectWorkOrderForAddingNotes(String workOrderId)  {
@@ -137,12 +138,12 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public void selectContinueWorkOrder() {
-		selectWorkOrder("Auto Save");
+		selectWorkOrder("Auto save");
 		appiumdriver.findElementByAccessibilityId("Continue").click();
 	}
 	
 	public void selectDiscardWorkOrder() {
-		selectWorkOrder("Auto Save");
+		selectWorkOrder("Auto save");
 		appiumdriver.findElementByAccessibilityId("Discard").click();
 	}
 	

@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 @Getter
 public class ListElement implements IWebElement {
     private WebElement rootElement;
-    private String recordTextLocator = ".//div[@class='simple-item-main-content']";
+    private String recordTextLocator = ".//*[@class='simple-item-main-content' or contains(@class,'list-item')]";
 
     public ListElement(WebElement rootElement) {
         this.rootElement = rootElement;

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.core.BrowserType;
@@ -32,9 +33,15 @@ public class BaseTestClass {
     protected static RetailCustomer testcustomer;
     protected static WholesailCustomer testwholesailcustomer;
     protected static String deviceOfficeUrl;
-    protected static EnvironmentType environmentType;
+    protected static EnvironmentType environmentType = EnvironmentType.QC;
+    protected static String deviceUrl = "http://208.87.18.5:8082/";
+    protected static String remoteWebDriverUrl = "http://aqc-linux2.westus.cloudapp.azure.com:4444/wd/hub";
+    @Getter
+    protected static BrowserType browserType = BrowserType.CHROME;
     @Getter
     protected static Employee employee;
+    protected static Employee inspector;
+    protected static Employee manager;
 
     public BaseTestClass() {
         testcustomer = new RetailCustomer();
@@ -49,29 +56,48 @@ public class BaseTestClass {
         testwholesailcustomer.setCompanyName("007 - Test Company1");
 
         employee = new Employee();
+        inspector = new Employee();
+        manager = new Employee();
         //employee.setEmployeeFirstName("Ivan");
         //employee.setEmployeeLastName("Yefremov1");
         //employee.setEmployeePassword("111111");
         employee.setEmployeeFirstName("Employee");
         employee.setEmployeeLastName("Employee");
         employee.setEmployeePassword("12345");
-
-        Optional<String> boURLParam = Optional.ofNullable(System.getProperty("testNewBOURL"));
-        if (boURLParam.isPresent())
-            deviceOfficeUrl = boURLParam.get();
-        else {
-            Optional<String> testEnv = Optional.ofNullable(System.getProperty("testEnv"));
-            if (testEnv.isPresent())
-                environmentType = EnvironmentType.getEnvironmentType(testEnv.get());
-            else
-                environmentType = EnvironmentType.QC;
-            deviceOfficeUrl = VNextClientEnvironmentUtils.getBackOfficeURL(environmentType);
-        }
+        inspector.setEmployeeFirstName("AutoEmpl_Inspector");
+        inspector.setEmployeeLastName("ADD_EDIT_REMOVE");
+        inspector.setEmployeePassword("111111");
+        manager.setEmployeeFirstName("AutoEmpl_Manager");
+        manager.setEmployeeLastName("ADD_EDIT_REMOVE");
+        manager.setEmployeePassword("111111");
     }
+
 
     @BeforeSuite
     @Parameters({"lic.name"})
     public void beforeSuite(String licenseName) {
+        Optional<String> browserParam = Optional.ofNullable(System.getProperty("browser"));
+        if (browserParam.isPresent())
+            browserType = BaseUtils.getBrowserType(browserParam.get());
+
+        Optional<String> testEnv = Optional.ofNullable(System.getProperty("testEnv"));
+        if (testEnv.isPresent())
+            environmentType = EnvironmentType.getEnvironmentType(testEnv.get());
+
+        Optional<String> deviceURLParam = Optional.ofNullable(System.getProperty("clientWebURL"));
+        if (deviceURLParam.isPresent())
+            deviceUrl = deviceURLParam.get();
+
+        Optional<String> boURLParam = Optional.ofNullable(System.getProperty("testBOURL"));
+        if (boURLParam.isPresent())
+            deviceOfficeUrl = boURLParam.get();
+        else {
+            deviceOfficeUrl = VNextClientEnvironmentUtils.getBackOfficeURL(environmentType);
+        }
+
+        Optional<String> azureUrl = Optional.ofNullable(System.getProperty("azure.url"));
+        if (azureUrl.isPresent())
+            remoteWebDriverUrl = azureUrl.get();
 
         Optional<String> testPlanIdFromMaven = Optional.ofNullable(System.getProperty("testPlanId"));
         //Optional<String> testCaseIdFromMaven = Optional.ofNullable("97261");
@@ -89,9 +115,9 @@ public class BaseTestClass {
             }
         }
 
-        WebDriver chromeWebDriver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
+        WebDriver chromeWebDriver = ChromeDriverProvider.INSTANCE.setRemoteWebDriverURL(remoteWebDriverUrl).getMobileChromeDriver();
         //chromeWebDriver.get("http://R360user:Geev9ied@77.120.104.171:8000");
-        chromeWebDriver.get("http://208.87.18.5:8082/");
+        chromeWebDriver.get(deviceUrl);
 
         if (VNextEnvironmentInfo.getInstance().installNewBuild()) {
             String regCode = getRegistrationCode(licenseName);
@@ -122,10 +148,15 @@ public class BaseTestClass {
 
 
     private String getRegistrationCode(String licenseName) {
-        DriverBuilder.getInstance().setDriver(BrowserType.CHROME);
 
+        DriverBuilder.getInstance().setBrowserType(browserType).
+                setRemoteWebDriverURL("http://aqc-linux2.westus.cloudapp.azure.com:4444/wd/hub")
+        .setDriver();
+        /*if (browserType.equals(BrowserType.CHROME)) {
+            DriverBuilder.getInstance().setDriver(browserType);
+        } else
+            DriverBuilder.getInstance().setAzureDriver("http://aqc-linux2.westus.cloudapp.azure.com:4444/wd/hub");*/
         WebDriver chromeDriver = DriverBuilder.getInstance().getDriver();
-
         BackOfficeLoginWebPage loginPage = new BackOfficeLoginWebPage(chromeDriver);
         ActiveDevicesWebPage activeDevicesWebPage = new ActiveDevicesWebPage(chromeDriver);
 

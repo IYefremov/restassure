@@ -50,10 +50,10 @@ public class BaseTestCase {
     public void ibsLogin(Method method) throws InterruptedException {
         browsertype = BaseUtils.getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser());
         try {
-            DriverBuilder.getInstance().setDriver(browsertype);
+            DriverBuilder.getInstance().setBrowserType(browsertype).setDriver();
         } catch (SessionNotCreatedException e) {
             Thread.sleep(10000);
-            DriverBuilder.getInstance().setDriver(browsertype);
+            DriverBuilder.getInstance().setBrowserType(browsertype).setDriver();
         }
         webdriver = DriverBuilder.getInstance().getDriver();
 

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.ServiceData;
@@ -10,9 +11,12 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
+import com.cyberiansoft.test.vnext.enums.MonitorRole;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
+import com.cyberiansoft.test.vnext.restclient.VNextAPIHelper;
+import com.cyberiansoft.test.vnext.restclient.monitorrolessettings.RoleSettingsDTO;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
@@ -24,11 +28,19 @@ import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
 
     @BeforeClass(description = "Team Monitoring Time Tracking Visibility")
-    public void beforeClass() {
+    public void beforeClass() throws IOException {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringBaseCaseDataPath();
+
+        RoleSettingsDTO roleSettingsDTO = new RoleSettingsDTO();
+        roleSettingsDTO.setMonitorCanAddService(false);
+        roleSettingsDTO.setMonitorCanEditService(true);
+        roleSettingsDTO.setMonitorCanRemoveService(false);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, roleSettingsDTO);
     }
 
     public String createWorkOrder() {
@@ -137,6 +149,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
         AvailableServicesScreenSteps.selectServiceGroup(workOrderData.getDamageData().getDamageGroupName());
         AvailableServicesScreenSteps.selectServices(workOrderData.getDamageData().getMoneyServices());
         ScreenNavigationSteps.pressBackButton();
+        BaseUtils.waitABit(1000);
         final String workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
 
@@ -166,6 +179,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
         GeneralSteps.confirmDialog();
         WizardScreenSteps.saveAction();
         WizardScreenSteps.saveAction();
+        MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE_ON);
         EditOrderSteps.openServiceMenu(serviceDto);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.STOP, false);

@@ -1,0 +1,294 @@
+{
+  "verifyUserCanAddAndEditTasks": [
+    {
+      "rowID": "verifyUserCanAddAndEditTasks.01",
+      "description": "Test Case 94259: ReconPro - Monitor - Verify user can add and edit tasks",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "94259",
+          "testCaseTitle": "ReconPro - Monitor - Verify user can add and edit tasks"
+        }
+      ],
+      "workOrderData": {
+        "damageData": {
+          "damageGroupName": "Other",
+          "moneyServices": [
+            {
+              "serviceName": "olrom"
+            },
+            {
+              "serviceName": "Orom_Money_Service"
+            }
+          ]
+        },
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "monitoring": {
+          "orderPhasesDto": [
+            {
+              "phaseName": "AutomationServiceLevel",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Test_manual_task",
+                    "serviceStatus": "STARTED"
+                  }
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Test_manual_task",
+                    "serviceStatus": "COMPLETED"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "verifyAutoAssignTechToATask": [
+    {
+      "rowID": "verifyAutoAssignTechToATask.01",
+      "description": "Test Case 94260: Auto-assign tech to a Task",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "94260",
+          "testCaseTitle": "Auto-assign tech to a Task"
+        }
+      ],
+      "workOrderData": {
+        "damageData": {
+          "damageGroupName": "Other",
+          "moneyServices": [
+            {
+              "serviceName": "olrom"
+            },
+            {
+              "serviceName": "Orom_Money_Service"
+            }
+          ]
+        },
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "monitoring": {
+          "orderPhasesDto": [
+            {
+              "phaseName": "AutomationServiceLevel",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Test_manual_task",
+                    "serviceStatus": "STARTED",
+                    "serviceDefaultTechnician":
+                    {
+                      "technicianFirstName": "Employee",
+                      "technicianLastName": "Employee",
+                      "isSelected": true
+                    }
+                  }
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Test_manual_task",
+                    "serviceStatus": "COMPLETED"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "verifyEmployeeCanCanNotAddDeleteEditServicesDependsOnBoSettings": [
+    {
+      "rowID": "verifyEmployeeCanCanNotAddDeleteEditServicesDependsOnBoSettings.01",
+      "description": "Test Case 92340: ReconPro - Monitor - Verify employee with role \"Employee\" can/can't ADD/DELETE or EDIT services depends on BO settings",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92340",
+          "testCaseTitle": "ReconPro - Monitor - Verify employee with role \"Employee\" can/can't ADD/DELETE or EDIT services depends on BO settings"
+        }
+      ],
+      "workOrderData": {
+        "damageData": {
+          "damageGroupName": "Other",
+          "moneyServices": [
+            {
+              "serviceName": "olrom"
+            },
+            {
+              "serviceName": "Orom_Money_Service"
+            }
+          ]
+        },
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "monitoring": {
+          "orderPhasesDto": [
+            {
+              "phaseName": "AutomationServiceLevel",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "olrom",
+                    "serviceStatus": "ACTIVE",
+                    "serviceDefaultTechnician":
+                    {
+                      "technicianFirstName": "Employee",
+                      "technicianLastName": "Employee",
+                      "isSelected": true
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "verifyHomeButtonIsAvailableFromPhasePartsInfoPages": [
+    {
+      "rowID": "verifyHomeButtonIsAvailableFromPhasePartsInfoPages.01",
+      "description": "Test Case 92330: Verify the \"Home\" button is available from the \"Phase\" page, \"Parts\" page and \"RO Info\" page.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92330",
+          "testCaseTitle": "Verify the \"Home\" button is available from the \"Phase\" page, \"Parts\" page and \"RO Info\" page."
+        }
+      ],
+      "workOrderData": {
+        "damageData": {
+          "damageGroupName": "Other",
+          "moneyServices": [
+            {
+              "serviceName": "olrom"
+            }
+          ],
+          "partServiceData": {
+            "serviceName": "Part",
+            "category": "Body",
+            "subCategory": "Bumper",
+            "partName": {
+              "partNameList": [
+                "Bumper"
+              ]
+            },
+            "partPosition": "Right"
+          }
+        },
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        }
+      }
+    }
+  ],
+  "verifyInspectorCanCanNotAddDeleteEditServicesDependsOnBoSettings": [
+    {
+      "rowID": "verifyInspectorCanCanNotAddDeleteEditServicesDependsOnBoSettings.01",
+      "description": "Test Case 92341: ReconPro - Monitor - Verify employee with role \"Inspector\" can/can't ADD/EDIT/REMOVE services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92341",
+          "testCaseTitle": "ReconPro - Monitor - Verify employee with role \"Inspector\" can/can't ADD/EDIT/REMOVE services"
+        }
+      ],
+      "workOrderData": {
+        "damageData": {
+          "damageGroupName": "Other",
+          "moneyServices": [
+            {
+              "serviceName": "olrom"
+            },
+            {
+              "serviceName": "Orom_Money_Service"
+            }
+          ]
+        },
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "monitoring": {
+          "orderPhasesDto": [
+            {
+              "phaseName": "AutomationServiceLevel",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "olrom",
+                    "serviceStatus": "ACTIVE",
+                    "serviceDefaultTechnician":
+                    {
+                      "technicianFirstName": "Employee",
+                      "technicianLastName": "Employee",
+                      "isSelected": true
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "verifyManagerCanCanNotAddDeleteEditServicesDependsOnBoSettings": [
+    {
+      "rowID": "verifyManagerCanCanNotAddDeleteEditServicesDependsOnBoSettings.01",
+      "description": "Test Case 92342: Verify employee with role \"Manager\" can/can't ADD/EDIT/REMOVE services depends on BO settings",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92342",
+          "testCaseTitle": "Verify employee with role \"Manager\" can/can't ADD/EDIT/REMOVE services depends on BO settings"
+        }
+      ],
+      "workOrderData": {
+        "damageData": {
+          "damageGroupName": "Other",
+          "moneyServices": [
+            {
+              "serviceName": "olrom"
+            },
+            {
+              "serviceName": "Orom_Money_Service"
+            }
+          ]
+        },
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "monitoring": {
+          "orderPhasesDto": [
+            {
+              "phaseName": "AutomationServiceLevel",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "olrom",
+                    "serviceStatus": "ACTIVE",
+                    "serviceDefaultTechnician":
+                    {
+                      "technicianFirstName": "Employee",
+                      "technicianLastName": "Employee",
+                      "isSelected": true
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

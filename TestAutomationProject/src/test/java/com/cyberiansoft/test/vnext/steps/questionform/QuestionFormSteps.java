@@ -4,8 +4,6 @@ import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
 import com.cyberiansoft.test.vnext.interactions.services.QuestionScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.questions.QuestionScreen;
-import com.cyberiansoft.test.vnext.steps.GeneralSteps;
-import com.cyberiansoft.test.vnext.steps.commonobjects.TopScreenPanelSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.GeneralQuestion;
 
@@ -69,9 +67,9 @@ public class QuestionFormSteps {
             QuestionScreenInteractions.clickQuestionCamera(imageQuestion.getQuestionName());
     }
 
-    public static void clearSelectedQuestion(QuestionsData questionData) {
+    public static void clearSelectedQuestion(String questionName) {
         QuestionScreen questionScreen = new QuestionScreen();
-        questionScreen.getGeneralQuestionByText(questionData.getQuestionName()).clearQuestion();
+        questionScreen.getGeneralQuestionByText(questionName).clearQuestion();
     }
 
     public static void answerDateQuestion(DatePickerQuestion datePickerQuestion, int month, int day, int year) {

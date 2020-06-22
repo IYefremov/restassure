@@ -76,7 +76,7 @@
         "location": "automationMonitoring",
         "repairOrderData": {
           "phaseName": "PHASEANDSERVICELEVEL",
-          "vin": "777777",
+          "vin": "77777777",
           "completePercentage": "33%"
         }
       }
@@ -359,17 +359,24 @@
       ],
       "services": [
         {
-          "serviceName": "Engine Auxiliary Engine Oil Filter Hose Clamp"
+          "serviceName": "Air Brake Compressor Crank Shaft Bearing"
         },
         {
-          "serviceName": "Battery Installation"
+          "serviceName": "Orom_Money_Service"
+        },
+        {
+          "serviceName": "Auto_adding_Task"
         }
       ],
       "monitoring": {
         "repairOrderData": {
-          "phaseName": "AUTOMATIONSERVICELEVEL",
-          "vin": "777777",
+          "phaseName": "NOT STARTED",
+          "vin": "77777777",
           "completePercentage": "0%"
+        },
+        "orderPhaseDto": {
+          "phaseName": "PhaseLevel",
+          "status": "COMPLETED"
         }
       }
     }

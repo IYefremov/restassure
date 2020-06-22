@@ -4,7 +4,6 @@ import com.cyberiansoft.test.vnext.screens.monitoring.TaskDetailsScreen;
 import com.cyberiansoft.test.vnext.steps.NotesSteps;
 import com.cyberiansoft.test.vnext.steps.commonobjects.TopScreenPanelSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import com.cyberiansoft.test.vnext.validations.monitor.SelectTeamScreenValidations;
 import org.openqa.selenium.By;
 
 public class TaskDetailsScreenSteps {
@@ -13,8 +12,15 @@ public class TaskDetailsScreenSteps {
 
         WaitUtils.click(new TaskDetailsScreen().getVendorTeamField());
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
-        SelectTeamScreenValidations.verifySelectTeamScreenIsOpened();
         SelectTeamScreenSteps.selectTeam(team);
+    }
+
+    public static void changeTechnician(String technician) {
+
+        WaitUtils.click(new TaskDetailsScreen().getTechnicianField());
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+        SelectTechnicianScreenSteps.selectTechnician(technician);
+        TopScreenPanelSteps.saveChanges();
     }
 
     public static void addNote(String noteText) {
