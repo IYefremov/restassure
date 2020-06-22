@@ -1,8 +1,7 @@
 package com.cyberiansoft.test.inhouse.utils;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
 import com.cyberiansoft.test.inhouse.testcases.BaseTestCase;
 import org.codehaus.plexus.util.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -67,8 +66,7 @@ public class TestListener extends TestListenerAdapter implements IInvokedMethodL
             fail(e);
         }
         DriverBuilder.getInstance().quitDriver();
-        DriverBuilder.getInstance().setDriver(BaseUtils
-                    .getBrowserType(InHouseConfigInfo.getInstance().getDefaultBrowser()));
+        DriverBuilder.getInstance().setBrowserType(BrowserType.CHROME).setDriver();
         ((BaseTestCase) currentClass).setDriver();
     }
 

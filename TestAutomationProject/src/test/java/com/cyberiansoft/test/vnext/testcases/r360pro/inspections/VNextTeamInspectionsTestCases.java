@@ -7,7 +7,6 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.utils.WebConstants;
-import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataclasses.TestCaseData;
 import com.cyberiansoft.test.dataclasses.VehicleInfoData;
@@ -303,7 +302,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
 
         WebDriver
-                webdriver = WebdriverInicializator.getInstance().initWebDriver(BrowserType.CHROME);
+                webdriver = WebdriverInicializator.getInstance().initWebDriver(browserType);
         webdriver.get(deviceOfficeUrl);
         BackOfficeLoginWebPage loginPage = new BackOfficeLoginWebPage(webdriver);
         loginPage.userLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(),

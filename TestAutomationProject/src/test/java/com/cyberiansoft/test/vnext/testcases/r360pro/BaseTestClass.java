@@ -70,6 +70,13 @@ public class BaseTestClass {
         manager.setEmployeeLastName("ADD_EDIT_REMOVE");
         manager.setEmployeePassword("111111");
 
+
+    }
+
+
+    @BeforeSuite
+    @Parameters({"lic.name"})
+    public void beforeSuite(String licenseName) {
         Optional<String> browserParam = Optional.ofNullable(System.getProperty("browser"));
         if (browserParam.isPresent())
             browserType = BaseUtils.getBrowserType(browserParam.get());
@@ -88,12 +95,6 @@ public class BaseTestClass {
         else {
             deviceOfficeUrl = VNextClientEnvironmentUtils.getBackOfficeURL(environmentType);
         }
-    }
-
-
-    @BeforeSuite
-    @Parameters({"lic.name"})
-    public void beforeSuite(String licenseName) {
 
         Optional<String> testPlanIdFromMaven = Optional.ofNullable(System.getProperty("testPlanId"));
         //Optional<String> testCaseIdFromMaven = Optional.ofNullable("97261");
@@ -144,10 +145,14 @@ public class BaseTestClass {
 
 
     private String getRegistrationCode(String licenseName) {
-        if (browserType.equals(BrowserType.CHROME)) {
+
+        DriverBuilder.getInstance().setBrowserType(browserType).
+                setRemoteWebDriverURL("http://aqc-linux2.westus.cloudapp.azure.com:4444/wd/hub")
+        .setDriver();
+        /*if (browserType.equals(BrowserType.CHROME)) {
             DriverBuilder.getInstance().setDriver(browserType);
         } else
-            DriverBuilder.getInstance().setAzureDriver("http://aqc-linux2.westus.cloudapp.azure.com:4444/wd/hub");
+            DriverBuilder.getInstance().setAzureDriver("http://aqc-linux2.westus.cloudapp.azure.com:4444/wd/hub");*/
         WebDriver chromeDriver = DriverBuilder.getInstance().getDriver();
         BackOfficeLoginWebPage loginPage = new BackOfficeLoginWebPage(chromeDriver);
         ActiveDevicesWebPage activeDevicesWebPage = new ActiveDevicesWebPage(chromeDriver);
