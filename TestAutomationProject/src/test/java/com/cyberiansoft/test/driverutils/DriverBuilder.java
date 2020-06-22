@@ -2,7 +2,6 @@ package com.cyberiansoft.test.driverutils;
 
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
-import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -95,18 +94,10 @@ public class DriverBuilder {
                 prefs.put("profile.default_content_setting_values.notifications", 1);
                 selenoidChromeOptions.setExperimentalOption("prefs", prefs);
                 selenoidChromeOptions.addArguments("--window-size=1800,1000");
-                DesiredCapabilities capabilities = new DesiredCapabilities();
-                capabilities.setBrowserName("chrome");
-                capabilities.setVersion("80.0");
-                capabilities.setCapability("enableVNC", true);
-                capabilities.setCapability("enableVideo", false);
-                capabilities.setCapability("sessionTimeout", "2m");
-                capabilities.setCapability("name", "SessionName");
-
-                capabilities.setCapability(ChromeOptions.CAPABILITY, selenoidChromeOptions);
+                DesiredCapabilities capabilities = new SelenoidConfiguration().getCapabilities(selenoidChromeOptions);
                 webcap = capabilities;
                 RemoteWebDriver driver = new RemoteWebDriver(
-                        URI.create(VNextBOConfigInfo.getInstance().getAzureURL()).toURL(),
+                        URI.create(remoteWebDriverURL).toURL(),
                         capabilities
                 );
                 driver.setFileDetector(new LocalFileDetector());
@@ -187,18 +178,10 @@ public class DriverBuilder {
                 prefs.put("profile.default_content_setting_values.notifications", 1);
                 selenoidChromeOptions.setExperimentalOption("prefs", prefs);
                 selenoidChromeOptions.addArguments("--window-size=1800,1000");
-                DesiredCapabilities capabilities = new DesiredCapabilities();
-                capabilities.setBrowserName("chrome");
-                capabilities.setVersion("80.0");
-                capabilities.setCapability("enableVNC", true);
-                capabilities.setCapability("enableVideo", false);
-                capabilities.setCapability("sessionTimeout", "2m");
-                capabilities.setCapability("name", "SessionName");
-
-                capabilities.setCapability(ChromeOptions.CAPABILITY, selenoidChromeOptions);
+                DesiredCapabilities capabilities = new SelenoidConfiguration().getCapabilities(selenoidChromeOptions);
                 webcap = capabilities;
                 RemoteWebDriver driver = new RemoteWebDriver(
-                        URI.create(VNextBOConfigInfo.getInstance().getAzureURL()).toURL(),
+                        URI.create(remoteWebDriverURL).toURL(),
                         capabilities
                 );
                 driver.setFileDetector(new LocalFileDetector());

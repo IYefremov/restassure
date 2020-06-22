@@ -20,6 +20,12 @@ public enum ChromeDriverProvider {
 
     private WebDriver chromeWebDriver;
     private WebDriver chromeMobileWebDriver;
+    private String remoteWebDriverURL;
+
+    public ChromeDriverProvider setRemoteWebDriverURL(String remoteWebDriverURL) {
+        this.remoteWebDriverURL = remoteWebDriverURL;
+        return this;
+    }
 
     //todo: refactor!!!!
     @SneakyThrows
@@ -62,7 +68,6 @@ public enum ChromeDriverProvider {
         } else {
             if (chromeMobileWebDriver == null || ((RemoteWebDriver) chromeMobileWebDriver).getSessionId() == null) {
                 WebDriverManager.chromedriver().setup();
-
                 Map<String, Object> deviceMetrics = new HashMap<>();
                 deviceMetrics.put("width", 360);
                 deviceMetrics.put("height", 640);
@@ -80,17 +85,10 @@ public enum ChromeDriverProvider {
                 prefs.put("profile.default_content_setting_values.notifications", 1);
                 selenoidChromeOptions.setExperimentalOption("prefs", prefs);
                 selenoidChromeOptions.addArguments("--window-size=1800,1000");
-                DesiredCapabilities capabilities = new DesiredCapabilities();
-                capabilities.setBrowserName("chrome");
-                capabilities.setVersion("78.0");
-                capabilities.setCapability("enableVNC", true);
-                capabilities.setCapability("enableVideo", false);
-                capabilities.setCapability("sessionTimeout", "2m");
-                capabilities.setCapability("name", "SessionName");
-                capabilities.setCapability(ChromeOptions.CAPABILITY, selenoidChromeOptions);
+                DesiredCapabilities capabilities = new SelenoidConfiguration().getCapabilities(selenoidChromeOptions);
                 //chromeOptions.addArguments("--user-data-dir=C:/AutoProfile1");
                 chromeMobileWebDriver = new RemoteWebDriver(
-                        URI.create("http://aqc-linux2.westus.cloudapp.azure.com:4444/wd/hub").toURL(),
+                        URI.create(remoteWebDriverURL).toURL(),
                         capabilities
                 );
             }
