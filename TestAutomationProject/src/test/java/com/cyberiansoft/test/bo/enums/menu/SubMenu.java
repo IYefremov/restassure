@@ -9,6 +9,12 @@ public enum SubMenu {
     APPLICATIONS("Applications"),
     SUBSCRIBE("Subscribe"),
 
+    //OPERATIONS
+    SERVICE_REQUESTS_LIST("Service Requests List"),
+
+    //MONITOR
+    REPAIR_ORDERS("Repair Orders"),
+
     //COMPANY
     TEAMS("Teams"),
     USERS("Users"),

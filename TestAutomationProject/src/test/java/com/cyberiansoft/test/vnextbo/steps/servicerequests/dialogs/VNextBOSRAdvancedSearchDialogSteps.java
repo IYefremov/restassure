@@ -114,6 +114,22 @@ public class VNextBOSRAdvancedSearchDialogSteps {
         new Select(teamField).selectByVisibleText(team);
     }
 
+    public static void setRepairLocation(String firstLetterOfTheLocation, String location) {
+        final WebElement locationField = new VNextBOSRAdvancedSearchDialog().getRepairLocationField();
+        final Select select = new Select(locationField);
+        Utils.clickElement(locationField);
+        Utils.sendKeys(locationField, firstLetterOfTheLocation);
+        waitForSelectedValueToBeUpdated(firstLetterOfTheLocation, select);
+        VNextBOSRAdvancedSearchDialogValidations.verifySelectedRepairLocationStartsWithLetter(firstLetterOfTheLocation);
+        select.selectByVisibleText(location);
+    }
+
+    public static void setRepairLocation(String location) {
+        final WebElement locationField = new VNextBOSRAdvancedSearchDialog().getRepairLocationField();
+        WaitUtilsWebDriver.waitForElementToBeClickable(locationField, 2);
+        new Select(locationField).selectByVisibleText(location);
+    }
+
     public static void setSrType(String firstLetterOfTheType, String srType) {
         final WebElement srTypeField = new VNextBOSRAdvancedSearchDialog().getSrTypeField();
         final Select select = new Select(srTypeField);

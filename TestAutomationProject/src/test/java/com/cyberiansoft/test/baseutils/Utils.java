@@ -639,6 +639,10 @@ public class Utils {
         }
     }
 
+    public static boolean attributeContains(List<WebElement> elementsList, String attribute, String value) {
+        return elementsList.stream().allMatch(element -> attributeContains(element, attribute, value));
+    }
+
     public static boolean attributeEquals(WebElement element, String attribute, String value) {
         try {
             return element.getAttribute(attribute).equals(value);

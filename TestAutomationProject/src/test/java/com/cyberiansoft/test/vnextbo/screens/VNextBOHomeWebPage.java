@@ -13,8 +13,8 @@ public class VNextBOHomeWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//a[text()='Access Client Portal']")
     private WebElement accessClientPortalLink;
 
-    @FindBy(xpath = "//a[text()='Access ReconPro BackOffice']")
-    private WebElement accessReconProBOLink;
+    @FindBy(xpath = "//a[text()='Access Repair360 BackOffice']")
+    private WebElement accessR360BOLink;
 
     @FindBy(xpath = "//div[@class='support-buttons-row']/a[contains(@href, 'back-office')]")
     private WebElement supportForBOButton;

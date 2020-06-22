@@ -19,10 +19,12 @@ public class VNextBOAddOnsPageSteps {
 
     public static void turnOffAddOnByName(String addOn) {
         final VNextBOAddOnsPage addOnsPage = new VNextBOAddOnsPage();
-        if (Utils.getText(new VNextBOAddOnsPage().getIntegrationStatus(addOn)).equals(IntegrationStatus.PENDING.name())) {
+        WaitUtilsWebDriver.waitForElementNotToBeStale(addOnsPage.getIntegrationStatus(addOn));
+        final String addOnDisplayed = Utils.getText(addOnsPage.getIntegrationStatus(addOn));
+        if (addOnDisplayed.equals(IntegrationStatus.PENDING.name())) {
             refreshPageWhileAddOnIsChangedFromPendingStatusToOnOrOffStatus(addOn);
         }
-        if (Utils.getText(addOnsPage.getIntegrationStatus(addOn)).equals(IntegrationStatus.ON.name())) {
+        if (addOnDisplayed.equals(IntegrationStatus.ON.name())) {
             WaitUtilsWebDriver.waitForElementNotToBeStale(addOnsPage.getAddOnsTurnOffButton(addOn));
             Utils.clickElement(addOnsPage.getAddOnsTurnOffButton(addOn));
             confirmAddOnChange(addOn);

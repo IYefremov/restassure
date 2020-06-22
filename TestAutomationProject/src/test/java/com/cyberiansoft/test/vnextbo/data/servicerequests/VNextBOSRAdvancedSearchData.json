@@ -133,6 +133,171 @@
       },
       "expectedValue": "Scheduled",
       "infoText": "Timeframe: Last Year; Status: All On Scheduled;"
+    },
+    {
+      "rowID": "verifyUserCanSearchByAllOnScheduledStatus.01",
+      "description": "Test Case 128173:Verify user can search by status \"Closed\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "128173"
+        }
+      ],
+      "searchData": {
+        "status": "Closed"
+      },
+      "expectedValue": "Closed",
+      "infoText": "Timeframe: Last Year; Status: Closed;"
+    }
+  ],
+  "verifyUserCanSearchByStatusWaitingForAcceptance": [
+    {
+      "rowID": "verifyUserCanSearchByStatusWaitingForAcceptance.01",
+      "description": "Test Case 128174:Verify user can search by status \"Waiting For Acceptance\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "128174"
+        }
+      ],
+      "searchData": {
+        "fromDate": "05/26/2019",
+        "toDate": "05/26/2020",
+        "status": "Waiting For Acceptance"
+      },
+      "expectedValue": "Proposed",
+      "infoText": "FromDate: 05/26/2019; ToDate: 05/26/2020; Status: Waiting For Acceptance;"
+    }
+  ],
+  "verifyUserCanSearchByStatusReadyForDelivery": [
+    {
+      "rowID": "verifyUserCanSearchByStatusReadyForDelivery.01",
+      "description": "Test Case 128176:Verify user can search by status \"Ready For Delivery\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "128176"
+        }
+      ],
+      "searchData": {
+        "fromDate": "05/26/2019",
+        "toDate": "05/26/2020",
+        "status": "Ready For Delivery"
+      },
+      "expectedValue": "D",
+      "infoText": "FromDate: 05/26/2019; ToDate: 05/26/2020; Status: Ready For Delivery;"
+    }
+  ],
+  "verifyUserCanSearchByStatusAcceptedNotInspected": [
+    {
+      "rowID": "verifyUserCanSearchByStatusAcceptedNotInspected.01",
+      "description": "Test Case 128178:Verify user can search by status \"Accepted, Not Inspected\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "128178"
+        }
+      ],
+      "searchData": {
+        "status": "Accepted, Not Inspected"
+      },
+      "infoText": "Timeframe: Last Year; Status: Accepted, Not Inspected;"
+    }
+  ],
+  "verifyUserCanSearchByStatusNoWorkOrder": [
+    {
+      "rowID": "verifyUserCanSearchByStatusNoWorkOrder.01",
+      "description": "Test Case 128187:Verify user can search by status \"No Work Order\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "128187"
+        }
+      ],
+      "searchData": {
+        "status": "No Work Order"
+      },
+      "infoText": "Timeframe: Last Year; Status: No Work Order;"
+    }
+  ],
+  "verifyUserCanSearchByStatusWorkInProcessNotInvoiced": [
+    {
+      "rowID": "verifyUserCanSearchByStatusWorkInProcessNotInvoiced.01",
+      "description": "Test Case 128179:Verify user can search by status \"Work in Process, Not Invoiced\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "128179"
+        }
+      ],
+      "searchData": {
+        "status": "Work in Process, Not Invoiced"
+      },
+      "expectedValue": "W",
+      "infoText": "Timeframe: Last Year; Status: Work in Process, Not Invoiced;"
+    }
+  ],
+  "verifyUserCanSearchByStatusCheckedInNotInspected": [
+    {
+      "rowID": "verifyUserCanSearchByStatusCheckedInNotInspected.01",
+      "description": "Test Case 128186:Verify user can search by status \"Checked In, Not Inspected\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "128186"
+        }
+      ],
+      "searchData": {
+        "status": "Checked In, Not Inspected",
+        "fromDate": "05/26/2018",
+        "toDate": "05/26/2020"
+      },
+      "expectedValue": "W",
+      "infoText": "FromDate: 05/26/2018; ToDate: 05/26/2020; Status: Checked In, Not Inspected;"
+    }
+  ],
+  "verifyUserCanSearchByStatusNotCheckedIn": [
+    {
+      "rowID": "verifyUserCanSearchByStatusNotCheckedIn.01",
+      "description": "Test Case 128181:Verify user can search by status \"Not Checked In\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "128181"
+        }
+      ],
+      "searchData": {
+        "status": "Not Checked In"
+      },
+      "infoText": "Timeframe: Last Year; Status: Not Checked In;"
+    }
+  ],
+  "verifyUserCanSearchByStatusAppointmentRequired": [
+    {
+      "rowID": "verifyUserCanSearchByStatusAppointmentRequired.01",
+      "description": "Test Case 128174:Verify user can search by status \"Appointment Required\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "128174"
+        }
+      ],
+      "searchData": {
+        "fromDate": "05/26/2019",
+        "toDate": "05/26/2020",
+        "status": "Appointment Required"
+      },
+      "expectedValue": "Proposed",
+      "infoText": "FromDate: 05/26/2019; ToDate: 05/26/2020; Status: Appointment Required;"
+    }
+  ],
+  "verifyUserCanSearchByRepairLocation": [
+    {
+      "rowID": "verifyUserCanSearchByRepairLocation.01",
+      "description": "Test Case 125735:Verify user can search by \"Repair Location\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125735"
+        }
+      ],
+      "searchData": {
+        "fromDate": "05/27/2018",
+        "toDate": "05/27/2020",
+        "repairLocation": "Rozstalnoy_location",
+        "status": "(All)"
+      },
+      "infoText": "FromDate: 05/27/2018; ToDate: 05/27/2020; Repair Location: Rozstalnoy_location;"
     }
   ],
   "verifyUserCanSearchByTeam": [

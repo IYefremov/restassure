@@ -1,10 +1,12 @@
 package com.cyberiansoft.test.vnextbo.validations.servicerequests;
 
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.dataclasses.vNextBO.alerts.VNextBOAlertMessages;
 import com.cyberiansoft.test.dataclasses.vNextBO.servicerequests.VNextBOSRSearchData;
 import com.cyberiansoft.test.enums.DateUtils;
-import com.cyberiansoft.test.enums.ServiceRequestStatus;
+import com.cyberiansoft.test.enums.servicerequests.ServiceRequestStatus;
+import com.cyberiansoft.test.vnextbo.screens.servicerequests.VNextBOSRTable;
 import com.cyberiansoft.test.vnextbo.steps.servicerequests.VNextBOSRTableSteps;
 import org.testng.Assert;
 
@@ -41,17 +43,41 @@ public class VNextBOSRTableValidations {
         Assert.assertTrue(actual.contains(expected), "The SR hasn't been found");
     }
 
-    public static void verifySRStatusIsNotClosed(String actual) {
-        Assert.assertNotEquals(actual, ServiceRequestStatus.CLOSED,
-                "The SR status has been '" + ServiceRequestStatus.CLOSED + "'");
+    public static void verifySRStatusIsNotEqual(String actual, ServiceRequestStatus notEqualStatus) {
+        Assert.assertNotEquals(actual, notEqualStatus.getValue(),
+                "The SR status has been '" + notEqualStatus.getValue() + "'");
     }
 
     public static void verifySRStatusIsDisplayed(String actual, String expected) {
         if (expected.equals(ALL_ACTIVE)) {
-            verifySRStatusIsNotClosed(actual);
+            verifySRStatusIsNotEqual(actual, ServiceRequestStatus.CLOSED);
         } else {
             Assert.assertEquals(actual, expected, "The SR status hasn't been found");
         }
+    }
+
+    public static void verifyInspectionsDocumentsListIsEmpty() {
+        final boolean contains = Utils.attributeContains(
+                new VNextBOSRTable().getDocumentsInspectionsList(), "class", "hasDocuments");
+        Assert.assertFalse(contains, "The SRs contain inspections documents");
+    }
+
+    public static void verifyInvoicesDocumentsListIsEmpty() {
+        final boolean contains = Utils.attributeContains(
+                new VNextBOSRTable().getDocumentsInvoicesList(), "class", "hasDocuments");
+        Assert.assertFalse(contains, "The SRs contain invoices documents");
+    }
+
+    public static void verifyWoListContainsDocuments() {
+        final boolean contains = Utils.attributeContains(
+                new VNextBOSRTable().getDocumentsWoList(), "class", "noDocuments");
+        Assert.assertFalse(contains, "The SRs do not contain WO documents");
+    }
+
+    public static void verifyWoDocumentsListIsEmpty() {
+        final boolean contains = Utils.attributeContains(
+                new VNextBOSRTable().getDocumentsWoList(), "class", "hasDocuments");
+        Assert.assertFalse(contains, "The SRs contain WO documents");
     }
 
     public static void verifyMoreServiceRequestsHaveBeenLoaded(int previousSRListSize) {
@@ -193,5 +219,17 @@ public class VNextBOSRTableValidations {
                         "between 00:00 of " + searchData.getFromDate() + " and 23:59 of " + searchData.getToDate());
             });
         }
+    }
+
+    public static void verifyAcceptButtonsAreEnabled() {
+        Assert.assertFalse(Utils.attributeContains(
+                new VNextBOSRTable().getAcceptButtonsList(), "class", "Disabled"),
+                "The 'Accept' buttons are not enabled");
+    }
+
+    public static void verifyRejectButtonsAreEnabled() {
+        Assert.assertFalse(Utils.attributeContains(
+                new VNextBOSRTable().getAcceptButtonsList(), "class", "Disabled"),
+                "The 'Accept' buttons are not enabled");
     }
 }

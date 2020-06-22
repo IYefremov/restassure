@@ -34,6 +34,14 @@ public class VNextBOSRAdvancedSearchDialogValidations {
         });
     }
 
+    public static void verifySelectedRepairLocationStartsWithLetter(String letter) {
+        final Select select = new Select(new VNextBOSRAdvancedSearchDialog().getRepairLocationField());
+        final String firstLetter = letter.substring(0, 1);
+        Assert.assertTrue(select.getFirstSelectedOption().getText().startsWith(firstLetter),
+                "The selected repair location " + select.getFirstSelectedOption().getText() +
+                        " is not started with the letter '" + firstLetter + "'");
+    }
+
     public static void verifySelectedTeamStartsWithLetter(String letter) {
         final Select select = new Select(new VNextBOSRAdvancedSearchDialog().getTeamField());
         final String firstLetter = letter.substring(0, 1);
