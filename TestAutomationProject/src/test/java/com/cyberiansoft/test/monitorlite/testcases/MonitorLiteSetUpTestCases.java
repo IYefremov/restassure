@@ -26,7 +26,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 
     @BeforeMethod
     public void BackOfficeLogin() {
-        DriverBuilder.getInstance().setDriver(BrowserType.CHROME);
+        DriverBuilder.getInstance().setBrowserType(BrowserType.CHROME).setDriver();
         webdriver = DriverBuilder.getInstance().getDriver();
         //webdriver.navigate().refresh();
         webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeReconProURL());

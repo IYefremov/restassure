@@ -19,7 +19,7 @@ public class WebdriverInicializator {
     }
 	
 	public WebDriver initWebDriver(BrowserType browserType) {
-		DriverBuilder.getInstance().setDriver(browserType);
+		DriverBuilder.getInstance().setBrowserType(browserType).setDriver();
 		return DriverBuilder.getInstance().getDriver();
 		}
 

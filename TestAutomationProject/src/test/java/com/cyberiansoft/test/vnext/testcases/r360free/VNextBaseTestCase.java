@@ -55,7 +55,7 @@ public class VNextBaseTestCase {
         deviceOfficeUrl = VNextTeamRegistrationInfo.getInstance()
                 .getBackOfficeUrlFromEnvType(envType);
         AppiumServiceManager.startAppium();
-        DriverBuilder.getInstance().setDriver(browsertype);
+        DriverBuilder.getInstance().setBrowserType(browsertype).setDriver();
         setupMobileDevice(mobilePlatform);
     }
 

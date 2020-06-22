@@ -43,7 +43,8 @@ public class DriverBuilder {
     private ThreadLocal<String> sessionBrowser = new ThreadLocal<>();
     private ThreadLocal<String> sessionVersion = new ThreadLocal<>();
     private ThreadLocal<MobilePlatform> mobilePlatform = new ThreadLocal<>();
-
+    private BrowserType browserType = BrowserType.CHROME;
+    private String remoteWebDriverURL;
 
     private DriverBuilder() {
     }
@@ -55,34 +56,63 @@ public class DriverBuilder {
         return instance;
     }
 
+    public DriverBuilder setBrowserType(BrowserType browserType) {
+        this.browserType = browserType;
+        return this;
+    }
 
-    //todo: refactor!!!!
+    public DriverBuilder setRemoteWebDriverURL(String remoteWebDriverURL) {
+        this.remoteWebDriverURL = remoteWebDriverURL;
+        return this;
+    }
+
     @SneakyThrows
-    public final void setAzureDriver(String azureURL) {
-
+    public final void setDriver() {
         DesiredCapabilities webcap = null;
-        ChromeOptions selenoidChromeOptions = new ChromeOptions();
-        Map<String, Object> prefs = new HashMap<>();
-        //1-Allow, 2-Block, 0-default
-        prefs.put("profile.default_content_setting_values.notifications", 1);
-        selenoidChromeOptions.setExperimentalOption("prefs", prefs);
-        selenoidChromeOptions.addArguments("--window-size=1800,1000");
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setBrowserName("chrome");
-        capabilities.setVersion("80.0");
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", false);
-        capabilities.setCapability("sessionTimeout", "2m");
-        capabilities.setCapability("name", "SessionName");
+        switch (browserType) {
+            case CHROME:
+                WebDriverManager.chromedriver().setup();
+                webcap = DesiredCapabilities.chrome();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("start-maximized");
+                options.addArguments("enable-automation");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-infobars");
+                options.addArguments("--disable-dev-shm-usage");
+                options.addArguments("--disable-browser-side-navigation");
+                options.addArguments("--disable-gpu");
+                options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+                try {
+                    webDriver.set(new ChromeDriver(options));
+                } catch (SessionNotCreatedException ignored) {
+                    new ThreadLocal<WebDriver>().set(new ChromeDriver(options));
+                }
+                break;
+            case SELENOID_CHROME:
+                ChromeOptions selenoidChromeOptions = new ChromeOptions();
+                Map<String, Object> prefs = new HashMap<>();
+                //1-Allow, 2-Block, 0-default
+                prefs.put("profile.default_content_setting_values.notifications", 1);
+                selenoidChromeOptions.setExperimentalOption("prefs", prefs);
+                selenoidChromeOptions.addArguments("--window-size=1800,1000");
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setBrowserName("chrome");
+                capabilities.setVersion("80.0");
+                capabilities.setCapability("enableVNC", true);
+                capabilities.setCapability("enableVideo", false);
+                capabilities.setCapability("sessionTimeout", "2m");
+                capabilities.setCapability("name", "SessionName");
 
-        capabilities.setCapability(ChromeOptions.CAPABILITY, selenoidChromeOptions);
-        webcap = capabilities;
-        RemoteWebDriver driver = new RemoteWebDriver(
-                URI.create(azureURL).toURL(),
-                capabilities
-        );
-        driver.setFileDetector(new LocalFileDetector());
-        webDriver.set(driver);
+                capabilities.setCapability(ChromeOptions.CAPABILITY, selenoidChromeOptions);
+                webcap = capabilities;
+                RemoteWebDriver driver = new RemoteWebDriver(
+                        URI.create(VNextBOConfigInfo.getInstance().getAzureURL()).toURL(),
+                        capabilities
+                );
+                driver.setFileDetector(new LocalFileDetector());
+                webDriver.set(driver);
+                break;
+        }
         sessionId.set(((RemoteWebDriver) webDriver.get()).getSessionId().toString());
         if (webcap != null) {
             sessionBrowser.set(webcap.getBrowserName());
@@ -103,7 +133,7 @@ public class DriverBuilder {
         }
     }
 
-    //todo: refactor!!!!
+    //todo: remove. Use Builder methods!
     @SneakyThrows
     public final void setDriver(BrowserType browserType) {
 
