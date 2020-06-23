@@ -8,6 +8,7 @@ import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOReactSearchPanel
 import com.cyberiansoft.test.vnextbo.steps.servicerequests.details.VNextBOSRDetailsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.servicerequests.dialogs.VNextBOSRAdvancedSearchDialogSteps;
 import com.cyberiansoft.test.vnextbo.validations.servicerequests.VNextBOSRTableValidations;
+import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.util.List;
@@ -56,7 +57,7 @@ public class VNextBOSRTableSteps {
         VNextBOSRDetailsPageSteps.waitForSRDetailsPageToBeOpened();
     }
 
-    public static List<String> getSRNumValues() {
+    public static List<String> getSRValuesList() {
         return Utils.getText(new VNextBOSRTable().getSrNumbersList());
     }
 
@@ -64,10 +65,18 @@ public class VNextBOSRTableSteps {
         return new VNextBOSRTable().getSrNumbersList().size();
     }
 
+    public static String getRandomSR() {
+        return getSRValuesList().get(RandomUtils.nextInt(0, getSRListSize()));
+    }
+
+    public static int getRandomSRIndex() {
+        return RandomUtils.nextInt(0, getSRListSize());
+    }
+
     public static void waitForServiceRequestsListToBeUpdated(int previousSRListSize) {
         try {
             WaitUtilsWebDriver.getWebDriverWait(7).until(
-                    (ExpectedCondition<Boolean>) driver -> VNextBOSRTableSteps.getSRListSize() > previousSRListSize);
+                    (ExpectedCondition<Boolean>) driver -> getSRListSize() > previousSRListSize);
         } catch (Exception ignored) {}
     }
 
@@ -76,8 +85,7 @@ public class VNextBOSRTableSteps {
         VNextBOSRAdvancedSearchDialogSteps.setCustomTimeFrame(searchData);
         VNextBOSRAdvancedSearchDialogSteps.setSrNum(srNum);
         VNextBOSRAdvancedSearchDialogSteps.search();
-        VNextBOSRTableSteps.getSRNumValues()
-                .forEach(sr -> VNextBOSRTableValidations.verifySRContainingValueIsDisplayed(sr, srNum));
+        getSRValuesList().forEach(sr -> VNextBOSRTableValidations.verifySRContainingValueIsDisplayed(sr, srNum));
         VNextBOReactSearchPanelSteps.clearSearchFilter();
     }
 }

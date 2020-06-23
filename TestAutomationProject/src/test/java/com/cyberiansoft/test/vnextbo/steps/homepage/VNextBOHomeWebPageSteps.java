@@ -80,7 +80,7 @@ public class VNextBOHomeWebPageSteps extends VNextBOBaseWebPageSteps {
     }
 
     public static void clickAccessReconProBOLink() {
-        Utils.clickElement(new VNextBOHomeWebPage().getAccessReconProBOLink());
+        Utils.clickElement(new VNextBOHomeWebPage().getAccessR360BOLink());
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         WaitUtilsWebDriver.waitUntilTitleContainsIgnoringException("ReconPro", 4);

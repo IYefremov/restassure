@@ -156,7 +156,7 @@ public class VNextBOSRSearchTestCases extends BaseTestCase {
 
         final String srNum = data.getSearchData().getHasThisText();
         VNextBOReactSearchPanelSteps.searchByText(srNum);
-        VNextBOSRTableSteps.getSRNumValues()
+        VNextBOSRTableSteps.getSRValuesList()
                 .forEach(sr -> VNextBOSRTableValidations.verifySRContainingValueIsDisplayed(sr, srNum));
     }
 

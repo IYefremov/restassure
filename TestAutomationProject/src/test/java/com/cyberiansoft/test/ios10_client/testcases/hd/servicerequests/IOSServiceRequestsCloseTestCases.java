@@ -4,7 +4,7 @@ import com.cyberiansoft.test.dataclasses.ServiceRequestData;
 import com.cyberiansoft.test.dataclasses.TestCaseData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.enums.ServiceRequestStatus;
+import com.cyberiansoft.test.enums.servicerequests.ServiceRequestStatus;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
 import com.cyberiansoft.test.ios10_client.hdclientsteps.NavigationSteps;

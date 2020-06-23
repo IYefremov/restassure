@@ -35,6 +35,7 @@ public class BaseTestClass {
     protected static String deviceOfficeUrl;
     protected static EnvironmentType environmentType = EnvironmentType.QC;
     protected static String deviceUrl = "http://208.87.18.5:8082/";
+    protected static String remoteWebDriverUrl = "http://aqc-linux2.westus.cloudapp.azure.com:4444/wd/hub";
     @Getter
     protected static BrowserType browserType = BrowserType.CHROME;
     @Getter
@@ -69,8 +70,6 @@ public class BaseTestClass {
         manager.setEmployeeFirstName("AutoEmpl_Manager");
         manager.setEmployeeLastName("ADD_EDIT_REMOVE");
         manager.setEmployeePassword("111111");
-
-
     }
 
 
@@ -96,6 +95,10 @@ public class BaseTestClass {
             deviceOfficeUrl = VNextClientEnvironmentUtils.getBackOfficeURL(environmentType);
         }
 
+        Optional<String> azureUrl = Optional.ofNullable(System.getProperty("azure.url"));
+        if (azureUrl.isPresent())
+            remoteWebDriverUrl = azureUrl.get();
+
         Optional<String> testPlanIdFromMaven = Optional.ofNullable(System.getProperty("testPlanId"));
         //Optional<String> testCaseIdFromMaven = Optional.ofNullable("97261");
         if (testPlanIdFromMaven.isPresent()) {
@@ -112,7 +115,7 @@ public class BaseTestClass {
             }
         }
 
-        WebDriver chromeWebDriver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
+        WebDriver chromeWebDriver = ChromeDriverProvider.INSTANCE.setRemoteWebDriverURL(remoteWebDriverUrl).getMobileChromeDriver();
         //chromeWebDriver.get("http://R360user:Geev9ied@77.120.104.171:8000");
         chromeWebDriver.get(deviceUrl);
 

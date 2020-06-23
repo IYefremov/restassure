@@ -41,6 +41,24 @@ public class VNextBOSRTable extends VNextBOSRPage {
     @FindBy(xpath = "//div[@name='Created_Progress']")
     private List<WebElement> createdDatesList;
 
+    @FindBy(xpath = "//div[contains(@class, 'ActionBadges-content--accept')]")
+    private List<WebElement> acceptButtonsList;
+
+    @FindBy(xpath = "//div[contains(@class, 'ActionBadges-content--reject')]")
+    private List<WebElement> rejectButtonsList;
+
+    @FindBy(xpath = "//div[contains(@class, 'ActionBadges-content--close')]")
+    private List<WebElement> closeButtonsList;
+
+    @FindBy(xpath = "//div[text()='Inspection']/preceding-sibling::div[contains(@class, 'DocumentsBlock-count')]")
+    private List<WebElement> documentsInspectionsList;
+
+    @FindBy(xpath = "//div[text()='Invoices']/preceding-sibling::div[contains(@class, 'DocumentsBlock-count')]")
+    private List<WebElement> documentsInvoicesList;
+
+    @FindBy(xpath = "//div[text()='WO']/preceding-sibling::div[contains(@class, 'DocumentsBlock-count')]")
+    private List<WebElement> documentsWoList;
+
     public VNextBOSRTable() {
         super();
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
