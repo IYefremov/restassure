@@ -14,4 +14,7 @@ public class VNextBOSRData {
 
     @JsonProperty("expectedValue")
     private String expectedValue;
+
+    @JsonProperty("expected")
+    private String[] expected;
 }

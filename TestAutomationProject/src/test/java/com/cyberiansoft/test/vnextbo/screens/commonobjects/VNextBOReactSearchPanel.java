@@ -23,7 +23,7 @@ public class VNextBOReactSearchPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@class, 'SearchInput-arrow')]")
     private WebElement advancedSearchCaret;
 
-    @FindBy(xpath = "//div[@class='SavedSearch']")
+    @FindBy(xpath = "//div[text()='Advanced Search']")
     private WebElement advancedSearchDropdown;
 
     @FindBy(xpath = "//div[contains(@class, 'SearchInput-reset')]")

@@ -178,7 +178,7 @@ public class WebElementsBot {
         act.click(combobox.getWrappedElement()).perform();
         WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getDriver() , 5);
         try {
-            wait.until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
+            WaitUtilsWebDriver.waitForVisibility(droplist.getWrappedElement(), 7);
         } catch (Exception e) {
             Assert.fail("The droplist has not been displayed!", e);
         }

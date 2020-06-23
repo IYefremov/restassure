@@ -161,4 +161,16 @@ public class CustomDateProvider {
         LocalDate localDate = getCurrentDateLocalized().minusYears(1);
         return localDate.withDayOfYear(localDate.lengthOfYear());
     }
+
+    public static String getDateMinusDays(String date, int days) {
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat());
+        final LocalDate localDate = LocalDate.parse(date, formatter).minusDays(days);
+        return CustomDateProvider.getFormattedLocalizedDate(localDate, DateUtils.FULL_DATE_FORMAT);
+    }
+
+    public static String getDatePlusDays(String date, int days) {
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat());
+        final LocalDate localDate = LocalDate.parse(date, formatter).plusDays(days);
+        return CustomDateProvider.getFormattedLocalizedDate(localDate, DateUtils.FULL_DATE_FORMAT);
+    }
 }

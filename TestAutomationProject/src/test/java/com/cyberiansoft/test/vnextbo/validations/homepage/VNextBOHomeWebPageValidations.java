@@ -15,7 +15,7 @@ public class VNextBOHomeWebPageValidations extends VNextBOBaseWebPageValidations
 
     public static void verifyAccessReconProBOLinkIsDisplayed() {
 
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOHomeWebPage().getAccessReconProBOLink()),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOHomeWebPage().getAccessR360BOLink()),
                 "Access ReconPro BackOffice link hasn't been displayed");
     }
 
