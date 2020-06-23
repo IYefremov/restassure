@@ -11,7 +11,7 @@
         }
       ],
       "service": {
-        "serviceName": "Auto_adding_Task"
+        "serviceName": "Labor AM"
       },
       "monitoring": {
         "orderInfoDto": {

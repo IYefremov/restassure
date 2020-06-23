@@ -10,6 +10,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
+import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
@@ -60,7 +61,7 @@ public class MonitoringRoActionMenuPhase extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
 
         HomeScreenSteps.openMonitor();
-        SearchSteps.searchByText(workOrderId);
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.START);
         InformationDialogValidations.clickStartAndVerifyMessage(String.format("Start phase %1$s?", workOrderData.getMonitoring().getOrderPhaseDto().getPhaseName()));
@@ -93,7 +94,7 @@ public class MonitoringRoActionMenuPhase extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
 
         HomeScreenSteps.openMonitor();
-        SearchSteps.searchByText(workOrderId);
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.START);
         InformationDialogValidations.clickStartAndVerifyMessage(String.format("Start phase %1$s?", workOrderData.getMonitoring().getOrderPhaseDto().getPhaseName()));
@@ -130,7 +131,7 @@ public class MonitoringRoActionMenuPhase extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
 
         HomeScreenSteps.openMonitor();
-        SearchSteps.searchByText(workOrderId);
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.openPhaseMenu(orderPhaseDto);
@@ -141,6 +142,7 @@ public class MonitoringRoActionMenuPhase extends BaseTestClass {
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);
         MenuSteps.closeMenu();
         WizardScreenSteps.saveAction();
+        SearchSteps.searchByText("");
         ScreenNavigationSteps.pressBackButton();
 
     }
@@ -174,7 +176,7 @@ public class MonitoringRoActionMenuPhase extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
 
         HomeScreenSteps.openMonitor();
-        SearchSteps.searchByText(workOrderId);
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         MonitorSteps.clickQuickActionsButton();
@@ -192,6 +194,7 @@ public class MonitoringRoActionMenuPhase extends BaseTestClass {
         MenuSteps.closeMenu();
 
         WizardScreenSteps.saveAction();
+        SearchSteps.searchByText("");
         ScreenNavigationSteps.pressBackButton();
 
     }

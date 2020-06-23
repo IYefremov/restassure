@@ -26,9 +26,6 @@
       ],
       "services": [
         {
-          "serviceName": "Auto_adding_Task"
-        },
-        {
           "serviceName": "Labor AM"
         }
       ]
