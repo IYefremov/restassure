@@ -38,6 +38,12 @@ public class PhaseScreenSteps {
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 
+    public static void deleteService(String serviceName) {
+        PhaseScreenInteractions.openServiceElementMenu(PhaseScreenInteractions.getServiceElements(serviceName));
+        MenuSteps.selectMenuItem(MenuItems.DELETE);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+    }
+
     public static void completeService(ServiceData serviceData) {
         EditOrderSteps.openServiceMenu(serviceData);
         MenuSteps.selectMenuItem(MenuItems.COMPLETE);

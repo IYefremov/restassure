@@ -10,7 +10,7 @@ import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
-import com.cyberiansoft.test.vnext.interactions.services.BundleServiceScreenInteractrions;
+import com.cyberiansoft.test.vnext.interactions.services.BundleServiceScreenInteractions;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.*;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
@@ -62,7 +62,7 @@ public class VNextTeamPartServiceBundleCases extends BaseTestClass {
         });
         ScreenNavigationSteps.pressBackButton();
         PartServiceSteps.confirmPartInfo();
-        BundleServiceSteps.setBundlePrice(BundleServiceScreenInteractrions.getBundleServiceSelectedAmount());
+        BundleServiceSteps.setBundlePrice(BundleServiceScreenInteractions.getBundleServiceSelectedAmount());
 
         BundleServiceSteps.switchToSelectedServices();
         BundleServiceValidations.validateServiceSelected(laborServiceInsideBundle.getServiceName());
@@ -108,7 +108,7 @@ public class VNextTeamPartServiceBundleCases extends BaseTestClass {
         laborServiceListInsideParts.forEach((service) -> LaborServiceSteps.selectService(service.getServiceName()));
         ScreenNavigationSteps.pressBackButton();
         PartServiceSteps.confirmPartInfo();
-        BundleServiceSteps.setBundlePrice(BundleServiceScreenInteractrions.getBundleServiceSelectedAmount());
+        BundleServiceSteps.setBundlePrice(BundleServiceScreenInteractions.getBundleServiceSelectedAmount());
 
         BundleServiceSteps.switchToSelectedServices();
         BundleServiceValidations.validateServiceSelected(partServiceInsideBundle.getServiceName());

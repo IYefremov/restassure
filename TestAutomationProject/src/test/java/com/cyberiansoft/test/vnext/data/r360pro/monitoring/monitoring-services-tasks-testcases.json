@@ -290,5 +290,79 @@
         }
       }
     }
+  ],
+  "verifyUserCanAddServicesUsesPlusButtonAndDelete": [
+    {
+      "rowID": "verifyUserCanAddServicesUsesPlusButtonAndDelete.01",
+      "description": "Test Case 94282: User can add services using \"+\" button and delete",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "94282",
+          "testCaseTitle": "User can add services using \"+\" button and delete"
+        }
+      ],
+      "workOrderData": {
+        "damageData": {
+          "damageGroupName": "Other",
+          "partServiceData": {
+            "serviceName": "Part",
+            "category": "Body",
+            "subCategory": "Bumper",
+            "partName": {
+              "partNameList": [
+                "Bumper"
+              ]
+            },
+            "partPosition": "Right"
+          }
+        },
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "bundleService": {
+          "bundleServiceName": "Damage Service"
+        },
+        "monitoring": {
+          "orderPhasesDto": [
+            {
+              "phaseName": "AutomationServiceLevel",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "olrom"
+                  }
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Orom_Money_Service"
+                  }
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Olrom_labor_AT"
+                  }
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Part"
+                  }
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Anastasia Bundle"
+                  }
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Test_manual_task"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
   ]
 }
