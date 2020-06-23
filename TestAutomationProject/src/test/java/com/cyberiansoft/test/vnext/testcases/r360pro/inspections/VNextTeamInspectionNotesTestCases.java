@@ -103,6 +103,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         NotesSteps.addPhotoFromCamera();
         NotesValidations.verifyPicturesPresent();
         ScreenNavigationSteps.pressBackButton();
+        BaseUtils.waitABit(15000);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesValidations.verifyNoteIsPresent(noteText);
@@ -228,6 +229,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         NotesSteps.setNoteText(noteText);
         resultNoteText = noteText + "\n" + NotesSteps.addQuickNotesFromListByCount(5);
         ScreenNavigationSteps.pressHardwareBackButton();
+        BaseUtils.waitABit(15000);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesValidations.verifyNoteIsPresent(resultNoteText.trim());

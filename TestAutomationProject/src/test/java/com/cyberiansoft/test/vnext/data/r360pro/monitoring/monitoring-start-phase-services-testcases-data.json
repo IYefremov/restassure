@@ -98,12 +98,6 @@
                 "serviceName": "Orom_Money_Service"
               },
               "monitorServiceStatus": "Completed"
-            },
-            {
-              "monitorService": {
-                "serviceName": "Auto_adding_Task"
-              },
-              "monitorServiceStatus": "Completed"
             }
           ]
         }
