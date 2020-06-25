@@ -46,7 +46,7 @@
       "monitoring": {
         "location": "automationMonitoring",
         "orderInfoDto": {
-          "vin": "777777"
+          "vin": "77777777777777777"
         }
       }
     }
@@ -76,7 +76,7 @@
         "location": "automationMonitoring",
         "repairOrderData": {
           "phaseName": "PHASEANDSERVICELEVEL",
-          "vin": "77777777",
+          "vin": "77777777777777777",
           "completePercentage": "33%"
         }
       }
@@ -106,7 +106,7 @@
       "monitoring": {
         "location": "automationMonitoring",
         "orderInfoDto": {
-          "vin": "777777"
+          "vin": "77777777777777777"
         }
       }
     }
@@ -142,7 +142,7 @@
       "monitoring": {
         "location": "automationMonitoring",
         "orderInfoDto": {
-          "vin": "777777"
+          "vin": "77777777777777777"
         }
       }
     }
@@ -371,7 +371,7 @@
       "monitoring": {
         "repairOrderData": {
           "phaseName": "NOT STARTED",
-          "vin": "77777777",
+          "vin": "77777777777777777",
           "completePercentage": "0%"
         },
         "orderPhaseDto": {
@@ -627,7 +627,7 @@
           ]
         },
         "vihicleInfo": {
-          "vinNumber": "7777777777777"
+          "vinNumber": "77777777777777777"
         },
         "monitoring": {
           "orderPhasesDto": [

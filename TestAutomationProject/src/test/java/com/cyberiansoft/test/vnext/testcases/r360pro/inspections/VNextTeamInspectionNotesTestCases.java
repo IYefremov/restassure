@@ -44,6 +44,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
 
         HomeScreenSteps.openInspections();
         InspectionSteps.switchToTeamInspections();
+        SearchSteps.textSearchTeam(inspectionId);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.setNoteText(noteText);
@@ -74,6 +75,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
 
         BaseUtils.waitABit(15000);
         InspectionSteps.switchToTeamInspections();
+        SearchSteps.textSearchTeam(inspectionId);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesValidations.verifyNoteIsPresent(myInspectionNote);
@@ -126,6 +128,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
 
         HomeScreenSteps.openInspections();
         InspectionSteps.switchToTeamInspections();
+        SearchSteps.textSearchTeam(inspectionId);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.setNoteText(noteText);
@@ -169,6 +172,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
 
         HomeScreenSteps.openInspections();
         InspectionSteps.switchToTeamInspections();
+        SearchSteps.textSearchTeam(inspectionId);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.setNoteText(noteText);
@@ -200,6 +204,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
 
         HomeScreenSteps.openInspections();
         InspectionSteps.switchToTeamInspections();
+        SearchSteps.textSearchTeam(inspectionId);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.setNoteText(noteText);
@@ -225,6 +230,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
 
         HomeScreenSteps.openInspections();
         InspectionSteps.switchToTeamInspections();
+        SearchSteps.textSearchTeam(inspectionId);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.setNoteText(noteText);

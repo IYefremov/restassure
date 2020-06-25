@@ -34,6 +34,7 @@ public class VNextInspectionsViewInspectionTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
         String inspectionNumber = InspectionSteps.saveInspection();
         InspectionSteps.switchToTeamInspections();
+        SearchSteps.textSearchTeam(inspectionNumber);
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.VIEW);
         ViewScreenValidations.verifyEstimationDataFieldFormat();
@@ -68,6 +69,7 @@ public class VNextInspectionsViewInspectionTestCases extends BaseTestClass {
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         String inspectionNumber = InspectionSteps.saveInspection();
         InspectionSteps.switchToTeamInspections();
+        SearchSteps.textSearchTeam(inspectionNumber);
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.VIEW);
 
@@ -166,6 +168,7 @@ public class VNextInspectionsViewInspectionTestCases extends BaseTestClass {
         VehiclePartsScreenSteps.saveVehicleParts();
         String inspectionNumber = InspectionSteps.saveInspection();
         InspectionSteps.switchToTeamInspections();
+        SearchSteps.textSearchTeam(inspectionNumber);
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.VIEW);
         ViewScreenValidations.verifyServiceIsPresent(inspectionData.getMatrixServiceData().getMatrixServiceName(), true);

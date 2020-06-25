@@ -35,6 +35,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
 
@@ -82,9 +83,9 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         if (date.minusDays(1).getDayOfMonth() != 1)
             date = date.minusDays(2);
         DateTimeFormatter dateFormat =
-                DateTimeFormatter.ofPattern("MMM dd");
+                DateTimeFormatter.ofPattern("MMM dd", Locale.US);
         DateTimeFormatter dateFormatlong =
-                DateTimeFormatter.ofPattern("MMMM d, yyyy");
+                DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.US);
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
         final String workOrderNumber = createWorkOrder(testCaseData.getWorkOrderData());
