@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ActiveDevicesWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
 import com.cyberiansoft.test.core.BrowserType;
+import com.cyberiansoft.test.core.WebDriverConfigInfo;
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.dataclasses.WholesailCustomer;
@@ -149,9 +150,10 @@ public class BaseTestClass {
 
     private String getRegistrationCode(String licenseName) {
 
-        DriverBuilder.getInstance().setBrowserType(browserType).
-                setRemoteWebDriverURL("http://aqc-linux2.westus.cloudapp.azure.com:4444/wd/hub")
-        .setDriver();
+        DriverBuilder.getInstance()
+                .setBrowserType(browserType)
+                .setRemoteWebDriverURL(WebDriverConfigInfo.getInstance().getAzureURL())
+                .setDriver();
         /*if (browserType.equals(BrowserType.CHROME)) {
             DriverBuilder.getInstance().setDriver(browserType);
         } else
