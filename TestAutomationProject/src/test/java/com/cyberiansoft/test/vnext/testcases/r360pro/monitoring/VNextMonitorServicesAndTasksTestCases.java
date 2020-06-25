@@ -46,7 +46,7 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
     VNextAPIHelper apiHelper = new VNextAPIHelper();
 
     @BeforeClass(description = "Monitor services and tasks test cases")
-    public void beforeClass() throws IOException {
+    public void beforeClass() {
 
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringServicesTasksTestCasesDataPath();
     }
@@ -82,7 +82,6 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
         final String workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
-        BaseUtils.waitABit(30000);
 
         HomeScreenSteps.openMonitor();
         SearchSteps.openSearchFilters();
@@ -133,7 +132,7 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         TopScreenPanelSteps.goToThePreviousScreen();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
+    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyAutoAssignTechToATask(String rowID, String description, JSONObject testData) throws IOException {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
@@ -148,7 +147,6 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
         final String workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
-        BaseUtils.waitABit(30000);
 
         HomeScreenSteps.openMonitor();
         SearchSteps.openSearchFilters();
@@ -194,7 +192,7 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         TopScreenPanelSteps.goToThePreviousScreen();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
+    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyEmployeeCanCanNotAddDeleteEditServicesDependsOnBoSettings(String rowID, String description, JSONObject testData) throws IOException {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
@@ -209,7 +207,6 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
         final String workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
-        BaseUtils.waitABit(30000);
 
         HomeScreenSteps.openMonitor();
         SearchSteps.openSearchFilters();
@@ -247,7 +244,7 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         TopScreenPanelSteps.goToThePreviousScreen();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyHomeButtonIsAvailableFromPhasePartsInfoPages(String rowID, String description, JSONObject testData) throws IOException {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
@@ -262,7 +259,6 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
         final String workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
-        BaseUtils.waitABit(30000);
 
         HomeScreenSteps.openMonitor();
         SearchSteps.openSearchFilters();
@@ -287,7 +283,7 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         TopScreenPanelSteps.goToThePreviousScreen();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyInspectorCanCanNotAddDeleteEditServicesDependsOnBoSettings(String rowID, String description, JSONObject testData) throws IOException {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
@@ -303,7 +299,6 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
         final String workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
-        BaseUtils.waitABit(30000);
 
         HomeScreenSteps.openMonitor();
         SearchSteps.openSearchFilters();
@@ -342,7 +337,7 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         HomeScreenSteps.reLoginWithAnotherUser(employee);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
+    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyManagerCanCanNotAddDeleteEditServicesDependsOnBoSettings(String rowID, String description, JSONObject testData) throws IOException {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
@@ -358,7 +353,6 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
         final String workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
-        BaseUtils.waitABit(30000);
 
         HomeScreenSteps.openMonitor();
         SearchSteps.openSearchFilters();
@@ -413,7 +407,6 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
         final String workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
-        BaseUtils.waitABit(30000);
 
         HomeScreenSteps.openMonitor();
         SearchSteps.openSearchFilters();
