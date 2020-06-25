@@ -77,23 +77,6 @@ public class BOConfigInfo {
 		return properties.getProperty("userdemo.psw");
 	}
 
-    public String getAzureURL() {
-        return checkForSystemProperty("azure.url");
-    }
-
-	public String getDefaultBrowser() {
-		return checkForSystemProperty("browser");
-	}
-
-    private String checkForSystemProperty(String property) {
-        try {
-            if (!System.getProperty(property).isEmpty()) {
-                properties.setProperty(property, System.getProperty(property));
-            }
-        } catch (NullPointerException ignored) {}
-        return properties.getProperty(property);
-    }
-
 	public String getOutlookMail() {
 		return properties.getProperty("outlook.mail");
 	}

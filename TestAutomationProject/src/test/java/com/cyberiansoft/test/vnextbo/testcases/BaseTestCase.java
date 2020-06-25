@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.core.BrowserType;
+import com.cyberiansoft.test.core.WebDriverConfigInfo;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.enums.TestEnvironments;
 import com.cyberiansoft.test.globalutils.EnvironmentsData;
@@ -81,8 +82,11 @@ public class BaseTestCase {
 
     @BeforeClass
     public void login(ITestContext context) {
-        browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
-        DriverBuilder.getInstance().setDriver(browserType);
+        browserType = BaseUtils.getBrowserType(WebDriverConfigInfo.getInstance().getDefaultBrowser());
+        DriverBuilder.getInstance()
+                .setBrowserType(browserType)
+                .setRemoteWebDriverURL(WebDriverConfigInfo.getInstance().getAzureURL())
+                .setDriver();
         webdriver = DriverBuilder.getInstance().getDriver();
         webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
         final String userName = context.getCurrentXmlTest().getParameter("userName") != null ?

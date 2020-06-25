@@ -3,6 +3,7 @@ package com.cyberiansoft.test.core;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.Properties;
 
 public class WebDriverConfigInfo {
@@ -32,6 +33,21 @@ public class WebDriverConfigInfo {
 
 
     public String getChromeVersion() {
-        return props.getProperty("chrome.version");
+        return Optional.ofNullable(getSystemProperty("chrome.version")).orElse("");
+    }
+
+    public String getDefaultBrowser() {
+        return getSystemProperty("browser");
+    }
+
+    public String getAzureURL() {
+        return getSystemProperty("azure.url");
+    }
+
+    public String getSystemProperty(String property) {
+        Optional.ofNullable(System.getProperty(property))
+                .filter(option -> !option.isEmpty())
+                .ifPresent(option -> props.setProperty(property, option));
+        return props.getProperty(property);
     }
 }
