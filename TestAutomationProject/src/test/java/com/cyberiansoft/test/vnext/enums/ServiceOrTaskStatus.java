@@ -2,15 +2,16 @@ package com.cyberiansoft.test.vnext.enums;
 
 import lombok.Getter;
 
-public enum TaskStatus {
+public enum ServiceOrTaskStatus {
     ACTIVE("Active"),
     AUDITED("Audited"),
-    REFUSED("Refused");
+    REFUSED("Refused"),
+    RECEIVED("Received");
 
     @Getter
     private String statusName;
 
-    TaskStatus(String statusName) {
+    ServiceOrTaskStatus(String statusName) {
         this.statusName = statusName;
     }
 }

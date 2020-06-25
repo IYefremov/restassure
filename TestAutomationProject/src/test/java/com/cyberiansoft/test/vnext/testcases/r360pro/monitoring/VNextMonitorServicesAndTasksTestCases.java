@@ -10,7 +10,7 @@ import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.MonitorRole;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
-import com.cyberiansoft.test.vnext.enums.TaskStatus;
+import com.cyberiansoft.test.vnext.enums.ServiceOrTaskStatus;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.interactions.PhaseScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.services.BundleServiceScreenInteractions;
@@ -21,6 +21,7 @@ import com.cyberiansoft.test.vnext.steps.commonobjects.TopScreenPanelSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.BundleServiceSteps;
+import com.cyberiansoft.test.vnext.steps.services.LaborServiceSteps;
 import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -113,9 +114,9 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         PhaseScreenValidations.validateServicePresent(serviceData, false);
         MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE);
         PhaseScreenValidations.validateServiceStatus(monitoringData.getOrderPhasesDto().get(0).getPhaseServices().get(1).getMonitorService());
-        PhaseScreenSteps.openSelectStatusScreen(serviceData);
+        PhaseScreenSteps.openSelectStatusScreen(serviceData.getServiceName());
         SelectStatusScreenValidations.verifySelectStatusScreenIsOpened();
-        SelectStatusScreenSteps.selectStatus(TaskStatus.ACTIVE);
+        SelectStatusScreenSteps.selectStatus(ServiceOrTaskStatus.ACTIVE);
         PhaseScreenValidations.validateServiceStatus(serviceData);
         reopenOrderPhaseScreen();
         PhaseScreenInteractions.openTaskForEdit(serviceData);
@@ -169,7 +170,7 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE);
         //TODO: Below verification fails due to the Bug 133518
         PhaseScreenValidations.validateServiceTechnician(serviceData);
-        PhaseScreenSteps.changeTaskStatus(serviceData, TaskStatus.ACTIVE);
+        PhaseScreenSteps.changeServiceOrTaskStatus(serviceData.getServiceName(), ServiceOrTaskStatus.ACTIVE);
         MonitorSteps.tapOnFirstOrder();
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         PhaseScreenInteractions.openTaskForEdit(serviceData);
@@ -178,7 +179,7 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         PhaseScreenSteps.completeServices();
         MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE);
         PhaseScreenValidations.validateServiceTechnician(serviceData);
-        PhaseScreenSteps.changeTaskStatus(serviceData, TaskStatus.ACTIVE);
+        PhaseScreenSteps.changeServiceOrTaskStatus(serviceData.getServiceName(), ServiceOrTaskStatus.ACTIVE);
         //below steps should be changed
         MonitorSteps.tapOnFirstOrder();
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -467,6 +468,51 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         SelectTaskScreenSteps.selectTestManualTask();
         TopScreenPanelSteps.saveChanges();
         PhaseScreenValidations.validateServicePresent(taskData, true);
+
+        TopScreenPanelSteps.saveChanges();
+        TopScreenPanelSteps.resetSearch();
+        TopScreenPanelSteps.goToThePreviousScreen();
+    }
+
+    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifySystemIndicatesReceivedPartForLaborService(String rowID, String description, JSONObject testData) throws IOException {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+        List<MonitorServiceData> servicesList = testCaseData.getWorkOrderData().getMonitoring().getOrderPhasesDto().get(0).getPhaseServices();
+
+        HomeScreenSteps.openCreateMyWorkOrder();
+        WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.AUTOMATION_WO_MONITOR, workOrderData);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.selectServiceGroup(workOrderData.getDamageData().getDamageGroupName());
+        AvailableServicesScreenSteps.selectService(servicesList.get(0).getMonitorService().getServiceName());
+        ScreenNavigationSteps.pressBackButton();
+        final String workOrderId = WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
+        BaseUtils.waitABit(30000);
+
+        HomeScreenSteps.openMonitor();
+        SearchSteps.openSearchFilters();
+        SearchSteps.clearFilters();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MonitorSteps.startRepairOrder(workOrderId);
+        MonitorSteps.tapOnFirstOrder();
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+
+        ServiceData laborServiceData = servicesList.get(1).getMonitorService();
+        PartServiceData partServiceData = workOrderData.getDamageData().getPartServiceData();
+        PhaseScreenSteps.addServices();
+        AvailableServicesScreenSteps.clickAddServiceButton(laborServiceData.getServiceName());
+        LaborServiceSteps.addPartService(partServiceData);
+
+        updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, false, true, false);
+        reopenOrderPhaseScreen();
+
+        EditOrderSteps.switchToParts();
+        //TODO: below step fails because there is no RECEIVED status on Select status screen
+        PhaseScreenSteps.changeServiceOrTaskStatus(partServiceData.getPartName().getPartNameList().get(0), ServiceOrTaskStatus.RECEIVED);
+
 
         TopScreenPanelSteps.saveChanges();
         TopScreenPanelSteps.resetSearch();

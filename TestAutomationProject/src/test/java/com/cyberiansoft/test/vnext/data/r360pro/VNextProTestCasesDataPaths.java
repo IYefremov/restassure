@@ -143,6 +143,10 @@ public class VNextProTestCasesDataPaths {
         return props.getProperty("monitoring.services.tasks.td");
     }
 
+    public String getMonitoringPhasesTestCasesDataPath() {
+        return props.getProperty("monitoring.phases.td");
+    }
+
     public String getMonitoringTimeReportDataPath() {
         return props.getProperty("monitoring.timereport");
     }
