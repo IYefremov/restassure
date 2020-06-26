@@ -1,24 +1,24 @@
 package com.cyberiansoft.test.vnext.screens.monitoring;
 
-import com.cyberiansoft.test.vnext.webelements.customers.ListElement;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
-
 @Getter
-public class SelectTechnicianScreen extends MonitorScreen {
+public class AssignTechScreen extends MonitorScreen {
 
-    @FindBy(xpath = "//div[@class='pages']/div[contains(@data-page,'tech')]")
+    @FindBy(xpath = "//div[@class='pages']/div[@data-page='part-info']")
     private WebElement rootElement;
 
-    @FindBy(xpath = "//div[contains(@data-autotests-id,'tech')]/div")
-    private List<ListElement> techniciansRecordsList;
+    @FindBy(xpath = "//input[@id='VendorTeams']")
+    private WebElement vendorTeamField;
 
-    public SelectTechnicianScreen() {
+    @FindBy(xpath = "//input[@id='Technicians']")
+    private WebElement technicianField;
+
+    public AssignTechScreen() {
         PageFactory.initElements(new FiledDecorator(webDriver), this);
     }
 }

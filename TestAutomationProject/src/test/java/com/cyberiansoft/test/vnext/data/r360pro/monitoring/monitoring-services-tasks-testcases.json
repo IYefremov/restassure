@@ -84,8 +84,7 @@
                   "monitorService": {
                     "serviceName": "Test_manual_task",
                     "serviceStatus": "STARTED",
-                    "serviceDefaultTechnician":
-                    {
+                    "serviceDefaultTechnician": {
                       "technicianFirstName": "Employee",
                       "technicianLastName": "Employee",
                       "isSelected": true
@@ -140,8 +139,7 @@
                   "monitorService": {
                     "serviceName": "olrom",
                     "serviceStatus": "ACTIVE",
-                    "serviceDefaultTechnician":
-                    {
+                    "serviceDefaultTechnician": {
                       "technicianFirstName": "Employee",
                       "technicianLastName": "Employee",
                       "isSelected": true
@@ -226,8 +224,7 @@
                   "monitorService": {
                     "serviceName": "olrom",
                     "serviceStatus": "ACTIVE",
-                    "serviceDefaultTechnician":
-                    {
+                    "serviceDefaultTechnician": {
                       "technicianFirstName": "Employee",
                       "technicianLastName": "Employee",
                       "isSelected": true
@@ -276,8 +273,7 @@
                   "monitorService": {
                     "serviceName": "olrom",
                     "serviceStatus": "ACTIVE",
-                    "serviceDefaultTechnician":
-                    {
+                    "serviceDefaultTechnician": {
                       "technicianFirstName": "Employee",
                       "technicianLastName": "Employee",
                       "isSelected": true
@@ -356,6 +352,57 @@
                 {
                   "monitorService": {
                     "serviceName": "Test_manual_task"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "verifySystemIndicatesReceivedPartForLaborService": [
+    {
+      "rowID": "verifySystemIndicatesReceivedPartForLaborService.01",
+      "description": "Test Case 92338: Verify system indicates the received part for labor service and ask user to change part service status to \"Received\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92338",
+          "testCaseTitle": "Verify system indicates the received part for labor service and ask user to change part service status to \"Received\""
+        }
+      ],
+      "workOrderData": {
+        "damageData": {
+          "damageGroupName": "Other",
+          "partServiceData": {
+            "serviceName": "Part",
+            "category": "Body",
+            "subCategory": "Bumper",
+            "partName": {
+              "partNameList": [
+                "Bumper"
+              ]
+            },
+            "partPosition": "Right"
+          }
+        },
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "monitoring": {
+          "orderPhasesDto": [
+            {
+              "phaseName": "AutomationServiceLevel",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "olrom"
+                  }
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Olrom_labor_AT"
                   }
                 }
               ]

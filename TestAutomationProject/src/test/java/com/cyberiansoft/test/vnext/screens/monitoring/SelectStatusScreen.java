@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.monitoring;
 
-import com.cyberiansoft.test.vnext.enums.TaskStatus;
+import com.cyberiansoft.test.vnext.enums.ServiceOrTaskStatus;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -14,7 +14,7 @@ public class SelectStatusScreen extends MonitorScreen {
     @FindBy(xpath = "//div[@class='pages']/div[@data-page='change-status']")
     private WebElement rootElement;
 
-    public WebElement getStatusRecord(TaskStatus status) {
+    public WebElement getStatusRecord(ServiceOrTaskStatus status) {
 
         return webDriver.findElement(By.xpath("//div[@data-name='" + status.getStatusName() + "']"));
     }

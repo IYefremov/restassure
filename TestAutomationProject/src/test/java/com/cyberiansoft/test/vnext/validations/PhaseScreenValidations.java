@@ -121,4 +121,9 @@ public class PhaseScreenValidations {
         else
             Assert.assertFalse(new PhasesScreen().getPartsScreenButton().isDisplayed(), "Part hasn't been deleted");
     }
+
+    public static void verifyPhaseScreenIsDisplayed() {
+
+        Assert.assertTrue(new PhasesScreen().getRootElement().isDisplayed(), "Phase screen hasn't been displayed");
+    }
 }

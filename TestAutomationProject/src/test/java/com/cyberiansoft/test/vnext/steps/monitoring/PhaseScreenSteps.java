@@ -4,7 +4,8 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.ServiceTechnician;
 import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.cyberiansoft.test.enums.MenuItems;
-import com.cyberiansoft.test.vnext.enums.TaskStatus;
+import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
+import com.cyberiansoft.test.vnext.enums.ServiceOrTaskStatus;
 import com.cyberiansoft.test.vnext.interactions.PhaseScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.monitoring.PhasesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
@@ -102,17 +103,26 @@ public class PhaseScreenSteps {
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 
-    public static void openSelectStatusScreen(ServiceData serviceData) {
+    public static void openSelectStatusScreen(String serviceName) {
 
-        EditOrderSteps.openServiceMenu(serviceData);
+        PhaseScreenInteractions.openServiceElementMenu(
+                PhaseScreenInteractions.getServiceElements(serviceName));
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 
-    public static void changeTaskStatus(ServiceData serviceData, TaskStatus newStatus) {
+    public static void changeServiceOrTaskStatus(String serviceName, ServiceOrTaskStatus newStatus) {
 
-        PhaseScreenSteps.openSelectStatusScreen(serviceData);
-        SelectStatusScreenSteps.selectStatus(TaskStatus.ACTIVE);
+        PhaseScreenSteps.openSelectStatusScreen(serviceName);
+        SelectStatusScreenSteps.selectStatus(newStatus);
+        TopScreenPanelSteps.saveChanges();
+    }
+
+    public static void changePhaseTechnician(OrderPhaseDto phaseData) {
+
+        EditOrderSteps.openPhaseMenu(phaseData);
+        MenuSteps.selectMenuItem(MenuItems.ASSIGN_TECH);
+        SelectTechnicianScreenSteps.selectTechnician("1111 2222");
         TopScreenPanelSteps.saveChanges();
     }
 }

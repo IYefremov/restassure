@@ -1,0 +1,28 @@
+{
+  "workOrderData": {
+    "damageData": {
+      "damageGroupName": "Other"
+    },
+    "vihicleInfo": {
+      "vinNumber": "7777777777777"
+    },
+    "monitoring": {
+      "orderPhaseDto": {
+        "phaseName": "PhaseLevel",
+        "status": "ACTIVE",
+        "phaseServices": [
+          {
+            "monitorService": {
+              "serviceName": "olrom",
+              "serviceDefaultTechnician": {
+                "technicianFirstName": "1111",
+                "technicianLastName": "2222",
+                "isSelected": true
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
