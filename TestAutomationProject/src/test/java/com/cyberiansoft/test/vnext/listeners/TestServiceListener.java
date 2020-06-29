@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class TestServiceListener implements ITestListener, IInvokedMethodListener, IConfigurationListener {
+public class TestServiceListener extends TestListenerAdapter implements ITestListener, IInvokedMethodListener, IConfigurationListener {
 
     @Getter
     @Setter
