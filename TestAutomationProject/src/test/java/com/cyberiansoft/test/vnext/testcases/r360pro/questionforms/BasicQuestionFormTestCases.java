@@ -3,7 +3,6 @@ package com.cyberiansoft.test.vnext.testcases.r360pro.questionforms;
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataclasses.QuestionsData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -243,32 +242,6 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyPartServiceIsAddedAndLinkedWithLaborAfterQuestionIsAnswered(String rowID,
-                                                                                  String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        List<QuestionsData> questionsDataList = workOrderData.getQuestionScreenData().getQuestionsData();
-        QuestionsData serviceQuestion = questionsDataList.get(0);
-        List<ServiceData> expectedServices = workOrderData.getServicesList();
-        ServiceData expectedNeedToSetupService = expectedServices.get(0);
-
-        HomeScreenSteps.openCreateMyInspection();
-        InspectionSteps.createInspection(testcustomer, InspectionTypes.WITH_QUESTIONS_ANSWER_SERVICES);
-        WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
-
-        QuestionFormSteps.answerGeneralQuestion(serviceQuestion);
-        QuestionFormValidations.validateGeneralQuestionAnswer(serviceQuestion);
-        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES, 1);
-        SelectedServicesScreenSteps.openServiceDetails(expectedNeedToSetupService.getServiceName());
-        ServiceDetailsValidations.verifyLaborServicesButtonPresent(false);
-        ServiceDetailsScreenSteps.setPartInfo();
-        ServiceDetailsValidations.verifyLaborServicesButtonPresent(true);
-        ScreenNavigationSteps.acceptScreen();
-        InspectionSteps.cancelInspection();
-        ScreenNavigationSteps.pressBackButton();
-    }
-
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyPartServiceIsAddedAndNotLinkedWithLaborAfterQuestionIsAnswered(String rowID,
                                                                                          String description, JSONObject testData) {
@@ -358,29 +331,27 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
         QuestionsData serviceQuestion = questionsDataList.get(0);
-        List<ServiceData> expectedServices = inspectionData.getServicesList();
-        ServiceData expectedSelectedService = expectedServices.get(0);
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.WITH_QUESTIONS_ANSWER_SERVICES);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
 
         QuestionFormSteps.answerGeneralQuestion(serviceQuestion);
-        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES, 1);
+        QuestionFormValidations.verifySelectedAnswerServicesHaveUnfilledServices(serviceQuestion.getQuestionName(),true);
+        QuestionFormSteps.openSelectedAnswerServices(serviceQuestion);
+
+        inspectionData.getPartServiceDataList().forEach(partServiceData -> {
+            PartServiceSteps.selectPartService(partServiceData);
+            PartServiceSteps.acceptDetailsScreen();
+        });
 
         QuestionServiceListSteps.switchToSelectedServiceView();
         inspectionData.getServicesList().forEach(serviceData -> {
             QuestionServiceListValidations.validateServicePresent(serviceData.getServiceName());
         });
-        SelectedServicesScreenSteps.openServiceDetails(expectedSelectedService.getServiceName());
-        ServiceDetailsValidations.verifyPartsServicePresent(true);
-        ServiceDetailsValidations.verifyLaborServicesButtonPresent(false);
-        ServiceDetailsScreenSteps.openPartServiceDetails();
-        PartServiceSteps.confirmPartInfo();
-        ServiceDetailsValidations.verifyPartsServicePresent(true);
-        ServiceDetailsValidations.verifyLaborServicesButtonPresent(true);
+        ScreenNavigationSteps.pressBackButton();
 
-        ServiceDetailsScreenSteps.closeServiceDetailsScreen();
+        QuestionFormValidations.verifySelectedAnswerServicesHaveUnfilledServices(serviceQuestion.getQuestionName(),false);
 
         InspectionSteps.cancelInspection();
         ScreenNavigationSteps.pressBackButton();

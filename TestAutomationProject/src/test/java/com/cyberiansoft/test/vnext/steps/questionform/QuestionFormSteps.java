@@ -106,4 +106,8 @@ public class QuestionFormSteps {
         WaitUtils.click(imageQuestion.getAddedImages().get(0));
         ImageScreenSteps.removeImage();
     }
+
+    public static void openSelectedAnswerServices(QuestionsData questionData) {
+        QuestionScreenInteractions.clickSelectedAnswerServicesIcon(questionData.getQuestionName());
+    }
 }

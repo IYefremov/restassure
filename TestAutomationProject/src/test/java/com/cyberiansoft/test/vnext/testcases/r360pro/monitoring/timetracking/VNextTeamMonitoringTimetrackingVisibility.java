@@ -178,7 +178,6 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
         MenuSteps.selectMenuItem(MenuItems.COMPLETE);
         GeneralSteps.confirmDialog();
         WizardScreenSteps.saveAction();
-        WizardScreenSteps.saveAction();
         MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE_ON);
         EditOrderSteps.openServiceMenu(serviceDto);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);

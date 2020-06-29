@@ -12,10 +12,13 @@ import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.enums.monitor.OrderPhaseStatuses;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.RepairOrderDto;
+import com.cyberiansoft.test.vnext.enums.MonitorRole;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
+import com.cyberiansoft.test.vnext.restclient.VNextAPIHelper;
+import com.cyberiansoft.test.vnext.restclient.monitorrolessettings.RoleSettingsDTO;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
@@ -28,6 +31,7 @@ import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +39,14 @@ public class VNextTeamMonitoringCalculations extends BaseTestClass {
     private String workOrderId = "";
 
     @BeforeClass(description = "Team Monitoring Basic Flow Test")
-    public void beforeClass() {
+    public void beforeClass() throws IOException {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringBaseCaseDataPath();
+
+        RoleSettingsDTO roleSettingsDTO = new RoleSettingsDTO();
+        roleSettingsDTO.setMonitorCanAddService(false);
+        roleSettingsDTO.setMonitorCanEditService(true);
+        roleSettingsDTO.setMonitorCanRemoveService(false);
+        VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, roleSettingsDTO);
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
@@ -128,7 +138,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestClass {
         MenuSteps.selectStatus(ServiceStatus.SKIPPED);
         WizardScreenSteps.saveAction();
         repairOrderDto.setCompletePercentage("100%");
-        repairOrderDto.setPhaseName("PHASEANDSERVICELEVEL");
+        repairOrderDto.setPhaseName("COMPLETED");
         MonitorValidations.verifyRepairOrderValues(workOrderId, repairOrderDto);
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -146,8 +156,6 @@ public class VNextTeamMonitoringCalculations extends BaseTestClass {
 
         PhaseScreenValidations.validatePhaseStatus(workOrderData.getMonitoring().getOrderPhaseDto(), OrderPhaseStatuses.REFUSED);
         WizardScreenSteps.saveAction();
-        repairOrderDto.setCompletePercentage("0%");
-        repairOrderDto.setPhaseName("PHASEANDSERVICELEVEL");
 
         ScreenNavigationSteps.pressBackButton();
     }
