@@ -325,7 +325,7 @@
       ],
       "monitoring": {
         "orderPhaseDto": {
-          "phaseName": "AutomationPhaseLevel"
+          "phaseName": "PhaseAndServiceLevel"
         }
       }
     }
@@ -344,6 +344,34 @@
         "orderPhaseDto": {
           "phaseName": "AutomationPhaseLevel"
         }
+      }
+    }
+  ],
+  "testСommonFiltersPhaseStatus": [
+    {
+      "rowID": "userCanSearchByPhase.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "132714",
+          "testCaseTitle": "Monitor - Сommon Filters - Phase Status"
+        }
+      ],
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "PhaseAndServiceLevel"
+        },
+        "orderPhasesDto": [
+          {
+            "phaseName": "PhaseAndServiceLevel"
+          },
+          {
+            "phaseName": "AutomationPhaseLevel"
+          }
+        ]
+      },
+      "service": {
+        "serviceName": "Labor AM"
       }
     }
   ],
