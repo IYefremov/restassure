@@ -14,6 +14,7 @@ import com.cyberiansoft.test.vnextbo.validations.VNextBOBaseWebPageValidations;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 
 import java.text.ParseException;
@@ -426,10 +427,11 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
     }
 
     public static void verifyDepartmentsAllAmountsIsCorrect() {
-
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBOROWebPageNew().getOrdersAmountThroughDepartmentsList(), 2);
-        List<String> ordersAmountsList = new VNextBOROWebPageNew().getOrdersAmountThroughDepartmentsList().stream().
-                map(WebElement::getText).collect(Collectors.toList());
+        final VNextBOROWebPageNew roPage = new VNextBOROWebPageNew();
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(roPage.getDepartmentsList(), 3);
+        roPage.getOrdersAmountThroughDepartmentsList().forEach(el -> WaitUtilsWebDriver.getShortWait()
+                .until((ExpectedCondition<Boolean>) driver -> !Utils.getText(el).isEmpty()));
+        List<String> ordersAmountsList = Utils.getText(roPage.getOrdersAmountThroughDepartmentsList());
         int ordersCalculatedAmount = 0;
         for (int i = 1; i < ordersAmountsList.size(); i++) {
             if (!ordersAmountsList.get(i).trim().equals(""))

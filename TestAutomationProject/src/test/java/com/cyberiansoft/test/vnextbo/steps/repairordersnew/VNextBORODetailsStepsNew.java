@@ -38,6 +38,7 @@ public class VNextBORODetailsStepsNew {
 
     public static void expandPhaseByName(String phase) {
         final VNextBORODetailsWebPageNew detailsWebPage = new VNextBORODetailsWebPageNew();
+        WaitUtilsWebDriver.waitForElementNotToBeStale(detailsWebPage.expandPhaseButton(phase));
         String style = WaitUtilsWebDriver.getWait().until((ExpectedCondition<String>) driver ->
                 Utils.getAttribute(detailsWebPage.expandPhaseButton(phase), "style"));
         if (style.contains("display: none")) {
@@ -49,6 +50,17 @@ public class VNextBORODetailsStepsNew {
             WaitUtilsWebDriver.waitForPendingRequestsToComplete();
             WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         }
+    }
+
+    public static void waitForServiceTechnicianToBeUpdated(String service, String expectedTechnician) {
+        try {
+            ConditionWaiter.create(__ -> Utils.getText(new VNextBORODetailsWebPageNew().serviceTechnicianDropDown(service))
+                    .equals(expectedTechnician)).execute();
+        } catch (Exception ignored) {}
+    }
+
+    public static void waitForServiceToBeDisplayed(String service) {
+        WaitUtilsWebDriver.waitForVisibility(new VNextBORODetailsWebPageNew().serviceDescription(service));
     }
 
     public static void collapsePhaseByName(String phase) {
@@ -178,6 +190,7 @@ public class VNextBORODetailsStepsNew {
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         if (Utils.getText(detailsWebPage.serviceStatusDropDownByService(service)).equals("Problem")) {
             resolveProblemForService(service);
+            WaitUtilsWebDriver.waitForElementNotToBeStale(detailsWebPage.serviceStatusDropDownByService(service));
             ConditionWaiter.create(__ -> !Utils.getText(detailsWebPage.serviceStatusDropDownByService(service)).equals("Problem")).execute();
         }
         if (!Utils.getText(detailsWebPage.serviceStatusDropDownByService(service)).equals(expectedStatus)) {
@@ -185,7 +198,7 @@ public class VNextBORODetailsStepsNew {
             Utils.clickWithJS(detailsWebPage.dropDownOption(expectedStatus));
             WaitUtilsWebDriver.waitForPageToBeLoaded();
             WaitUtilsWebDriver.waitABit(5000);
-            WaitUtilsWebDriver.waitForElementNotToBeStale(detailsWebPage.serviceStatusDropDownByService(service));
+            WaitUtilsWebDriver.waitForElementNotToBeStale(detailsWebPage.serviceStatusDropDownByService(service), 45);
             ConditionWaiter.create(__ -> detailsWebPage.serviceStatusDropDownByService(service).isEnabled()).execute();
             ConditionWaiter.create(__ -> Utils.getText(detailsWebPage.serviceStatusDropDownByService(service)).equals(expectedStatus)).execute();
         }
@@ -287,6 +300,22 @@ public class VNextBORODetailsStepsNew {
         Utils.clickElement(detailsWebPageNew.startServiceButtonForService(service));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
         collapsePhaseByName(phase);
+    }
+
+    public static void startServiceByServiceNameIfNeeded(String phase, String service) {
+        VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
+        expandPhaseByName(phase);
+        if (Utils.isElementDisplayed(detailsWebPageNew.startServiceButtonForService(service))) {
+            Utils.clickElement(detailsWebPageNew.startServiceButtonForService(service));
+            WaitUtilsWebDriver.waitForPageToBeLoaded();
+        }
+    }
+
+    public static void waitForServiceIconToBeDisplayed(String service, String expectedServiceIcon) {
+        try {
+            WaitUtilsWebDriver.getWait().until((ExpectedCondition<Boolean>) driver -> Utils.attributeEquals(
+                    new VNextBORODetailsWebPageNew().serviceIcon(service), "class", expectedServiceIcon));
+        } catch (Exception ignored) {}
     }
 
     public static void resetStartDateIfNeededByServiceName(String phase, String service) {

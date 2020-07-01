@@ -1,39 +1,6 @@
 {
   "verifySettingsTabIsShown": [
     {
-      "rowID": "verifySettingsTabIsShown.01",
-      "description": "88650 - \"Settings\" tab is shown for \"SuperUser\" user",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91078"
-        }
-      ],
-      "login": "cyberiansoft.test@nada.ltd",
-      "password": "ZZzz11!!"
-    },
-    {
-      "rowID": "verifySettingsTabIsShown.02",
-      "description": "88646 - \"Settings\" tab is shown for \"Administrator\" user",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91074"
-        }
-      ],
-      "login": "yrozstalnoy+1@cyberiansoft.com",
-      "password": "Barcelona_1990"
-    },
-    {
-      "rowID": "verifySettingsTabIsShown.03",
-      "description": "88647 - \"Settings\" tab is shown for \"Area Administrator\" user",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91075"
-        }
-      ],
-      "login": "yrozstalnoy+34@cyberiansoft.com",
-      "password": "Barcelona_1990"
-    },
-    {
       "rowID": "verifySettingsTabIsShown.04",
       "description": "88649 - \"Settings\" tab is shown for \"Setup Engineer\" user",
       "targetProcessTestCaseData": [
@@ -41,7 +8,7 @@
           "testCaseID": "91077"
         }
       ],
-      "login": "yrozstalnoy+30@cyberiansoft.com",
+      "login": "yrozstalnoy+8@cyberiansoft.com",
       "password": "Barcelona_1990"
     },
     {

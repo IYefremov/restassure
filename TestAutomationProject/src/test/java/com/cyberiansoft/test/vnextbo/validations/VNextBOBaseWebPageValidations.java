@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.validations;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
@@ -61,7 +62,7 @@ public class VNextBOBaseWebPageValidations {
 
         WebDriver driver = DriverBuilder.getInstance().getDriver();
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(driver);
-        driver.switchTo().frame(baseWebPage.intercomLauncherFrame);
+        VNextBOBaseWebPageSteps.switchToIntercomFrame();
         boolean isIntercomButtonDisplayed = Utils.isElementDisplayed(baseWebPage.openCloseIntercomButton);
         driver.switchTo().defaultContent();
         Assert.assertTrue(isIntercomButtonDisplayed, "Intercom button hasn't been displayed");
@@ -87,7 +88,7 @@ public class VNextBOBaseWebPageValidations {
 
     public static void verifyHelpPageIsOpened(String actualHelpPageUrl) {
 
-        Assert.assertTrue(actualHelpPageUrl.contains("intercom.help") && actualHelpPageUrl.contains("reconpro-reconmonitor-back-office"),
+        Assert.assertTrue(actualHelpPageUrl.contains("intercom.help") && actualHelpPageUrl.contains("repair360-reconpro-back-office"),
                 "The \"Help\" page hasn't been opened");
     }
 
