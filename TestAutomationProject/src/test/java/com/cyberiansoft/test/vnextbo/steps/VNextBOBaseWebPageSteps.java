@@ -65,9 +65,17 @@ public class VNextBOBaseWebPageSteps {
     {
         WebDriver driver = DriverBuilder.getInstance().getDriver();
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(driver);
-        driver.switchTo().frame(baseWebPage.intercomLauncherFrame);
+        switchToIntercomFrame();
         Utils.clickElement(baseWebPage.openCloseIntercomButton);
         driver.switchTo().defaultContent();
+    }
+
+    public static void switchToIntercomFrame() {
+        final WebDriver driver = DriverBuilder.getInstance().getDriver();
+        try {
+            //for some environments intercom is an element, not an iframe.
+            driver.switchTo().frame(new VNextBOBaseWebPage(driver).intercomLauncherFrame);
+        } catch (Exception ignored) {}
     }
 
     public static void openIntercomMessengerWithoutFrame()
@@ -80,7 +88,7 @@ public class VNextBOBaseWebPageSteps {
     {
         WebDriver driver = DriverBuilder.getInstance().getDriver();
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(driver);
-        driver.switchTo().frame(baseWebPage.intercomLauncherFrame);
+        switchToIntercomFrame();
         Utils.clickElement(baseWebPage.openCloseIntercomButton);
         driver.switchTo().defaultContent();
     }

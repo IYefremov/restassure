@@ -1309,12 +1309,17 @@
           "testCaseTitle": "Verify that icon of the started services is different as not started"
         }
       ],
-      "orderNumber": "O-000-147163",
-      "phase": "PDR Station",
-      "service": "autotestHVlSsaH",
+      "location": "Rozstalnoy_location",
+      "orderNumber": "O-368-00003",
+      "phase": "Rozstalnoy2",
+      "service": "roz_en_part_money",
       "serviceStatuses": [
         "Active",
         "Rework"
+      ],
+      "icons": [
+        "icon-start-ro text-green",
+        "icon-clock text-green"
       ]
     }
   ],

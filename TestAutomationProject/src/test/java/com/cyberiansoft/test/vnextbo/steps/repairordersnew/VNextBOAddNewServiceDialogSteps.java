@@ -117,6 +117,7 @@ public class VNextBOAddNewServiceDialogSteps {
         allServicesTypesSteps(serviceData);
         setPrice(serviceData.getServicePrice());
         setQuantity(serviceData.getServiceQuantity());
+        WaitUtilsWebDriver.waitABit(1000);
         VNextBOAddNewServiceDialogValidations.verifyAllFieldsAreSetCorrectly(serviceData);
         submitService();
     }

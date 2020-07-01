@@ -20,6 +20,8 @@ import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
+
 public class VNextBOMonitorTestCasesPart2New extends BaseTestCase {
 
     final String TEST_LOCATION = "Best Location Automation";
@@ -28,8 +30,8 @@ public class VNextBOMonitorTestCasesPart2New extends BaseTestCase {
     public void settingUp() {
 
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorTD();
+        webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
         VNextBOLeftMenuInteractions.selectRepairOrdersMenu();
-        Utils.refreshPage();
         VNextBOBreadCrumbInteractions.setLocation(TEST_LOCATION);
     }
 

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.repairordersnew;
 
+import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.enums.menu.Menu;
@@ -11,6 +12,7 @@ import com.cyberiansoft.test.bo.steps.monitor.repairlocations.BORepairLocationsP
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.enums.monitor.OrderMonitorServiceStatuses;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
@@ -25,9 +27,6 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
@@ -88,18 +87,24 @@ public class VNextBOMonitorTestCasesPart3New extends BaseTestCase {
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void verifyUserCanChangeStatusOfRoService(String rowID, String description, JSONObject testData) {
 
-		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-		VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
-		VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[0]);
-		WaitUtilsWebDriver.waitForPageToBeLoaded();
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        final String status = data.getServiceStatuses()[1];
+        final String service = data.getService();
+
+        VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+        VNextBORODetailsStepsNew.setServiceStatusIfNeeded(service, data.getServiceStatuses()[0]);
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitABit(3000);
+        VNextBORODetailsStepsNew.setServiceStatusIfNeeded(service, status);
 		WaitUtilsWebDriver.waitABit(3000);
-		VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[1]);
-		WaitUtilsWebDriver.waitABit(3000);
-		VNextBORODetailsValidationsNew.verifyServiceStartedDateIsCorrect(data.getService(), data.getServiceStartedDate());
-		if (data.getServiceStatuses()[1].equals("Active") || data.getServiceStatuses()[1].equals("Rework"))
-			VNextBORODetailsValidationsNew.verifyServiceCompletedDateIsCorrect(data.getService(), "");
-		else VNextBORODetailsValidationsNew.verifyServiceCompletedDateIsCorrect(data.getService(), LocalDate.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
-		VNextBORODetailsValidationsNew.verifyServiceHelpInfoIsCorrect(data.getService(), data.getServiceStatuses()[1]);
+		VNextBORODetailsValidationsNew.verifyServiceStartedDateIsCorrect(service, data.getServiceStartedDate());
+		if (status.equals(OrderMonitorServiceStatuses.ACTIVE.getValue()) || status.equals(OrderMonitorServiceStatuses.REWORK.getValue())) {
+            VNextBORODetailsValidationsNew.verifyServiceCompletedDateIsCorrect(service, "");
+        } else {
+            VNextBORODetailsValidationsNew.verifyServiceCompletedDateIsCorrect(
+                    service, CustomDateProvider.getCurrentDateInFullFormat(true));
+        }
+		VNextBORODetailsValidationsNew.verifyServiceHelpInfoIsCorrect(service, status);
 		VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
 	}
 

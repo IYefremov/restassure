@@ -50,7 +50,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
     public void verifyUserCanAddNewUser(String rowID, String description, JSONObject testData) throws Exception {
 
         NadaEMailService nada = new NadaEMailService();
-        nada.setEmailId(newUserEmail);
+        final String newUserEmail = nada.getEmailId();
         VNextBOUsersPageSteps.clickAddNewUserButton();
         VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog();
         VNextBOAddNewUserDialogSteps.createNewUser(newUserFirstName, newUserLastName,
@@ -63,6 +63,8 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
                 "Red triangle warning icon hasn't been displayed.");
         VNextBOUsersPageValidations.verifyReSendButtonIsDisplayed();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+
+        nada.setEmailId(newUserEmail);
         NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
                 new NadaEMailService.MailSearchParametersBuilder()
                         .withSubject("REGISTRATION");
