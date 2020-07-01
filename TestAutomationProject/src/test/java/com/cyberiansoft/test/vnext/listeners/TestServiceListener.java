@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.listeners;
 
+import com.cyberiansoft.test.baseutils.AllureUtils;
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.TargetProcessTestCaseData;
 import com.cyberiansoft.test.dataclasses.TestCaseData;
@@ -26,12 +27,13 @@ import org.testng.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class TestServiceListener implements ITestListener, IInvokedMethodListener, IConfigurationListener {
+public class TestServiceListener extends TestListenerAdapter implements ITestListener, IInvokedMethodListener, IConfigurationListener {
 
     @Getter
     @Setter
@@ -83,10 +85,12 @@ public class TestServiceListener implements ITestListener, IInvokedMethodListene
     }
 
     @Override
-    public void onTestFailure(ITestResult result) {
+    public void onTestFailure(ITestResult testResult) {
+        AllureUtils.attachLog(Arrays.toString(testResult.getThrowable().getStackTrace()));
+        AllureUtils.attachScreenshot(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         if (!testToTestRunMap.isEmpty()) {
-            if (getTestCasesData(result) != null && getTestCasesData(result).getTargetProcessTestCaseData() != null)
-                this.getTestCasesData(result).getTargetProcessTestCaseData()
+            if (getTestCasesData(testResult) != null && getTestCasesData(testResult).getTargetProcessTestCaseData() != null)
+                this.getTestCasesData(testResult).getTargetProcessTestCaseData()
                     .stream().map(TargetProcessTestCaseData::getTestCaseID)
                     .forEach(id -> {
                         try {
@@ -108,7 +112,8 @@ public class TestServiceListener implements ITestListener, IInvokedMethodListene
 
     @Override
     public void onTestSkipped(ITestResult result) {
-
+        AllureUtils.attachLog(Arrays.toString(result.getThrowable().getStackTrace()));
+        AllureUtils.attachScreenshot(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
     @Override

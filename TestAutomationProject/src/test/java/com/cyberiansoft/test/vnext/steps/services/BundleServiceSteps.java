@@ -1,17 +1,17 @@
 package com.cyberiansoft.test.vnext.steps.services;
 
-import com.cyberiansoft.test.vnext.interactions.services.BundleServiceScreenInteractrions;
+import com.cyberiansoft.test.vnext.interactions.services.BundleServiceScreenInteractions;
 
 public class BundleServiceSteps {
     public static void openServiceDetails(String serviceName) {
-        BundleServiceScreenInteractrions.selectService(serviceName);
+        BundleServiceScreenInteractions.selectService(serviceName);
     }
 
     public static void switchToSelectedServices() {
-        BundleServiceScreenInteractrions.switchToSelectedServices();
+        BundleServiceScreenInteractions.switchToSelectedServices();
     }
 
     public static void setBundlePrice(String bundlePrice) {
-        BundleServiceScreenInteractrions.setBundlePrice(bundlePrice);
+        BundleServiceScreenInteractions.setBundlePrice(bundlePrice);
     }
 }

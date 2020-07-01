@@ -103,6 +103,14 @@ public class DriverBuilder {
                 driver.setFileDetector(new LocalFileDetector());
                 webDriver.set(driver);
                 break;
+            case FIREFOX:
+                WebDriverManager.firefoxdriver().setup();
+                webcap = DesiredCapabilities.firefox();
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.setCapability("browser.autofocus", true);
+                firefoxOptions.setCapability("browser.tabs.remote.autostart.2", false);
+                webDriver.set(new FirefoxDriver(firefoxOptions.merge(webcap)));
+                break;
         }
         sessionId.set(((RemoteWebDriver) webDriver.get()).getSessionId().toString());
         if (webcap != null) {

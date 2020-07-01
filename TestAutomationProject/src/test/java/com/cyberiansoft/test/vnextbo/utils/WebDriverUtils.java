@@ -2,8 +2,8 @@ package com.cyberiansoft.test.vnextbo.utils;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.core.BrowserType;
+import com.cyberiansoft.test.core.WebDriverConfigInfo;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -17,8 +17,11 @@ public class WebDriverUtils {
             driver = DriverBuilder.getInstance().getDriver();
             driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         } catch (Exception ignored) {
-            BrowserType browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
-            DriverBuilder.getInstance().setDriver(browserType);
+            BrowserType browserType = BaseUtils.getBrowserType(WebDriverConfigInfo.getInstance().getDefaultBrowser());
+            DriverBuilder.getInstance()
+                    .setBrowserType(browserType)
+                    .setRemoteWebDriverURL(WebDriverConfigInfo.getInstance().getAzureURL())
+                    .setDriver();
             driver = DriverBuilder.getInstance().getDriver();
             driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         }

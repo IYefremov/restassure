@@ -107,4 +107,23 @@ public class PhaseScreenValidations {
                         .getText().contains("$" + price + " x " + quantity),
                 "Price or quantity hasn't been correct");
     }
+
+    public static void verifyServiceIsPresent(String serviceName, boolean isPresent) {
+        if (isPresent)
+            Assert.assertTrue(PhaseScreenInteractions.isServiceExists(serviceName), "Part hasn't been displayed");
+        else
+            Assert.assertFalse(PhaseScreenInteractions.isServiceExists(serviceName), "Part hasn't been deleted");
+    }
+
+    public static void verifyPartsScreenButtonIsDisplayed(boolean isPresent) {
+        if (isPresent)
+            Assert.assertTrue(new PhasesScreen().getPartsScreenButton().isDisplayed(), "Part hasn't been displayed");
+        else
+            Assert.assertFalse(new PhasesScreen().getPartsScreenButton().isDisplayed(), "Part hasn't been deleted");
+    }
+
+    public static void verifyPhaseScreenIsDisplayed() {
+
+        Assert.assertTrue(new PhasesScreen().getRootElement().isDisplayed(), "Phase screen hasn't been displayed");
+    }
 }

@@ -375,7 +375,7 @@
       ],
       "matrixService": {
         "matrixServiceName": "zayatsPriceMatrixService",
-        "hailMatrixName": "zayatsPriceMatrix",
+        "hailMatrixName": "zayatsPriceMatrix-Labor",
         "vehiclePartData": {
           "vehiclePartName": "Roof",
           "vehiclePartSize": "DIME",
@@ -541,7 +541,7 @@
       ],
       "matrixService": {
         "matrixServiceName": "zayatsPriceMatrixService",
-        "hailMatrixName": "zayatsPriceMatrix",
+        "hailMatrixName": "zayatsPriceMatrix-Labor",
         "vehiclePartData": {
           "vehiclePartName": "Roof",
           "vehiclePartSize": "DIME",

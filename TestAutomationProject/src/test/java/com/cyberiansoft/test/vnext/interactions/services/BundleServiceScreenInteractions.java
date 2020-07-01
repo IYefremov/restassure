@@ -6,7 +6,7 @@ import com.cyberiansoft.test.vnext.screens.VNextCustomKeyboard;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.BundleServiceScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
-public class BundleServiceScreenInteractrions {
+public class BundleServiceScreenInteractions {
 
     public static void selectService(String serviceName) {
         BundleServiceScreen bundleServiceScreen = new BundleServiceScreen();
@@ -23,11 +23,12 @@ public class BundleServiceScreenInteractrions {
         WaitUtils.click(bundleServiceScreen.getBundlePriceInput());
         BaseUtils.waitABit(500);
         VNextCustomKeyboard keyboard = new VNextCustomKeyboard(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        keyboard.clearFieldValue("1000");
         keyboard.typeValue(bundlePrice);
         keyboard.clickKeyboardDoneButton();
     }
 
-    public static  String getBundleServiceSelectedAmount() {
+    public static String getBundleServiceSelectedAmount() {
         BundleServiceScreen bundleServiceScreen = new BundleServiceScreen();
         WaitUtils.waitUntilElementIsClickable(bundleServiceScreen.getSelectedServicesAmount());
         return bundleServiceScreen.getSelectedServicesAmount().getText().replace("$", "").trim();

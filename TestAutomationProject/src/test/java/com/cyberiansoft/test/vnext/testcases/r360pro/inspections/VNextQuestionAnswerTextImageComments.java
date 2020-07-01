@@ -394,9 +394,11 @@ public class VNextQuestionAnswerTextImageComments extends BaseTestClass {
         VNextAPIHelper.updateEmployeeRoleSettings(MonitorRole.MANAGER, roleSettingsDTO);
 
         WizardScreenSteps.saveAction();
+        SearchSteps.searchByText("");
         ScreenNavigationSteps.pressBackButton();
 
         HomeScreenSteps.openMonitor();
+        SearchSteps.searchByText(workOrderId);
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
 

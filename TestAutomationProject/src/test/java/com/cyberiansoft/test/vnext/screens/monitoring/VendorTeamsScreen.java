@@ -10,15 +10,15 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 @Getter
-public class SelectTechnicianScreen extends MonitorScreen {
+public class VendorTeamsScreen extends MonitorScreen {
 
-    @FindBy(xpath = "//div[@class='pages']/div[contains(@data-page,'tech')]")
+    @FindBy(xpath = "//div[@class='pages']/div[@data-page='vendor-teams']")
     private WebElement rootElement;
 
-    @FindBy(xpath = "//div[contains(@data-autotests-id,'tech')]/div")
-    private List<ListElement> techniciansRecordsList;
+    @FindBy(xpath = "//div[@data-autotests-id='vendor-teams']/div")
+    private List<ListElement> teamsRecordsList;
 
-    public SelectTechnicianScreen() {
+    public VendorTeamsScreen() {
         PageFactory.initElements(new FiledDecorator(webDriver), this);
     }
 }

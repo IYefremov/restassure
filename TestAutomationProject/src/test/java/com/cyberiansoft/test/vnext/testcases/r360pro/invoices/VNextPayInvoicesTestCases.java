@@ -603,6 +603,10 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextPayPOROScreen poroScreen = new VNextPayPOROScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         poroScreen.setPaymentPOROValue(paymentPOROValue);
         poroScreen.payForInvoice();
+        InvoiceSteps.waitInvoicesScreenLoaded();
+        ScreenNavigationSteps.pressBackButton();
+        HomeScreenSteps.waitUntilQueueMessageInvisible();
+        HomeScreenSteps.openInvoices();
         InvoicesScreenValidations.validateInvoiceHasPaymentIcon(invoiceNumber, true);
         ScreenNavigationSteps.pressBackButton();
     }

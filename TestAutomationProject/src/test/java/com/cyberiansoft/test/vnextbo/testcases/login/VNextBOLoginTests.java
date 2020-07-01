@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.testcases.login;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.core.BrowserType;
+import com.cyberiansoft.test.core.WebDriverConfigInfo;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOHomePageData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -39,14 +40,17 @@ public class VNextBOLoginTests extends BaseTestCase {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getLoginTD();
         userName = VNextBOConfigInfo.getInstance().getVNextBONadaTestMail();
         userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
-        browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
+        browserType = BaseUtils.getBrowserType(WebDriverConfigInfo.getInstance().getDefaultBrowser());
     }
 
     @BeforeMethod
     public void restart() {
         if (browserType.getBrowserTypeString().equals(BrowserType.FIREFOX.getBrowserTypeString())) {
-            browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
-            DriverBuilder.getInstance().setDriver(browserType);
+            browserType = BaseUtils.getBrowserType(WebDriverConfigInfo.getInstance().getDefaultBrowser());
+            DriverBuilder.getInstance()
+                    .setBrowserType(browserType)
+                    .setRemoteWebDriverURL(WebDriverConfigInfo.getInstance().getAzureURL())
+                    .setDriver();
         }
         webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
     }
@@ -147,7 +151,10 @@ public class VNextBOLoginTests extends BaseTestCase {
         final String url = Utils.getUrl();
         Utils.closeWindows();
         browserType = BaseUtils.getBrowserType(BrowserType.FIREFOX.getBrowserTypeString());
-        DriverBuilder.getInstance().setDriver(browserType);
+        DriverBuilder.getInstance()
+                .setBrowserType(browserType)
+                .setRemoteWebDriverURL(WebDriverConfigInfo.getInstance().getAzureURL())
+                .setDriver();
         webdriverGotoWebPage(url);
         Assert.assertTrue(VNextBOLoginValidations.isLoginFormDisplayed(),
                 "The login page hasn't been displayed");

@@ -44,6 +44,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
 
         HomeScreenSteps.openInspections();
         InspectionSteps.switchToTeamInspections();
+        SearchSteps.textSearchTeam(inspectionId);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.setNoteText(noteText);
@@ -74,6 +75,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
 
         BaseUtils.waitABit(15000);
         InspectionSteps.switchToTeamInspections();
+        SearchSteps.textSearchTeam(inspectionId);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesValidations.verifyNoteIsPresent(myInspectionNote);
@@ -103,6 +105,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         NotesSteps.addPhotoFromCamera();
         NotesValidations.verifyPicturesPresent();
         ScreenNavigationSteps.pressBackButton();
+        BaseUtils.waitABit(15000);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesValidations.verifyNoteIsPresent(noteText);
@@ -125,6 +128,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
 
         HomeScreenSteps.openInspections();
         InspectionSteps.switchToTeamInspections();
+        SearchSteps.textSearchTeam(inspectionId);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.setNoteText(noteText);
@@ -132,6 +136,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         NotesSteps.addQuickNote(quickNoteText2);
         NotesValidations.verifyNoteIsPresent(noteText + '\n' + quickNoteText1 + '\n' + quickNoteText2);
         ScreenNavigationSteps.pressHardwareBackButton();
+        BaseUtils.waitABit(10000);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesValidations.verifyNoteIsPresent(noteText + '\n' + quickNoteText1 + '\n' + quickNoteText2);
@@ -167,6 +172,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
 
         HomeScreenSteps.openInspections();
         InspectionSteps.switchToTeamInspections();
+        SearchSteps.textSearchTeam(inspectionId);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.setNoteText(noteText);
@@ -198,6 +204,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
 
         HomeScreenSteps.openInspections();
         InspectionSteps.switchToTeamInspections();
+        SearchSteps.textSearchTeam(inspectionId);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.setNoteText(noteText);
@@ -223,11 +230,13 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
 
         HomeScreenSteps.openInspections();
         InspectionSteps.switchToTeamInspections();
+        SearchSteps.textSearchTeam(inspectionId);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.setNoteText(noteText);
         resultNoteText = noteText + "\n" + NotesSteps.addQuickNotesFromListByCount(5);
         ScreenNavigationSteps.pressHardwareBackButton();
+        BaseUtils.waitABit(15000);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesValidations.verifyNoteIsPresent(resultNoteText.trim());

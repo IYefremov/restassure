@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.core.BrowserType;
+import com.cyberiansoft.test.core.WebDriverConfigInfo;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.google.common.base.Function;
 import org.awaitility.core.ConditionTimeoutException;
@@ -70,7 +70,7 @@ public abstract class BaseWebPage {
     }
 
 	public String getBrowserType() {
-        browserType = BaseUtils.getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser());
+        browserType = BaseUtils.getBrowserType(WebDriverConfigInfo.getInstance().getDefaultBrowser());
         return DriverBuilder.getInstance().getBrowser();
 	}
 
