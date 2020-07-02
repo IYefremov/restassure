@@ -49,4 +49,10 @@ public class ServiceDetailsValidations {
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
         WaitUtils.elementShouldBeVisible(serviceDetailsScreen.getRootElement(), true);
     }
+
+    public static void verifyServiceDetailsPageIsOpened() {
+        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+        Assert.assertTrue(serviceDetailsScreen.getRootElement().isDisplayed(),
+                "Service details screen hasn't been displayed");
+    }
 }

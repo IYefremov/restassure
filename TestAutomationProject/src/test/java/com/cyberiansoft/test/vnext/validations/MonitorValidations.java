@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.validations;
 
 import com.cyberiansoft.test.vnext.dto.RepairOrderDto;
+import com.cyberiansoft.test.vnext.enums.RepairOrderBackGroundColors;
 import com.cyberiansoft.test.vnext.enums.RepairOrderFlag;
 import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -13,6 +14,14 @@ public class MonitorValidations {
         Assert.assertEquals(
                 repairOrderScreen.getRepairOrderElement(workOrderId).getRepairOrderFlag(),
                 repairOrderFlag);
+    }
+
+    public static void verifyOrderBackGroundColor(String workOrderId, RepairOrderBackGroundColors repairOrderBackGroundColor) {
+
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        Assert.assertEquals(
+                repairOrderScreen.getRepairOrderElement(workOrderId).getRootElement().getCssValue("background-color"),
+                repairOrderBackGroundColor.getBackGroundColor());
     }
 
     public static void verifyRepairOrderValues(String repairOrderId, RepairOrderDto expectedRoValues) {

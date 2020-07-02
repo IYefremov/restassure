@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.steps.monitoring;
 
+import com.cyberiansoft.test.baseutils.ConditionWaiter;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.ServiceTechnician;
 import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
@@ -124,5 +125,19 @@ public class PhaseScreenSteps {
         MenuSteps.selectMenuItem(MenuItems.ASSIGN_TECH);
         SelectTechnicianScreenSteps.selectTechnician("1111 2222");
         TopScreenPanelSteps.saveChanges();
+    }
+
+    public static void reopenOrderPhaseScreen() {
+
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+        TopScreenPanelSteps.saveChanges();
+        MonitorSteps.tapOnFirstOrder();
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+    }
+
+    public static void waitUntilPhaseScreenIsLoaded() {
+
+        ConditionWaiter.create(__ -> new PhasesScreen().getRootElement().isDisplayed()).execute();
+        ConditionWaiter.create(__ -> new PhasesScreen().getPhaseListElements().size() > 0).execute();
     }
 }

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.steps.services;
 
+import com.cyberiansoft.test.baseutils.ConditionWaiter;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
 import com.cyberiansoft.test.vnext.interactions.services.ServiceDetailsInteractions;
@@ -7,7 +8,9 @@ import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.NotesSteps;
 import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
+import com.cyberiansoft.test.vnext.steps.commonobjects.TopScreenPanelSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import org.openqa.selenium.By;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -105,5 +108,18 @@ public class ServiceDetailsScreenSteps {
 
         WaitUtils.click(new VNextServiceDetailsScreen().getPartServiceInfoTitle());
         ScreenNavigationSteps.acceptScreen();
+    }
+
+    public static void waitUntilScreenIsLoaded() {
+
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+        ConditionWaiter.create(__ -> new VNextServiceDetailsScreen().getRootElement().isDisplayed()).execute();
+        ConditionWaiter.create(__ -> new VNextServiceDetailsScreen().getServiceDetailsPrice().isDisplayed()).execute();
+    }
+
+    public static void saveDetailsChanges() {
+
+        TopScreenPanelSteps.saveChanges();
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 }

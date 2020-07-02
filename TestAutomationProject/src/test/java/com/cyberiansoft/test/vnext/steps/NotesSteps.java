@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.ConditionWaiter;
 import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.notes.NoteListMenuScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.VNextRepairOrderNoteScreen;
@@ -107,5 +108,11 @@ public class NotesSteps {
             NotesSteps.addQuickNote(notesText);
         });
         return stringBuilder.toString();
+    }
+
+    public static void waitUntilNotesListScreenIsLoaded() {
+
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+        ConditionWaiter.create(__ -> new NoteListMenuScreen().getAddNewNoteButton().isDisplayed()).execute();
     }
 }

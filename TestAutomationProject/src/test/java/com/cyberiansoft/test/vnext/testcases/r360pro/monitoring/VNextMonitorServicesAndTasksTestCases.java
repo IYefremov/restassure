@@ -24,7 +24,6 @@ import com.cyberiansoft.test.vnext.steps.services.BundleServiceSteps;
 import com.cyberiansoft.test.vnext.steps.services.LaborServiceSteps;
 import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.validations.HomeScreenValidation;
 import com.cyberiansoft.test.vnext.validations.NotesValidations;
 import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
@@ -32,7 +31,6 @@ import com.cyberiansoft.test.vnext.validations.monitor.SelectStatusScreenValidat
 import com.cyberiansoft.test.vnext.validations.monitor.SelectTechnicianScreenValidations;
 import com.cyberiansoft.test.vnext.validations.monitor.TaskDetailsScreenValidations;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.By;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -117,7 +115,7 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         SelectStatusScreenValidations.verifySelectStatusScreenIsOpened();
         SelectStatusScreenSteps.selectStatus(ServiceOrTaskStatus.ACTIVE);
         PhaseScreenValidations.validateServiceStatus(serviceData);
-        reopenOrderPhaseScreen();
+        PhaseScreenSteps.reopenOrderPhaseScreen();
         PhaseScreenInteractions.openTaskForEdit(serviceData);
         TaskDetailsScreenSteps.changeVendorTeam("01_TimeRep_team");
         SelectTechnicianScreenValidations.verifySelectTechnicianScreenIsOpened();
@@ -161,7 +159,7 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         SelectTaskScreenSteps.selectTestManualTask();
         TaskDetailsScreenSteps.changeTechnician("1111 2222");
         updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, false, true, false);
-        reopenOrderPhaseScreen();
+        PhaseScreenSteps.reopenOrderPhaseScreen();
         ServiceData serviceData = monitoringData.getOrderPhasesDto().get(0).getPhaseServices().get(0).getMonitorService();
         PhaseScreenSteps.startService(serviceData);
         PhaseScreenSteps.completeService(serviceData);
@@ -222,22 +220,22 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         TopScreenPanelSteps.saveChanges();
         ServiceData serviceData = monitoringData.getOrderPhasesDto().get(0).getPhaseServices().get(0).getMonitorService();
         PhaseScreenValidations.validateServicePresent(serviceData, true);
-        reopenOrderPhaseScreen();
+        PhaseScreenSteps.reopenOrderPhaseScreen();
         PhaseScreenSteps.deleteService(serviceData);
-        reopenOrderPhaseScreen();
+        PhaseScreenSteps.reopenOrderPhaseScreen();
         BaseUtils.waitABit(10000);
         PhaseScreenValidations.validateServicePresent(serviceData, false);
         PhaseScreenSteps.addServices();
         AvailableServicesScreenSteps.clickAddServiceButton(workOrderData.getDamageData().getMoneyServices().get(0).getServiceName());
         TopScreenPanelSteps.saveChanges();
         updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, false, true, false);
-        reopenOrderPhaseScreen();
+        PhaseScreenSteps.reopenOrderPhaseScreen();
         PhaseScreenValidations.verifyPlusButtonIsDisplayed(false);
         PhaseScreenInteractions.openServiceDetails(PhaseScreenInteractions.getServiceElements(serviceData.getServiceName()));
         ServiceDetailsScreenSteps.changeServicePrice("4");
         ServiceDetailsScreenSteps.changeServiceQuantity("8");
         TopScreenPanelSteps.saveChanges();
-        reopenOrderPhaseScreen();
+        PhaseScreenSteps.reopenOrderPhaseScreen();
         //TODO: Below verification fails due to the bug 133519
         PhaseScreenValidations.verifyServicePriceAndQuantityAreCorrect(serviceData.getServiceName(), "4.00", "8");
         TopScreenPanelSteps.saveChanges();
@@ -284,7 +282,7 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         TopScreenPanelSteps.goToThePreviousScreen();
     }
 
-    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyInspectorCanCanNotAddDeleteEditServicesDependsOnBoSettings(String rowID, String description, JSONObject testData) throws IOException {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
@@ -314,22 +312,22 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         TopScreenPanelSteps.saveChanges();
         ServiceData serviceData = monitoringData.getOrderPhasesDto().get(0).getPhaseServices().get(0).getMonitorService();
         PhaseScreenValidations.validateServicePresent(serviceData, true);
-        reopenOrderPhaseScreen();
+        PhaseScreenSteps.reopenOrderPhaseScreen();
         PhaseScreenSteps.deleteService(serviceData);
-        reopenOrderPhaseScreen();
+        PhaseScreenSteps.reopenOrderPhaseScreen();
         BaseUtils.waitABit(10000);
         PhaseScreenValidations.validateServicePresent(serviceData, false);
         PhaseScreenSteps.addServices();
         AvailableServicesScreenSteps.clickAddServiceButton(workOrderData.getDamageData().getMoneyServices().get(0).getServiceName());
         TopScreenPanelSteps.saveChanges();
         updateEmployeeRoleSettings(MonitorRole.INSPECTOR, false, true, false);
-        reopenOrderPhaseScreen();
+        PhaseScreenSteps.reopenOrderPhaseScreen();
         PhaseScreenValidations.verifyPlusButtonIsDisplayed(false);
         PhaseScreenInteractions.openServiceDetails(PhaseScreenInteractions.getServiceElements(serviceData.getServiceName()));
         ServiceDetailsScreenSteps.changeServicePrice("4");
         ServiceDetailsScreenSteps.changeServiceQuantity("8");
         TopScreenPanelSteps.saveChanges();
-        reopenOrderPhaseScreen();
+        PhaseScreenSteps.reopenOrderPhaseScreen();
         //TODO: Below verification fails due to the bug 133519
         PhaseScreenValidations.verifyServicePriceAndQuantityAreCorrect(serviceData.getServiceName(), "4.00", "8");
         TopScreenPanelSteps.saveChanges();
@@ -368,22 +366,22 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         TopScreenPanelSteps.saveChanges();
         ServiceData serviceData = monitoringData.getOrderPhasesDto().get(0).getPhaseServices().get(0).getMonitorService();
         PhaseScreenValidations.validateServicePresent(serviceData, true);
-        reopenOrderPhaseScreen();
+        PhaseScreenSteps.reopenOrderPhaseScreen();
         PhaseScreenSteps.deleteService(serviceData);
-        reopenOrderPhaseScreen();
+        PhaseScreenSteps.reopenOrderPhaseScreen();
         BaseUtils.waitABit(10000);
         PhaseScreenValidations.validateServicePresent(serviceData, false);
         PhaseScreenSteps.addServices();
         AvailableServicesScreenSteps.clickAddServiceButton(workOrderData.getDamageData().getMoneyServices().get(0).getServiceName());
         TopScreenPanelSteps.saveChanges();
         updateEmployeeRoleSettings(MonitorRole.MANAGER, false, true, false);
-        reopenOrderPhaseScreen();
+        PhaseScreenSteps.reopenOrderPhaseScreen();
         PhaseScreenValidations.verifyPlusButtonIsDisplayed(false);
         PhaseScreenInteractions.openServiceDetails(PhaseScreenInteractions.getServiceElements(serviceData.getServiceName()));
         ServiceDetailsScreenSteps.changeServicePrice("4");
         ServiceDetailsScreenSteps.changeServiceQuantity("8");
         TopScreenPanelSteps.saveChanges();
-        reopenOrderPhaseScreen();
+        PhaseScreenSteps.reopenOrderPhaseScreen();
         //TODO: Below verification fails due to the bug 133519
         PhaseScreenValidations.verifyServicePriceAndQuantityAreCorrect(serviceData.getServiceName(), "4.00", "8");
         TopScreenPanelSteps.saveChanges();
@@ -440,7 +438,7 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         EditOrderSteps.switchToParts();
         PhaseScreenValidations.verifyServiceIsPresent(parName, true);
         PhaseScreenSteps.deleteService(parName);
-        reopenOrderPhaseScreen();
+        PhaseScreenSteps.reopenOrderPhaseScreen();
         PhaseScreenValidations.verifyPartsScreenButtonIsDisplayed(false);
 
         String bundleServiceName = workOrderData.getBundleService().getBundleServiceName();
@@ -500,7 +498,7 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         LaborServiceSteps.addPartService(partServiceData);
 
         updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, false, true, false);
-        reopenOrderPhaseScreen();
+        PhaseScreenSteps.reopenOrderPhaseScreen();
 
         EditOrderSteps.switchToParts();
         //TODO: below step fails because there is no RECEIVED status on Select status screen
@@ -518,14 +516,6 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         roleSettings.setMonitorCanEditService(canEdit);
         roleSettings.setMonitorCanRemoveService(canRemove);
         apiHelper.updateEmployeeRoleSettings(role, roleSettings);
-    }
-
-    private void reopenOrderPhaseScreen() {
-
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
-        TopScreenPanelSteps.saveChanges();
-        MonitorSteps.tapOnFirstOrder();
-        MenuSteps.selectMenuItem(MenuItems.EDIT);
     }
 
     private void navigateToHomeScreenAndReturnBackToMonitor() {

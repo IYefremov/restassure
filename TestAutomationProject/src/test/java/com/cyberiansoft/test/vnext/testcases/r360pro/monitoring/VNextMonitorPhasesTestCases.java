@@ -19,6 +19,7 @@ import com.cyberiansoft.test.vnext.steps.monitoring.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
+import com.cyberiansoft.test.vnext.validations.monitor.SelectStatusScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -33,6 +34,7 @@ public class VNextMonitorPhasesTestCases extends BaseTestClass {
     VNextAPIHelper apiHelper = new VNextAPIHelper();
     WorkOrderData workOrderData;
     ServiceData serviceData;
+    String workOrderId;
     private static final String PRECONDITIONS_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/r360pro/monitoring/monitoring-phases-testcases-base-data.json";
 
     @BeforeClass(description = "Monitor phases test cases")
@@ -49,7 +51,7 @@ public class VNextMonitorPhasesTestCases extends BaseTestClass {
         AvailableServicesScreenSteps.selectServiceGroup(workOrderData.getDamageData().getDamageGroupName());
         AvailableServicesScreenSteps.selectService(serviceData.getServiceName());
         ScreenNavigationSteps.pressBackButton();
-        final String workOrderId = WorkOrderSteps.saveWorkOrder();
+        workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
 
         HomeScreenSteps.openMonitor();
@@ -103,6 +105,22 @@ public class VNextMonitorPhasesTestCases extends BaseTestClass {
         MonitorSteps.tapOnFirstOrder();
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         PhaseScreenValidations.validateServiceTechnician(serviceData);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCanReturnFromSelectStatusScreen(String rowID,
+                                                              String description, JSONObject testData) throws IOException {
+        PhaseScreenSteps.reopenOrderPhaseScreen();
+        EditOrderSteps.openPhaseMenu(workOrderData.getMonitoring().getOrderPhaseDto());
+        MenuSteps.selectMenuItem(MenuItems.START);
+        GeneralSteps.confirmDialog();
+        EditOrderSteps.openPhaseMenu(workOrderData.getMonitoring().getOrderPhaseDto());
+        MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
+        SelectStatusScreenValidations.verifySelectStatusScreenIsOpened();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        PhaseScreenSteps.waitUntilPhaseScreenIsLoaded();
+        PhaseScreenValidations.verifyPhaseScreenIsDisplayed();
+        PhaseScreenSteps.reopenOrderPhaseScreen();
     }
 
     private void updateEmployeeRoleSettings(MonitorRole role, boolean canAdd, boolean canEdit, boolean canRemove) throws IOException {
