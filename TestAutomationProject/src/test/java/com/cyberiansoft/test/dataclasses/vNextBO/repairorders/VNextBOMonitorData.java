@@ -307,6 +307,9 @@ public class VNextBOMonitorData {
     @JsonProperty("informationFields")
     private String[] informationFields;
 
+    @JsonProperty("icons")
+    private String[] icons;
+
     @JsonProperty("servicePhaseHeaders")
     private String[] servicePhaseHeaders;
 

@@ -480,7 +480,7 @@
           "testCaseTitle": "User can search by \"Days in Process\" (\"Between\")"
         }
       ],
-      "daysInProcess": "Between",
+      "daysInProcess": "BETWEEN",
       "daysNumStart": "10",
       "daysNum": "25"
     }

@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class VNextBOLogInfoDialogNew extends VNextBOBaseWebPage {
 
-    @FindBy(css = "div[style='display: block;'] li[data-bind='click: servicesLog']")
+    @FindBy(xpath = "//div[contains(@id, 'log') and contains(@style, 'block')]//li[contains(@data-bind, 'services')]")
     private WebElement servicesTab;
 
     @FindBy(xpath = "(//div[@id='repairOrder_servicesLog']//div[@data-bind='text: serviceName'])[1]")
@@ -26,7 +26,7 @@ public class VNextBOLogInfoDialogNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "(//div[@id='repairOrder_servicesLog']//div[@data-bind='text: notes'])[1]")
     private WebElement firstRecordNote;
 
-    @FindBy(xpath = "//div[@id='repair-order-audit-log-modal' and @style='display: block;']//button[@class='close']")
+    @FindBy(xpath = "//div[contains(@id, 'log') and contains(@style, 'block')]//button[@class='close']")
     private WebElement closeDialogButton;
 
     public VNextBOLogInfoDialogNew() {

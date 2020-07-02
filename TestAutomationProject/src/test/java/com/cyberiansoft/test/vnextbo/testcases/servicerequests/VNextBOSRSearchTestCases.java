@@ -20,8 +20,6 @@ import com.cyberiansoft.test.vnextbo.steps.servicerequests.VNextBOSRTableSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOReactSearchPanelValidations;
 import com.cyberiansoft.test.vnextbo.validations.servicerequests.VNextBOSRTableValidations;
-import com.cyberiansoft.test.vnextbo.validations.servicerequests.details.VNextBOSRGeneralInfoValidations;
-import com.cyberiansoft.test.vnextbo.validations.servicerequests.details.VNextBOSRVehicleInfoValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -126,8 +124,7 @@ public class VNextBOSRSearchTestCases extends BaseTestCase {
 
         final String vinNum = data.getSearchData().getHasThisText();
         VNextBOReactSearchPanelSteps.searchByText(vinNum);
-        VNextBOSRTableSteps.openSRDetailsPage(0);
-        VNextBOSRVehicleInfoValidations.verifyVinIsDisplayed(vinNum);
+        VNextBOSRTableValidations.verifyEitherNotificationOrVINIsDisplayed(vinNum);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -136,8 +133,7 @@ public class VNextBOSRSearchTestCases extends BaseTestCase {
 
         final String roNum = data.getSearchData().getHasThisText();
         VNextBOReactSearchPanelSteps.searchByText(roNum);
-        VNextBOSRTableSteps.openSRDetailsPage(0);
-        VNextBOSRGeneralInfoValidations.verifyRoIsDisplayed(roNum);
+        VNextBOSRTableValidations.verifyEitherNotificationOrROIsDisplayed(roNum);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -160,6 +156,7 @@ public class VNextBOSRSearchTestCases extends BaseTestCase {
                 .forEach(sr -> VNextBOSRTableValidations.verifySRContainingValueIsDisplayed(sr, srNum));
     }
 
+    //todo bug https://cyb.tpondemand.com/restui/board.aspx?#page=bug/134873
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanDeleteSearchOptions(String rowID, String description, JSONObject testData) {
         VNextBOSRData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSRData.class);

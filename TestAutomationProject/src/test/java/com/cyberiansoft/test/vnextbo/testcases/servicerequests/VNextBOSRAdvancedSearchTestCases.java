@@ -239,7 +239,6 @@ public class VNextBOSRAdvancedSearchTestCases extends BaseTestCase {
         VNextBOSRTableValidations.verifyWoDocumentsListIsEmpty();
     }
 
-    //todo bug https://cyb.tpondemand.com/restui/board.aspx?#page=bug/133535
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchByStatusWorkInProcessNotInvoiced(String rowID, String description, JSONObject testData) {
         VNextBOSRData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSRData.class);
@@ -253,7 +252,7 @@ public class VNextBOSRAdvancedSearchTestCases extends BaseTestCase {
         VNextBOSRTableValidations.verifyWoListContainsDocuments();
         VNextBOSRTableSteps.getUniqueStatusBadgeLettersFields().forEach(badge ->
                 VNextBOSRTableValidations.verifySRIsDisplayed(badge, data.getExpectedValue()));
-        //        VNextBOSRTableValidations.verifyInvoicesDocumentsListIsEmpty(); todo uncomment after bug fix
+                VNextBOSRTableValidations.verifyInvoicesDocumentsListIsEmpty();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -268,7 +267,6 @@ public class VNextBOSRAdvancedSearchTestCases extends BaseTestCase {
         VNextBOSRAdvancedSearchDialogSteps.setStatus(searchData.getStatus());
         VNextBOSRAdvancedSearchDialogSteps.search();
         VNextBOReactSearchPanelValidations.verifyFilterInfoTextIsDisplayed(data.getInfoText());
-//        VNextBOSRTableValidations.verifyInspectionsDocumentsListIsEmpty(); todo uncomment after bug fix
         final String srNumber = VNextBOSRTableSteps.getRandomSR();
         VNextBOHomeWebPageSteps.clickLogo();
         VNextBOHomeWebPageSteps.clickAccessReconProBOLink();

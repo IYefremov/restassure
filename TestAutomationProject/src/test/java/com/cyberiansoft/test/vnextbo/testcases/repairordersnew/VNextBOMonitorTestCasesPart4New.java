@@ -179,7 +179,9 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         VNextBOROWebPageValidationsNew.verifyTechniciansAreCorrectInTheTable(data.getTechnician1());
         VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
         VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+        VNextBORODetailsStepsNew.waitForServiceTechnicianToBeUpdated(data.getServices()[0], data.getTechnician1());
         VNextBORODetailsValidationsNew.verifyServiceTechnicianIsCorrect(data.getServices()[0], data.getTechnician1());
+        VNextBORODetailsStepsNew.waitForServiceTechnicianToBeUpdated(data.getServices()[1], data.getTechnician1());
         VNextBORODetailsValidationsNew.verifyServiceTechnicianIsCorrect(data.getServices()[1], data.getTechnician1());
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
     }
@@ -270,13 +272,25 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
     public void verifyStartedServiceIconDiffersFromNotStarted(String rowID, String description, JSONObject testData) {
 
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        final String arrow = data.getIcons()[0];
+        final String clock = data.getIcons()[1];
+        final String service = data.getService();
+
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+        VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+        VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
         VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
-        VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[0]);
-        VNextBORODetailsValidationsNew.verifyServiceIconIsCorrect(data.getService(), "icon-start-ro text-green");
-        VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[1]);
-        VNextBORODetailsValidationsNew.verifyServiceIconIsCorrect(data.getService(), "icon-start-ro text-green");
-        VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[0]);
-        VNextBORODetailsValidationsNew.verifyServiceIconIsCorrect("autotesthfBekUs", "icon-clock text-green");
+        VNextBORODetailsStepsNew.startServiceByServiceNameIfNeeded(data.getPhase(), service);
+        VNextBORODetailsStepsNew.setServiceStatusIfNeeded(service, data.getServiceStatuses()[0]);
+        VNextBORODetailsStepsNew.waitForServiceIconToBeDisplayed(service, arrow);
+        VNextBORODetailsValidationsNew.verifyServiceIconIsCorrect(service, arrow);
+        VNextBORODetailsStepsNew.setServiceStatusIfNeeded(service, data.getServiceStatuses()[1]);
+        VNextBORODetailsStepsNew.waitForServiceIconToBeDisplayed(service, arrow);
+        VNextBORODetailsValidationsNew.verifyServiceIconIsCorrect(service, arrow);
+        VNextBORODetailsStepsNew.resetStartDateIfNeededByServiceName(data.getPhase(), service);
+        VNextBORODetailsStepsNew.waitForServiceIconToBeDisplayed(service, clock);
+        VNextBORODetailsValidationsNew.verifyServiceIconIsCorrect(service, clock);
+        VNextBORODetailsStepsNew.startServiceByServiceName(data.getPhase(), service);
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
     }
 

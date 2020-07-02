@@ -7,9 +7,11 @@ import com.cyberiansoft.test.vnext.screens.VNextCustomKeyboard;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleModelsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclemakesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.utils.ControlUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import org.openqa.selenium.*;
+import com.cyberiansoft.test.vnext.webelements.VehicleInfoListElement;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -21,13 +23,13 @@ public class VehicleInfoScreenInteractions {
         WaitUtils.collectionSizeIsGreaterThan(vehicleInfoScreen.getDataFieldList(), 0);
         //todo: temporary fix for hide keyboard
         WaitUtils.getGeneralFluentWait().until(driver -> {
-            ControlUtils.setValue(vehicleInfoScreen
-                            .getDataFieldList()
-                            .stream()
-                            .filter(element -> element.getAttribute("name").contains(dataField.getValue()))
-                            .findFirst()
-                            .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + dataField.getValue())),
-                    value);
+            vehicleInfoScreen
+                    .getDataFieldList()
+                    .stream()
+                    .filter(element -> element.getFieldName().contains(dataField.getValue()))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + dataField.getValue()))
+                    .setValue(value);
             return true;
         });
     }
@@ -35,13 +37,13 @@ public class VehicleInfoScreenInteractions {
     public static String getDataFieldValue(VehicleDataField dataField) {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.collectionSizeIsGreaterThan(vehicleInfoScreen.getDataFieldList(), 0);
-        return WaitUtils.getGeneralFluentWait().until(driver -> ControlUtils.getElementValue(vehicleInfoScreen
+        return WaitUtils.getGeneralFluentWait().until(driver -> vehicleInfoScreen
                 .getDataFieldList()
                 .stream()
-                .filter(element -> element.getAttribute("name").contains(dataField.getValue()))
+                .filter(element -> element.getFieldName().contains(dataField.getValue()))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + dataField.getValue()))
-        ));
+                .getFieldValue());
     }
 
     public static void selectColor(String color) {
@@ -51,18 +53,22 @@ public class VehicleInfoScreenInteractions {
         WaitUtils.click(By.xpath("//*[@action='select-item' and @data-id='" + color + "']"));
     }
 
-    public static void selectMakeAndModel(String vehicleMake, String vehicleModel) {
-        VehicleInfoScreenInteractions.waitPageLoaded();
+    public static void clickColorCell() {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        vehicleInfoScreen
-                .getDataFieldList()
-                .stream()
-                .filter(element -> element.getAttribute("name").contains(VehicleDataField.VIN.getValue()))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + VehicleDataField.VIN.getValue())).sendKeys(Keys.TAB);
-        WaitUtils.click(vehicleInfoScreen.getMakeSectionExpandButton());
+        vehicleInfoScreen.getColorSectionExpandButton().click();
+    }
+
+    public static void switchToPaintCodesMode() {
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        vehicleInfoScreen.getPaintCodesModeTab().click();
+    }
+
+    public static void selectMakeAndModel(String vehicleMake, String vehicleModel) {
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        vehicleInfoScreen.getMakeSectionExpandButton().click();
         VNextVehiclemakesScreen vehicleMakesScreen = new VNextVehiclemakesScreen();
-        VNextVehicleModelsScreen vehicleModelsScreen = vehicleMakesScreen.selectVehicleMake(vehicleMake);
+        vehicleMakesScreen.selectVehicleMake(vehicleMake);
+        VNextVehicleModelsScreen vehicleModelsScreen = new VNextVehicleModelsScreen();
         vehicleModelsScreen.selectVehicleModel(vehicleModel);
     }
 
@@ -103,16 +109,15 @@ public class VehicleInfoScreenInteractions {
 
     public static void setMileage(String milage) {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        WebElement milageField = vehicleInfoScreen
+        VehicleInfoListElement milageField = vehicleInfoScreen
                 .getDataFieldList()
                 .stream()
-                .filter(element -> element.getAttribute("name").contains(VehicleDataField.MILAGE.getValue()))
+                .filter(element -> element.getFieldName().contains(VehicleDataField.MILAGE.getValue()))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + VehicleDataField.MILAGE.getValue()));
-
         milageField.click();
         VNextCustomKeyboard keyboard = new VNextCustomKeyboard(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        keyboard.setFieldValue(milageField.getAttribute("value"), milage);
+        keyboard.setFieldValue(milageField.getFieldValue(), milage);
     }
 
     public static void openTechnicianList() {
@@ -122,7 +127,7 @@ public class VehicleInfoScreenInteractions {
                     vehicleInfoScreen
                             .getDataFieldList()
                             .stream()
-                            .filter(element -> element.getAttribute("name").contains(VehicleDataField.VEHICLE_TECH.getValue()))
+                            .filter(element -> element.getFieldName().contains(VehicleDataField.VEHICLE_TECH.getValue()))
                             .findFirst()
                             .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + VehicleDataField.VEHICLE_TECH.getValue())).click();
                     return true;
@@ -132,7 +137,8 @@ public class VehicleInfoScreenInteractions {
 
     public static void waitPageLoaded() {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getVehicleFieldsList(), true);
+        WaitUtils.waitUntilElementIsClickable(vehicleInfoScreen.getVehicleFieldsList());
         WaitUtils.collectionSizeIsGreaterThan(vehicleInfoScreen.getDataFieldList(), 0);
     }
 }

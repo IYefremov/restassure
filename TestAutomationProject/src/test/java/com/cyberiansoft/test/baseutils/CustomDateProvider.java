@@ -71,11 +71,10 @@ public class CustomDateProvider {
     }
 
     public static String getCurrentDateInFullFormat(boolean... isLocalized) {
-        if (isLocalized[0]) {
-            return getFormattedLocalizedDate(DateUtils.FULL_DATE_FORMAT);
-        } else {
-            return getCurrentDate().format(DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat()));
-        }
+        final DateUtils format = DateUtils.FULL_DATE_FORMAT;
+        return isLocalized[0] ?
+                getFormattedLocalizedDate(getCurrentDateLocalized(), format) :
+                getCurrentDate().format(DateTimeFormatter.ofPattern(format.getFormat()));
     }
 
     public static String getLocalizedCurrentDateInTheShortestFormat() {
@@ -165,12 +164,12 @@ public class CustomDateProvider {
     public static String getDateMinusDays(String date, int days) {
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat());
         final LocalDate localDate = LocalDate.parse(date, formatter).minusDays(days);
-        return CustomDateProvider.getFormattedLocalizedDate(localDate, DateUtils.FULL_DATE_FORMAT);
+        return getFormattedLocalizedDate(localDate, DateUtils.FULL_DATE_FORMAT);
     }
 
     public static String getDatePlusDays(String date, int days) {
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat());
         final LocalDate localDate = LocalDate.parse(date, formatter).plusDays(days);
-        return CustomDateProvider.getFormattedLocalizedDate(localDate, DateUtils.FULL_DATE_FORMAT);
+        return getFormattedLocalizedDate(localDate, DateUtils.FULL_DATE_FORMAT);
     }
 }

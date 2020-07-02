@@ -90,6 +90,8 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
         clickWizardMenuSaveButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickDraftButton();
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        WaitUtils.elementShouldBeVisible(inspectionsScreen.getInspectionsScreen(), true, 90);
     }
 
     public void saveInspectionViaMenu() {
@@ -101,7 +103,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
         WaitUtils.elementShouldBeVisible(inspectionsScreen.getInspectionsScreen(), true, 90);
     }
 
-    public VNextWorkOrdersScreen saveWorkOrderViaMenu() {
+    public void saveWorkOrderViaMenu() {
         clickWizardMenuSaveButton();
         if (workOrderType != null)
             if (new WorkOrderTypeData(workOrderType).isCanBeDraft())
@@ -109,14 +111,14 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
         VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
         WaitUtils.elementShouldBeVisible(workOrdersScreen.getRootElement(), true, 90);
         workOrdersScreen.clearSearchField();
-        return workOrdersScreen;
     }
 
-    public VNextWorkOrdersScreen saveWorkOrderAsDraft() {
+    public void saveWorkOrderAsDraft() {
         clickWizardMenuSaveButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickDraftButton();
-        return new VNextWorkOrdersScreen();
+        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
+        WaitUtils.elementShouldBeVisible(workOrdersScreen.getRootElement(), true, 90);
     }
 
     public void clickMenuButton() {

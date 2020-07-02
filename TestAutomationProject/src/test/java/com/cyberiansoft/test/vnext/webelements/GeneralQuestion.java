@@ -25,6 +25,7 @@ public class GeneralQuestion implements IWebElement {
     private String questionNotesIcon = ".//*[contains(@class,'selected-answer-notes ')]";
     private String addedImageLocator = ".//div[@class='image-item']";
     private String hiddenImagesCounterLocator = ".//div[@class='image-item counter-item']";
+    private String selectedAnswerServicesIcon = ".//div[contains(@class, 'selected-answer-services')]";
 
     public GeneralQuestion(WebElement rootElement) {
         this.rootElement = rootElement;
@@ -69,6 +70,10 @@ public class GeneralQuestion implements IWebElement {
 
     public WebElement getSaveButton() {
         return rootElement.findElement(By.xpath(saveMultiAnswerQuestion));
+    }
+
+    public WebElement getSelectedAnswerServicesIcon() {
+        return rootElement.findElement(By.xpath(selectedAnswerServicesIcon));
     }
 
     public WebElement getQuestionCameraElement() {

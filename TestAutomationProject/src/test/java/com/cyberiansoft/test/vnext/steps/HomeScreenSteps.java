@@ -80,6 +80,11 @@ public class HomeScreenSteps {
         WaitUtils.click(homeScreen.getWorkQueue());
     }
 
+    public static void waitUntilQueueMessageInvisible() {
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
+        homeScreen.waitUntilQueueMessageInvisible();
+    }
+
     public static void openUpdateWork() {
         VNextHomeScreen homeScreen = new VNextHomeScreen();
         WaitUtils.click(homeScreen.getMonitorUpdateWork());

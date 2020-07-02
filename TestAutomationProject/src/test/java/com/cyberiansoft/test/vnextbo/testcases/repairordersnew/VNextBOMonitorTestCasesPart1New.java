@@ -238,6 +238,7 @@ public class VNextBOMonitorTestCasesPart1New extends BaseTestCase {
 		VNextBOROPageStepsNew.filterOrdersByDepartment("ALL");
     }
 
+    //todo bug https://cyb.tpondemand.com/restui/board.aspx?#page=bug/132478
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanFilterRObyPhases(String rowID, String description, JSONObject testData) {
 

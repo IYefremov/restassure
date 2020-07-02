@@ -8,6 +8,8 @@ import com.cyberiansoft.test.enums.DateUtils;
 import com.cyberiansoft.test.enums.servicerequests.ServiceRequestStatus;
 import com.cyberiansoft.test.vnextbo.screens.servicerequests.VNextBOSRTable;
 import com.cyberiansoft.test.vnextbo.steps.servicerequests.VNextBOSRTableSteps;
+import com.cyberiansoft.test.vnextbo.validations.servicerequests.details.VNextBOSRGeneralInfoValidations;
+import com.cyberiansoft.test.vnextbo.validations.servicerequests.details.VNextBOSRVehicleInfoValidations;
 import org.testng.Assert;
 
 import java.time.LocalDate;
@@ -231,5 +233,23 @@ public class VNextBOSRTableValidations {
         Assert.assertFalse(Utils.attributeContains(
                 new VNextBOSRTable().getAcceptButtonsList(), "class", "Disabled"),
                 "The 'Accept' buttons are not enabled");
+    }
+
+    public static void verifyEitherNotificationOrROIsDisplayed(String roNum) {
+        if (VNextBOSRTableSteps.getSRListSize() == 0) {
+            verifyNotFoundNotificationIsDisplayed();
+        } else {
+            VNextBOSRTableSteps.openSRDetailsPage(0);
+            VNextBOSRGeneralInfoValidations.verifyRoIsDisplayed(roNum);
+        }
+    }
+
+    public static void verifyEitherNotificationOrVINIsDisplayed(String vinNum) {
+        if (VNextBOSRTableSteps.getSRListSize() == 0) {
+            verifyNotFoundNotificationIsDisplayed();
+        } else {
+            VNextBOSRTableSteps.openSRDetailsPage(0);
+            VNextBOSRVehicleInfoValidations.verifyVinIsDisplayed(vinNum);
+        }
     }
 }

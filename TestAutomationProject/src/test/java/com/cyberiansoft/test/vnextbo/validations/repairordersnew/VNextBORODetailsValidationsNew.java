@@ -138,7 +138,7 @@ public class VNextBORODetailsValidationsNew {
     public static void verifyServiceIsDisplayed(String serviceDescription, boolean shouldBeDisplayed) {
 
         if (shouldBeDisplayed) {
-            ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().serviceDescription(serviceDescription).isDisplayed()).execute();
+            VNextBORODetailsStepsNew.waitForServiceToBeDisplayed(serviceDescription);
             Assert.assertTrue(Utils.isElementDisplayed(new VNextBORODetailsWebPageNew().serviceDescription(serviceDescription)),
                     "Service with description " + serviceDescription + " hasn't been added");
         }
@@ -197,10 +197,8 @@ public class VNextBORODetailsValidationsNew {
     }
 
     public static void verifyServiceTechnicianIsCorrect(String service, String expectedTechnician) {
-
-        ConditionWaiter.create(__ -> Utils.getText(new VNextBORODetailsWebPageNew().serviceTechnicianDropDown(service)).equals(expectedTechnician)).execute();
-        Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().serviceTechnicianDropDown(service)), expectedTechnician,
-                "Technician hasn't been correct");
+        Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().serviceTechnicianDropDown(service)),
+                expectedTechnician, "Technician hasn't been correct");
     }
 
     public static void verifyServiceHelpInfoIsCorrect(String service, String expectedHelpInfo) {
@@ -239,8 +237,6 @@ public class VNextBORODetailsValidationsNew {
     }
 
     public static void verifyServiceIconIsCorrect(String service, String expectedServiceIcon) {
-
-        ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().serviceIcon(service).getAttribute("class").equals(expectedServiceIcon)).execute();
         Assert.assertEquals(new VNextBORODetailsWebPageNew().serviceIcon(service).getAttribute("class"), expectedServiceIcon,
                 "Service icon hasn't been correct");
     }

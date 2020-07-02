@@ -103,4 +103,23 @@ public class QuestionFormValidations {
         Assert.assertTrue(imageQuestion.getAddedImages().size() == 0, "Images hasn't been cleared");
         Assert.assertTrue(!imageQuestion.getClearIcon().isDisplayed(), "Clear icon has been displayed");
     }
+
+    public static void clickSelectedAnswerServicesIcon(String questionName) {
+        QuestionScreen questionScreen = new QuestionScreen();
+        WaitUtils.waitUntilElementIsClickable(questionScreen.getGeneralQuestionByText(questionName).getRootElement());
+        WaitUtils.click(questionScreen.getGeneralQuestionByText(questionName).getSelectedAnswerServicesIcon());
+    }
+
+    public static void verifySelectedAnswerServicesHaveUnfilledServices(String questionName, boolean haveUnfilled) {
+        QuestionScreen questionScreen = new QuestionScreen();
+        WaitUtils.waitUntilElementIsClickable(questionScreen.getGeneralQuestionByText(questionName).getRootElement());
+        if (haveUnfilled)
+            Assert.assertTrue(questionScreen.getGeneralQuestionByText(questionName).
+                    getSelectedAnswerServicesIcon().getAttribute("class").contains("unfillFilled-services"));
+        else
+            Assert.assertFalse(questionScreen.getGeneralQuestionByText(questionName).
+                    getSelectedAnswerServicesIcon().getAttribute("class").contains("unfillFilled-services"));
+
+    }
+
 }

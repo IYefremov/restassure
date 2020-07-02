@@ -13,6 +13,7 @@ import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
+import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
@@ -104,6 +105,8 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         SearchSteps.searchByPhase(expectedOrderInfo.getPhaseName());
         MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
+
+
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -112,6 +115,55 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
                                       String description, JSONObject testData) {
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.IN_PROGRESS_ACTIVE);
         MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testСommonFiltersPhaseStatus(String rowID,
+                                     String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        OrderPhaseDto expectedOrderInfo = workOrderData.getMonitoring().getOrderPhaseDto();
+
+        ScreenNavigationSteps.pressBackButton();
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
+        final String inspectionId = InspectionSteps.saveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.approveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.selectCreateWorkOrder();
+        WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
+        final String workOrderId = WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
+
+        HomeScreenSteps.openMonitor();
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        SearchSteps.searchByPhase(expectedOrderInfo.getPhaseName());
+        MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
+        MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        workOrderData.getMonitoring().getOrderPhasesDto().forEach(orderPhaseDto -> {
+            EditOrderSteps.openPhaseMenu(orderPhaseDto);
+            MenuSteps.selectMenuItem(MenuItems.COMPLETE);
+            GeneralSteps.confirmDialog();
+        });
+        EditOrderSteps.openServiceMenu(workOrderData.getServiceData());
+        MenuSteps.selectMenuItem(MenuItems.START);
+        GeneralSteps.confirmDialog();
+        EditOrderSteps.openServiceMenu(workOrderData.getServiceData());
+        MenuSteps.selectMenuItem(MenuItems.COMPLETE);
+        GeneralSteps.confirmDialog();
+        WizardScreenSteps.saveAction();
+
+        VNextInformationDialog informationDialog = new VNextInformationDialog();
+        informationDialog.clickInformationDialogOKButton();
+        SearchSteps.searchByPhase("Completed");
+        MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
+
+        SearchSteps.clearAllFilters();
+        SearchSteps.searchByText("");
         ScreenNavigationSteps.pressBackButton();
     }
 }

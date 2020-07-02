@@ -4,7 +4,6 @@ import com.cyberiansoft.test.dataclasses.VehicleInfoData;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.utils.ControlUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -39,24 +38,24 @@ public class VehicleInfoScreenValidations {
                 vehicleInfoScreen
                         .getDataFieldList()
                         .stream()
-                        .filter(element -> element.getAttribute("name").contains(dataField.getValue()))
+                        .filter(element -> element.getFieldName().contains(dataField.getValue()))
                         .findFirst()
-                        .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + dataField.getValue())),
+                        .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + dataField.getValue()))
+                        .getElement(),
                 shouldBeVisible);
     }
 
     public static void dataFieldShouldHaveValue(VehicleDataField dataField, String expectedValue) {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        WaitUtils.collectionSizeIsGreaterThan(vehicleInfoScreen.getDataFieldList(), 0);
+        VehicleInfoScreenInteractions.waitPageLoaded();
         WaitUtils.getGeneralFluentWait().until(driver -> {
-                    Assert.assertEquals(
-                            ControlUtils.getElementValue(vehicleInfoScreen
+                    Assert.assertEquals(vehicleInfoScreen
                                     .getDataFieldList()
                                     .stream()
-                                    .filter(element -> element.getAttribute("name").contains(dataField.getValue()))
+                                    .filter(element -> element.getFieldName().contains(dataField.getValue()))
                                     .findFirst()
-                                    .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + dataField.getValue()))), expectedValue
-                    );
+                                    .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + dataField.getValue()))
+                            .getFieldValue(), expectedValue);
                     return true;
                 }
         );
@@ -76,7 +75,6 @@ public class VehicleInfoScreenValidations {
     }
 
     public static void cutomerContextShouldBe(String expectedCustomerContext) {
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.getGeneralFluentWait().until(driver -> {
             Assert.assertEquals(VehicleInfoScreenInteractions.getCustomerContextValue(), expectedCustomerContext);
             return true;
