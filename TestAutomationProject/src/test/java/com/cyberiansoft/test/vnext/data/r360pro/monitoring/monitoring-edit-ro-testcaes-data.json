@@ -111,5 +111,32 @@
         }
       }
     }
+  ],
+  "testVerifyUserCanSetFlagToGreenFoRo": [
+    {
+      "rowID": "testVerifyUserCanSetFlagToGreenFoRo.01",
+      "description": "Test Case 92322: Verify user can set the flag to \"Green\" for the repair order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92322",
+          "testCaseTitle": "Verify user can set the flag to \"Green\" for the repair order"
+        }
+      ]
+    }
+  ],
+  "testVerifyUserCanCloseEditServicePage": [
+    {
+      "rowID": "testVerifyUserCanCloseEditServicePage.01",
+      "description": "Test Case 92365: Verify user can close the service edit page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92365",
+          "testCaseTitle": "Verify user can close the service edit page"
+        }
+      ],
+      "service": {
+        "serviceName": "Expenses_money (AM)"
+      }
+    }
   ]
 }

@@ -34,5 +34,18 @@
         }
       ]
     }
+  ],
+
+  "testVerifyUserCanReturnFromSelectStatusScreen": [
+    {
+      "rowID": "testVerifyUserCanReturnFromSelectStatusScreen.01",
+      "description": "Test Case 92362: User can return from \"Select Status\" page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92362",
+          "testCaseTitle": "User can return from \"Select Status\" page"
+        }
+      ]
+    }
   ]
 }

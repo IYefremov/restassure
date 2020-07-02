@@ -124,6 +124,7 @@ public class PhaseScreenValidations {
 
     public static void verifyPhaseScreenIsDisplayed() {
 
-        Assert.assertTrue(new PhasesScreen().getRootElement().isDisplayed(), "Phase screen hasn't been displayed");
+        PhasesScreen phasesScreen = new PhasesScreen();
+        Assert.assertTrue(phasesScreen.getRootElement().isDisplayed(), "Phase screen hasn't been displayed");
     }
 }

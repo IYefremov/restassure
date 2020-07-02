@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.steps.monitoring;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.ConditionWaiter;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.enums.RepairOrderFlag;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
@@ -102,5 +103,13 @@ public class MonitorSteps {
         MenuSteps.selectMenuItem(MenuItems.START_RO);
         GeneralSteps.confirmDialog();
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+    }
+
+    public static void waitUntilScreenIsOpenedWithOrders() {
+
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+        ConditionWaiter.create(__ -> repairOrderScreen.getRootElement().isDisplayed()).execute();
+        ConditionWaiter.create(__ -> repairOrderScreen.getRepairOrderListElements().size() > 0).execute();
     }
 }

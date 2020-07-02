@@ -92,8 +92,8 @@ public class HomeScreenSteps {
 
     public static void logOut() {
         VNextBaseScreen vNextBaseScreen = new VNextBaseScreen();
-        ConditionWaiter.create(__ -> vNextBaseScreen.getLogoutButton().isDisplayed()).execute();
-        ConditionWaiter.create(__ -> vNextBaseScreen.getLogoutButton().isEnabled()).execute();
+        ConditionWaiter.create(20000, 500, __ -> vNextBaseScreen.getLogoutButton().isDisplayed()).execute();
+        ConditionWaiter.create(20000, 500, __ -> vNextBaseScreen.getLogoutButton().isEnabled()).execute();
         WaitUtils.click(vNextBaseScreen.getLogoutButton());
     }
 
