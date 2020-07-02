@@ -75,9 +75,10 @@ public class ViewScreenValidations {
         Assert.assertEquals(viewScreen.getOriginalAmount(), expectedAmaunt);
     }
 
-    public static void verifyServiceTotalAmaunt(String serviceName, String expectedAmaunt) {
+    public static void verifyPainCodeIsPresent(String painCodeValue) {
         VNextViewScreen viewScreen = new VNextViewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        Assert.assertEquals(viewScreen.getServiceTotalAmount(serviceName), expectedAmaunt);
+        viewScreen.waitViewScreenLoaded();
+        Assert.assertTrue(viewScreen.isPainCodePresent(painCodeValue));
     }
 
     public static String getEstimationCustomerAddressValue(RetailCustomer retailCustomer) {

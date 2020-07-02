@@ -15,9 +15,12 @@ import com.cyberiansoft.test.vnext.steps.customers.CustomersScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.PaintCodesScreenValidations;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
+import com.cyberiansoft.test.vnext.validations.ViewScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.time.Year;
 
 public class VNextInspectionsPainCodesTestCases extends BaseTestClass {
 
@@ -36,6 +39,7 @@ public class VNextInspectionsPainCodesTestCases extends BaseTestClass {
         final String firstColor = "Alpina Blue";
         final String secondColor = "Black Forest";
 
+        Year year = Year.now();
         HomeScreenSteps.openCreateMyInspection();
         CustomersScreenSteps.selectCustomer(testcustomer);
         InspectionSteps.selectInspectionType(InspectionTypes.O_KRAMAR);
@@ -67,7 +71,7 @@ public class VNextInspectionsPainCodesTestCases extends BaseTestClass {
         CustomersScreenSteps.selectCustomer(testcustomer);
         InspectionSteps.selectInspectionType(InspectionTypes.O_KRAMAR);
         VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVehicleInfo().getVINNumber());
-        VehicleInfoScreenInteractions.setYear("2021");
+        VehicleInfoScreenInteractions.setYear(year.plusYears(1).toString());
         VehicleInfoScreenInteractions.clickColorCell();
         VehicleInfoScreenInteractions.switchToPaintCodesMode();
         PaintCodesScreenValidations.verifyPainCodesListEmpty();
@@ -80,6 +84,7 @@ public class VNextInspectionsPainCodesTestCases extends BaseTestClass {
         final String inspectionId = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.VIEW);
+        ViewScreenValidations.verifyPainCodeIsPresent(secondColor);
         ScreenNavigationSteps.pressBackButton();
 
         ScreenNavigationSteps.pressBackButton();
