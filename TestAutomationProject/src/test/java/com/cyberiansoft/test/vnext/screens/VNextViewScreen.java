@@ -125,12 +125,11 @@ public class VNextViewScreen extends VNextBaseScreen {
 		return  supplementAmaunt;
 	}
 
-	public String getServiceTotalAmount(String serviceName) {
+	public boolean isPainCodePresent(String painCodeValue) {
 		ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(viewscreen.findElement(By.xpath(".//iframe[@class='printing-viewer']")));
-		WebElement serviceParentCell = getServiceTableRow(serviceName);
-		String totalAmaunt = serviceParentCell.findElement(By.xpath("./td[4]")).getText().trim();
+		boolean exists = viewscreen.getText().contains(painCodeValue);
 		ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
-		return  totalAmaunt;
+		return  exists;
 	}
 
 	public String getSupplementAmount() {
