@@ -3,7 +3,7 @@
     <listeners>
         <listener class-name="com.cyberiansoft.test.vnext.listeners.TestServiceListener"/>
     </listeners>
-    <parameter name="lic.name" value="OKramar_android2"  />
+    <parameter name="lic.name" value="Automation_lic1"  />
     <test name="Tests for VNext client" group-by-instances="true">
         <classes>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionNotesTestCases"/>
