@@ -1,0 +1,31 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Cyberiansoft VNext client tests" verbose="10" configfailurepolicy="continue">
+    <listeners>
+        <listener class-name="com.cyberiansoft.test.vnext.listeners.TestServiceListener"/>
+    </listeners>
+    <parameter name="lic.name" value="Automation_lic3"  />
+    <test name="Tests for VNext client" group-by-instances="true">
+        <classes>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringBaseCase"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringCommonFilters"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitoringSearchFiltersTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringCalculations"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.problemreporting.VNextTeamMonitoringProblemReporting"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.problemreporting.VNextTeamProblemEnforcement"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking.VNextTeamMonitoringTimetracking"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking.VNextTeamMonitoringTimetrackingVisibility"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking.VNextTeamMonitoringResetStartDate"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking.VNextTeamMonitoringTimeReport"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.AutoAssignTechCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorServicesAndTasksTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorPhasesTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.MonitoringRoActionMenuPhase"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.MonitoringRoActionMenuPhaseAndService"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorLocationTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorEditROTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorStartPhaseServicesTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorFocusModeButtonTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorFlagsAddDeleteServicesTestCases"/>
+        </classes>
+    </test>
+</suite>

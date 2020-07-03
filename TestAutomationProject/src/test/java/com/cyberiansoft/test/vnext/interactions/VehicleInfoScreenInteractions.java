@@ -9,9 +9,7 @@ import com.cyberiansoft.test.vnext.screens.VNextVehiclemakesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.VehicleInfoListElement;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -48,9 +46,8 @@ public class VehicleInfoScreenInteractions {
 
     public static void selectColor(String color) {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        ((JavascriptExecutor) ChromeDriverProvider.INSTANCE.getMobileChromeDriver()).executeScript("arguments[0].scrollIntoView(true);", vehicleInfoScreen.getColorSectionExpandButton());
         vehicleInfoScreen.getColorSectionExpandButton().click();
-        WaitUtils.click(By.xpath("//*[@action='select-item' and @data-id='" + color + "']"));
+        WaitUtils.click(By.xpath("//*[@action='select-color' and @data-color-name='" + color + "']"));
     }
 
     public static void clickColorCell() {
@@ -65,6 +62,11 @@ public class VehicleInfoScreenInteractions {
 
     public static void selectMakeAndModel(String vehicleMake, String vehicleModel) {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        try {
+            vehicleInfoScreen.getMakeSectionExpandButton().rootElement.sendKeys(Keys.TAB);
+        } catch (ElementNotInteractableException e) {
+            //
+        }
         vehicleInfoScreen.getMakeSectionExpandButton().click();
         VNextVehiclemakesScreen vehicleMakesScreen = new VNextVehiclemakesScreen();
         vehicleMakesScreen.selectVehicleMake(vehicleMake);
