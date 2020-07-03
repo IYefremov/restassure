@@ -105,16 +105,28 @@ public class PhaseScreenInteractions {
         serviceElement.getRootElement().findElement(By.xpath(serviceElement.getCheckElementLocator())).click();
     }
 
+    public static void selectService(String serviceName) {
+        PhasesScreen phasesScreen = new PhasesScreen();
+        WaitUtils.collectionSizeIsGreaterThan(phasesScreen.getServiceElementsList(), 0);
+        WaitUtils.elementShouldBeVisible(phasesScreen.getRootElement(), true);
+        WaitUtils.waitUntilElementIsClickable(phasesScreen.getRootElement());
+        BaseUtils.waitABit(2000);
+        ServiceElement serviceElement = getServiceElements(serviceName);
+        serviceElement.getRootElement().findElement(By.xpath(serviceElement.getCheckElementLocator())).click();
+    }
+
     public static void clickStartServices() {
         PhasesScreen phasesScreen = new PhasesScreen();
         WaitUtils.elementShouldBeVisible(phasesScreen.getStartServicesButton(), true);
         phasesScreen.getStartServicesButton().click();
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 
     public static void clickStopServices() {
         PhasesScreen phasesScreen = new PhasesScreen();
         WaitUtils.elementShouldBeVisible(phasesScreen.getStopServicesButton(), true);
         phasesScreen.getStopServicesButton().click();
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 
     public static void clickCompleteServices() {

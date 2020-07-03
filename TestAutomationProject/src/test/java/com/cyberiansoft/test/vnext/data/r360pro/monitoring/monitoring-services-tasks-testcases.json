@@ -411,5 +411,91 @@
         }
       }
     }
+  ],
+  "verifySupportTheBundleServiceItem": [
+    {
+      "rowID": "verifySupportTheBundleServiceItem.01",
+      "description": "Test Case 92328: ReconPro - Monitor - Support the bundle service item",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92328",
+          "testCaseTitle": "ReconPro - Monitor - Support the bundle service item"
+        }
+      ],
+      "workOrderData": {
+        "damagesData": [
+          {
+            "damageGroupName": "Other",
+            "partServiceData": {
+              "serviceName": "Nikolay's Part",
+              "category": "Body",
+              "subCategory": "Bumper",
+              "partName": {
+                "partNameList": [
+                  "Bumper"
+                ]
+              },
+              "partPosition": "Right"
+            }
+          },
+          {
+            "damageGroupName": "Other",
+            "partServiceData": {
+              "serviceName": "Generic Part",
+              "category": "Body",
+              "subCategory": "Bumper",
+              "partName": {
+                "partNameList": [
+                  "Bumper Accent Piece"
+                ]
+              },
+              "partPosition": "Front"
+            }
+          }
+        ],
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "monitoring": {
+          "orderPhasesDto": [
+            {
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Nikolay's Bundle"
+                  }
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Nikolay's Money Service (Tax Exempt)"
+                  }
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Nikolay's Labor (MOTOR Estimated Work Times)"
+                  }
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Anastasia Bundle"
+                  }
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Battery Installation"
+                  }
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Anastasia Labor vehicle Data"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
   ]
 }
