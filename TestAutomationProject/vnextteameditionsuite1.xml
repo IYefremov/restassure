@@ -1,0 +1,41 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Cyberiansoft VNext client tests" verbose="10" configfailurepolicy="continue">
+    <listeners>
+        <listener class-name="com.cyberiansoft.test.vnext.listeners.TestServiceListener"/>
+    </listeners>
+    <parameter name="lic.name" value="Automation_lic1"  />
+    <test name="Tests for VNext client" group-by-instances="true">
+        <classes>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionNotesTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextApproveTeamInspectionsTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamClaimInfoScreenTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionsTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamArchiveInspectionsTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionsServicesTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionsChangeCustomerTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextInspectionsPainCodesTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoicesTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamSupplementsTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionsLineApprovalTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamCalculationsTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextPayInvoicesTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersChangeCustomerTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoiceEditingTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersList"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersTechniciansTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextQuestionAnswerTextImageComments"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextLaborServiceTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextVehicleOwnerSupportTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextInspectionsViewInspectionTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamDraftWOTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamDraftInspectionsTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamVehicleInfoTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextEmailInspectionsTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextQuestionAnswerTextImageComments"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoicesEditWOInInvoiceTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoicePrintViewTestCases"/>
+        </classes>
+    </test>
+</suite>

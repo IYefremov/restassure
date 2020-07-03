@@ -102,15 +102,31 @@ public class BaseTestClass {
 
         Optional<String> testPlanIdFromMaven = Optional.ofNullable(System.getProperty("testPlanId"));
         //Optional<String> testCaseIdFromMaven = Optional.ofNullable("97261");
+        Optional<String> releaseIdFromMaven = Optional.ofNullable(System.getProperty("releaseId"));
+        TPIntegrationService tpIntegrationService = new TPIntegrationService();
+
         if (testPlanIdFromMaven.isPresent()) {
-            TPIntegrationService tpIntegrationService = new TPIntegrationService();
             String testPlanId = testPlanIdFromMaven.get();
             try {
-                TestPlanRunDTO testPlanRunDTO = tpIntegrationService.createTestPlanRun(testPlanId);
-                TestServiceListener.setTestPlanRunId(testPlanRunDTO.getId().toString());
-                TestServiceListener.setTestToTestRunMap(
-                        tpIntegrationService.testCaseToTestRunMapRecursively(
-                                testPlanRunDTO));
+                if (releaseIdFromMaven.isPresent()) {
+                    TestPlanRunDTO testPlanRun = tpIntegrationService.getAllTestPlanRuns().getItems().stream().
+                            filter(run -> run.getName().contains(releaseIdFromMaven.get())).
+                            findAny().orElse(null);
+                    if (testPlanRun != null) {
+                        testPlanRun = tpIntegrationService.getTestPlanRunInfo(testPlanRun.getId().toString());
+                        if (testPlanRun.getTestCaseRuns() != null)
+                            TestServiceListener.setTestToTestRunMap(tpIntegrationService.testCaseToTestRunMapRecursively(testPlanRun));
+                    }
+                    else {
+                        TestServiceListener.setTestToTestRunMap(
+                                tpIntegrationService.testCaseToTestRunMapRecursively(tpIntegrationService.createTestPlanRun(testPlanId, releaseIdFromMaven.get())));
+                    }
+                } else {
+                    TestPlanRunDTO testPlanRunDTO = tpIntegrationService.createTestPlanRun(testPlanId);
+                    TestServiceListener.setTestPlanRunId(testPlanRunDTO.getId().toString());
+                    TestServiceListener.setTestToTestRunMap(
+                            tpIntegrationService.testCaseToTestRunMapRecursively(testPlanRunDTO));
+                }
             } catch (UnirestException | IOException e) {
                 e.printStackTrace();
             }
