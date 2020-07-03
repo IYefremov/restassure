@@ -25,6 +25,7 @@ import com.cyberiansoft.test.vnext.steps.services.LaborServiceSteps;
 import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.HomeScreenValidation;
+import com.cyberiansoft.test.vnext.validations.MenuValidations;
 import com.cyberiansoft.test.vnext.validations.NotesValidations;
 import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
 import com.cyberiansoft.test.vnext.validations.monitor.SelectStatusScreenValidations;
@@ -480,7 +481,6 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
         final String workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
-        BaseUtils.waitABit(30000);
 
         HomeScreenSteps.openMonitor();
         SearchSteps.openSearchFilters();
@@ -510,6 +510,77 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         TopScreenPanelSteps.goToThePreviousScreen();
     }
 
+    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifySupportTheBundleServiceItem(String rowID, String description, JSONObject testData) throws IOException {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+        List<MonitorServiceData> servicesList = testCaseData.getWorkOrderData().getMonitoring().getOrderPhasesDto().get(0).getPhaseServices();
+        PartServiceData partServiceData1 = workOrderData.getDamagesData().get(0).getPartServiceData();
+        PartServiceData partServiceData2 = workOrderData.getDamagesData().get(1).getPartServiceData();
+
+        HomeScreenSteps.openCreateMyWorkOrder();
+        WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.AUTOMATION_WO_MONITOR, workOrderData);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.selectServiceGroup(workOrderData.getDamagesData().get(0).getDamageGroupName());
+        AvailableServicesScreenSteps.selectService(servicesList.get(0).getMonitorService().getServiceName());
+        BundleServiceSteps.addServiceWithPlusButton(servicesList.get(1).getMonitorService().getServiceName());
+        BundleServiceSteps.addServiceWithPlusButton(servicesList.get(2).getMonitorService().getServiceName());
+        BundleServiceSteps.addPartService(partServiceData1);
+        AvailableServicesScreenSteps.selectService(servicesList.get(3).getMonitorService().getServiceName());
+        BundleServiceSteps.addServiceWithPlusButton(servicesList.get(4).getMonitorService().getServiceName());
+        BundleServiceSteps.addServiceWithPlusButton(servicesList.get(5).getMonitorService().getServiceName());
+        BundleServiceSteps.addPartService(partServiceData2);
+        ScreenNavigationSteps.pressBackButton();
+        final String workOrderId = WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
+
+        updateEmployeeRoleSettings(MonitorRole.EMPLOYEE, false, true, false);
+
+        HomeScreenSteps.openMonitor();
+        SearchSteps.openSearchFilters();
+        SearchSteps.clearFilters();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MonitorSteps.startRepairOrder(workOrderId);
+        MonitorSteps.tapOnFirstOrder();
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+
+        PhaseScreenSteps.waitUntilPhaseScreenIsLoaded();
+        PhaseScreenValidations.verifyPhaseScreenIsDisplayed();
+        PhaseScreenValidations.verifyServiceIsPresent(servicesList.get(1).getMonitorService().getServiceName(), true);
+        PhaseScreenValidations.verifyServiceIsPresent(servicesList.get(2).getMonitorService().getServiceName(), true);
+        PhaseScreenValidations.verifyServiceIsPresent(servicesList.get(4).getMonitorService().getServiceName(), true);
+        PhaseScreenValidations.verifyServiceIsPresent(servicesList.get(5).getMonitorService().getServiceName(), true);
+
+        verifyServiceMenuContainsAllButtons(servicesList.get(5).getMonitorService().getServiceName());
+        verifyServiceMenuContainsAllButtons(servicesList.get(1).getMonitorService().getServiceName());
+
+        PhaseScreenInteractions.selectService(servicesList.get(1).getMonitorService().getServiceName());
+        PhaseScreenInteractions.selectService(servicesList.get(2).getMonitorService().getServiceName());
+        PhaseScreenInteractions.selectService(servicesList.get(4).getMonitorService().getServiceName());
+        PhaseScreenInteractions.selectService(servicesList.get(5).getMonitorService().getServiceName());
+        PhaseScreenInteractions.clickStartServices();
+
+        //TODO: add verifier that services were started - after manual test case is updated
+
+        PhaseScreenInteractions.selectService(servicesList.get(1).getMonitorService().getServiceName());
+        PhaseScreenInteractions.selectService(servicesList.get(2).getMonitorService().getServiceName());
+        PhaseScreenInteractions.selectService(servicesList.get(4).getMonitorService().getServiceName());
+        PhaseScreenInteractions.selectService(servicesList.get(5).getMonitorService().getServiceName());
+        PhaseScreenInteractions.clickStopServices();
+
+        //TODO: add verifier that services were started - after manual test case is updated
+
+        EditOrderSteps.switchToParts();
+        PhaseScreenValidations.verifyServiceIsPresent(partServiceData1.getServiceName(), true);
+        PhaseScreenValidations.verifyServiceIsPresent(partServiceData2.getServiceName(), true);
+
+        TopScreenPanelSteps.saveChanges();
+        TopScreenPanelSteps.resetSearch();
+        TopScreenPanelSteps.goToThePreviousScreen();
+    }
+
     private void updateEmployeeRoleSettings(MonitorRole role, boolean canAdd, boolean canEdit, boolean canRemove) throws IOException {
 
         roleSettings.setMonitorCanAddService(canAdd);
@@ -527,5 +598,21 @@ public class VNextMonitorServicesAndTasksTestCases extends BaseTestClass {
         HomeScreenSteps.openMonitor();
         MonitorSteps.tapOnFirstOrder();
         MenuSteps.selectMenuItem(MenuItems.EDIT);
+    }
+
+    private static void verifyServiceMenuContainsAllButtons(String serviceName) {
+
+        EditOrderSteps.openServiceMenu(serviceName);
+        MenuValidations.verifyMenuItemIsVisible(MenuItems.RESET_START_DATE.getMenuItemDataName());
+        MenuValidations.verifyMenuItemIsVisible(MenuItems.ASSIGN_TECH.getMenuItemDataName());
+        MenuValidations.verifyMenuItemIsVisible(MenuItems.CHANGE_STATUS.getMenuItemDataName());
+        MenuValidations.verifyMenuItemIsVisible(MenuItems.START.getMenuItemDataName());
+        MenuValidations.verifyMenuItemIsVisible(MenuItems.STOP.getMenuItemDataName());
+        MenuValidations.verifyMenuItemIsVisible(MenuItems.COMPLETE.getMenuItemDataName());
+        MenuValidations.verifyMenuItemIsVisible(MenuItems.REPORT_PROBLEM.getMenuItemDataName());
+        MenuValidations.verifyMenuItemIsVisible(MenuItems.RESOLVE_PROBLEM.getMenuItemDataName());
+        MenuValidations.verifyMenuItemIsVisible(MenuItems.NOTES.getMenuItemDataName());
+        MenuValidations.verifyMenuItemIsVisible(MenuItems.TIME_REPORT.getMenuItemDataName());
+        MenuSteps.closeMenu();
     }
 }

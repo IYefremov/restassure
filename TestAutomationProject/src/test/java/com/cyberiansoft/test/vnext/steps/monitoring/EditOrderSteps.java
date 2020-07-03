@@ -28,6 +28,11 @@ public class EditOrderSteps {
                 PhaseScreenInteractions.getServiceElements(serviceData.getServiceName()));
     }
 
+    public static void openServiceMenu(String serviceName) {
+        PhaseScreenInteractions.openServiceElementMenu(
+                PhaseScreenInteractions.getServiceElements(serviceName));
+    }
+
     public static void openServiceDetails(ServiceData serviceData) {
         PhaseScreenInteractions.openServiceDetails(
                 PhaseScreenInteractions.getServiceElements(serviceData.getServiceName()));

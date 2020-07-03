@@ -94,14 +94,7 @@ public class PhaseScreenSteps {
 
     public static void addPartService(PartServiceData serviceData) {
         addServices();
-        AvailableServicesScreenSteps.clickAddServiceButton(serviceData.getServiceName());
-        CategoryScreenSteps.selectCategory(serviceData.getCategory());
-        SubCategoryScreenSteps.selectSubCategory(serviceData.getSubCategory());
-        PartNameScreenSteps.selectPartName(serviceData.getPartName().getPartNameList().get(0));
-        PartPositionScreenSteps.selectPartPosition(serviceData.getPartPosition());
-        TopScreenPanelSteps.saveChanges();
-        TopScreenPanelSteps.saveChanges();
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+        AvailableServicesScreenSteps.addPartService(serviceData);
     }
 
     public static void openSelectStatusScreen(String serviceName) {

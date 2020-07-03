@@ -3,12 +3,18 @@ package com.cyberiansoft.test.vnext.steps.services;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.MatrixServiceData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.interactions.services.AvailableServiceScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextGroupServicesScreen;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
+import com.cyberiansoft.test.vnext.steps.commonobjects.TopScreenPanelSteps;
+import com.cyberiansoft.test.vnext.steps.monitoring.CategoryScreenSteps;
+import com.cyberiansoft.test.vnext.steps.monitoring.PartNameScreenSteps;
+import com.cyberiansoft.test.vnext.steps.monitoring.PartPositionScreenSteps;
+import com.cyberiansoft.test.vnext.steps.monitoring.SubCategoryScreenSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.GroupServiceListItem;
 import org.openqa.selenium.By;
@@ -84,8 +90,15 @@ public class AvailableServicesScreenSteps {
         servicesScreen.switchToAvalableServicesView();
     }
 
-    public static void openServicesList() {
+    public static void addPartService(PartServiceData serviceData) {
 
-        new VNextAvailableServicesScreen().getAllServicesList().click();
+        clickAddServiceButton(serviceData.getServiceName());
+        CategoryScreenSteps.selectCategory(serviceData.getCategory());
+        SubCategoryScreenSteps.selectSubCategory(serviceData.getSubCategory());
+        PartNameScreenSteps.selectPartName(serviceData.getPartName().getPartNameList().get(0));
+        PartPositionScreenSteps.selectPartPosition(serviceData.getPartPosition());
+        TopScreenPanelSteps.saveChanges();
+        TopScreenPanelSteps.saveChanges();
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 }

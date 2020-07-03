@@ -15,8 +15,7 @@ public class MenuValidations {
             WaitUtils.getGeneralFluentWait().until(__ -> MenuScreenInteractions.getMenuItem(menuItem).isDisplayed());
             Assert.assertTrue(MenuScreenInteractions.getMenuItem(menuItem).isDisplayed(),
                     menuItem.getMenuItemDataName() + "menu item hasn't been displayed");
-        }
-        else
+        } else
             Assert.assertNull(MenuScreenInteractions.getMenuItem(menuItem));
     }
 
@@ -30,11 +29,11 @@ public class MenuValidations {
             WaitUtils.getGeneralFluentWait().until(ExpectedConditions.attributeContains(MenuScreenInteractions.getMenuItem(menuItem), "class", "disabled-action"));
             Assert.assertEquals((boolean) MenuScreenInteractions.getMenuItem(menuItem).getAttribute("class").contains("disabled-action"), !shouldBeVisible);
         }
-
     }
 
     public static void verifyMenuItemIsVisible(String menuItem) {
 
+        WaitUtils.elementShouldBeVisible(new GeneralMenuScreen().getRootElement(), true);
         Assert.assertTrue(MenuScreenInteractions.getMenuItem(menuItem).isDisplayed(), menuItem + " Menu item hasn't been displayed");
     }
 
