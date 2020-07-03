@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -35,6 +36,7 @@ public class VNextViewScreen extends VNextBaseScreen {
     public void waitViewScreenLoaded() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.visibilityOf(viewscreen));
+		BaseUtils.waitABit(500);
 		//HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 	}
 

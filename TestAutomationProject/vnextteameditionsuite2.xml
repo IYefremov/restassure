@@ -6,44 +6,18 @@
     <parameter name="lic.name" value="Automation_lic2"  />
     <test name="Tests for VNext client" group-by-instances="true">
         <classes>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringBaseCase"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringCommonFilters"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitoringSearchFiltersTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringCalculations"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.problemreporting.VNextTeamMonitoringProblemReporting"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.problemreporting.VNextTeamProblemEnforcement"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking.VNextTeamMonitoringTimetracking"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking.VNextTeamMonitoringTimetrackingVisibility"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking.VNextTeamMonitoringResetStartDate"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking.VNextTeamMonitoringTimeReport"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.AutoAssignTechCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorServicesAndTasksTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorPhasesTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.techsplit.VNextTeamTechSplitBaseCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.techsplit.VNextTeamTechSplitTeamCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.techsplit.VNextTeamTechSplitServiceCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.partservice.VNextTeamPartServiceBaseCase"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.partservice.VNextTeamPartServiceMatrixCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.partservice.VNextTeamPartServiceLaborCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.partservice.VNextTeamPartServiceBundleCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.questionforms.BasicQuestionFormTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.questionforms.InspectionsQuestionFormTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.questionforms.WorkOrdersQuestionFormTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.servicerequests.ServiceRequestsRegressionTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.login.SearchEmployeeOnLoginTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.services.option.multiple.SingleSelectionServiceTests"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.vehicleparts.BasicVehiclePartsTests"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.MonitoringRoActionMenuPhase"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.MonitoringRoActionMenuPhaseAndService"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorLocationTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorEditROTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorStartPhaseServicesTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorFocusModeButtonTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorFlagsAddDeleteServicesTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextWholesaleCustomersTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextWholesaleCustomersContactsTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextWholesaleCustomersCreationNewContactsTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextTeamPresetCustomerTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersChangeCustomerTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersList"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersTechniciansTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextQuestionAnswerTextImageComments"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamDraftWOTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoicesTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextPayInvoicesTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoiceEditingTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoicesEditWOInInvoiceTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoicePrintViewTestCases"/>
         </classes>
     </test>
 </suite>
