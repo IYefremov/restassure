@@ -15,13 +15,17 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.config.ManipulationDataProdInfo;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularMainScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectEnvironmentScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularVehiclePartScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInspectionsScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularClaimScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularPriceMatrixScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularServicesScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularVehicleScreen;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.ProdInspectionsTypes;
-import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -119,8 +123,9 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         RegularNavigationSteps.navigateToScreen("State Farm");
         RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen();
         for (VehiclePartData vehiclePartData : inspdata.getMatrixServiceData().getVehiclePartsData()) {
-            RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(vehiclePartData.getVehiclePartName());
-            vehiclePartScreen.setSizeAndSeverity(vehiclePartData.getVehiclePartSize(), vehiclePartData.getVehiclePartSeverity());
+            pricematrix.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+            RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
+                    vehiclePartScreen.setSizeAndSeverity(vehiclePartData.getVehiclePartSize(), vehiclePartData.getVehiclePartSeverity());
             for (ServiceData service : vehiclePartData.getVehiclePartAdditionalServices())
                 vehiclePartScreen.selectDiscaunt(service.getServiceName());
             vehiclePartScreen.clickSave();

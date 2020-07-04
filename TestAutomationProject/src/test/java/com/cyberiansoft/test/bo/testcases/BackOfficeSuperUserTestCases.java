@@ -5,7 +5,6 @@ import com.cyberiansoft.test.dataclasses.bo.BOSuperUserData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -26,7 +25,7 @@ public class BackOfficeSuperUserTestCases extends BaseTestCase {
 		BOSuperUserData data = JSonDataParser.getTestDataFromJson(testData, BOSuperUserData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		SuperUserWebPage superUserPage = new SuperUserWebPage(webdriver);
+		SuperUserWebPage superUserPage = new SuperUserWebPage();
 		backOfficeHeader.clickSuperUserLink();
 		AllUsersWebPage allUsersPage = new AllUsersWebPage(webdriver);
 		superUserPage.clickAllUsersLink();
@@ -70,7 +69,7 @@ public class BackOfficeSuperUserTestCases extends BaseTestCase {
 		BOSuperUserData data = JSonDataParser.getTestDataFromJson(testData, BOSuperUserData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		SuperUserWebPage superUserPage = new SuperUserWebPage(webdriver);
+		SuperUserWebPage superUserPage = new SuperUserWebPage();
 		backOfficeHeader.clickSuperUserLink();
 		AllEmployeesWebPage allEmployeesPage = new AllEmployeesWebPage(webdriver);
 		superUserPage.clickAllEmployeesLink();
@@ -113,7 +112,7 @@ public class BackOfficeSuperUserTestCases extends BaseTestCase {
 		BOSuperUserData data = JSonDataParser.getTestDataFromJson(testData, BOSuperUserData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		SuperUserWebPage superUserPage = new SuperUserWebPage(webdriver);
+		SuperUserWebPage superUserPage = new SuperUserWebPage();
 		backOfficeHeader.clickSuperUserLink();
 		ApplicationsWebPage applicationsPage = new ApplicationsWebPage(webdriver);
 		superUserPage.clickApplicationsLink();

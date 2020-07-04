@@ -5,14 +5,12 @@ import com.cyberiansoft.test.dataclasses.bo.BOCompanyData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-//@Listeners(VideoListener.class)
 public class BackOfficeCompanyTestCases extends BaseTestCase {
 
 	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOCompanyData.json";
@@ -158,7 +156,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 
 		String lastpagenumber = servicesPage.getLastPageNumber();
 		servicesPage.clickGoToLastPage();
-		Assert.assertEquals(lastpagenumber, servicesPage.getGoToPageFieldValue());
+        Assert.assertEquals(lastpagenumber, servicesPage.getPageFieldValue());
 
 		servicesPage.clickGoToFirstPage();
 		Assert.assertEquals(data.getPage1(), servicesPage.getGoToPageFieldValue());
@@ -187,7 +185,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-		TeamsWebPage teamsPage = new TeamsWebPage(webdriver);
+		TeamsWebPage teamsPage = new TeamsWebPage();
 		backOfficeHeader.clickCompanyLink();
 		companyWebPage.clickTeamsLink();
 
@@ -212,7 +210,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		teamsPage.clickGoToPreviousPage();
 		Assert.assertEquals(data.getPage1(), teamsPage.getGoToPageFieldValue());
 
-		if (Integer.valueOf(lastpagenumber) < 50) {
+		if (Integer.parseInt(lastpagenumber) < 50) {
 			teamsPage.setPageSize(lastpagenumber);
 			Assert.assertEquals(Integer.valueOf(lastpagenumber), Integer.valueOf(teamsPage.getTeamsTableRowsCount()));
 		} else {
@@ -260,7 +258,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 
 		jobsPage.clickGoToPreviousPage();
 		Assert.assertEquals(data.getPage1(), jobsPage.getGoToPageFieldValue());
-		if (Integer.valueOf(lastpagenumber) < 50) {
+		if (Integer.parseInt(lastpagenumber) < 50) {
 			jobsPage.setPageSize(lastpagenumber);
 			Assert.assertEquals(Integer.valueOf(lastpagenumber), Integer.valueOf(jobsPage.getJobsTableRowsCount()));
 		} else {

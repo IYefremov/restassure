@@ -1,14 +1,9 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens;
 
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularTechRevenueScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.types.invoicestypes.IInvoicesTypes;
-import com.cyberiansoft.test.ios10_client.types.workorderstypes.IWorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -21,11 +16,8 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
-	
-	private By autosavedworkorder = By.xpath("//XCUIElementTypeTable[@name='MyWorkOrdersTable']/XCUIElementTypeCell/XCUIElementTypeOther[@name='EntityInfoButtonUnchecked, AutoSaved']");
 
 	@iOSXCUITFindBy(accessibility = "Done")
 	private IOSElement donebtn;
@@ -44,14 +36,16 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 
 	public void waitMyWorkOrdersScreenLoaded() {
 		FluentWait<WebDriver>  wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("MyWorkOrdersTable")));
+		WebElement myWoTable =  wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("MyWorkOrdersTable")));
+		wait = new WebDriverWait(appiumdriver, 90);
+		wait.until(ExpectedConditions.elementToBeClickable(myWoTable));
 	}
 
 	public void clickAddOrderButton() {
 		addinspbtn.click();
 		if (elementExists("Discard")) {
 			appiumdriver.findElementByAccessibilityId("Discard").click();
-		};
+		}
 	}
 
 	public void selectFirstOrder() {
@@ -63,6 +57,7 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public void clickFilterButton() {
+		waitMyWorkOrdersScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name CONTAINS 'filter'")));
 		if (appiumdriver.findElementsByAccessibilityId("filter").size() < 1)
@@ -77,7 +72,8 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public boolean isAutosavedWorkOrderExists() {	
-		return elementExists(autosavedworkorder);
+		return appiumdriver.findElementByAccessibilityId("MyWorkOrdersTable")
+				.findElements(MobileBy.AccessibilityId("EntityInfoButtonUnchecked, AutoSaved")).size() > 0;
 	}
 	
 	public void selectWorkOrderForAction(String workOrderID) {
@@ -87,7 +83,7 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	public void selectWorkOrderForApprove(String workOrderID) {
 		waitMyWorkOrdersScreenLoaded();
-		mywotable.findElement(MobileBy.AccessibilityId(workOrderID)).findElement(MobileBy.className("XCUIElementTypeOther")).click();
+		mywotable.findElement(MobileBy.AccessibilityId(workOrderID)).findElement(MobileBy.AccessibilityId("EntityInfoButtonUnchecked, ButtonImageId_78")).click();
 		
 	}
 	
@@ -120,8 +116,9 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	public void selectWorkOrder(String workOrderId) {
 		waitMyWorkOrdersScreenLoaded();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(mywotable.findElementByAccessibilityId(workOrderId))).click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(workOrderId)));
+		appiumdriver.findElementByAccessibilityId(workOrderId).click();
 	}
 	
 	public void selectWorkOrderForAddingNotes(String workOrderId)  {
@@ -135,19 +132,18 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		return new RegularTechRevenueScreen();
 	}
 	
-	public RegularSelectedServiceDetailsScreen selectWorkOrderTechniciansMenuItem(String workOrderId) {
+	public void selectWorkOrderTechniciansMenuItem(String workOrderId) {
 		selectWorkOrder(workOrderId);
 		appiumdriver.findElementByAccessibilityId("Technicians").click();
-		return new RegularSelectedServiceDetailsScreen();
 	}
 	
 	public void selectContinueWorkOrder() {
-		selectWorkOrder("Auto Save");
+		selectWorkOrder("Auto save");
 		appiumdriver.findElementByAccessibilityId("Continue").click();
 	}
 	
 	public void selectDiscardWorkOrder() {
-		selectWorkOrder("Auto Save");
+		selectWorkOrder("Auto save");
 		appiumdriver.findElementByAccessibilityId("Discard").click();
 	}
 	
@@ -167,9 +163,8 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 
 	public void clickCreateInvoiceIconForWOs(String[] wos) {
-		for (int i = 0; i < wos.length; i++) {
-			clickCreateInvoiceIconForWO(wos[i]);
-
+		for (String wo : wos) {
+			clickCreateInvoiceIconForWO(wo);
 		}
 	}
 	
@@ -180,13 +175,15 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 		public boolean isWorkOrderPresent(String workOrderNumber) {
 		waitMyWorkOrdersScreenLoaded();
-		FluentWait<WebDriver>  wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(mywotable));
+		//FluentWait<WebDriver>  wait = new WebDriverWait(appiumdriver, 60);
+		//wait.until(ExpectedConditions.elementToBeClickable(mywotable));
 		return appiumdriver.findElements(MobileBy.AccessibilityId(workOrderNumber)).size() > 0;	
 	}
 
 	public void clickInvoiceIcon() {
-		appiumdriver.findElementByAccessibilityId("invoice new").click();
+		BaseUtils.waitABit(1000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("invoice new"))).click();
 	}
 
 	public void selectJob(String jobName) {

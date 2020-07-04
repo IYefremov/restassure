@@ -1,0 +1,34 @@
+{
+  "testCanAddServiceInMonitorAddDeleteServices": [
+    {
+      "rowID": "testCanAddServiceInMonitorAddDeleteServices.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98296",
+          "testCaseTitle": "CanAddService in Monitor - Add/Delete Services"
+        }
+      ],
+      "moneyService": {
+        "serviceName": "Body Shop 1"
+      }
+    }
+  ],
+  "testCanAddServiceInMonitorStartStopRO": [
+    {
+      "rowID": "testCanAddServiceInMonitorStartStopRO.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98297",
+          "testCaseTitle": "CanAddService in Monitor - Start/Stop RO"
+        }
+      ],
+      "services": [
+        {
+          "serviceName": "Labor AM"
+        }
+      ]
+    }
+  ]
+}

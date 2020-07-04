@@ -20,7 +20,6 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	
@@ -85,26 +84,16 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public String getServicePriceValue() {
-		WebElement pricecell = appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Price' and type = 'XCUIElementTypeCell' AND visible == 1"));
+		WebElement priceCell = appiumdriver.findElementByClassName("XCUIElementTypePopover").
+				findElement(MobileBy.iOSNsPredicateString("name = 'Price' and type = 'XCUIElementTypeCell'"));
 
-		IOSElement pricefld = (IOSElement) pricecell.findElement(MobileBy.className("XCUIElementTypeTextField"));
-		return pricefld.getText();
+		IOSElement priceFld = (IOSElement) priceCell.findElement(MobileBy.className("XCUIElementTypeTextField"));
+		return priceFld.getText();
 	}
 
 	public String getServiceAdjustmentsValue() {
 		return getAdjustmentsValue();
 	}
-
-	/*public void setServicePriceValue(String _price)	 {
-
-		WebElement pricefld = appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Price' and type = 'XCUIElementTypeCell' AND visible == 1"));
-		pricefld.click();
-		if (pricefld.findElements(MobileBy.AccessibilityId("Clear text")).size() > 0)
-			pricefld.findElement(MobileBy.AccessibilityId("Clear text")).click();
-		pricefld.sendKeys(_price + "\n");
-		BaseUtils.waitABit(1000);
-	}*/
-
 
 	public void setServicePriceValue(String _price) {
 		appiumdriver.findElementByAccessibilityId("Price").click();
@@ -225,21 +214,17 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 
 	public void saveSelectedServiceDetails() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-		MobileElement saveButton = (MobileElement) wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND visible == 1 AND name == 'Save'")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypePopover")));
+		MobileElement saveButton = (MobileElement) appiumdriver.findElementByClassName("XCUIElementTypePopover").
+				findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND label == 'Save'"));
 		saveButton.click();
 	}
 
 	public void clickCancelSelectedServiceDetails() {
-		MobileElement cancelButton = (MobileElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND visible == 1 AND name == 'Cancel'"));
+		MobileElement cancelButton = (MobileElement) appiumdriver.findElementByClassName("XCUIElementTypePopover").
+				findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND label == 'Cancel'"));
 		cancelButton.click();
 	}
-
-	public String saveSelectedServiceDetailsWithAlert() {
-		saveSelectedServiceDetails();
-		return Helpers.getAlertTextAndAccept();
-	}
-	
-
 	
 	public void removeService() {
 		appiumdriver.findElementByAccessibilityId("Remove").click();
@@ -252,10 +237,11 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 	
 	public TechniciansPopup clickTechniciansIcon() {
-		List<IOSElement> techtoolbars = appiumdriver.findElementsByClassName("XCUIElementTypeToolbar");
+		appiumdriver.findElementByClassName("XCUIElementTypePopover").findElement(MobileBy.AccessibilityId("technician")).click();
+		/*List<IOSElement> techtoolbars = appiumdriver.findElementsByClassName("XCUIElementTypeToolbar");
 		for (IOSElement techtoolbar : techtoolbars)
 			if (techtoolbar.findElementsByAccessibilityId("technician").size() > 0)
-				techtoolbar.findElementByAccessibilityId("technician").click();
+				techtoolbar.findElementByAccessibilityId("technician").click();*/
 		return new TechniciansPopup();
 	}
 
@@ -338,30 +324,17 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 	
 	public boolean isQuestionFormCellExists() {
-		boolean exists =  appiumdriver.findElements(MobileBy.AccessibilityId("Questions")).size() > 0;
-		return exists;
+		return appiumdriver.findElements(MobileBy.AccessibilityId("Questions")).size() > 0;
 	}
 	
 	public String getServiceDetailsPriceValue() {
-		MobileElement toolbar = null;
-		List<MobileElement> toolbars = appiumdriver.findElementsByClassName("XCUIElementTypeToolbar");
-		for (MobileElement tbr : toolbars)
-			if (tbr.isDisplayed()) {
-				toolbar = tbr;
-				break;
-			}
-		return toolbar.findElementByClassName("XCUIElementTypeStaticText").getAttribute("value");
+		return appiumdriver.findElementByClassName("XCUIElementTypePopover").findElement(MobileBy.className("XCUIElementTypeToolbar"))
+				.findElement(MobileBy.className("XCUIElementTypeStaticText")).getAttribute("value");
 	}
 	
 	public String getServiceDetailsTotalValue() {
-		MobileElement toolbar = null;
-		List<MobileElement> toolbars = appiumdriver.findElementsByClassName("XCUIElementTypeToolbar");
-		for (MobileElement tbr : toolbars)
-			if (tbr.isDisplayed()) {
-				toolbar = tbr;
-				break;
-			}
-		return toolbar.findElementsByClassName("XCUIElementTypeStaticText").get(1).getAttribute("value");
+		return appiumdriver.findElementByClassName("XCUIElementTypePopover").findElement(MobileBy.className("XCUIElementTypeToolbar"))
+				.findElements(MobileBy.className("XCUIElementTypeStaticText")).get(1).getAttribute("value");
 	}
 	
 	public String getServiceRateValue(ServiceRateData serviceRateData) {

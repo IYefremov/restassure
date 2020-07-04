@@ -92,7 +92,7 @@
           },
           "moneyService": {
             "serviceName": "Dye",
-            "servicePrice": "$10.00",
+            "servicePrice": "10.00",
             "serviceQuantity": "3.00",
             "serviceAdjustment": {
               "adjustmentTotalAmaunt": "$0.50"
@@ -100,7 +100,7 @@
           },
           "percentageService": {
             "serviceName": "Disc_Ex_Service1",
-            "servicePrice": "$100.00",
+            "servicePrice": "100.00",
             "serviceAdjustment": {
               "adjustmentTotalAmaunt": "-$5.00",
               "adjustmentData": {
@@ -731,7 +731,9 @@
             "screenName": "Follow up Requested",
             "questionsData": [
               {
-                "signatureQuestion": true,
+                "signatureQuestion": {
+
+              },
                 "screenIndex": 1,
                 "screenHDIndex": 0
               },
@@ -771,14 +773,14 @@
         ],
         "moneyService": {
           "serviceName": "Dye",
-          "servicePrice": "$10.00",
+          "servicePrice": "10.00",
           "serviceAdjustment": {
             "adjustmentTotalAmaunt": "$0.50"
           }
         },
         "percentageService": {
           "serviceName": "Disc_Ex_Service1",
-          "servicePrice": "$100.00",
+          "servicePrice": "100.00",
           "serviceAdjustment": {
             "adjustmentTotalAmaunt": "-$5.00",
             "adjustmentData": {
@@ -4332,7 +4334,7 @@
           "defaultTechnician": {
             "technicianFirstName": "Employee",
             "technicianLastName": "Simple 20%",
-            "technicianPercentageValue": "%100.00"
+            "technicianPercentageValue": "100.00"
           }
         },
         "matrixService": {
@@ -4460,7 +4462,8 @@
           },
           "serviceDefaultTechnician": {
             "technicianFirstName": "Employee",
-            "technicianLastName": "Simple 20%"
+            "technicianLastName": "Simple 20%",
+            "isSelected": true
           }
         },
         "workOrderTotalSale": "5"
@@ -4554,11 +4557,13 @@
           "newTechnicians": [
             {
               "technicianFirstName": "Inspector",
-              "technicianLastName": "1"
+              "technicianLastName": "1",
+              "isSelected": true
             },
             {
               "technicianFirstName": "Man-Insp",
-              "technicianLastName": "1"
+              "technicianLastName": "1",
+              "isSelected": true
             }
           ]
         },
@@ -4692,11 +4697,13 @@
           "newTechnicians": [
             {
               "technicianFirstName": "Inspector",
-              "technicianLastName": "1"
+              "technicianLastName": "1",
+              "isSelected": true
             },
             {
               "technicianFirstName": "Man-Insp",
-              "technicianLastName": "1"
+              "technicianLastName": "1",
+              "isSelected": true
             }
           ]
         },
@@ -4713,11 +4720,13 @@
               "serviceNewTechnicians": [
                 {
                   "technicianFirstName": "Inspector",
-                  "technicianLastName": "1"
+                  "technicianLastName": "1",
+                  "isSelected": true
                 },
                 {
                   "technicianFirstName": "Man-Insp",
-                  "technicianLastName": "1"
+                  "technicianLastName": "1",
+                  "isSelected": true
                 }
               ],
               "vehiclePart": {
@@ -4770,11 +4779,13 @@
           "newTechnicians": [
             {
               "technicianFirstName": "Vladimir",
-              "technicianLastName": "Avsievich"
+              "technicianLastName": "Avsievich",
+              "isSelected": true
             },
             {
               "technicianFirstName": "Nikolay",
-              "technicianLastName": "Lomeko"
+              "technicianLastName": "Lomeko",
+              "isSelected": true
             }
           ]
         },
@@ -4837,7 +4848,8 @@
           "serviceDefaultTechnician": {
             "technicianFirstName": "Employee",
             "technicianLastName": "Simple 20%",
-            "technicianPriceValue": "$0.00"
+            "technicianPriceValue": "0.00",
+            "isSelected": true
           },
           "vehiclePart": {
             "vehiclePartName": "Grill"
@@ -4864,12 +4876,13 @@
           },
           "newTechnician": {
             "technicianFirstName": "Vladimir",
-            "technicianLastName": "Avsievich"
+            "technicianLastName": "Avsievich",
+            "isSelected": true
           }
         },
         "service": {
           "serviceName": "3/4\" - Penny Size",
-          "servicePrice": "$0.00"
+          "servicePrice": "0.00"
         }
       }
     }
@@ -5626,6 +5639,65 @@
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
+        }
+      }
+    }
+  ],
+  "testCreateWorkOrderWithTypeIsAssignedToASpecificClient": [
+    {
+      "rowID": "testCreateWorkOrderWithTypeIsAssignedToASpecificClient.01",
+      "description": "Test Case 8430:Create work order with type is assigned to a specific client",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89024"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "ZWERTYASDFDDXZBVB"
+        },
+        "moneyService": {
+          "serviceName": "Wheel"
+        },
+        "workOrderPrice": "71.40"
+      },
+      "invoiceData": {
+        "poNumber": "1111 2222"
+      }
+    }
+  ],
+  "testCreateRetailCustomer": [
+    {
+      "rowID": "testCreateRetailCustomer.01",
+      "description": "Test Case 8441:Add Retail Customer in regular build",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89034"
+        },
+        {
+          "testCaseID": "89033"
+        },
+        {
+          "testCaseID": "89037"
+        }
+      ]
+    }
+  ],
+  "testUserCanChangeApprovedStatusOfPercentageServiceToDeclinedOnlyUsingDeclineAllOption": [
+    {
+      "rowID": "testUserCanChangeApprovedStatusOfPercentageServiceToDeclinedOnlyUsingDeclineAllOption.01",
+      "description": "Test Case :User can change 'Approved' status of percentage service to 'Declined', only using 'Decline All' option",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "96255"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "percentageService" : {
+          "serviceName": "Little Service"
         }
       }
     }

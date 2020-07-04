@@ -8,16 +8,16 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
-import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
-import com.cyberiansoft.test.vnext.steps.InspectionSteps;
-import com.cyberiansoft.test.vnext.steps.VisualScreenSteps;
-import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
-import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
+import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
+import com.cyberiansoft.test.vnext.validations.VisualScreenValidations;
+import com.cyberiansoft.test.vnext.validations.WizardScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditionRegistration {
+public class VNextTeamInspectionsServicesTestCases extends BaseTestClass {
 
     @BeforeClass(description="Team Inspections Services Test Cases")
     public void beforeClass() {
@@ -34,17 +34,15 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditi
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR2, inspectionData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
 
-        for (DamageData damageData : inspectionData.getDamagesData()) {
-            VisualScreenSteps.addDamage(damageData);
-        }
-        VisualScreenSteps.verifyNumberOfAddedDamages(inspectionData.getDamagesData().size());
+        inspectionData.getDamagesData().forEach(VisualScreenSteps::addDefaultDamage);
+        VisualScreenValidations.numberOfMarksShouldBeEqualTo(inspectionData.getDamagesData().size());
         final String inspectionNumber = InspectionSteps.saveInspection();
 
         InspectionSteps.openInspectionToEdit(inspectionNumber);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
-        VisualScreenSteps.verifyNumberOfAddedDamages(inspectionData.getDamagesData().size());
+        VisualScreenValidations.numberOfMarksShouldBeEqualTo(inspectionData.getDamagesData().size());
         InspectionSteps.cancelInspection();
-        InspectionSteps.navigateHomeScreen();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -60,14 +58,14 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditi
         for (DamageData damageData : inspectionData.getDamagesData()) {
             VisualScreenSteps.addDamage(damageData);
         }
-        VisualScreenSteps.verifyNumberOfAddedDamages(inspectionData.getDamagesData().size());
+        VisualScreenValidations.numberOfMarksShouldBeEqualTo(inspectionData.getDamagesData().size());
         final String inspectionNumber = InspectionSteps.saveInspection();
 
         InspectionSteps.openInspectionToEdit(inspectionNumber);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
-        VisualScreenSteps.verifyNumberOfAddedDamages(inspectionData.getDamagesData().size());
+        VisualScreenValidations.numberOfMarksShouldBeEqualTo(inspectionData.getDamagesData().size());
         InspectionSteps.cancelInspection();
-        InspectionSteps.navigateHomeScreen();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -87,11 +85,11 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditi
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
         VisualScreenSteps.editVisualDamage(
                 String.valueOf(BackOfficeUtils.getServicePriceValue(inspectionData.getDamageData().getMoneyService().getServicePrice())));
-        VisualScreenSteps.verifyInspectionTotalPrice(inspectionData.getDamageData().getMoneyService().getServicePrice());
+        WizardScreenValidations.validateTotalPriceValue(inspectionData.getDamageData().getMoneyService().getServicePrice());
 
         InspectionSteps.saveInspection();
-        InspectionSteps.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getDamageData().getMoneyService().getServicePrice());
-        InspectionSteps.navigateHomeScreen();
+        InspectionsValidations.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getDamageData().getMoneyService().getServicePrice());
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -107,17 +105,17 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditi
         VisualScreenSteps.addDamage(inspectionData.getDamageData());
         VisualScreenSteps.editVisualDamage(
                 String.valueOf(BackOfficeUtils.getServicePriceValue(inspectionData.getDamageData().getMoneyService().getServicePrice())));
-        VisualScreenSteps.verifyInspectionTotalPrice(inspectionData.getDamageData().getMoneyService().getServicePrice());
+        WizardScreenValidations.validateTotalPriceValue(inspectionData.getDamageData().getMoneyService().getServicePrice());
         final String inspectionNumber = InspectionSteps.saveInspection();
-        InspectionSteps.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getDamageData().getMoneyService().getServicePrice());
+        InspectionsValidations.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getDamageData().getMoneyService().getServicePrice());
 
         InspectionSteps.openInspectionToEdit(inspectionNumber);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
         VisualScreenSteps.removeAllBreakages();
 
-        VisualScreenSteps.verifyInspectionTotalPrice(inspectionData.getInspectionPrice());
+        WizardScreenValidations.validateTotalPriceValue(inspectionData.getInspectionPrice());
 
         InspectionSteps.cancelInspection();
-        InspectionSteps.navigateHomeScreen();
+        ScreenNavigationSteps.pressBackButton();
     }
 }

@@ -16,4 +16,6 @@ public class TestPlanRunDTO {
     private Integer id;
     @JsonProperty("TestCaseRuns")
     private TestCaseRunsDTO testCaseRuns;
+    @JsonProperty("TestPlanRuns")
+    private TestPlanRunsDTO testPlanRuns;
 }

@@ -1,16 +1,25 @@
 package com.cyberiansoft.test.vnext.testcases.r360free.customers;
 
 
+import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.StringUtils;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
-import com.cyberiansoft.test.vnext.screens.*;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextCustomersMenuScreen;
+import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
+import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
+import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
+import com.cyberiansoft.test.vnext.steps.StatusScreenSteps;
+import com.cyberiansoft.test.vnext.steps.customers.CustomersScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
@@ -18,15 +27,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import com.cyberiansoft.test.baseutils.AppiumUtils;
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
-import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.ClientsWebPage;
-import com.cyberiansoft.test.bo.pageobjects.webpages.CompanyWebPage;
-import com.cyberiansoft.test.dataclasses.RetailCustomer;
-import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 
 
 public class VNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
@@ -51,24 +51,22 @@ public class VNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 
 		deleteCustomerOnBackOffice(testcustomer.getCompany(), "");
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
-		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-		newcustomerscreen.createNewCustomer(testcustomer);
-		customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
-		customersscreen.selectCustomerByCompanyName(testcustomer.getCompany());
-		VNextCustomersMenuScreen customersMenuScreen = new VNextCustomersMenuScreen(DriverBuilder.getInstance().getAppiumDriver());
-		newcustomerscreen = customersMenuScreen.clickEditCustomerMenuItem();
-		Assert.assertEquals(newcustomerscreen.getCustomerFirstName(), testcustomer.getFirstName());
-		Assert.assertEquals(newcustomerscreen.getCustomerLastName(), testcustomer.getLastName());
-		Assert.assertEquals(newcustomerscreen.getCustomerCompanyName(), testcustomer.getCompany());
-		Assert.assertEquals(newcustomerscreen.getCustomerEmail(), testcustomer.getMailAddress());
-		Assert.assertEquals(newcustomerscreen.getCustomerPhone(), testcustomer.getCustomerPhone());
-		Assert.assertEquals(newcustomerscreen.getCustomerAddress(), StringUtils.upperCaseAllFirst(testcustomer.getCustomerAddress1()));
-		Assert.assertEquals(newcustomerscreen.getCustomerCountry(), testcustomer.getCustomerCountry());
-		Assert.assertEquals(newcustomerscreen.getCustomerState(), testcustomer.getCustomerState());
-		customersscreen = newcustomerscreen.clickBackButton();
-		customersscreen.clickBackButton();
+        HomeScreenSteps.openCustomers();
+		CustomersScreenSteps.clickAddCustomerButton();
+		VNextNewCustomerScreen newCustomerScreen = new VNextNewCustomerScreen();
+		newCustomerScreen.createNewCustomer(testcustomer);
+		CustomersScreenSteps.selectCustomer(testcustomer);
+        CustomersScreenSteps.openCustomerForEdit(testcustomer);
+		Assert.assertEquals(newCustomerScreen.getCustomerFirstName(), testcustomer.getFirstName());
+		Assert.assertEquals(newCustomerScreen.getCustomerLastName(), testcustomer.getLastName());
+		Assert.assertEquals(newCustomerScreen.getCustomerCompanyName(), testcustomer.getCompany());
+		Assert.assertEquals(newCustomerScreen.getCustomerEmail(), testcustomer.getMailAddress());
+		Assert.assertEquals(newCustomerScreen.getCustomerPhone(), testcustomer.getCustomerPhone());
+		Assert.assertEquals(newCustomerScreen.getCustomerAddress(), StringUtils.upperCaseAllFirst(testcustomer.getCustomerAddress1()));
+		Assert.assertEquals(newCustomerScreen.getCustomerCountry(), testcustomer.getCustomerCountry());
+		Assert.assertEquals(newCustomerScreen.getCustomerState(), testcustomer.getCustomerState());
+		ScreenNavigationSteps.pressBackButton();
+		ScreenNavigationSteps.pressBackButton();
 		BaseUtils.waitABit(45000);
 		WebDriver
 				webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
@@ -99,31 +97,28 @@ public class VNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 
 		deleteCustomerOnBackOffice(testcustomer.getFirstName(), testcustomer.getLastName());
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
 		AppiumUtils.setNetworkOff();
-		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
-		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-		newcustomerscreen.createNewCustomer(testcustomer);
+		HomeScreenSteps.openCustomers();
+		CustomersScreenSteps.clickAddCustomerButton();
+		VNextNewCustomerScreen newCustomerScreen = new VNextNewCustomerScreen();
+		newCustomerScreen.createNewCustomer(testcustomer);
 		AppiumUtils.setAndroidNetworkOn();
-		customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
-		customersscreen.clickBackButton();
-		homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+		ScreenNavigationSteps.pressBackButton();
 		BaseUtils.waitABit(1000);
-		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
-		statusscreen.updateMainDB(employee);
-		//homescreen = statusscreen.clickBackButton();
-		customersscreen = homescreen.clickCustomersMenuItem();
-		newcustomerscreen = customersscreen.openCustomerForEdit(testcustomer);
-		Assert.assertEquals(newcustomerscreen.getCustomerFirstName(), testcustomer.getFirstName());
-		Assert.assertEquals(newcustomerscreen.getCustomerLastName(), testcustomer.getLastName());
-		Assert.assertEquals(newcustomerscreen.getCustomerCompanyName(), testcustomer.getCompany());
-		Assert.assertEquals(newcustomerscreen.getCustomerEmail(), testcustomer.getMailAddress());
-		Assert.assertEquals(newcustomerscreen.getCustomerPhone(), testcustomer.getCustomerPhone());
-		Assert.assertEquals(newcustomerscreen.getCustomerAddress(), testcustomer.getCustomerAddress1());
-		Assert.assertEquals(newcustomerscreen.getCustomerCountry(), testcustomer.getCustomerCountry());
-		Assert.assertEquals(newcustomerscreen.getCustomerState(), testcustomer.getCustomerState());
-		customersscreen = newcustomerscreen.clickBackButton();
-		customersscreen.clickBackButton();
+		StatusScreenSteps.updateMainDB();
+		//homeScreen = statusscreen.clickBackButton();
+		HomeScreenSteps.openCustomers();
+		CustomersScreenSteps.openCustomerForEdit(testcustomer);
+		Assert.assertEquals(newCustomerScreen.getCustomerFirstName(), testcustomer.getFirstName());
+		Assert.assertEquals(newCustomerScreen.getCustomerLastName(), testcustomer.getLastName());
+		Assert.assertEquals(newCustomerScreen.getCustomerCompanyName(), testcustomer.getCompany());
+		Assert.assertEquals(newCustomerScreen.getCustomerEmail(), testcustomer.getMailAddress());
+		Assert.assertEquals(newCustomerScreen.getCustomerPhone(), testcustomer.getCustomerPhone());
+		Assert.assertEquals(newCustomerScreen.getCustomerAddress(), testcustomer.getCustomerAddress1());
+		Assert.assertEquals(newCustomerScreen.getCustomerCountry(), testcustomer.getCustomerCountry());
+		Assert.assertEquals(newCustomerScreen.getCustomerState(), testcustomer.getCustomerState());
+		ScreenNavigationSteps.pressBackButton();
+		ScreenNavigationSteps.pressBackButton();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -134,29 +129,25 @@ public class VNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 
 		deleteCustomerOnBackOffice(testcustomer.getFirstName(), testcustomer.getLastName());
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
-		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-		newcustomerscreen.createNewCustomer(testcustomer);
-		customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
-		customersscreen.clickBackButton();
-		homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+		HomeScreenSteps.openCustomers();
+		CustomersScreenSteps.clickAddCustomerButton();
+		VNextNewCustomerScreen newCustomerScreen = new VNextNewCustomerScreen();
+		newCustomerScreen.createNewCustomer(testcustomer);
+		ScreenNavigationSteps.pressBackButton();
 		BaseUtils.waitABit(30000);
-		VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
-		statusscreen.updateMainDB(employee);
-		//homescreen = statusscreen.clickBackButton();
-		customersscreen = homescreen.clickCustomersMenuItem();
-		newcustomerscreen = customersscreen.openCustomerForEdit(testcustomer);
-		Assert.assertEquals(newcustomerscreen.getCustomerFirstName(), testcustomer.getFirstName());
-		Assert.assertEquals(newcustomerscreen.getCustomerLastName(), testcustomer.getLastName());
-		Assert.assertEquals(newcustomerscreen.getCustomerCompanyName(), testcustomer.getCompany());
-		Assert.assertEquals(newcustomerscreen.getCustomerEmail(), testcustomer.getMailAddress());
-		Assert.assertEquals(newcustomerscreen.getCustomerPhone(), testcustomer.getCustomerPhone());
-		Assert.assertEquals(newcustomerscreen.getCustomerAddress(), testcustomer.getCustomerAddress1());
-		Assert.assertEquals(newcustomerscreen.getCustomerCountry(), testcustomer.getCustomerCountry());
-		Assert.assertEquals(newcustomerscreen.getCustomerState(), testcustomer.getCustomerState());
-		customersscreen = newcustomerscreen.clickBackButton();
-		customersscreen.clickBackButton();
+		StatusScreenSteps.updateMainDB();
+		HomeScreenSteps.openCustomers();
+		CustomersScreenSteps.openCustomerForEdit(testcustomer);
+		Assert.assertEquals(newCustomerScreen.getCustomerFirstName(), testcustomer.getFirstName());
+		Assert.assertEquals(newCustomerScreen.getCustomerLastName(), testcustomer.getLastName());
+		Assert.assertEquals(newCustomerScreen.getCustomerCompanyName(), testcustomer.getCompany());
+		Assert.assertEquals(newCustomerScreen.getCustomerEmail(), testcustomer.getMailAddress());
+		Assert.assertEquals(newCustomerScreen.getCustomerPhone(), testcustomer.getCustomerPhone());
+		Assert.assertEquals(newCustomerScreen.getCustomerAddress(), testcustomer.getCustomerAddress1());
+		Assert.assertEquals(newCustomerScreen.getCustomerCountry(), testcustomer.getCustomerCountry());
+		Assert.assertEquals(newCustomerScreen.getCustomerState(), testcustomer.getCustomerState());
+		ScreenNavigationSteps.pressBackButton();
+		ScreenNavigationSteps.pressBackButton();
 	}
 
 	private void deleteCustomerOnBackOffice(String firstName, String lastName) {

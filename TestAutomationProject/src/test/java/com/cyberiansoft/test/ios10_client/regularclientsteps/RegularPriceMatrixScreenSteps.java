@@ -1,16 +1,9 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
-import com.cyberiansoft.test.dataclasses.MatrixServiceData;
 import com.cyberiansoft.test.dataclasses.PriceMatrixScreenData;
-import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularInspectionToolBar;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularPriceMatricesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularPriceMatrixScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularServicesScreen;
-import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
-import org.testng.Assert;
 
 public class RegularPriceMatrixScreenSteps {
 

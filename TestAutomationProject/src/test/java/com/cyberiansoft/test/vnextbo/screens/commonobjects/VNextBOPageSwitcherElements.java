@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnextbo.screens.commonobjects;
 
-import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
@@ -9,8 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import java.util.List;
 
 @Getter
 public class VNextBOPageSwitcherElements extends VNextBOBaseWebPage {
@@ -51,15 +48,9 @@ public class VNextBOPageSwitcherElements extends VNextBOBaseWebPage {
     @FindBy(xpath = "//section[@class='view']//tfoot//button[@class='pager__item active']")
     private WebElement footerActivePageNumber;
 
-    @FindBy(xpath = "(//section[@class='view']//button[@class='pager__item active'])[1]")
-    private WebElement activePageTopPagingElement;
-
-    @FindBy(xpath = "(//section[@class='view']//button[@class='pager__item active'])[2]")
-    private WebElement activePageBottomPagingElement;
-
     public WebElement specificPageButton(int pageNumber) {
-        return driver.findElement(By.xpath("(//button[@class='pager__item' and @data-page-index='" +
-                (pageNumber - 1) + "'])[1]"));
+        return driver.findElement(By.xpath("//thead//button[@class='pager__item' and @data-page-index='" +
+                (pageNumber - 1) + "']"));
     }
 
     public WebElement itemsPerPageOption(String itemsPerPage) {

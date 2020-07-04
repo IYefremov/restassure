@@ -5,32 +5,27 @@ import com.cyberiansoft.test.dataclasses.MatrixServiceData;
 import com.cyberiansoft.test.dataclasses.TestCaseData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
+import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.steps.InspectionSteps;
-import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
+import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
+import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionAdvancedSearchForm;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsAdvancedSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
-import com.cyberiansoft.test.vnextbo.verifications.inspections.VNextBOInspectionsPageValidations;
+import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
+import com.cyberiansoft.test.vnextbo.validations.inspections.VNextBOInspectionsPageValidations;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -39,7 +34,7 @@ import org.testng.annotations.Test;
 
 public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 
-    private String inspnumber = "";
+    private String inspectionNumber = "";
     private String archivedinspnumber = "";
     private final String VIN = "3N1AB7AP3HY327077";
     private final String stock = "123";
@@ -48,124 +43,102 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateInspectionWithPopulatedVehicleInfoForCurrentDay(String rowID,
-                                                                                String description, JSONObject testData) throws Exception {
+                                                                                String description, JSONObject testData){
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
-        customersScreen.selectCustomer(testcustomer);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, inspectionData);
 
-        inspnumber = vehicleInfoScreen.getNewInspectionNumber();
-        vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
-        VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        claimInfoScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
-        claimInfoScreen.setClaimNumber(inspectionData.getInsuranceCompanyData().getClaimNumber());
-        claimInfoScreen.setPolicyNumber(inspectionData.getInsuranceCompanyData().getPolicyNumber());
-        claimInfoScreen.setDeductibleValue(inspectionData.getInsuranceCompanyData().getDeductible());
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen.selectService(inspectionData.getPercentageServiceData().getServiceName());
-        availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
+        ClaimInfoSteps.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
+        ClaimInfoSteps.setClaimNumber(inspectionData.getInsuranceCompanyData().getClaimNumber());
+        ClaimInfoSteps.setPolicyNumber(inspectionData.getInsuranceCompanyData().getPolicyNumber());
+        ClaimInfoSteps.setDeductibleValue(inspectionData.getInsuranceCompanyData().getDeductible());
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+        AvailableServicesScreenSteps.selectService(inspectionData.getPercentageServiceData());
+        AvailableServicesScreenSteps.selectService(inspectionData.getMoneyServiceData());
         MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
         AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
-        VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(matrixServiceData.getVehiclePartData().getVehiclePartName());
+        VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        vehiclePartsScreen.selectVehiclePart(matrixServiceData.getVehiclePartData().getVehiclePartName());
+        VNextVehiclePartInfoScreen vehiclePartInfoScreen = new VNextVehiclePartInfoScreen();
         vehiclePartInfoScreen.selectVehiclePartSize(matrixServiceData.getVehiclePartData().getVehiclePartSize());
         vehiclePartInfoScreen.selectVehiclePartSeverity(matrixServiceData.getVehiclePartData().getVehiclePartSeverity());
         vehiclePartInfoScreen.selectVehiclePartAdditionalService(matrixServiceData.getVehiclePartData().getVehiclePartAdditionalService().getServiceName());
         vehiclePartInfoScreen.clickSaveVehiclePartInfo();
-        vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
-        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
-        selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
+        vehiclePartsScreen.clickVehiclePartsSaveButton();
+        SelectedServicesScreenSteps.changeSelectedServicePrice(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
+        SelectedServicesScreenSteps.changeSelectedServiceQuantity(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
 
-        inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
-        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspnumber), PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
-        inspectionsScreen.clickBackButton();
+        inspectionNumber = InspectionSteps.saveInspection();
+        InspectionsValidations.verifyInspectionTotalPrice(inspectionNumber, PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
+        ScreenNavigationSteps.pressBackButton();
 
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         webdriver.get(deviceOfficeUrl);
-        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
-                VNextBOLoginScreenWebPage.class);
-        loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
+        VNextBOLoginSteps.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
                 VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
         VNextBOInspectionsPageSteps.advancedSearchInspectionByCustomer(testcustomer.getFullName());
 
-        insppage.selectInspectionInTheList(inspnumber);
+        insppage.selectInspectionInTheList(inspectionNumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspectionData.getInspectionPrice());
         webdriver.quit();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateArchivedInspectionWithFullPopulatedVehicleInfoForCurrentDay(String rowID,
-                                                                          String description, JSONObject testData) throws Exception {
+                                                                          String description, JSONObject testData)  {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
-        customersScreen.selectCustomer(testcustomer);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, inspectionData);
 
-        archivedinspnumber = vehicleInfoScreen.getNewInspectionNumber();
-        vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
-        VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        claimInfoScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
-        claimInfoScreen.setClaimNumber(inspectionData.getInsuranceCompanyData().getClaimNumber());
-        claimInfoScreen.setPolicyNumber(inspectionData.getInsuranceCompanyData().getPolicyNumber());
-        claimInfoScreen.setDeductibleValue(inspectionData.getInsuranceCompanyData().getDeductible());
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen.selectService(inspectionData.getPercentageServiceData().getServiceName());
-        availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
+        ClaimInfoSteps.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
+        ClaimInfoSteps.setClaimNumber(inspectionData.getInsuranceCompanyData().getClaimNumber());
+        ClaimInfoSteps.setPolicyNumber(inspectionData.getInsuranceCompanyData().getPolicyNumber());
+        ClaimInfoSteps.setDeductibleValue(inspectionData.getInsuranceCompanyData().getDeductible());
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+        AvailableServicesScreenSteps.selectService(inspectionData.getPercentageServiceData());
+        AvailableServicesScreenSteps.selectService(inspectionData.getMoneyServiceData());
         MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
         AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
-        VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(matrixServiceData.getVehiclePartData().getVehiclePartName());
+        VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        vehiclePartsScreen.selectVehiclePart(matrixServiceData.getVehiclePartData().getVehiclePartName());
+        VNextVehiclePartInfoScreen vehiclePartInfoScreen = new VNextVehiclePartInfoScreen();
         vehiclePartInfoScreen.selectVehiclePartSize(matrixServiceData.getVehiclePartData().getVehiclePartSize());
         vehiclePartInfoScreen.selectVehiclePartSeverity(matrixServiceData.getVehiclePartData().getVehiclePartSeverity());
         vehiclePartInfoScreen.selectVehiclePartAdditionalService(matrixServiceData.getVehiclePartData().getVehiclePartAdditionalService().getServiceName());
         vehiclePartInfoScreen.clickSaveVehiclePartInfo();
-        vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
-        availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
-        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
-        selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
+        vehiclePartsScreen.clickVehiclePartsSaveButton();
+        SelectedServicesScreenSteps.changeSelectedServicePrice(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
+        SelectedServicesScreenSteps.changeSelectedServiceQuantity(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
 
-        inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
-        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(archivedinspnumber), PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
+        archivedinspnumber = InspectionSteps.saveInspection();
+        InspectionsValidations.verifyInspectionTotalPrice(archivedinspnumber, PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
         InspectionSteps.archiveInspection(archivedinspnumber);
-
-        inspectionsScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(testName = "Test Case 64864:R360: verify searching inspection by All Status on BO",
-            description = "Verify searching inspection by All Status on BO",
-            dependsOnMethods = {"testCreateInspectionWithPopulatedVehicleInfoForCurrentDay", "testCreateArchivedInspectionWithFullPopulatedVehicleInfoForCurrentDay"})
+            description = "Verify searching inspection by All Status on BO")
     public void testVerifySearchingInspectionByAllStatusOnBO() {
 
         final String inspTotalPrice = "$ 267.81";
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         webdriver.get(deviceOfficeUrl);
-        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
-                VNextBOLoginScreenWebPage.class);
-        loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
+        VNextBOLoginSteps.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
                 VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
@@ -178,17 +151,14 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
     }
 
     @Test(testName = "Test Case 64871:R360: verify searching inspection by Archived Status on BO",
-            description = "Verify searching inspection by Archived Status on BO",
-            dependsOnMethods = {"testCreateArchivedInspectionWithFullPopulatedVehicleInfoForCurrentDay"})
+            description = "Verify searching inspection by Archived Status on BO")
     public void testVerifySearchingInspectionByArchivedStatusOnBO() {
 
         final String inspTotalPrice = "$ 267.81";
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         webdriver.get(deviceOfficeUrl);
-        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
-                VNextBOLoginScreenWebPage.class);
-        loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
+        VNextBOLoginSteps.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
                 VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
@@ -201,100 +171,87 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
     }
 
     @Test(testName = "Test Case 64872:R360: verify searching inspection by Approved Status on BO",
-            description = "Verify searching inspection by Approved Status on BO",
-            dependsOnMethods = {"testCreateInspectionWithPopulatedVehicleInfoForCurrentDay"})
+            description = "Verify searching inspection by Approved Status on BO")
     public void testVerifySearchingInspectionByApprovedStatusOnBO() {
 
         final String inspTotalPrice = "$ 267.81";
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         webdriver.get(deviceOfficeUrl);
-        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
-                VNextBOLoginScreenWebPage.class);
-        loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
+        VNextBOLoginSteps.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
                 VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
         VNextBOInspectionsPageSteps.advancedSearchInspectionByStatus("Approved");
 
-        insppage.selectInspectionInTheList(inspnumber);
+        insppage.selectInspectionInTheList(inspectionNumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
         webdriver.quit();
     }
 
     @Test(testName = "Test Case 64944:R360: verify searching inspection by Stock# on BO",
-            description = "Verify searching inspection by Stock# on BO",
-            dependsOnMethods = {"testCreateInspectionWithPopulatedVehicleInfoForCurrentDay"})
+            description = "Verify searching inspection by Stock# on BO")
     public void testVerifySearchingInspectionByStockNumberOnBO() {
 
         final String inspTotalPrice = "$ 267.81";
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         webdriver.get(deviceOfficeUrl);
-        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
-                VNextBOLoginScreenWebPage.class);
-        loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
+        VNextBOLoginSteps.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
                 VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
         VNextBOInspectionsPageSteps.advancedSearchInspectionByStockNumber(stock);
 
-        insppage.selectInspectionInTheList(inspnumber);
+        insppage.selectInspectionInTheList(inspectionNumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
         webdriver.quit();
     }
 
     @Test(testName = "Test Case 64945:R360: verify searching inspection by PO# on BO",
-            description = "Verify searching inspection by PO# on BO",
-            dependsOnMethods = {"testCreateInspectionWithPopulatedVehicleInfoForCurrentDay"})
+            description = "Verify searching inspection by PO# on BO")
     public void testVerifySearchingInspectionByPONumberOnBO() {
 
         final String inspTotalPrice = "$ 267.81";
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         webdriver.get(deviceOfficeUrl);
-        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
-                VNextBOLoginScreenWebPage.class);
-        loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
+        VNextBOLoginSteps.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
                 VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
         VNextBOInspectionsPageSteps.advancedSearchInspectionByPONumber(po);
 
-        insppage.selectInspectionInTheList(inspnumber);
+        insppage.selectInspectionInTheList(inspectionNumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
         webdriver.quit();
     }
 
     @Test(testName = "Test Case 64946:R360: verify searching inspection by VIN on BO",
-            description = "Verify searching inspection by VIN on BO",
-            dependsOnMethods = {"testCreateInspectionWithPopulatedVehicleInfoForCurrentDay"})
+            description = "Verify searching inspection by VIN on BO")
     public void testVerifySearchingInspectionByVINOnBO() {
 
         final String inspTotalPrice = "$ 267.81";
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         webdriver.get(deviceOfficeUrl);
-        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
-                VNextBOLoginScreenWebPage.class);
-        loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
+        VNextBOLoginSteps.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
                 VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
         VNextBOInspectionsPageSteps.advancedSearchInspectionByVIN(VIN);
 
-        insppage.selectInspectionInTheList(inspnumber);
+        insppage.selectInspectionInTheList(inspectionNumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
         webdriver.quit();
     }
 
     @Test(testName = "Test Case 64947:R360: verify posibility to Save Inspection Search filter on BO",
-            description = "Verify posibility to Save Inspection Search filter on BO",
-            dependsOnMethods = {"testCreateInspectionWithPopulatedVehicleInfoForCurrentDay"})
+            description = "Verify posibility to Save Inspection Search filter on BO")
     public void testVerifyPosibilityToSaveInspectionSearchFilterOnBO() {
 
         final String inspTotalPrice = "$ 267.81";
@@ -302,31 +259,28 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         webdriver.get(deviceOfficeUrl);
-        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
-                VNextBOLoginScreenWebPage.class);
-        loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
+        VNextBOLoginSteps.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
                 VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
 
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
-        if (VNextBOInspectionsPageValidations.isSavedAdvancedSearchFilterExists(filterName))
+        if (VNextBOInspectionsPageValidations.verifySavedAdvancedSearchFilterExists(filterName))
             VNextBOInspectionsPageSteps.deleteSavedAdvancedSearchFilter(filterName);
 
 
         VNextBOInspectionsPageSteps.openAdvancedSearchForm();
         VNextBOInspectionAdvancedSearchForm advancedserchdialog = new VNextBOInspectionAdvancedSearchForm();
-        VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#", inspnumber);
+        VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#", inspectionNumber);
         VNextBOInspectionsAdvancedSearchSteps.setAdvancedSearchFilterNameAndSave(filterName);
-        insppage.selectInspectionInTheList(inspnumber);
+        insppage.selectInspectionInTheList(inspectionNumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
         webdriver.quit();
     }
 
     @Test(testName = "Test Case 64949:R360: verify posibility to edit saved Inspection Search filter on BO",
-            description = "Verify posibility to edit saved Inspection Search filter on BO",
-            dependsOnMethods = {"testVerifyPosibilityToSaveInspectionSearchFilterOnBO"})
+            description = "Verify posibility to edit saved Inspection Search filter on BO")
     public void testVerifyPosibilityToEditSavedInspectionSearchFilterOnBO() {
 
         final String inspTotalPrice = "$ 267.81";
@@ -335,16 +289,14 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         webdriver.get(deviceOfficeUrl);
-        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
-                VNextBOLoginScreenWebPage.class);
-        loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
+        VNextBOLoginSteps.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
                 VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
 
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
-        if (VNextBOInspectionsPageValidations.isSavedAdvancedSearchFilterExists(filterNameEdited))
+        if (VNextBOInspectionsPageValidations.verifySavedAdvancedSearchFilterExists(filterNameEdited))
             VNextBOInspectionsPageSteps.deleteSavedAdvancedSearchFilter(filterNameEdited);
 
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
@@ -353,23 +305,20 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Search Name", filterNameEdited);
         VNextBOInspectionsAdvancedSearchSteps.saveAdvancedSearchFilter();
 
-        insppage.selectInspectionInTheList(inspnumber);
+        insppage.selectInspectionInTheList(inspectionNumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
         webdriver.quit();
     }
 
     @Test(testName = "Test Case 64956:R360: verify posibility to Clear saved Inspection Search filter on BO",
-            description = "Verify posibility to Clear saved Inspection Search filter on BO",
-            dependsOnMethods = {"testVerifyPosibilityToEditSavedInspectionSearchFilterOnBO"})
+            description = "Verify posibility to Clear saved Inspection Search filter on BO")
     public void testVerifyPosibilityToClearSavedInspectionSearchFilterOnBO() {
 
         final String filterNameEdited = "test12345edited";
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         webdriver.get(deviceOfficeUrl);
-        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
-                VNextBOLoginScreenWebPage.class);
-        loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
+        VNextBOLoginSteps.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
                 VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
@@ -388,8 +337,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
     }
 
     @Test(testName = "Test Case 64957:R360: verify posibility to Delete saved Inspection Search filter on BO",
-            description = "Verify posibility to Delete saved Inspection Search filter on BO",
-            dependsOnMethods = {"testVerifyPosibilityToEditSavedInspectionSearchFilterOnBO"})
+            description = "Verify posibility to Delete saved Inspection Search filter on BO")
     public void testVerifyPosibilityToDeleteSavedInspectionSearchFilterOnBO() {
 
         final String filterNameEdited = "test12345edited";
@@ -397,9 +345,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         webdriver.get(deviceOfficeUrl);
-        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
-                VNextBOLoginScreenWebPage.class);
-        loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
+        VNextBOLoginSteps.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
                 VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
@@ -410,20 +356,17 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         Assert.assertEquals(VNextBOInspectionsPageSteps.getSearchFieldValue(), "");
         Assert.assertEquals(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue(), defaultTimeFrameValue);
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
-        Assert.assertFalse(VNextBOInspectionsPageValidations.isSavedAdvancedSearchFilterExists(filterNameEdited));
+        Assert.assertFalse(VNextBOInspectionsPageValidations.verifySavedAdvancedSearchFilterExists(filterNameEdited));
         webdriver.quit();
     }
 
     @Test(testName = "Test Case 64958:R360: verify posibility to reset Inspection Search filter to default on BO",
-            description = "Verify posibility to reset Inspection Search filter to default on BO",
-            dependsOnMethods = {"testVerifyPosibilityToEditSavedInspectionSearchFilterOnBO"})
+            description = "Verify posibility to reset Inspection Search filter to default on BO")
     public void testVerifyPosibilityToResetInspectionSearchFilterOnBO() {
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         webdriver.get(deviceOfficeUrl);
-        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
-                VNextBOLoginScreenWebPage.class);
-        loginpage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
+        VNextBOLoginSteps.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
                 VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
@@ -433,16 +376,17 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNextBOInspectionsPageSteps.openAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("VIN", VIN);
         VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
-        insppage.selectInspectionInTheList(inspnumber);
-        VNextBOInspectionsPageSteps.clickClearFilterIcon();
+        insppage.selectInspectionInTheList(inspectionNumber);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         Assert.assertEquals(VNextBOInspectionsPageSteps.getSearchFieldValue(), "");
         Assert.assertEquals(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue(), defaultTimeFrameValue);
-        VNextBOInspectionsPageSteps.searchInspectionByText(inspnumber);
-        insppage.selectInspectionInTheList(inspnumber);
-        VNextBOInspectionsPageSteps.clickClearFilterIcon();
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(inspectionNumber);
+        insppage.selectInspectionInTheList(inspectionNumber);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         Assert.assertEquals(VNextBOInspectionsPageSteps.getSearchFieldValue(), "");
         Assert.assertEquals(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue(), defaultTimeFrameValue);
 
         webdriver.quit();
     }
 }
+

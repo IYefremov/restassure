@@ -5,17 +5,13 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
 import static io.appium.java_client.touch.offset.ElementOption.element;
@@ -107,8 +103,8 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 		int yy = imagecar.getLocation().getY();	
 		
 		//action.press(appiumdriver.manage().window().getSize().width - yy - imagecar .getSize().getHeight()/2 + 30, xx + imagecar.getSize().getWidth()/(times+1)).waitAction(1000).
-		action.tap(element(imagecar, imagecar.getSize().getWidth()- times*40, imagecar.getSize().getHeight()/2 + 130)).perform();
-
+		//action.tap(element(imagecar, imagecar.getSize().getWidth()- times*40, imagecar.getSize().getHeight()/2 + 130)).perform();
+		action.tap(element(imagecar, imagecar.getSize().getWidth()/2 + times*40, imagecar.getSize().getHeight()/2 + times*40)).perform();
 	}
 
 	public void tapExterior() {

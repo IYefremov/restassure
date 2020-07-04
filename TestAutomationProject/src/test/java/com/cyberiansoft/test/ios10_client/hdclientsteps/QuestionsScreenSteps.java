@@ -2,9 +2,7 @@ package com.cyberiansoft.test.ios10_client.hdclientsteps;
 
 import com.cyberiansoft.test.dataclasses.QuestionScreenData;
 import com.cyberiansoft.test.dataclasses.QuestionsData;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.QuestionsScreen;
-import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 
 import java.util.List;
 
@@ -44,7 +42,7 @@ public class QuestionsScreenSteps {
             answerTextQuestion(questionData);
         else if (questionData.getQuestionAnswer() != null)
             questionsScreen.selectAnswerForQuestion(questionData);
-        else if (questionData.isSignatureQuestion())
+        else if (questionData.getSignatureQuestion() != null)
             questionsScreen.drawSignature();
         else
             questionsScreen.selectAnswerForQuestion(questionData);

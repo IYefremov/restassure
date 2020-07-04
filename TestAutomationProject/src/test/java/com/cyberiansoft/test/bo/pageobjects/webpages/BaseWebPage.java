@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.core.BrowserType;
+import com.cyberiansoft.test.core.WebDriverConfigInfo;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.google.common.base.Function;
 import org.awaitility.core.ConditionTimeoutException;
@@ -47,30 +47,15 @@ public abstract class BaseWebPage {
 
 		moveToElement(childElement);
 
-		wait.until(new Function<WebDriver, Boolean>() {
-			@Override
-			public Boolean apply(WebDriver input) {
-				return childElement.isEnabled();
-			}
-		});
+		wait.until((Function<WebDriver, Boolean>) input -> childElement.isEnabled());
 
 		return childElement;
 	}
 
 	protected WebElement waitUntilElementIsClickable(final WebElement element) {
-		final WebElement childElement = wait.until(new Function<WebDriver, WebElement>() {
-			@Override
-			public WebElement apply(WebDriver input) {
-				return element;
-			}
-		});
+		final WebElement childElement = wait.until((Function<WebDriver, WebElement>) input -> element);
 		moveToElement(element);
-		wait.until(new Function<WebDriver, Boolean>() {
-			@Override
-			public Boolean apply(WebDriver input) {
-				return childElement.isEnabled();
-			}
-		});
+		wait.until((Function<WebDriver, Boolean>) input -> childElement.isEnabled());
 
 		return childElement;
 	}
@@ -85,7 +70,7 @@ public abstract class BaseWebPage {
     }
 
 	public String getBrowserType() {
-        browserType = BaseUtils.getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser());
+        browserType = BaseUtils.getBrowserType(WebDriverConfigInfo.getInstance().getDefaultBrowser());
         return DriverBuilder.getInstance().getBrowser();
 	}
 
@@ -103,14 +88,10 @@ public abstract class BaseWebPage {
 	public void waitForNewTab() {
 	    try {
             wait.until(ExpectedConditions.numberOfWindowsToBe(2));
-        } catch (TimeoutException e) {
-	        waitABit(5000);
-        }
-		waitABit(5000);
-		wait.until((ExpectedCondition<Boolean>) d -> (d.getWindowHandles().size() > 1));
+        } catch (TimeoutException ignored) {}
+		waitABit(2000);
+		wait.until((ExpectedCondition<Boolean>) d -> d.getWindowHandles().size() > 1);
 	}
-
-    // Bot actions
 
 	/* Wait For */
 	public void waitABit(int milliseconds) {
@@ -233,7 +214,7 @@ public abstract class BaseWebPage {
     public void waitForLoading(){
         waitForLoadingToBegin();
         try {
-            await().atMost(80, TimeUnit.SECONDS)
+            await().atMost(15, TimeUnit.SECONDS)
                     .ignoreExceptions()
                     .pollInterval(500, TimeUnit.MILLISECONDS)
                     .until(this::waitForLoadingToStop);

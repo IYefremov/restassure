@@ -1,9 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -47,10 +45,10 @@ public class VNextRegistrationOverviewScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//input[@data-bind='value: data.personalInfo.countryText']")
 	private WebElement countryfld;
-	
-	public VNextRegistrationOverviewScreen(AppiumDriver<MobileElement> appiumdriver) {
+
+    public VNextRegistrationOverviewScreen(WebDriver appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(registrationoverviewscreen));
 	}

@@ -5,7 +5,7 @@
 
   <test name="VNext BO Smoke Test Cases" preserve-order="true">
     <classes>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBONewSmokeTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.smoke.VNextBOSmokeTestCases"/>
     </classes>
   </test>
 </suite>

@@ -1,0 +1,31 @@
+{
+
+  "testVerifyUserCantCreateWholesaleCustomersOnTheDevice": [
+    {
+      "rowID": "testVerifyUserCantCreateWholesaleCustomersOnTheDevice.01",
+      "description": "Test Case 63617:Verify user can't create wholesale customers on the device",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90746",
+          "testCaseTitle": "Verify user can't create wholesale customers on the device"
+        }
+      ]
+    }
+  ],
+  "testVerifyUserCanSelectWholesaleCustomerWhenCreateInspection": [
+    {
+      "rowID": "testVerifyUserCanSelectWholesaleCustomerWhenCreateInspection.01",
+      "description": "Test Case 63629:Verify user can select Wholesale customer when create Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90313",
+          "testCaseTitle": "Verify user can select Wholesale customer when create Inspection"
+        }
+      ],
+      "inspType": "O_Kramar",
+      "vihicleInfo": {"vinNumber": "7777777777777"
+      }
+    }
+  ]
+
+}

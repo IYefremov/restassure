@@ -1,9 +1,8 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import com.cyberiansoft.test.baseutils.DataUtils;
-import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.bo.webelements.*;
+import com.cyberiansoft.test.enums.DateUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,13 +28,13 @@ public class WebPageWithFilter extends WebPageWithPagination {
     private ComboBox searchBillingCmb;
 
     @FindBy(xpath = "//div[contains(@id, 'filterer_ddlPORequired_DropDown')]")
-    private DropDown searchBillingDropDown;
+    private DropDown searchBillingDd;
 
     @FindBy(xpath = "//input[contains(@id, 'filterer_txtInvoiceNo')]")
     private TextField invoiceField;
 
     public WebPageWithFilter selectBillingOption(WebConstants.BillingValues billingValues) {
-        selectComboboxValue(searchBillingCmb, searchBillingDropDown, billingValues.getName());
+        selectComboboxValue(searchBillingCmb, searchBillingDd, billingValues.getName());
         return this;
     }
 
@@ -56,7 +55,7 @@ public class WebPageWithFilter extends WebPageWithPagination {
 	
 	public void verifyTableDateRangeForCurrentTablePage(LocalDate startrange, LocalDate endrange, List<WebElement> datecells) {
 		DateTimeFormatter dateFormat =
-                DateTimeFormatter.ofPattern(DataUtils.FULL_DATE_FORMAT.getData());
+                DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat());
 		for (WebElement datecell : datecells) {
 			LocalDate datevalue = LocalDate.parse(datecell.getText(), dateFormat);
 			Assert.assertTrue((datevalue.isAfter(startrange) & datevalue.isBefore(endrange)), "Date " + datecell.getText() + " is not after " + startrange + " or not before " + endrange);
@@ -71,7 +70,7 @@ public class WebPageWithFilter extends WebPageWithPagination {
 	}
 	
 	public void verifyTableDateRangeForAllTablePages(LocalDate startrange, LocalDate endrange, WebTable table, String datecolumnname) {
-		int pagenum =  Integer.valueOf(getLastPageNumber());
+		int pagenum =  Integer.parseInt(getLastPageNumber());
 		for (int i = 1; i <= pagenum; i++) {
 			List<WebElement> datecells = table.getTableColumnCells(datecolumnname);
 			verifyTableDateRangeForCurrentTablePage(startrange, endrange, datecells);
@@ -81,7 +80,7 @@ public class WebPageWithFilter extends WebPageWithPagination {
 	}
 	
 	public void verifyTableDateRangeForAllTablePages(LocalDate startrange, LocalDate endrange, WebTable table, String datecolumnname, DateTimeFormatter dateFormat) {		
-		int pagenum =  Integer.valueOf(getLastPageNumber());	
+		int pagenum =  Integer.parseInt(getLastPageNumber());
 		for (int i = 1; i <= pagenum; i++) {
 			List<WebElement> datecells = table.getTableColumnCells(datecolumnname);
 			verifyTableDateRangeForCurrentTablePage(startrange, endrange, datecells, dateFormat);
@@ -91,7 +90,7 @@ public class WebPageWithFilter extends WebPageWithPagination {
 	}
 	
 	public void verifyTableDateRangeForFirstAndLastTablePages(LocalDate startrange, LocalDate endrange, WebTable table, String datecolumnname) {
-		int pagenum =  Integer.valueOf(getLastPageNumber());
+		int pagenum =  Integer.parseInt(getLastPageNumber());
 		for (int i = 1; i <= 3; i++) {
 			List<WebElement> datecells = table.getTableColumnCells(datecolumnname);
 			verifyTableDateRangeForCurrentTablePage(startrange, endrange, datecells);
@@ -102,7 +101,7 @@ public class WebPageWithFilter extends WebPageWithPagination {
 	}
 	
 	public void verifyTableDateRangeForFirstAndLastTablePages(LocalDate startrange, LocalDate endrange, WebTable table, String datecolumnname, DateTimeFormatter dateFormat) {
-		int pagenum =  Integer.valueOf(getLastPageNumber());
+		int pagenum =  Integer.parseInt(getLastPageNumber());
 		for (int i = 1; i <= 3; i++) {
 			List<WebElement> datecells = table.getTableColumnCells(datecolumnname);
 			verifyTableDateRangeForCurrentTablePage(startrange, endrange, datecells, dateFormat);

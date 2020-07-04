@@ -10,8 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public class RegularTeamInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 
 	@iOSXCUITFindBy(accessibility = "InvoicesTable")
@@ -23,7 +21,8 @@ public class RegularTeamInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 	}
 
 	public void selectInvoice(String invoiceNumber) {
-		WaitUtils.elementShouldBeVisible(invoicesTable, true);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(invoiceNumber)));
 		invoicesTable.findElementByAccessibilityId(invoiceNumber).click();
 	}
 

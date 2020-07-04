@@ -1,0 +1,258 @@
+{
+  "verifyUserCanAddLaborPriceService": [
+    {
+      "rowID": "verifyUserCanAddLaborPriceService.01",
+      "description": "Test Case 91560: Verify user can add \"Labor\" price service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91560",
+          "testCaseTitle": "Verify user can add \"Labor\" price service"
+        }
+      ],
+      "serviceName": "Labor service 91560",
+      "serviceType": "Detail",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Labor",
+      "serviceLaborRate": "45.00",
+      "serviceDefaultLaborTime": "50.0",
+      "serviceUseSelectedLaborTimes": "false"
+    }
+  ],
+
+  "verifyUserCanAddLaborPriceServiceWithUseLaborTimes": [
+    {
+      "rowID": "verifyUserCanAddLaborPriceServiceWithUseLaborTimes.01",
+      "description": "Test Case 91561: Verify user can add \"Labor\" price service with \"Use labor times\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91561",
+          "testCaseTitle": "Verify user can add \"Labor\" price service with \"Use labor times\""
+        }
+      ],
+      "serviceName": "Labor service 91561",
+      "serviceType": "Detail",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Labor",
+      "serviceLaborRate": "78.00",
+      "serviceDefaultLaborTime": "12.0",
+      "serviceUseSelectedLaborTimes": "true"
+    }
+  ],
+
+  "verifyUserCannotAddLaborServiceWithClickedRejectIcon": [
+    {
+      "rowID": "verifyUserCannotAddLaborServiceWithClickedRejectIcon.01",
+      "description": "Test Case 91562: Verify user can't add new \"labor\" service when click reject",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91562",
+          "testCaseTitle": "Verify user can't add new \"labor\" service when click reject"
+        }
+      ],
+      "serviceName": "Labor service 91562",
+      "serviceType": "Detail",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Labor",
+      "serviceLaborRate": "78.00",
+      "serviceDefaultLaborTime": "12.0",
+      "serviceUseSelectedLaborTimes": "true"
+    }
+  ],
+
+  "verifyUserCanEditLaborPriceService": [
+    {
+      "rowID": "verifyUserCanEditLaborPriceService.01",
+      "description": "Test Case 91570: Verify user can edit \"Labor\" price service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91570",
+          "testCaseTitle": "Verify user can edit \"Labor\" price service"
+        }
+      ],
+      "serviceName": "Labor service 91570",
+      "serviceType": "Detail",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Labor",
+      "serviceLaborRate": "78.00",
+      "serviceDefaultLaborTime": "12.0",
+      "serviceUseSelectedLaborTimes": "true"
+    }
+  ],
+
+  "verifyUserCanDeleteLaborPriceService": [
+    {
+      "rowID": "verifyUserCanDeleteLaborPriceService.01",
+      "description": "Test Case 91565: Verify user can delete \"Labor\" price service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91565",
+          "testCaseTitle": "Verify user can delete \"Labor\" price service"
+        }
+      ],
+      "serviceName": "Labor service 91565",
+      "serviceType": "Detail",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Labor",
+      "serviceLaborRate": "78.00",
+      "serviceDefaultLaborTime": "12.0",
+      "serviceUseSelectedLaborTimes": "true"
+    }
+  ],
+
+  "verifyUserCanRestoreDeletedLaborPriceService": [
+    {
+      "rowID": "verifyUserCanRestoreDeletedLaborPriceService.01",
+      "description": "Test Case 91566: Verify user can restore deleted \"Labor\" price service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91566",
+          "testCaseTitle": "Verify user can restore deleted \"Labor\" price service"
+        }
+      ],
+      "serviceName": "Labor service 91566",
+      "serviceType": "Detail",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Labor",
+      "serviceLaborRate": "78.00",
+      "serviceDefaultLaborTime": "12.0",
+      "serviceUseSelectedLaborTimes": "true"
+    }
+  ],
+
+  "verifyUserCanAddPartPriceService": [
+    {
+      "rowID": "verifyUserCanAddPartPriceService.01",
+      "description": "Test Case 91574: Verify user can add \"Part\" price service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91574",
+          "testCaseTitle": "Verify user can add \"Part\" price service"
+        }
+      ],
+      "serviceName": "Part service 91574",
+      "serviceType": "Autre",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Part"
+    }
+  ],
+
+  "verifyUserCanAddPartPriceServiceWithCategorySubcategoryAndPartName": [
+    {
+      "rowID": "verifyUserCanAddPartPriceServiceWithCategorySubcategoryAndPartName.01",
+      "description": "Test Case 91564: Verify user can add \"Part\" price service with \"Category\", \"Subcategory\" and \"Part Name\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91564",
+          "testCaseTitle": "Verify user can add \"Part\" price service with \"Category\", \"Subcategory\" and \"Part Name\""
+        }
+      ],
+      "serviceName": "Part service 91564",
+      "serviceType": "Autre",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Part",
+      "serviceCategory": "Body",
+      "serviceSubCategory": "Bumper",
+      "servicePartName": "Air Dam"
+    }
+  ],
+
+  "verifyUserCanEditPartPriceService": [
+    {
+      "rowID": "verifyUserCanEditPartPriceService.01",
+      "description": "Test Case 91569: Verify user can edit \"Part\" price service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91569",
+          "testCaseTitle": "Verify user can edit \"Part\" price service"
+        }
+      ],
+      "serviceName": "Part service 91569",
+      "serviceType": "Autre",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Part",
+      "serviceCategory": "Body",
+      "serviceSubCategory": "Bumper",
+      "servicePartName": "Air Dam"
+    }
+  ],
+
+  "verifyUserCanDeletePartPriceService": [
+    {
+      "rowID": "verifyUserCanDeletePartPriceService.01",
+      "description": "Test Case 91567: Verify user can delete \"Part\" price service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91567",
+          "testCaseTitle": "Verify user can delete \"Part\" price service"
+        }
+      ],
+      "serviceName": "Part service 91567",
+      "serviceType": "Autre",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Part",
+      "serviceCategory": "Body",
+      "serviceSubCategory": "Bumper",
+      "servicePartName": "Air Dam"
+    }
+  ],
+
+  "verifyUserCanRestoreDeletedPartPriceService": [
+    {
+      "rowID": "verifyUserCanRestoreDeletedPartPriceService.01",
+      "description": "Test Case 91568: Verify user can restore deleted \"Part\" price service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91568",
+          "testCaseTitle": "Verify user can restore deleted \"Part\" price service"
+        }
+      ],
+      "serviceName": "Part service 91568",
+      "serviceType": "Autre",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Part",
+      "serviceCategory": "Body",
+      "serviceSubCategory": "Bumper",
+      "servicePartName": "Air Dam"
+    }
+  ],
+
+  "verifyUserCanChangeSequenceNumberForLaborServiceOrder": [
+    {
+      "rowID": "verifyUserCanChangeSequenceNumberForLaborServiceOrder.01",
+      "description": "Test Case 91573: Verify user can change sequence number for \"Labor\" service order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91573",
+          "testCaseTitle": "Verify user can change sequence number for \"Labor\" service order"
+        }
+      ],
+      "serviceName": "Labor service 91573",
+      "serviceType": "Detail",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Labor",
+      "serviceLaborRate": "78.00",
+      "serviceDefaultLaborTime": "12.0",
+      "serviceUseSelectedLaborTimes": "true"
+    }
+  ],
+
+  "verifyUserCanChangeSequenceNumberForPartServiceOrder": [
+    {
+      "rowID": "verifyUserCanChangeSequenceNumberForPartServiceOrder.01",
+      "description": "Test Case 91574: Verify user can change sequence number for \"Part\" service order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91574",
+          "testCaseTitle": "Verify user can change sequence number for \"Part\" service order"
+        }
+      ],
+      "serviceName": "Part service 91574",
+      "serviceType": "Autre",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Part",
+      "serviceCategory": "Body",
+      "serviceSubCategory": "Bumper",
+      "servicePartName": "Air Dam"
+    }
+  ]
+}

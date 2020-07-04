@@ -2,22 +2,18 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.steps.WorkOrderSteps;
+import com.cyberiansoft.test.vnext.steps.customers.CustomersScreenSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -28,139 +24,132 @@ public class VNextHomeScreen extends VNextBaseScreen {
     private WebElement rootElement;
 
     @FindBy(xpath = "//*[@action='navigate-to-customers']")
-    private WebElement customerslist;
+    private WebElement customersList;
 
     @FindBy(xpath = "//span[@class='client-mode']")
-    private WebElement clientmode;
+    private WebElement clientMode;
 
     @FindBy(xpath = "//*[@action='navigate-to-inspections']")
-    private WebElement inspectionslist;
+    private WebElement inspectionsList;
 
     @FindBy(xpath = "//*[@action='navigate-to-orders']")
-    private WebElement workorderslist;
+    private WebElement workOrdersList;
 
     @FindBy(xpath = "//*[@action='navigate-to-invoices']")
-    private WebElement invoiceslist;
+    private WebElement invoicesList;
 
     @FindBy(xpath = "//*[@action='work-queue']")
     private WebElement workQueue;
 
+    @FindBy(xpath = "//*[@action='monitor-update-work']")
+    private WebElement monitorUpdateWork;
+
     @FindBy(xpath = "//*[@action='navigate-to-monitor']")
     private WebElement monitor;
 
+    @FindBy(xpath = "//*[@action='navigate-to-service-requests']")
+    private WebElement serviceRequests;
+
     @FindBy(xpath = "//a[@class='tile-link tile-item more-tile']")
-    private WebElement morelist;
+    private WebElement moreList;
 
     @FindBy(xpath = "//*[@action='navigate-to-settings']")
-    private WebElement settingslist;
+    private WebElement settingsList;
 
     @FindBy(xpath = "//*[@action='navigate-to-status']")
-    private WebElement statuslist;
+    private WebElement statusList;
 
     @FindBy(xpath = "//*[@action='messager-send']/span[@class='messager-counter']")
-    private WebElement queuemessage;
+    private WebElement queueMessage;
 
     @FindBy(xpath = "//*[@action='messager-send']")
-    private WebElement queuemessageicon;
+    private WebElement queueMessageIcon;
 
     @FindBy(xpath = "//*[@action='logout']")
-    private WebElement logoutbtn;
+    private WebElement logoutBtn;
 
     @FindBy(xpath = "//div[@class='speed-dial']/a[@class='floating-button color-red']")
-    private WebElement addbtn;
+    private WebElement addBtn;
 
     @FindBy(xpath = "//*[@action='new_order']")
-    private WebElement newworkorderbtn;
+    private WebElement newWorkOrderBtn;
 
     @FindBy(xpath = "//*[@action='new_inspection']")
-    private WebElement newinspectionbtn;
+    private WebElement newInspectionBtn;
 
-    public VNextHomeScreen(AppiumDriver<MobileElement> appiumdriver) {
-        super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        WaitUtils.elementShouldBeVisible(getRootElement(),true);
-        if (checkHelpPopupPresence())
-            if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed()) {
-                tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
-        }
-    }
+    @FindBy(xpath = "//*[@action='new_invoice']")
+    private WebElement newInvoiceBtn;
 
     public VNextHomeScreen() {
     }
 
-    public VNextCustomersScreen clickCustomersMenuItem() {
-        tap(customerslist);
-        return new VNextCustomersScreen(appiumdriver);
+    public void clickCustomersMenuItem() {
+        tap(customersList);
     }
 
-    public VNextWorkOrdersScreen clickWorkOrdersMenuItem() {
-        //waitABit(2000);
-        WaitUtils.elementShouldBeVisible(workorderslist,true);
-        tap(workorderslist);
-        return new VNextWorkOrdersScreen(appiumdriver);
+    public void clickWorkOrdersMenuItem() {
+        WaitUtils.elementShouldBeVisible(workOrdersList,true);
+        tap(workOrdersList);
     }
 
     @Step
-    public VNextInspectionsScreen clickInspectionsMenuItem() {
-        tap(inspectionslist);
-        return new VNextInspectionsScreen(appiumdriver);
+    public void clickInspectionsMenuItem() {
+        WebDriver webDriver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+            executor.executeScript("arguments[0].click();", inspectionsList);
+            return true;
+        });
     }
 
-    public VNextInvoicesScreen clickInvoicesMenuItem() {
-        tap(invoiceslist);
+    public void clickInvoicesMenuItem() {
+        tap(invoicesList);
         BaseUtils.waitABit(2000);
-        return new VNextInvoicesScreen(appiumdriver);
     }
 
-    public VNextSettingsScreen clickSettingsMenuItem() {
-        if (!settingslist.isDisplayed())
-            tap(morelist);
-        tap(settingslist);
-        return new VNextSettingsScreen(appiumdriver);
+    public void clickSettingsMenuItem() {
+        if (!settingsList.isDisplayed())
+            tap(moreList);
+        tap(settingsList);
     }
 
-    public VNextStatusScreen clickStatusMenuItem() {
-        if (!statuslist.isDisplayed())
-            tap(morelist);
-        tap(statuslist);
-        return new VNextStatusScreen(appiumdriver);
+    public void clickStatusMenuItem() {
+        WebDriver webDriver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
+        JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+        executor.executeScript("arguments[0].click();", statusList);
     }
 
     public void clickQueueMessageIcon() {
-        tap(queuemessageicon);
+        tap(queueMessageIcon);
         BaseUtils.waitABit(500);
     }
 
     public String getQueueMessageValue() {
-        WaitUtils.elementShouldBeVisible(queuemessage, true);
-        return queuemessage.getText();
+        WaitUtils.elementShouldBeVisible(queueMessage, true);
+        return queueMessage.getText();
     }
 
     public boolean isQueueMessageVisible() {
-        return appiumdriver.findElementByXPath("//*[@action='messager-send']").isDisplayed();
+        return WaitUtils.isElementPresent(By.xpath("//*[@action='messager-send']"));
     }
 
     public void waitUntilQueueMessageInvisible() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 240);
-        wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElementByXPath("//*[@action='messager-send']")));
+        wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElement(By.xpath("//*[@action='messager-send']"))));
     }
 
     public VNextLoginScreen clickLogoutButton() {
-        tap(logoutbtn);
+        tap(logoutBtn);
         return new VNextLoginScreen(appiumdriver);
     }
 
+    //todo: make it as Step
     public VNextVehicleInfoScreen openCreateWOWizard(AppCustomer testcustomer) {
-        VNextWorkOrdersScreen workordersscreen = clickWorkOrdersMenuItem();
-        VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
-        customersscreen.selectCustomer(testcustomer);
+        WorkOrderSteps.clickAddWorkOrderButton();
+        CustomersScreenSteps.selectCustomer(testcustomer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         return vehicleInfoScreen;
-    }
-
-    public void clickUpgrateToProBanner() {
-        tap(appiumdriver.findElement(By.xpath("//div[@class='upgrade-image' and @action='ad']")));
     }
 
     public boolean isUpgrateToProBannerVisible() {
@@ -168,27 +157,11 @@ public class VNextHomeScreen extends VNextBaseScreen {
     }
 
     public void clickAddButton() {
-        tap(addbtn);
+        tap(addBtn);
     }
 
-    public VNextCustomersScreen clickNewWorkOrderPopupMenu() {
+    public void clickNewWorkOrderPopupMenu() {
         clickAddButton();
-        tap(newworkorderbtn);
-        return new VNextCustomersScreen(appiumdriver);
-    }
-
-    public VNextCustomersScreen clickNewInspectionPopupMenu() {
-        clickAddButton();
-        tap(newinspectionbtn);
-        return new VNextCustomersScreen(appiumdriver);
-    }
-
-    public String getDefaultCustomerValue() {
-        return clientmode.getText();
-    }
-
-    public void clickMonitor() {
-        WaitUtils.elementShouldBeVisible(workQueue,true);
-        workQueue.click();
+        tap(newWorkOrderBtn);
     }
 }

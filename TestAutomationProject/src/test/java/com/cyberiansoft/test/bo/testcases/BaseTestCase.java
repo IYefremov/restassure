@@ -5,15 +5,15 @@ import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
-import com.cyberiansoft.test.bo.verifications.ServiceRequestsListVerifications;
+import com.cyberiansoft.test.bo.validations.ServiceRequestsListVerifications;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.core.WebDriverConfigInfo;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
-import org.monte.screenrecorder.ScreenRecorder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -29,7 +29,6 @@ import java.io.File;
 
 public class BaseTestCase {
 
-	private ScreenRecorder screenRecorder;
 	protected AppiumDriver<MobileElement> appiumdriver;
 	protected WebDriver webdriver;
 	protected DesiredCapabilities appiumcap;
@@ -37,7 +36,6 @@ public class BaseTestCase {
 	protected static BrowserType browserType;
 	protected static MobilePlatform mobilePlatform = MobilePlatform.IOS_REGULAR;
 	protected File app;
-	String bundleid = "";
 	protected static AppiumDriverLocalService service;
     protected ServiceRequestsListVerifications serviceRequestsListVerifications;
 
@@ -60,9 +58,12 @@ public class BaseTestCase {
 
     @BeforeMethod
     public void BackOfficeLogin() {
-        browserType = BaseUtils.getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser());
+        browserType = BaseUtils.getBrowserType(WebDriverConfigInfo.getInstance().getDefaultBrowser());
         try {
-            DriverBuilder.getInstance().setDriver(browserType);
+            DriverBuilder.getInstance()
+                    .setBrowserType(browserType)
+                    .setRemoteWebDriverURL(WebDriverConfigInfo.getInstance().getAzureURL())
+                    .setDriver();
         } catch (WebDriverException e) {
             e.printStackTrace();
 //            await().atMost(30, TimeUnit.SECONDS).ignoreExceptions().until(() -> DriverBuilder.getInstance().setDriver(browserType));

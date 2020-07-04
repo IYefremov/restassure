@@ -357,7 +357,7 @@
         {
           "serviceName": "Discount 5-10%",
           "servicePrice": "6",
-          "servicePrice2": "$2.90"
+          "servicePrice2": "2.90"
         }
       ]
     }
@@ -389,7 +389,7 @@
         {
           "serviceName": "Discount 5-10%",
           "servicePrice": "6",
-          "servicePrice2": "$2.48"
+          "servicePrice2": "2.48"
         }
       ]
     }
@@ -421,7 +421,7 @@
         {
           "serviceName": "Discount 5-10%",
           "servicePrice": "6",
-          "servicePrice2": "$1.69"
+          "servicePrice2": "1.69"
         }
       ]
     }
@@ -487,7 +487,7 @@
         "screenName": "Zayats Section1",
         "questionData": {
           "questionName": "Question 2",
-          "questionAnswer": "A1"
+          "questionAnswer": "A3"
         }
       },
       "workOrderTotalSale": "3",
@@ -1283,7 +1283,8 @@
             "servicePrice": "5.09",
             "questionData": {
               "questionName": "QuestionTypeLogical_Q1",
-              "logicalQuestion": true
+              "logicalQuestion": true,
+              "logicalQuestionValue": true
             }
           },
           {
@@ -1339,7 +1340,8 @@
           "servicePrice": "2.5"
         },
         "matrixService": {
-          "matrixServiceName": "PM_New",
+          "matrixServiceName": "Test service price matrix",
+          "hailMatrixName": "PM_New",
           "vehiclePartData": {
             "vehiclePartName": "VP1 zayats",
             "vehiclePartOption": "PDR",
@@ -1936,7 +1938,7 @@
         ],
         "percentageService": {
           "serviceName": "Tax discount",
-          "servicePrice": "$178.20"
+          "servicePrice": "178.20"
         },
         "workOrderTotalSale": "3",
         "workOrderPrice": "$3,742.10"
@@ -2954,7 +2956,7 @@
         },
         "servicesScreen": {
           "screenPrice": "$303.90",
-          "screenTotalPrice": "$449.85",
+          "screenTotalPrice": "$218.43",
           "percentageServices": [
             {
               "serviceName": "Calc_Discount",
@@ -3036,7 +3038,7 @@
             }
           }
         },
-        "workOrderPrice": "$207.93",
+        "workOrderPrice": "$218.43",
         "workOrderTotalSale": "3",
         "questionScreenData": {
           "screenName": "Zayats Section1",

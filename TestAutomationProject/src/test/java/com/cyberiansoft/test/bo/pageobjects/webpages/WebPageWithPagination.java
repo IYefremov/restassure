@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import lombok.Getter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -8,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.concurrent.TimeUnit;
 
-
+@Getter
 public class WebPageWithPagination extends BaseWebPage {
 
 	public final int MAX_TABLE_ROW_COUNT_VALUE = 50;
@@ -30,10 +32,10 @@ public class WebPageWithPagination extends BaseWebPage {
 	private WebElement paginations;
 
 	@FindBy(xpath = "//input[contains(@id, 'ChangePageSizeTextBox')][1]")
-	private WebElement pagesizefld;
+	private WebElement pageSizeField;
 
 	@FindBy(xpath = "//*[contains(@id, 'ChangePageSizeLinkButton')]")
-	private WebElement changesizebtn;
+	private WebElement changeSizeButton;
 
 	@FindBy(xpath = "//input[contains(@id, 'GoToPageTextBox') and @type='text']")
 	private WebElement gotopagefld;
@@ -59,7 +61,7 @@ public class WebPageWithPagination extends BaseWebPage {
 		String oftxt = "of ";
 		wait.ignoring(StaleElementReferenceException.class)
 				.until(ExpectedConditions.visibilityOf(pageoflabel));
-		return pageoflabel.getText().substring(oftxt.length(), pageoflabel.getText().length());
+		return pageoflabel.getText().substring(oftxt.length());
 	}
 
 	public String getCurrentlySelectedPageNumber() {
@@ -67,32 +69,31 @@ public class WebPageWithPagination extends BaseWebPage {
 	}
 
 	public String getGoToPageFieldValue() {
-		return gotopagefld.getAttribute("value");
+		return Utils.getInputFieldValue(gotopagefld);
 	}
 
 	public String getPageFieldValue() {
-		return getGoToPageFieldValue().replace(",", "");
+		return getGoToPageFieldValue().replaceAll(",", "");
 	}
 
 	public void setPageSize(String pageSize) {
-		setAttribute(pagesizefld, "value", "");
-		wait.until(ExpectedConditions.elementToBeClickable(pagesizefld)).clear();
-		wait.until(ExpectedConditions.elementToBeClickable(pagesizefld)).sendKeys(pageSize);
-		pagesizefld.sendKeys(Keys.ENTER);
+		setAttribute(pageSizeField, "value", "");
+		wait.until(ExpectedConditions.elementToBeClickable(pageSizeField)).clear();
+		wait.until(ExpectedConditions.elementToBeClickable(pageSizeField)).sendKeys(pageSize);
+		pageSizeField.sendKeys(Keys.ENTER);
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(changesizebtn)).click();
+			wait.until(ExpectedConditions.elementToBeClickable(changeSizeButton)).click();
 		} catch (WebDriverException e) {
 			wait
 					.ignoring(StaleElementReferenceException.class)
-					.until(ExpectedConditions.elementToBeClickable(changesizebtn));
-			clickWithJS(changesizebtn);
+					.until(ExpectedConditions.elementToBeClickable(changeSizeButton));
+			clickWithJS(changeSizeButton);
 		}
 		waitForLoading();
 	}
 
 	public void clickGoToLastPage() {
-		wait.until(ExpectedConditions.elementToBeClickable(gotolastpage));
-		gotolastpage.click();
+        Utils.clickElement(gotolastpage);
 		waitForLoading();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By
 				.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber() + "']")));
@@ -103,7 +104,7 @@ public class WebPageWithPagination extends BaseWebPage {
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			executor.executeScript("arguments[0].click();", gotolastpage);
 		} else {
-			gotolastpage.click();
+		    Utils.clickElement(gotolastpage);
 		}
 		try {
 			wait.until(ExpectedConditions.visibilityOf(updateProcess));
@@ -129,7 +130,7 @@ public class WebPageWithPagination extends BaseWebPage {
 	}
 
 	public void clickGoToNextPage() {
-		int currentPage = Integer.valueOf(getCurrentlySelectedPageNumber());
+		int currentPage = Integer.parseInt(getCurrentlySelectedPageNumber());
 		int nextPage = currentPage + 1;
 		goToNextPage.click();
 		waitForLoading();
@@ -140,7 +141,7 @@ public class WebPageWithPagination extends BaseWebPage {
 	}
 
 	public void clickGoToPreviousPage() {
-		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
+		int currenpage = Integer.parseInt(getCurrentlySelectedPageNumber());
 		int previouspage = currenpage - 1;
 		gotopreviouspage.click();
 		try {

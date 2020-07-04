@@ -75,6 +75,10 @@ public class VNextProTestCasesDataPaths {
         return props.getProperty("inspections.td");
     }
 
+    public String getInspectionsPaintCodesTestCasesDataPath() {
+        return props.getProperty("inspections.paintcodes");
+    }
+
     public String getInspectionsServicesTestCasesDataPath() {
         return props.getProperty("inspections.services.td");
     }
@@ -95,6 +99,10 @@ public class VNextProTestCasesDataPaths {
         return props.getProperty("invoice.editing.td");
     }
 
+    public String getInvoicePrintViewTestCasesDataPath() {
+        return props.getProperty("invoice.print.view.td");
+    }
+
     public String getInvoicePaymentTestCasesDataPath() {
         return props.getProperty("invoice.payment.td");
     }
@@ -109,6 +117,10 @@ public class VNextProTestCasesDataPaths {
 
     public String getCreateMultipleWOFromInspectionTestCasesDataPath() {
         return props.getProperty("create.multiple.wo.from.inspection.td");
+    }
+
+    public String getChangeDepartment() {
+        return props.getProperty("change.department");
     }
 
     public String getDraftWorkOrdersTestCasesDataPath() {
@@ -129,6 +141,14 @@ public class VNextProTestCasesDataPaths {
 
     public String getMonitoringBaseCaseDataPath() {
         return props.getProperty("monitoring.basic.flow");
+    }
+
+    public String getMonitoringServicesTasksTestCasesDataPath() {
+        return props.getProperty("monitoring.services.tasks.td");
+    }
+
+    public String getMonitoringPhasesTestCasesDataPath() {
+        return props.getProperty("monitoring.phases.td");
     }
 
     public String getMonitoringTimeReportDataPath() {
@@ -163,6 +183,14 @@ public class VNextProTestCasesDataPaths {
         return props.getProperty("question.form.basic");
     }
 
+    public String getQuestionFormInspectionsCasesDataPath() {
+        return props.getProperty("question.form.inspections");
+    }
+
+    public String getQuestionFormWorkOrdersCasesDataPath() {
+        return props.getProperty("question.form.work.orders");
+    }
+
     public String getVehiclePartsCasesDataPath() {
         return props.getProperty("vehicle.parts.basic");
     }
@@ -177,5 +205,65 @@ public class VNextProTestCasesDataPaths {
 
     public String getAutoAssignTech() {
         return props.getProperty("monitoring.autoassign.tech");
+    }
+
+    public String getVehicleOwnerSupportTestCasesDataPath() {
+        return props.getProperty("wo.owner.support");
+    }
+
+    public String getWholesaleCustomersTestCasesDataPath() {
+        return props.getProperty("wholesale.customers");
+    }
+
+    public String getWholesaleCustomersContactsTestCasesDataPath() {
+        return props.getProperty("wholesale.customers.contacts");
+    }
+
+    public String getViewInspectionTestCasesDataPath() {
+        return props.getProperty("inspections.view");
+    }
+
+    public String getEmailInspectionsTestCasesDataPath() {
+        return props.getProperty("inspections.email");
+    }
+
+    public String getMonitoringSearchFiltersDataPath() {
+        return props.getProperty("monitoring.search.filters");
+    }
+
+    public String getMonitoringLocationDataPath() {
+        return props.getProperty("monitoring.location");
+    }
+
+    public String getMonitoringEditRODataPath() {
+        return props.getProperty("monitoring.edit.ro");
+    }
+
+    public String getMonitoringStartPhaseServicesDataPath() {
+        return props.getProperty("monitoring.start.phasesercics");
+    }
+
+    public String getMonitoringFocusModeButtonTestCasesDataPath() {
+        return props.getProperty("monitoring.focusmode.button");
+    }
+
+    public String getMonitoringAddDeleteServicesTestCasesDataPath() {
+        return props.getProperty("monitoring.adddelete.services");
+    }
+
+    public String getInspectionQuestionAnswerTextImageCommentsTestCasesDataPath() {
+        return props.getProperty("inspection.question.textimage.comments");
+    }
+
+    public String getWorkOrderQuestionAnswerTextImageCommentsTestCasesDataPath() {
+        return props.getProperty("workorder.question.textimage.comments");
+    }
+
+    public String getServiceRequestsTestCasesDataPath() {
+        return props.getProperty("service.requests");
+    }
+
+    public String getSearchEmployeeOnLoginTestCasesDataPath() {
+        return props.getProperty("login.search.employee.td");
     }
 }

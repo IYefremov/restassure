@@ -1,0 +1,142 @@
+{
+  "testVerifyUserCanSwitchToInfoMode": [
+    {
+      "rowID": "testVerifyUserCanSwitchToInfoMode.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92274",
+          "testCaseTitle": "Verify user can switch to 'Info' mode"
+        },
+        {
+          "testCaseID": "92356",
+          "testCaseTitle": "Verify user can set order's priority to 'High'"
+        },
+        {
+          "testCaseID": "92354",
+          "testCaseTitle": "Verify user can set order's priority to 'Low'"
+        },
+        {
+          "testCaseID": "92355",
+          "testCaseTitle": "Verify user can set order's priority to 'Normal'"
+        }
+      ],
+      "monitoring": {
+        "location": "automationMonitoring",
+        "orderInfoDto": {
+          "vin": "77777777777777777"
+        }
+      }
+    }
+  ],
+  "testVerifyUserCanStartTheService": [
+    {
+      "rowID": "testVerifyUserCanStartTheService.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92274",
+          "testCaseTitle": "Verify user can start the service"
+        },
+        {
+          "testCaseID": "92364",
+          "testCaseTitle": "Verify user can reach the page with the services edit icons"
+        }
+      ],
+      "service": {
+        "serviceName": "Labor AM",
+        "serviceStatus": "STARTED"
+      }
+    }
+  ],
+  "testVerifyUserCanTypeTheNoteForService": [
+    {
+      "rowID": "testVerifyUserCanTypeTheNoteForService.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92369",
+          "testCaseTitle": "Verify user can reach to the 'Notes' page"
+        },
+        {
+          "testCaseID": "92370",
+          "testCaseTitle": "Verify user can type the note for service"
+        }
+      ],
+      "service": {
+        "serviceName": "Labor AM",
+        "serviceStatus": "STARTED"
+      }
+    }
+  ],
+  "testVerifyUserCanAssignTheTechOnPhaseLevel": [
+    {
+      "rowID": "testVerifyUserCanChangeStatusForPhase.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92363",
+          "testCaseTitle": "Verify user can assign the tech on phase level"
+        }
+      ],
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "AutomationPhaseLevel"
+        }
+      },
+      "service": {
+        "serviceName": "Expenses_money (AM)",
+        "serviceDefaultTechnician": {
+          "technicianFirstName": "1111",
+          "technicianLastName": "2222"
+        }
+      }
+    }
+  ],
+  "testVerifyUserCanAssignTheTechOnTheServiceLevel": [
+    {
+      "rowID": "testVerifyUserCanAssignTheTechOnTheServiceLevel.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92366",
+          "testCaseTitle": "Verify user can assign the tech on the service level"
+        }
+      ],
+      "service": {
+        "serviceName": "Labor AM",
+        "serviceDefaultTechnician": {
+          "technicianFirstName": "1111",
+          "technicianLastName": "2222"
+        }
+      }
+    }
+  ],
+  "testVerifyUserCanSetFlagToGreenFoRo": [
+    {
+      "rowID": "testVerifyUserCanSetFlagToGreenFoRo.01",
+      "description": "Test Case 92322: Verify user can set the flag to \"Green\" for the repair order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92322",
+          "testCaseTitle": "Verify user can set the flag to \"Green\" for the repair order"
+        }
+      ]
+    }
+  ],
+  "testVerifyUserCanCloseEditServicePage": [
+    {
+      "rowID": "testVerifyUserCanCloseEditServicePage.01",
+      "description": "Test Case 92365: Verify user can close the service edit page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92365",
+          "testCaseTitle": "Verify user can close the service edit page"
+        }
+      ],
+      "service": {
+        "serviceName": "Expenses_money (AM)"
+      }
+    }
+  ]
+}

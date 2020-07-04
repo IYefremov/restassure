@@ -1,0 +1,113 @@
+{
+  "testVerifyWorkOrdersQuestionFormsImageQuestion": [
+    {
+      "rowID": " testVerifyWorkOrdersQuestionFormsImageQuestion.01",
+      "description": "Test Case 97389: ReconPro - Work Orders - Question Forms - Image Type",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "97389",
+          "testCaseTitle": "ReconPro - Work Orders - Question Forms - Image Type"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Picture of your app?"
+          }
+        ]
+      }
+    }
+  ],
+  "testVerifyWorkOrdersQuestionFormsHandwritingQuestion": [
+    {
+      "rowID": " testVerifyWorkOrdersQuestionFormsHandwritingQuestion.01",
+      "description": "Test Case 97390: ReconPro - Work Orders - Question Forms - Handwriting",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "97390",
+          "testCaseTitle": "ReconPro - Work Orders - Question Forms - Handwriting"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "questionScreenData": {
+        "questionData": {
+          "signatureQuestion": {
+            "questionName": "Sign?"
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyWorkOrdersQuestionFormsDateQuestion": [
+    {
+      "rowID": " testVerifyWorkOrdersQuestionFormsDateQuestion.01",
+      "description": "Test Case 97391: ReconPro - Work Orders - Question Forms - Date type",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "97391",
+          "testCaseTitle": "ReconPro - Work Orders - Question Forms - Date type"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "questionScreenData": {
+        "questionData": {
+          "datePickerQuestion": {
+            "questionName": "Start Date?"
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyWorkOrdersQuestionFormsTimeQuestion": [
+    {
+      "rowID": " testVerifyWorkOrdersQuestionFormsTimeQuestion.01",
+      "description": "Test Case 97392: ReconPro - Work Orders - Question Forms - Time",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "97392",
+          "testCaseTitle": "ReconPro - Work Orders - Question Forms - Time"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "questionScreenData": {
+        "questionData": {
+          "timePickerQuestion": {
+            "questionName": "Start Time?"
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyWorkOrdersQuestionFormsLogicalQuestion": [
+    {
+      "rowID": " testVerifyWorkOrdersQuestionFormsLogicalQuestion.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "97128",
+          "testCaseTitle": "ReconPro - Work Orders - Question Forms - Logical type"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "questionScreenData": {
+        "questionData": {
+          "logicalQuestionData": {
+            "questionName": "Add new categorizations ?",
+            "logicalAnswer": "No"
+          }
+        }
+      }
+    }
+  ]
+}

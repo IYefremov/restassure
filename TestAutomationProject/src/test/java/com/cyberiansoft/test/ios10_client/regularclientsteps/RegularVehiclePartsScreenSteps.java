@@ -45,7 +45,8 @@ public class RegularVehiclePartsScreenSteps {
 
     public static void selectVehiclePart(VehiclePartData vehiclePartData) {
         RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
-        RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+        priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+        RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
         if (vehiclePartData.getVehiclePartOption() != null)
             vehiclePartScreen.switchOffOption(vehiclePartData.getVehiclePartOption());
         if (vehiclePartData.getVehiclePartSize() != null)

@@ -3,7 +3,6 @@ package com.cyberiansoft.test.ios10_client.regularclientsteps;
 import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularAssignTechniciansScreen;
 import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 public class RegularAssignTechniciansSteps {
 
@@ -23,6 +22,12 @@ public class RegularAssignTechniciansSteps {
     }
 
     public static void assignTechniciansToWorkOrder() {
+        selectWorkOrderToAssignTechnicians();
+        //AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.SELECTED_TECHNICIANS_WILL_BE_ASSIGNED_TO_ALL_WO_SERVICES);
+        clickDoneButton();
+    }
+
+    public static void assignTechniciansToWorkOrderWithServices() {
         selectWorkOrderToAssignTechnicians();
         AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.SELECTED_TECHNICIANS_WILL_BE_ASSIGNED_TO_ALL_WO_SERVICES);
         clickDoneButton();

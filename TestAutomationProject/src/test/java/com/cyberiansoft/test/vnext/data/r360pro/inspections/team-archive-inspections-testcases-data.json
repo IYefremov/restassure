@@ -31,6 +31,22 @@
       }
     }
   ],
+  "testVerifyUserCanArchiveTeamInspection": [
+    {
+      "rowID": "testVerifyUserCanArchiveTeamInspection.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91743",
+          "testCaseTitle": "Verify user can't archive Team Inspection"
+        }
+      ],
+      "inspType": "O_Kramar",
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      }
+    }
+  ],
   "testVerifyUserCanArchiveInspectionUsingSearch": [
     {
       "rowID": "testVerifyUserCanArchiveInspectionUsingSearch.01",
@@ -79,13 +95,13 @@
       }
     }
   ],
-  "testVerifyArchivedInspectionsDoesntDispalysOnTheListAfterDBUpdate": [
+  "testVerifyArchivedInspectionsDOESDispalysOnTheListAfterDBUpdate": [
     {
       "rowID": "testVerifyArchivedInspectionsDoesntDispalysOnTheListAfterDBUpdate.01",
       "description": "Test Case 75371:Verify archived Inspections doesn't dispalys on the list after DB update",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91747",
+          "testCaseID": "98632",
           "testCaseTitle": "Verify archived Inspections doesn't dispalys on the list after DB update."
         }
       ],

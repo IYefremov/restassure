@@ -8,15 +8,12 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class RegularMyInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 
@@ -76,7 +73,7 @@ public class RegularMyInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		WebElement changePOPopup = wait.until(ExpectedConditions.elementToBeClickable(invoicesTable));
 		String invoiceInfoLabel = invoicesTable.findElementByAccessibilityId(invoiceID).findElementByAccessibilityId("labelInfo2").getAttribute("value");
-		return invoiceInfoLabel.substring(invoiceInfoLabel.indexOf(poSubstring) + poSubstring.length(), invoiceInfoLabel.length());
+		return invoiceInfoLabel.substring(invoiceInfoLabel.indexOf(poSubstring) + poSubstring.length());
 	}
 	
 	public boolean myInvoicesIsDisplayed() {
@@ -107,10 +104,9 @@ public class RegularMyInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 		
 		appiumdriver.findElementByAccessibilityId(invoiceNumber).click();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypeScrollView")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeNavigationBar' and name = '" + invoiceNumber + "'")));
 		boolean approved = appiumdriver.findElementsByAccessibilityId("Approve").size() > 0;
 		clickCancel();
-		new RegularMyInvoicesScreen();
 		return approved;		
 	}
 	
@@ -145,6 +141,10 @@ public class RegularMyInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 	public boolean isInvoiceHasApproveIcon(String invoiceNumber) {
 		return invoicesTable.findElementByAccessibilityId(invoiceNumber).findElement(MobileBy.iOSNsPredicateString("name CONTAINS 'EntityInfoButtonUnchecked'")).
 				getAttribute("name").equals("EntityInfoButtonUnchecked, ButtonImageId_65");
+	}
+
+	public boolean isInvoiceHasPrintIcon(String invoiceNumber) {
+		return invoicesTable.findElementByAccessibilityId(invoiceNumber).findElements(MobileBy.AccessibilityId("INVOICE_PRINTED")).size() > 0;
 	}
 
 	public void clickInvoicesSearchButton() {

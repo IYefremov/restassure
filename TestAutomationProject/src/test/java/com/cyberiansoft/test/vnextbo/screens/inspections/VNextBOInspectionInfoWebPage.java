@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens.inspections;
 
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import org.openqa.selenium.By;
@@ -11,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import java.util.concurrent.TimeUnit;
 
 public class VNextBOInspectionInfoWebPage extends VNextBOBaseWebPage {
 	

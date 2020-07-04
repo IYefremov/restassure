@@ -2,16 +2,13 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -19,6 +16,9 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@class='page customer-details page-on-center']")
 	private WebElement newcustomerscreen;
+
+	@FindBy(xpath="//*[@data-autotests-id='customer-form']")
+	private WebElement rootElement;
 	
 	@FindBy(xpath="//*[@action='save']")
 	private WebElement savebtn;
@@ -66,16 +66,14 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	////////////States
 	@FindBy(xpath="//div[@data-page='states']")
 	private WebElement statespage;
-	
-	public VNextNewCustomerScreen(AppiumDriver<MobileElement> appiumdriver) {
-		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+
+	public VNextNewCustomerScreen() {
+	}
+
+	//todo make step!!!
+	public void createNewCustomer(RetailCustomer retailCustomer) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(firstnamefld));
-		BaseUtils.waitABit(1000);
-	}
-	
-	public void createNewCustomer(RetailCustomer retailCustomer) {
 		if (retailCustomer.getFirstName() != null )
 			setCustomerFirstName(retailCustomer.getFirstName());
 		if (retailCustomer.getLastName() != null )
@@ -103,6 +101,11 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 
 	
 	public void setCustomerFirstName(String firstname) {
+		WaitUtils.waitUntilElementIsClickable(rootElement);
+		WaitUtils.getGeneralFluentWait().until(driver -> {
+			firstnamefld.click();
+			return true;
+		});
 		firstnamefld.clear();
 		firstnamefld.sendKeys(firstname);
 	}
@@ -186,6 +189,9 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	
 	public void setCustomerZIP(String customerzip) {
 		if (customerzip.length() > 0) {
+			WaitUtils.waitUntilElementIsClickable(zipfld);
+			Actions move = new Actions(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+			move.moveToElement(zipfld).perform();
 			zipfld.clear();
 			zipfld.sendKeys(customerzip);
 		}
@@ -209,7 +215,9 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	public String getCustomerCountry() {
 		return countrycell.getAttribute("value");
 	}
-	
+
+
+	//todo rewrite
 	public void selectCustomerState(String customerstate) {
 		//waitABit(2000);
 		if (customerstate.length() > 0) {
@@ -224,6 +232,7 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(firstnamefld));
 		}
+		BaseUtils.waitABit(1000);
 	}
 	
 	public String getCustomerState() {
@@ -233,11 +242,6 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	public void clickSaveCustomerButton() {
 		WaitUtils.elementShouldBeVisible(savebtn, true);
 		tap(savebtn);
-	}
-	
-	public VNextCustomersScreen clickBackButton() {
-		clickScreenBackButton();
-		return new VNextCustomersScreen(appiumdriver);
 	}
 
 }

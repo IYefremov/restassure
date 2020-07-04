@@ -1,9 +1,10 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.ios10_client.utils.AppiumWait;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -17,7 +18,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 	
@@ -56,7 +56,10 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 	
 	public void clickApproveAfterSelection() {
 		Helpers.waitForAlert();
-		appiumdriver.findElementByClassName("XCUIElementTypeAlert").findElement(MobileBy.AccessibilityId("Approve")).click();
+		AppiumWait.getGeneralFluentWait(5, 300).until(driver -> {
+			appiumdriver.findElementByClassName("XCUIElementTypeAlert").findElement(MobileBy.AccessibilityId("Approve")).click();
+			return true;
+		});
 	}
 	
 
@@ -241,6 +244,21 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Save")));
 		appiumdriver.findElementByAccessibilityId("Save").click();
+	}
+
+	public boolean isServiceApproved(String serviceName) {
+		return !getServiceCell(serviceName).findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeButton' and name contains 'approve little'"))
+				.getAttribute("name").contains("off");
+	}
+
+	public boolean isServiceSkipped(String serviceName) {
+		return !getServiceCell(serviceName).findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeButton' and name contains 'skip little'"))
+				.getAttribute("name").contains("off");
+	}
+
+	public boolean isServiceDeclibed(String serviceName) {
+		return !getServiceCell(serviceName).findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeButton' and name contains 'decline little'"))
+				.getAttribute("name").contains("off");
 	}
 
 }

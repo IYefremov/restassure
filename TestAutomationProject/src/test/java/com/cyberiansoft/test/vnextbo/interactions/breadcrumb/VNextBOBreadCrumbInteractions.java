@@ -4,135 +4,83 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBreadCrumbPanel;
-import org.openqa.selenium.By;
+import com.cyberiansoft.test.vnextbo.validations.general.VNextBOBreadCrumbValidations;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
 public class VNextBOBreadCrumbInteractions {
 
-    private VNextBOBreadCrumbPanel breadCrumbPanel;
-
-    public VNextBOBreadCrumbInteractions() {
-        breadCrumbPanel = PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOBreadCrumbPanel.class);
+    public static void clickFirstBreadCrumbLink() {
+        Utils.clickElement(new VNextBOBreadCrumbPanel().getBreadCrumbsLink());
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
     }
 
-    public boolean isBreadCrumbClickable() {
-        return Utils.isElementClickable(breadCrumbPanel.getBreadCrumbsLink());
+    public static void clickLastBreadCrumb() {
+        Utils.clickElement(new VNextBOBreadCrumbPanel().getLastBreadCrumb());
     }
 
-    public void clickFirstBreadCrumbLink() {
-        Utils.clickElement(breadCrumbPanel.getBreadCrumbsLink());
-        WaitUtilsWebDriver.waitForLoading();
-    }
-
-    public boolean isLastBreadCrumbDisplayed() {
-        return Utils.isElementDisplayed(breadCrumbPanel.getLastBreadCrumb());
-    }
-
-    public String getLastBreadCrumbText() {
+    public static String getLastBreadCrumbText() {
         try {
-            return WaitUtilsWebDriver.waitForVisibility(breadCrumbPanel.getLastBreadCrumb(), 7).getText();
+            return WaitUtilsWebDriver.waitForVisibility(new VNextBOBreadCrumbPanel().getLastBreadCrumb(), 7).getText();
         } catch (Exception ignored) {
             return "";
         }
     }
 
-    public void setLocation(String location) {
-        if (!isLocationExpanded()) {
-            Utils.clickElement(breadCrumbPanel.getLocationName());
+    public static void setLocation(String location) {
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        if (!VNextBOBreadCrumbValidations.isLocationSet(location, 1)) {
+            openLocationDropDown();
+            selectLocation(location);
+            WaitUtilsWebDriver.waitForPageToBeLoaded(7);
         }
-        selectLocation(location);
     }
 
-    public void setLocation(String location, boolean isSetWithEnter) {
+    public static void clickLocationName() {
+        Utils.clickWithJS(new VNextBOBreadCrumbPanel().getLocationName());
+    }
+
+    public static void setLocation(String location, boolean isSetWithEnter) {
         if (isSetWithEnter) {
-            System.out.println("isSetWithEnter");
-            isLocationSearched(location);
-            Utils.getActions().sendKeys(Keys.ENTER);
-            setLocation(location);
-        } else {
-            setLocation(location);
+            VNextBOBreadCrumbValidations.isLocationSearched(location);
+            new Actions(DriverBuilder.getInstance().getDriver()).sendKeys(Keys.ENTER);
         }
+        setLocation(location);
     }
 
-    public boolean isLocationSet(String location) {
-        return Utils.isTextDisplayed(breadCrumbPanel.getLocationName(), location);
+    private static void selectLocation(String location) {
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        final VNextBOBreadCrumbPanel breadCrumbPanel = new VNextBOBreadCrumbPanel();
+        Utils.selectOptionInDropDown(breadCrumbPanel.getLocationsDropDown(),
+                breadCrumbPanel.getLocationsList(), location, true);
+        Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSelected(location), "The location hasn't been selected");
     }
 
-    private void selectLocation(String location) {
-        Utils.selectOptionInDropDown(
-                breadCrumbPanel.getLocationsDropDown(), breadCrumbPanel.getLocationsList(), location, true);
-        Assert.assertTrue(isLocationSelected(location), "The location hasn't been selected");
-    }
-
-    public void closeLocationDropDown() {
-        if (isLocationExpanded()) {
-            Utils.clickElement(breadCrumbPanel.getLocationName());
+    public static void closeLocationDropDown() {
+        if (VNextBOBreadCrumbValidations.isLocationExpanded()) {
+            clickLocationName();
         }
-        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(breadCrumbPanel.getLocationExpanded());
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOBreadCrumbPanel().getLocationExpanded(), false);
     }
 
-    public boolean isLocationSelected(String location) {
-        try {
-            WaitUtilsWebDriver.getWait()
-                    .ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions
-                            .presenceOfElementLocated(By
-                                    .xpath("//div[@class='add-notes-item menu-item active']//label[text()='" + location + "']")));
-            return true;
-        } catch (Exception ignored) {
-            return false;
+    public static void openLocationDropDown() {
+        if (VNextBOBreadCrumbValidations.isLocationCollapsed()) {
+            clickLocationName();
         }
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOBreadCrumbPanel().getLocationExpanded(), true);
     }
 
-    public boolean isLocationExpanded() {
-        try {
-            return WaitUtilsWebDriver.waitForVisibility(breadCrumbPanel.getLocationExpanded(), 5).isDisplayed();
-        } catch (Exception ignored) {
-            return false;
-        }
+    public static String getActiveLocationValue() {
+        return Utils.getText(new VNextBOBreadCrumbPanel().getActiveLocation());
     }
 
-    public int clearAndTypeLocation(String searchLocation) {
+    public static int clearAndTypeLocation(String searchLocation) {
+        final VNextBOBreadCrumbPanel breadCrumbPanel = new VNextBOBreadCrumbPanel();
         Utils.clickElement(breadCrumbPanel.getLocationSearchInput());
         final int locationsNum = WaitUtilsWebDriver
                 .waitForVisibilityOfAllOptions(breadCrumbPanel.getLocationLabels()).size();
         Utils.clearAndType(breadCrumbPanel.getLocationSearchInput(), searchLocation);
         return locationsNum;
-    }
-
-    public boolean isLocationSearched(String searchLocation) {
-        try {
-            WaitUtilsWebDriver.waitForVisibility(breadCrumbPanel.getLocationExpanded());
-        } catch (Exception e) {
-            Utils.clickElement(breadCrumbPanel.getLocationName());
-        }
-        final int locationsNum = clearAndTypeLocation(searchLocation);
-        try {
-            WaitUtilsWebDriver.getShortWait().until((ExpectedCondition<Boolean>) driver -> breadCrumbPanel
-                    .getLocationLabels()
-                    .size() != locationsNum);
-        } catch (Exception e) {
-            WaitUtilsWebDriver.waitABit(2000);
-        }
-
-        return breadCrumbPanel.getLocationLabels()
-                .stream()
-                .allMatch(label -> label
-                        .getText()
-                        .toLowerCase()
-                        .contains(searchLocation.toLowerCase()));
-    }
-
-    public void clickLocationInDropDown(String location) {
-        breadCrumbPanel.getLocationLabels().stream().filter(loc -> loc.getText().contains(location))
-                .findFirst()
-                .ifPresent(WebElement::click);
-        WaitUtilsWebDriver.waitForLoading();
     }
 }

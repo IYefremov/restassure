@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBONotesDialog;
+import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBONotesDialog;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

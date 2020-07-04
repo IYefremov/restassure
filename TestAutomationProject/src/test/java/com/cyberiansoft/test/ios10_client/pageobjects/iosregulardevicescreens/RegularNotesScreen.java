@@ -9,8 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public class RegularNotesScreen extends iOSRegularBaseScreen {
 
 	final public static String quicknotesvalue = "This is test Quick Notes";
@@ -102,6 +100,8 @@ public class RegularNotesScreen extends iOSRegularBaseScreen {
 	}
 	
 	public boolean isNotesPresent(String _notes) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("txtNotes")));
 		return appiumdriver.findElementsByAccessibilityId(_notes).size() > 0;
 	}
 
@@ -142,6 +142,17 @@ public class RegularNotesScreen extends iOSRegularBaseScreen {
 
 	public void clickDeleteImageButton() {
 		deleteImgBtn.click();
+	}
+
+	public void clickCancelGallery() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeNavigationBar' and name = 'Photos'")));
+		appiumdriver.findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeNavigationBar' and name = 'Photos'")).
+				findElement(MobileBy.AccessibilityId("Cancel")).click();
+	}
+
+	public void clickBackButton() {
+		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();
 	}
 
 }

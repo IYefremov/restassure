@@ -155,7 +155,7 @@
       "description": "Test Case 78447:Verify user see PO/RO payment method if PO/RO method = ON",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92046\n",
+          "testCaseID": "92046",
           "testCaseTitle": "Verify user see PO/RO payment method if PO/RO method = ON."
         }
       ],
@@ -180,8 +180,8 @@
       "description": "Test Case 78448:Verify user see PO/RO payment action for paid Invoices",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "",
-          "testCaseTitle": ""
+          "testCaseID": "92047",
+          "testCaseTitle": "Verify user see PO/RO payment action for paid Invoices"
         }
       ],
       "workOrderData": {
@@ -211,7 +211,7 @@
       "description": "Test Case 78449:Verify user see PO/RO payment action for not fully paid Invoice",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92047\n",
+          "testCaseID": "92048",
           "testCaseTitle": "Verify user see PO/RO payment action for paid Invoices."
         }
       ],
@@ -242,7 +242,7 @@
       "description": "Test Case 78450:Verify payment PO/RO is equal to invoice PO#",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92049\n",
+          "testCaseID": "92049",
           "testCaseTitle": "Verify payment PO/RO is equal to invoice PO#."
         }
       ],
@@ -267,7 +267,7 @@
       "description": "Test Case 78451:Verify PO/RO field is required",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92050\n",
+          "testCaseID": "92050",
           "testCaseTitle": "Verify PO/RO field is required."
         }
       ],
@@ -292,7 +292,7 @@
       "description": "Test Case 78452:Verify Notes field is optional for PO/RO payment",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92051\n",
+          "testCaseID": "92051",
           "testCaseTitle": "Verify Notes field is optional for PO/RO payment."
         }
       ],
@@ -317,7 +317,7 @@
       "description": "Test Case 78453:Verify user can go back to invoice list without save payment",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92052\n",
+          "testCaseID": "92052",
           "testCaseTitle": "Verify user can go back to invoice list without save payment."
         }
       ],
@@ -342,7 +342,7 @@
       "description": "Test Case 78454:Verify entered PO on PO/RO payment screen is saved for Invoice",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92053\n",
+          "testCaseID": "92053",
           "testCaseTitle": "Verify entered PO on PO/RO payment screen is saved for Invoice."
         }
       ],
@@ -367,7 +367,7 @@
       "description": "Test Case 78455:Verify user can't see Payment type PO/RO for Invoice if amount is zero, Test Case 78502:Verify user can't see Payment type Cash/Check for Invoice if amount is zero",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92054\n",
+          "testCaseID": "92054",
           "testCaseTitle": "Verify user can't see Payment type PO/RO for Invoice if amount is zero."
         }
       ],
@@ -375,6 +375,9 @@
         "workOrderType": "O_Kramar",
         "vihicleInfo": {
           "vinNumber": "7777777777777"
+        },
+        "service": {
+          "serviceName": "Battery Installation"
         }
       },
       "invoiceData": {
@@ -389,7 +392,7 @@
       "description": "Test Case 78498:Verify user see Cash/Check payment method if Cash/Check method = ON",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92056\n",
+          "testCaseID": "92056",
           "testCaseTitle": "Verify user see Cash/Check payment method if Cash/Check method = ON."
         }
       ],
@@ -414,7 +417,7 @@
       "description": "Test Case 78499:Verify user can't see Cash/Check payment action for paid Invoices",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92057\n",
+          "testCaseID": "92057",
           "testCaseTitle": "Verify user can't see Cash/Check payment action for paid Invoices."
         }
       ],
@@ -439,7 +442,7 @@
       "description": "Test Case 78500:Verify user see Cash/Check payment action for not fully paid Invoice",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92058\n",
+          "testCaseID": "92058",
           "testCaseTitle": "Verify user see Cash/Check payment action for not fully paid Invoice."
         }
       ],
@@ -464,7 +467,7 @@
       "description": "Test Case 78501:Verify user can go back to invoice list without save payment",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92059\n",
+          "testCaseID": "92059",
           "testCaseTitle": "Verify user can go back to invoice list without save payment."
         }
       ],
@@ -489,7 +492,7 @@
       "description": "Test Case 78503:Verify Amount field is Required for Cash/Check method",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92061\n",
+          "testCaseID": "92061",
           "testCaseTitle": "Verify Amount field is Required for Cash/Check method"
         }
       ],
@@ -514,7 +517,7 @@
       "description": "Test Case 78504:Verify Check field is Optional for Cash/Check method",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92062\n",
+          "testCaseID": "92062",
           "testCaseTitle": "Verify Check field is Optional for Cash/Check method"
         }
       ],
@@ -539,7 +542,7 @@
       "description": "Test Case 78505:Verify Notes field is Optional for Cash/Check type",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92063\n",
+          "testCaseID": "92063",
           "testCaseTitle": "Verify Notes field is Optional for Cash/Check type"
         }
       ],
@@ -564,8 +567,12 @@
       "description": "Test Case 78506:Verify payment amount is updated after part payment using Cash/Check method, Test Case 78507:Verify payment amount is equal to invoice unpaid amount",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92064\n",
+          "testCaseID": "92064",
           "testCaseTitle": "Verify payment amount is updated after part payment using Cash/Check method"
+        },
+        {
+          "testCaseID": "92065",
+          "testCaseTitle": "Verify payment amount is equal to invoice unpaid amount"
         }
       ],
       "workOrderData": {
@@ -589,7 +596,7 @@
       "description": "Test Case 78508:Verify user can pay one Invoice using CC and Cash/Check payment method",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92066\n",
+          "testCaseID": "92066",
           "testCaseTitle": "Verify user can pay one Invoice using CC and Cash/Check payment method"
         }
       ],
@@ -620,7 +627,7 @@
       "description": "Test Case 78509:Verify user can pay Invoice using Cash/Check and PO/RO payment method",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92067\n",
+          "testCaseID": "92067",
           "testCaseTitle": "Verify user can pay Invoice using Cash/Check and PO/RO payment method"
         }
       ],
@@ -651,7 +658,7 @@
       "description": "Test Case 78510:Verify user can't pay amount <=0 using Cash/Check method",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92068\n",
+          "testCaseID": "92068",
           "testCaseTitle": "Verify user can't pay amount <=0 using Cash/Check method"
         }
       ],

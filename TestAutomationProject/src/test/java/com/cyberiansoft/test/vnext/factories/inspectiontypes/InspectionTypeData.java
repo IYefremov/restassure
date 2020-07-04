@@ -20,17 +20,15 @@ public class InspectionTypeData {
                 canBeFinalDraft= true;
                 break;
             case INSP_TYPE_APPROV_REQUIRED:
-                inspTypeID = "";
-                canBeFinalDraft= false;
-                break;
             case O_KRAMAR_NO_SHARING:
+            case ROZSTALNOY_TEXT_QUESTIONS_IT:
                 inspTypeID = "";
                 canBeFinalDraft= false;
                 break;
         }
     }
 
-    public String getInspTypeID() { return inspTypeID; };
+    public String getInspTypeID() { return inspTypeID; }
 
-    public boolean isCanBeFinalDraft() { return canBeFinalDraft; };
+    public boolean isCanBeFinalDraft() { return canBeFinalDraft; }
 }

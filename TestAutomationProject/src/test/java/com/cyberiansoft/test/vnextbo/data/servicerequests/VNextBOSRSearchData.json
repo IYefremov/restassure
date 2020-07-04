@@ -1,0 +1,130 @@
+{
+  "verifySRIsFoundByCustomersFirstName": [
+    {
+      "rowID": "verifySRIsFoundByCustomersFirstName.01",
+      "description": "Test Case 125686:Verify search will find Service Requests by \"First Customer name\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125686"
+        }
+      ],
+      "searchData": {
+        "customer": "abracadabra",
+        "hasThisText": "EMotorFN"
+      }
+    }
+  ],
+  "verifySRIsFoundByCustomersLastName": [
+    {
+      "rowID": "verifySRIsFoundByCustomersLastName.01",
+      "description": "Test Case 125687:Verify search will find Service Requests by \"Last Customer name\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125687"
+        }
+      ],
+      "searchData": {
+        "hasThisText": "EMotorLN"
+      }
+    }
+  ],
+  "verifySRIsFoundByCompanyName": [
+    {
+      "rowID": "verifySRIsFoundByCompanyName.01",
+      "description": "Test Case 125688:Verify search will find Service Requests by \"Company name\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125688"
+        }
+      ],
+      "searchData": {
+        "hasThisText": "E MOTOR CARS"
+      }
+    }
+  ],
+  "verifySRIsFoundByCustomerEmail": [
+    {
+      "rowID": "verifySRIsFoundByCustomerEmail.01",
+      "description": "Test Case 125689:Verify search will find Service Requests by \"Company email\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125689"
+        }
+      ],
+      "searchData": {
+        "hasThisText": "emotorcars@gmail.com"
+      }
+    }
+  ],
+  "verifySRIsFoundByVIN": [
+    {
+      "rowID": "verifySRIsFoundByVIN.01",
+      "description": "Test Case 125690:Verify search will find Service Requests by \"VIN\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125690"
+        }
+      ],
+      "searchData": {
+        "hasThisText": "KNDJN2A2XG7322650"
+      }
+    }
+  ],
+  "verifySRIsFoundByRO": [
+    {
+      "rowID": "verifySRIsFoundByRO.01",
+      "description": "Test Case 125691:Verify search will find Service Requests by \"RO#\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125691"
+        }
+      ],
+      "searchData": {
+        "hasThisText": "TESR"
+      }
+    }
+  ],
+  "verifySRIsFoundByStockNum": [
+    {
+      "rowID": "verifySRIsFoundByStockNum.01",
+      "description": "Test Case 125692:Verify search will find Service Requests by \"Stock#\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125692"
+        }
+      ],
+      "searchData": {
+        "hasThisText": "STOCK"
+      }
+    }
+  ],
+  "verifySRIsFoundBySRNum": [
+    {
+      "rowID": "verifySRIsFoundBySRNum.01",
+      "description": "Test Case 125693:Verify search will find Service Requests by \"SR#\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125693"
+        }
+      ],
+      "searchData": {
+        "hasThisText": "0005649"
+      }
+    }
+  ],
+  "verifyUserCanDeleteSearchOptions": [
+    {
+      "rowID": "verifyUserCanDeleteSearchOptions.01",
+      "description": "Test Case 125694:Verify user can delete search options",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125694"
+        }
+      ],
+      "searchData": {
+        "hasThisText": "sd"
+      },
+      "infoText": "Timeframe: Last 30 days; Has this text: sd;"
+    }
+  ]
+}

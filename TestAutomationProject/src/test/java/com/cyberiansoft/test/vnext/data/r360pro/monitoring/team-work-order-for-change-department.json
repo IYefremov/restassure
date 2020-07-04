@@ -1,0 +1,18 @@
+{
+  "testUserCanChangeDepartment": [
+    {
+      "rowID": "testUserCanChangeDepartment.01",
+      "description": "Verify user can change the department",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92393",
+          "testCaseTitle": "Verify user can change the department"
+        }
+      ],
+      "moneyService":
+        {
+          "serviceName": "Battery Installation"
+        }
+    }
+  ]
+}

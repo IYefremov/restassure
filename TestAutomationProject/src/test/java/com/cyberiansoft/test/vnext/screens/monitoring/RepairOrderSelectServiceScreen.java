@@ -20,7 +20,7 @@ public class RepairOrderSelectServiceScreen extends MonitorScreen {
     }
 
     public void selectServices(List<String> serviceListToSelect) {
-        serviceListToSelect.stream().forEach((serviceName) -> serviceList.stream()
+        serviceListToSelect.forEach((serviceName) -> serviceList.stream()
                 .filter((serviceElement) -> serviceElement.getText().contains(serviceName))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Unable to find service " + serviceName))

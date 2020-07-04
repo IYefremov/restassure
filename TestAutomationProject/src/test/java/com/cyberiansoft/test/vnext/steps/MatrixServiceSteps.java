@@ -4,11 +4,13 @@ import com.cyberiansoft.test.dataclasses.MatrixServiceData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.cyberiansoft.test.vnext.enums.partservice.PartServiceWizardScreen;
+import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
 import com.cyberiansoft.test.vnext.interactions.PriceMatrixScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.services.MatrixServiceDetailsScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.services.MatrixServicePdrScreenInteractions;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 
 public class MatrixServiceSteps {
     public static void selectMatrixService(MatrixServiceData matrixServiceData) {
@@ -18,6 +20,7 @@ public class MatrixServiceSteps {
 
     public static void selectServiceDetails(MatrixServiceData matrixServiceData) {
         VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         if (matrixServiceData.getHailMatrixName() != null)
             MatrixServiceSteps.selectPriceMatrix(matrixServiceData.getHailMatrixName());
         if (vehiclePartData.getVehiclePartName() != null)
@@ -35,6 +38,7 @@ public class MatrixServiceSteps {
     public static void selectVehicle(MatrixServiceData matrixServiceData) {
         VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
         ListSelectPageInteractions.waitListPageReady(matrixServiceData.getMatrixServiceName());
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         ListSelectPageInteractions.selectItem(vehiclePartData.getVehiclePartName());
     }
 
@@ -57,11 +61,12 @@ public class MatrixServiceSteps {
     public static void selectPartServiceInsideMatrixService(PartServiceData vehiclePartData) {
         MatrixServiceSteps.openPartServiceDetailsInsideMatrixService(vehiclePartData);
         PartServiceSteps.acceptDetailsScreen();
+        ServiceDetailsScreenSteps.saveServiceDetails();
     }
 
     public static void openPartServiceDetailsInsideMatrixService(PartServiceData partServiceData) {
         MatrixServiceDetailsScreenInteractions.selectService(partServiceData.getServiceName());
-        PartServiceSteps.selectpartServiceDetails(partServiceData);
+        PartServiceSteps.selectPartServiceDetails(partServiceData);
     }
 
     public static void openPartServiceDetails(PartServiceData partService) {
@@ -78,5 +83,9 @@ public class MatrixServiceSteps {
 
     public static void openServiceDetailsInsideMatrixService(String serviceName) {
         MatrixServiceDetailsScreenInteractions.selectService(serviceName);
+    }
+
+    public static void setMatrixServiceVehiclePartPrice(String priceValue) {
+        MatrixServiceDetailsScreenInteractions.setPrice(priceValue);
     }
 }

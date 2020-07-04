@@ -184,7 +184,7 @@
   "verifyUserCanSearchInspectionByPONumber": [
     {
       "rowID": "verifyUserCanSearchInspectionByPONumber.01",
-      "description": "Test Case 90906: User can search Inspections by \"PO#\" using Advanced Search",
+      "description": "Test Case 84592: User can search Inspections by \"PO#\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "90906",
@@ -196,7 +196,7 @@
 
   "verifyUserCanSearchInspectionByRONumber": [
     {
-      "rowID": "verifyUserCanSearchInspectionByPONumber.01",
+      "rowID": "verifyUserCanSearchInspectionByRONumber.01",
       "description": "Test Case 90907: User can search Inspections by \"RO#\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
@@ -403,6 +403,19 @@
         {
           "testCaseID": "90924",
           "testCaseTitle": "User can search Inspections by \"Timeframe → Custom\" using Advanced Search"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchInspectionsUsingSavedAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchInspectionsUsingSavedAdvancedSearch.01",
+      "description": "Test Case 90934: User can search \"Inspections\" using saved \"Advanced Search\" form",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90934",
+          "testCaseTitle": "User can search \"Inspections\" using saved \"Advanced Search\" form"
         }
       ]
     }

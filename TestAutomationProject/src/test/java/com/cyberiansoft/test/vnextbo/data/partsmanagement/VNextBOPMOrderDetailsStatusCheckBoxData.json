@@ -1,0 +1,142 @@
+{
+  "verifyUserCanSelectPartsByStatus": [
+    {
+      "rowID": "verifyUserCanSelectPartsByStatus.01",
+      "description": "Test Case 91197: User can select All parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91197",
+          "testCaseTitle": "User can select All parts"
+        }
+      ],
+      "status": "All"
+    },
+    {
+      "rowID": "verifyUserCanSelectPartsByStatus.02",
+      "description": "Test Case 91198: User can select \"Open\" parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91198",
+          "testCaseTitle": "User can select \"Open\" parts"
+        }
+      ],
+      "status": "Open"
+    },
+    {
+      "rowID": "verifyUserCanSelectPartsByStatus.03",
+      "description": "Test Case 91199: User can select \"On Hold\" parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91199",
+          "testCaseTitle": "User can select \"On Hold\" parts"
+        }
+      ],
+      "status": "On Hold"
+    },
+    {
+      "rowID": "verifyUserCanSelectPartsByStatus.04",
+      "description": "Test Case 91200: User can select \"Quote Received\" parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91200",
+          "testCaseTitle": "User can select \"Quote Received\" parts"
+        }
+      ],
+      "status": "Quote Received"
+    },
+    {
+      "rowID": "verifyUserCanSelectPartsByStatus.05",
+      "description": "Test Case 91201: User can select \"Ordered\" parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91201",
+          "testCaseTitle": "User can select \"Ordered\" parts"
+        }
+      ],
+      "status": "Ordered"
+    },
+    {
+      "rowID": "verifyUserCanSelectPartsByStatus.06",
+      "description": "Test Case 91202: User can select \"Re-Ordered\" parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91202",
+          "testCaseTitle": "User can select \"Re-Ordered\" parts"
+        }
+      ],
+      "status": "Re-Ordered"
+    },
+    {
+      "rowID": "verifyUserCanSelectPartsByStatus.07",
+      "description": "Test Case 91203: User can select \"Received (final)\" parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91203",
+          "testCaseTitle": "User can select \"Received (final)\" parts"
+        }
+      ],
+      "status": "Received"
+    },
+    {
+      "rowID": "verifyUserCanSelectPartsByStatus.08",
+      "description": "Test Case 91204: User can select \"RTV Complete (final)\" parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91204",
+          "testCaseTitle": "User can select \"RTV Complete (final)\" parts"
+        }
+      ],
+      "status": "RTV Complete"
+    },
+    {
+      "rowID": "verifyUserCanSelectPartsByStatus.09",
+      "description": "Test Case 91205: User can select \"Refused\" parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91205",
+          "testCaseTitle": "User can select \"Refused\" parts"
+        }
+      ],
+      "status": "Refused"
+    },
+    {
+      "rowID": "verifyUserCanSelectPartsByStatus.10",
+      "description": "Test Case 91206: User can select \"Audited\" parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91206",
+          "testCaseTitle": "User can select \"Audited\" parts"
+        }
+      ],
+      "status": "Audited"
+    }
+  ],
+  "verifyUserCanSeeOnlyStatusesBelongingToThePertsInRO": [
+    {
+      "rowID": "verifyUserCanSeeOnlyStatusesBelongingToThePertsInRO.01",
+      "description": "Test Case 91207: User can see only Statuses belonging to the Parts in RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91207",
+          "testCaseTitle": "User can see only Statuses belonging to the Parts in RO"
+        }
+      ],
+      "statusesList": [
+        "All",
+        "Open",
+        "On Hold",
+        "Quote Received",
+        "Ordered",
+        "Re-Ordered",
+        "Received",
+        "RTV Complete",
+        "Refused",
+        "Audited",
+        "Installed",
+        "Partially Received",
+        "Other",
+        "Quote Requested"
+      ]
+    }
+  ]
+}

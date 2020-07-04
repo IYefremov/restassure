@@ -1,0 +1,137 @@
+{
+
+  "testThatSelectedServicesOnSRAreCopiedToInspectionBasedOnSR": [
+    {
+      "rowID": "testThatSelectedServicesOnSRAreCopiedToInspectionBasedOnSR.01",
+      "description": "Test Case 24075:SR: Test that selected services on SR are copied to Inspection based on SR",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88859"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "vehicleMake": "Dodge",
+          "vehicleModel": "Dakota",
+          "vehicleYear": "2006"
+        },
+        "moneyServices": [
+          {
+            "serviceName": "Dye",
+            "serviceQuantity": "14",
+            "servicePrice2": "$10.00 x 14.00"
+          },
+          {
+            "serviceName": "VPS1",
+            "servicePrice2": "%20.000"
+          },
+          {
+            "serviceName": "Wheel",
+            "servicePrice2": "$70.00 x 1.00"
+          }
+        ],
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyThatWhenCreateInspectionFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices": [
+    {
+      "rowID": "testVerifyThatWhenCreateInspectionFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices.01",
+      "description": "Test Case 30084:SR: Verify that when create Inspection from SR message that vehicle parts are required is shown for appropriate services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88858"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008",
+          "vehicleMake": "Chrysler",
+          "vehicleModel": "Town and Country",
+          "vehicleYear": "2010"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        },
+        "moneyServices": [
+          {
+            "serviceName": "SR_S1_Money",
+            "vehiclePart": {
+              "vehiclePartName": "Hood"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_Vehicle",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_Panel",
+            "vehiclePart": {
+              "vehiclePartName": "Back Glass"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "testSRVerifyMultipleInspectionsAndMultipleWorkOrdersToBeTiedToAServiceRequest": [
+    {
+      "rowID": "testSRVerifyMultipleInspectionsAndMultipleWorkOrdersToBeTiedToAServiceRequest.01",
+      "description": "Test Case 45251:SR: Verify multiple inspectiontypes and multiple work orders to be tied to a Service Request",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88505"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        }
+      },
+      "inspectionsData": [
+        {
+          "inspType": "INS_LINE_APPROVE_OFF",
+          "isDraft": true
+        },
+        {
+          "inspType": "INSP_FOR_CALC",
+          "isDraft": false
+        }
+      ],
+      "workOrdersData": [
+        {
+          "workOrderType": "WO_DELAY_START",
+          "workOrderTotalSale": "5"
+        },
+        {
+          "workOrderType": "WO_MONITOR_DEVICE",
+          "workOrderTotalSale": "5"
+        }
+      ]
+    }
+  ]
+
+}

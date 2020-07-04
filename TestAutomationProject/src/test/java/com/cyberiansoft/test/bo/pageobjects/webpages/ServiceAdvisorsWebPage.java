@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
@@ -180,18 +181,12 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 		return serviceadvisorstable.getTableRows();
 	}
 	
-	public WebElement getTableRowWithServiceAdvisor(String firstname, String lastname) {
+	private WebElement getTableRowWithServiceAdvisor(String firstName, String lastName) {
 		List<WebElement> rows = getServiceAdvisorsTableRows();
 		return rows.stream().filter(row -> {
 		    WaitUtilsWebDriver.waitABit(500);
-		    return row.getText().contains(firstname + " " + lastname);
+		    return Utils.getText(row).contains(firstName + " " + lastName);
         }).findFirst().orElse(null);
-//		for (WebElement row : rows) {
-//			if (row.findElement(By.xpath(".//td[4]")).getText().contains(firstname + " " + lastname)) {
-//				return row;
-//			}
-//		}
-//		return null;
 	}
 	
 	public void setUserSearchCriteria(String _user) {
@@ -206,32 +201,31 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 	}
 	
 	public boolean serviceAdvisorExists(String firstname, String lastname) {
-		boolean exists =  serviceadvisorstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + firstname + " " + lastname + "']")).size() > 0;
-		return exists;
+        return serviceadvisorstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + firstname + " " + lastname + "']")).size() > 0;
 	}
 	
 	public void clickEditServiceAdvisor(String firstname, String lastname) {
 		WebElement row = getTableRowWithServiceAdvisor(firstname, lastname);
 		if (row != null) {
 			clickEditTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " service advisor");
+		} else
+            Assert.fail("Can't find " + firstname + " " + lastname + " service advisor");
 	}
 	
 	public void deleteServiceAdvisor(String firstname, String lastname) {
 		WebElement row = getTableRowWithServiceAdvisor(firstname, lastname);
 		if (row != null) {
 			deleteTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " service advisor");		
+		} else
+            Assert.fail("Can't find " + firstname + " " + lastname + " service advisor");
 	}
 	
 	public void deleteServiceAdvisorAndCancelDeleting(String firstname, String lastname) {
 		WebElement row = getTableRowWithServiceAdvisor(firstname, lastname);
 		if (row != null) {
 			cancelDeletingTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " service advisor");		
+		} else
+            Assert.fail("Can't find " + firstname + " " + lastname + " service advisor");
 	}
 	
 	public void createNewServiceAdvisor(String email, String firstname, String lastname, String clientname, String role) {

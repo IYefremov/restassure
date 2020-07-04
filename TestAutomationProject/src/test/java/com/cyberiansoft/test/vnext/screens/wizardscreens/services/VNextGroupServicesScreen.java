@@ -1,65 +1,41 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens.services;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
+import com.cyberiansoft.test.vnext.webelements.GroupServiceListItem;
+import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.util.List;
 
+@Getter
 public class VNextGroupServicesScreen extends VnextBaseServicesScreen {
+
+    @FindBy(xpath = "//div[@data-page='services-list']")
+    private WebElement rootElement;
+
+    @FindBy(xpath = "//*[@action='select-group']")
+    private List<GroupServiceListItem> groupServiceList;
 
     @FindBy(xpath="//div[@data-page='services-list']")
     private WebElement servicesscreen;
 
-    public VNextGroupServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
-        super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-
+    public VNextGroupServicesScreen() {
+        PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
     }
 
-    public WebElement getServicesList() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-        return wait.until(ExpectedConditions.visibilityOf(servicesscreen.findElement(By.xpath(".//*[@data-autotests-id='all-services']"))));
+    public GroupServiceListItem getGroupServiceElement(String groupName) {
+        return groupServiceList.stream().filter(listElement -> listElement.getServiceName().equals(groupName)).findFirst().orElseThrow(() -> new RuntimeException("service group not found " + groupName));
     }
 
-    public VNextAvailableGroupServicesList openServiceGroup(String serviceGroupName) {
-        WebElement servicerow = getServiceGroupItem(serviceGroupName);
-        if (servicerow != null)
-            tap(servicerow);
-        else
-            Assert.assertTrue(false, "Can't find service group: " + serviceGroupName);
-
-        return new VNextAvailableGroupServicesList(appiumdriver);
-    }
-
-    private List<WebElement> getServiceGroupsItems() {
-        return getServicesList().findElements(By.xpath(".//*[@action='select-group']"));
-    }
-
-    private WebElement getServiceGroupItem(String serviceGroupName) {
-        WebElement serviceListItem = null;
-        List<WebElement> services = getServiceGroupsItems();
-        for (WebElement srv: services)
-            if (srv.findElement(By.xpath(".//div[@class='list-item-text']")).getText().trim().equals(serviceGroupName)) {
-                serviceListItem = srv;
-                break;
-            }
-        return serviceListItem;
-    }
-
-    public VNextSelectedGroupServicesScreen switchToSelectedGroupServicesView() {
-        tap(servicesscreen.findElement(By.xpath(".//*[@action='selected']")));
+    public void switchToAvailableGroupServicesView() {
+        tap(servicesscreen.findElement(By.xpath(".//*[@action='available']")));
         WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='selected' and @class='button active']")));
-        wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='labor-list' and @data-view-mode='selected']")));
-        return  new VNextSelectedGroupServicesScreen(appiumdriver);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='available' and @class='button active']")));
     }
 }

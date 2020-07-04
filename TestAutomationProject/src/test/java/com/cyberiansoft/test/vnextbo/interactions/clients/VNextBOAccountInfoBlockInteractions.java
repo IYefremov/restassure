@@ -2,69 +2,48 @@ package com.cyberiansoft.test.vnextbo.interactions.clients;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.VNextBOAccountInfoBlock;
-import org.openqa.selenium.support.PageFactory;
 
 public class VNextBOAccountInfoBlockInteractions {
 
-    private VNextBOAccountInfoBlock accountInfoBlock;
-
-    public VNextBOAccountInfoBlockInteractions() {
-        accountInfoBlock = PageFactory.initElements(DriverBuilder.getInstance().getDriver(),
-                VNextBOAccountInfoBlock.class);
+    public static void setAccountingId(String accountingId) {
+        Utils.clearAndType(new VNextBOAccountInfoBlock().getAccountingId(), accountingId);
     }
 
-    public void setAccountingId(String accountingId) {
-        Utils.clearAndType(accountInfoBlock.getAccountingId(), accountingId);
+    public static void setAccountingId2(String accountingId2) {
+        Utils.clearAndType(new VNextBOAccountInfoBlock().getAccountingId2(), accountingId2);
     }
 
-    public void setAccountingId2(String accountingId2) {
-        Utils.clearAndType(accountInfoBlock.getAccountingId2(), accountingId2);
+    private static void clickExportAsArrow() {
+        Utils.clickElement(new VNextBOAccountInfoBlock().getExportAsArrow());
     }
 
-    private void clickExportAsArrow() {
-        Utils.clickElement(accountInfoBlock.getExportAsArrow());
-    }
-
-    public void setExportAs(String exportAs) {
+    public static void setExportAs(String exportAs) {
+        final VNextBOAccountInfoBlock accountInfoBlock = new VNextBOAccountInfoBlock();
         Utils.clearAndType(accountInfoBlock.getExportAsInputField(), exportAs);
-        WaitUtilsWebDriver.waitABit(2000);
+        WaitUtilsWebDriver.waitABit(3000);
         Utils.selectOptionInDropDownWithJs(accountInfoBlock.getExportAsDropDown(),
                 accountInfoBlock.getExportAsListBoxOptionByText(exportAs));
     }
 
-    public void setClass(String classOption) {
+    public static void setClass(String classOption) {
 
         if (!classOption.equals("")) {
+            final VNextBOAccountInfoBlock accountInfoBlock = new VNextBOAccountInfoBlock();
             Utils.clickElement(accountInfoBlock.getClassArrow());
             Utils.selectOptionInDropDown(accountInfoBlock.getClassDropDown(),
                     accountInfoBlock.getClassListBoxOptions(), classOption, true);
         }
     }
 
-    /*public void setQbAccount(String qbAccount) {
-        Utils.clickElement(accountInfoBlock.getQbAccountArrow());
-        Utils.selectOptionInDropDownWithJs(accountInfoBlock.getQbAccountDropDown(),
-                accountInfoBlock.getQbAccountListBoxOptionByText(qbAccount));
-    }*/
-
-    public void setQbAccount(String qbAccount) {
+    public static void setQbAccount(String qbAccount) {
+        final VNextBOAccountInfoBlock accountInfoBlock = new VNextBOAccountInfoBlock();
         Utils.clickElement(accountInfoBlock.getQbAccountArrow());
         Utils.selectOptionInDropDown(accountInfoBlock.getQbAccountDropDown(),
                 accountInfoBlock.getQbAccountListBoxOptions(), qbAccount, true);
     }
 
-    public void clickPoNumberRequiredCheckbox() {
-        Utils.clickElement(accountInfoBlock.getPoNumberRequiredCheckbox());
-    }
-
-    public boolean isPoNumberUpfrontRequiredCheckboxClickable() {
-        try {
-            WaitUtilsWebDriver.waitForElementToBeClickable(accountInfoBlock.getPoNumberUpfrontRequiredCheckbox(), 3);
-            return true;
-        } catch (Exception ignored) {
-            return false;
-        }
+    public static void clickPoNumberRequiredCheckbox() {
+        Utils.clickElement(new VNextBOAccountInfoBlock().getPoNumberRequiredCheckbox());
     }
 }

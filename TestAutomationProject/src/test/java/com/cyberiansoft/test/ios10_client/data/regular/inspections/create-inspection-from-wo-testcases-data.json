@@ -1,0 +1,24 @@
+{
+
+  "testCreateInspectionFromWO": [
+    {
+      "rowID": "testCreateInspectionFromWO.01",
+      "description": "Test Case 16507:Create inspection from WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89013"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397",
+          "vehicleMake": "Mitsubishi",
+          "vehicleModel": "Montero Sport",
+          "vehicleYear": "2000"
+        },
+        "workOrderPrice": "$0.00"
+      }
+    }
+  ]
+
+}

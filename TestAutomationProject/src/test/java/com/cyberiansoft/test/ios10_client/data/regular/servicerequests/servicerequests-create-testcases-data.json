@@ -1,0 +1,114 @@
+{
+
+  "testSRVerifyThatSRIsCreatedCorrectlyWhenSelectOwnerOnVehicleInfo": [
+    {
+      "rowID": "testSRVerifyThatSRIsCreatedCorrectlyWhenSelectOwnerOnVehicleInfo.01",
+      "description": "Test Case 26214:SR: Verify that SR is created correctly when select owner on Vehicle info",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88875"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "moneyService": {
+          "serviceName": "Disc_Ex_Service1"
+        }
+      }
+    }
+  ],
+  "testCreatingServiceRequestWithInspectionWOAndAppointmentRequiredOnDevice": [
+    {
+      "rowID": "testCreatingServiceRequestWithInspectionWOAndAppointmentRequiredOnDevice.01",
+      "description": "Test Case 20786:Creating Service Request with Inspection, WO and Appointment required on device",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89009"
+        },
+        {
+          "testCaseID": "89010"
+        },
+        {
+          "testCaseID": "89011"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "WERTYU123",
+          "vehicleMake": "BMW",
+          "vehicleModel": "323i U",
+          "vehicleColor": "Red",
+          "vehicleYear": "2012",
+          "mileage": "77777",
+          "vehicleFuelTankLevel": "25",
+          "vehicleType": "Used",
+          "vehicleStock": "Stock1",
+          "roNumber": "123"
+        },
+        "moneyServices": [
+          {
+            "serviceName": "Bundle1_Disc_Ex"
+          },
+          {
+            "serviceName": "Quest_Req_Serv"
+          },
+          {
+            "serviceName": "Wheel",
+            "serviceQuantity": "3"
+          }
+        ],
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG"
+        },
+        "questionScreenData": {
+          "questionData": {
+            "questionName": "Tax_Point_1",
+            "questionAnswer": "Test Answer 1"
+          }
+        }
+      },
+      "inspectionData": {
+        "moneyServices": [
+          {
+            "serviceName": "Quest_Req_Serv",
+            "servicePrice2": "$10.00 x 1.00",
+            "questionData": {
+              "questionName": "QuestionTypeSelect_Tax_Point_1",
+              "questionAnswer": "Test Answer 1"
+            }
+          },
+          {
+            "serviceName": "Wheel",
+            "servicePrice2": "$70.00 x 3.00"
+          }
+        ],
+        "bundleService": {
+          "bundleServiceName": "Bundle1_Disc_Ex",
+          "services": [
+            {
+              "serviceName": "Dye"
+            },
+            {
+              "serviceName": "Wheel",
+              "serviceQuantity": "2"
+            }
+          ],
+          "bundleServiceAmount": "$70.00"
+        },
+        "inspPrice": "$438.60"
+      },
+      "workOrderData": {
+        "moneyService": {
+          "serviceName": "Wheel",
+          "servicePrice2": "$70.00 x 3.00"
+        },
+        "bundleService": {
+          "bundleServiceName": "Bundle1_Disc_Ex",
+          "bundleServiceAmount": "70"
+        }
+      }
+    }
+  ]
+}

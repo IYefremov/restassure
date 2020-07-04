@@ -3,6 +3,12 @@
     {
       "rowID": "userCanCreateInspectionWithPartsMatrixService.01",
       "description": "86706",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98824",
+          "testCaseTitle": "User Can Create Inspection With Parts Matrix Service"
+        }
+      ],
       "matrixServiceDataList": [
         {
           "matrixServiceName": "rozstalnoy_enable_matrix",
@@ -32,23 +38,110 @@
       ]
     }
   ],
-  "userCanEditPartsInMatrixService": [
+  "userCanAddPartServiceWithPreselectedCategorySubCategoryPartNameAndCantEditPreselectedPartsFromPriceMatrix": [
     {
-      "rowID": "userCanEditPartsInMatrixService.01",
-      "description": "89701 89703 89704 89708",
+      "rowID": "userCanAddPartServiceWithPreselectedCategorySubCategoryPartNameAndCantEditPreselectedPartsFromPriceMatrix.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91842",
+          "testCaseTitle": "User can add Part service with preselected 'Category + Sub Category + Part Name' and can't edit preselected parts (from Price Matrix)"
+        }
+      ],
+      "matrixServiceDataList": [
+        {
+          "matrixServiceName": "rozstalnoy_enable_matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Rozstalnoy_vehicle",
+            "vehiclePartSize": "QTR",
+            "vehiclePartSeverity": "HEAVY",
+            "partServicesList": [
+              {
+                "serviceName": "roz_part_full_cat",
+                "partPosition": "Main"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "userCanAddPartServiceWithPreselectedCategoryPlusSubCategoryAndCantEditPreselectedPartsFromPriceMatrix": [
+    {
+      "rowID": "userCanAddPartServiceWithPreselectedCategoryPlusSubCategoryAndCantEditPreselectedPartsFromPriceMatrix.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91841",
+          "testCaseTitle": "User can add Part service with preselected 'Category + Sub Category' and can't edit preselected parts (from Price Matrix)"
+        }
+      ],
+      "matrixServiceDataList": [
+        {
+          "matrixServiceName": "rozstalnoy_enable_matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Rozstalnoy_vehicle",
+            "vehiclePartSize": "QTR",
+            "vehiclePartSeverity": "HEAVY",
+            "partServicesList": [
+              {
+                "serviceName": "roz_part_cat_subcat",
+                "category": "Bearings",
+                "partName": {
+                  "partNameList": [
+                    "Air Brake Compressor Crank Shaft Bearing"
+                  ],
+                  "isMultiSelect": true
+                },
+                "partPosition": "N/A"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "userCanAddPartServiceWithPreselectedCategoryAndCantEditPreselectedPartsFromPriceMatrix": [
+    {
+      "rowID": "userCanAddPartServiceWithPreselectedCategoryAndCantEditPreselectedPartsFromPriceMatrix.01",
+      "description": "",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91840",
-          "testCaseTitle": "User can add Part service with preselected \"Category\" and can't edit preselected part (from Price Matrix)"
-        },
+          "testCaseTitle": "User can add Part service with preselected 'Category' and can't edit preselected part (from Price Matrix)"
+        }
+      ],
+      "matrixServiceDataList": [
         {
-          "testCaseID": "91841",
-          "testCaseTitle": "User can add Part service with preselected \"Category + Sub Category\" and can't edit preselected parts (from Price Matrix"
-        },
-        {
-          "testCaseID": "91842",
-          "testCaseTitle": "User can add Part service with preselected \"Category + Sub Category + Part Name\" and can't edit preselected parts (from Price Matrix)"
-        },
+          "matrixServiceName": "rozstalnoy_enable_matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Rozstalnoy_vehicle",
+            "vehiclePartSize": "QTR",
+            "vehiclePartSeverity": "HEAVY",
+            "partServicesList": [
+              {
+                "serviceName": "roz_part_cat_subcat",
+                "category": "Body",
+                "subCategory": "Dash",
+                "partName": {
+                  "partNameList": [
+                    "Dash Panel"
+                  ],
+                  "isMultiSelect": true
+                },
+                "partPosition": "Left Upper"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "userCanEditPartsInMatrixService": [
+    {
+      "rowID": "userCanEditPartsInMatrixService.01",
+      "description": "",
+      "targetProcessTestCaseData": [
         {
           "testCaseID": "91832",
           "testCaseTitle": "User can edit Parts services and selected category > sub-category > part name > part position and part's details (price, quantity, notes, etc.) (from \"Price Matrix\")"
@@ -63,11 +156,9 @@
             "vehiclePartSeverity": "HEAVY",
             "partServicesList": [
               {
-                "serviceName": "roz_part_full_cat",
-                "partPosition": "Main"
-              },
-              {
                 "serviceName": "rozstalnoy_enable_parts",
+                "servicePrice": "0.99",
+                "serviceQuantity": "99.00",
                 "category": "Brake",
                 "subCategory": "Control Cables",
                 "partName": {
@@ -98,6 +189,12 @@
     {
       "rowID": "userCanSelectAndLinkMultipleLaborServicesToPartService.01",
       "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91851",
+          "testCaseTitle": "User Can Create Inspection With Parts Matrix Service"
+        }
+      ],
       "matrixServiceDataList": [
         {
           "matrixServiceName": "rozstalnoy_enable_matrix",
@@ -128,6 +225,12 @@
     {
       "rowID": ".01",
       "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91852",
+          "testCaseTitle": "User Can Create Inspection With Parts Matrix Service"
+        }
+      ],
       "matrixServiceDataList": [
         {
           "matrixServiceName": "rozstalnoy_enable_matrix",
@@ -148,6 +251,43 @@
                 }
               ]
             }
+          }
+        }
+      ]
+    }
+  ],
+  "userCanAddPartsServicesAndSelectCategorySubcategoryPartNamePartPositionAndEdit": [
+    {
+      "rowID": "userCanAddPartsServicesAndSelectCategorySubcategoryPartNamePartPositionAndEdit.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91831",
+          "testCaseTitle": "User can add Parts services and select category > sub-category > part name > part position and edit part's details (price, quantity, notes, etc.) (from Price Matrix)"
+        }
+      ],
+      "matrixServiceDataList": [
+        {
+          "matrixServiceName": "rozstalnoy_enable_matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Rozstalnoy_vehicle",
+            "vehiclePartSize": "DIME",
+            "vehiclePartSeverity": "LIGHT",
+            "partServicesList": [
+              {
+                "serviceName": "rozstalnoy_enable_parts",
+                "servicePrice": "199.99",
+                "serviceQuantity": "0.99",
+                "category": "Brake",
+                "subCategory": "Control Cables",
+                "partName": {
+                  "partNameList": [
+                    "Parking Brake Cable Lever"
+                  ],
+                  "isMultiSelect": true
+                }
+              }
+            ]
           }
         }
       ]

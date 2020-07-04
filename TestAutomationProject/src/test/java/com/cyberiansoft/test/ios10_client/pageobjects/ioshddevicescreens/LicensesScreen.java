@@ -7,8 +7,6 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import java.util.concurrent.TimeUnit;
-
 public class LicensesScreen extends iOSHDBaseScreen {
 	
 	public LicensesScreen() {

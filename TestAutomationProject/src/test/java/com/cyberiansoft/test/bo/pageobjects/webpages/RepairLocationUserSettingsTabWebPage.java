@@ -1,26 +1,33 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import java.util.List;
 
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
 
+@Getter
 public class RepairLocationUserSettingsTabWebPage extends BaseWebPage {
 	
 	@FindBy(id = "ctl00_Content_btnUpdate")
 	private WebElement updatesettingsbtn;
+
+	@FindBy(xpath = "//table[@id='ctl00_Content_dlSettings']//input[@type='checkbox']")
+	private List<WebElement> userSettingsCheckboxes;
+
+	@FindBy(xpath = "//table[@id='ctl00_Content_dlSettings']//input[@type='checkbox' and @checked]")
+	private List<WebElement> checkedUserSettingsCheckboxes;
+
+	@FindBy(xpath = "(//table[@id='ctl00_Content_dlSettings']//input[@type='checkbox'])[not(@checked)]")
+	private List<WebElement> uncheckedUserSettingsCheckboxes;
 	
 	public RepairLocationUserSettingsTabWebPage(WebDriver driver) {
 		super(driver);

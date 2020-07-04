@@ -1,0 +1,109 @@
+{
+
+  "testVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalONAndNoSignature": [
+    {
+      "rowID": "testVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalONAndNoSignature.01",
+      "description": "Test Case 28473:Invoices: Verify that red 'A' icon is present for invoice with customer approval ON and no signature",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88510"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "services": [
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test service zayats"
+          }
+        ],
+        "workOrderTotalSale": "4"
+      },
+      "invoiceData": {
+        "poNumber": "12345"
+      }
+    }
+  ],
+  "testVerifyThatGreyAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature": [
+    {
+      "rowID": "testVerifyThatGreyAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature.01",
+      "description": "Test Case 28476:Invoices: Verify that grey 'A' icon is present for invoice with customer approval OFF and no signature",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88511"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "services": [
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test service zayats"
+          }
+        ],
+        "workOrderTotalSale": "4"
+      },
+      "invoiceData": {
+        "poNumber": "12345"
+      }
+    }
+  ],
+  "testVerifyThatAIconIsNotPresentForInvoiceWhenSignatureExists": [
+    {
+      "rowID": "testVerifyThatAIconIsNotPresentForInvoiceWhenSignatureExists.01",
+      "description": "Test Case 28478:Invoices: Regular - Verify that 'A' icon is not present for invoice when signature exists",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88512"
+        }
+      ],
+      "workOrdersData": [
+        {
+          "vihicleInfo": {
+            "vinNumber": "JA4LS31H8YP047397"
+          },
+          "services": [
+            {
+              "serviceName": "Wheel"
+            },
+            {
+              "serviceName": "Test service zayats"
+            }
+          ],
+          "workOrderTotalSale": "4",
+          "invoiceData": {
+            "invoiceType": "CUSTOMER_APPROVALON_INVOICETYPE",
+            "poNumber": "12345"
+          }
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "JA4LS31H8YP047397"
+          },
+          "services": [
+            {
+              "serviceName": "Wheel"
+            },
+            {
+              "serviceName": "Test service zayats"
+            }
+          ],
+          "workOrderTotalSale": "4",
+          "invoiceData": {
+            "invoiceType": "CUSTOMER_APPROVALOFF_INVOICETYPE",
+            "poNumber": "12345"
+          }
+        }
+      ]
+    }
+  ]
+
+}

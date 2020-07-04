@@ -1,0 +1,81 @@
+{
+  "testDontAlowToSelectBilleAandNotBilledOrdersTogetherInMultiSelectionMode": [
+    {
+      "rowID": "testDontAlowToSelectBilleAandNotBilledOrdersTogetherInMultiSelectionMode.01",
+      "description": "Test Case 18426:Don't allow to select billed and not billed orders together in multi selection mode",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89018"
+        }
+      ],
+      "workOrdersData": [
+        {
+          "vihicleInfo": {
+            "vinNumber": "JA4LS31H8YP047397"
+          },
+          "services": [
+            {
+              "serviceName": "Wheel"
+            },
+            {
+              "serviceName": "Test Tax"
+            },
+            {
+              "serviceName": "VPS1"
+            }
+          ]
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "JA4LS31H8YP047397"
+          },
+          "services": [
+            {
+              "serviceName": "Wheel"
+            },
+            {
+              "serviceName": "Test Tax"
+            },
+            {
+              "serviceName": "VPS1"
+            }
+          ]
+        }
+      ],
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ],
+  "testDontAlowToChangeBilledOrders": [
+    {
+      "rowID": "testDontAlowToChangeBilledOrders.01",
+      "description": "Test Case 18436:Don't allow to change billed orders",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89017"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "services": [
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test Tax"
+          },
+          {
+            "serviceName": "VPS1"
+          }
+        ]
+      },
+      "invoiceData": {
+        "poNumber": "first123"
+      }
+    }
+  ]
+
+}

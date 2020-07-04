@@ -14,8 +14,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public class TeamInvoicesScreen extends BaseTypeScreenWithTabs {
 
 	@iOSXCUITFindBy(accessibility ="Change PO#")
@@ -50,11 +48,7 @@ public class TeamInvoicesScreen extends BaseTypeScreenWithTabs {
 	public IOSElement getFirstInvoice() {
 		return (IOSElement) appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]");
 	}
-	
-	public String getFirstInvoiceValue() {
-		return getFirstInvoice().getAttribute("name");
-	}
-	
+
 	public boolean isInvoicePrintButtonExists(String invoicenumber) {
 		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + invoicenumber + "']/XCUIElementTypeImage[@name='INVOICE_PRINTED']").size() > 0;
 	}

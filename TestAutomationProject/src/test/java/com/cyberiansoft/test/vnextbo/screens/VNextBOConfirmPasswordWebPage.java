@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import org.openqa.selenium.By;
@@ -40,7 +41,7 @@ public class VNextBOConfirmPasswordWebPage extends VNextBOBaseWebPage {
 		setUserPasswordFieldValue(newpassword);
 		setUserConfirmPasswordFieldValue(newpassword);
 		clickSubmitButton();
-		waitABit(2000);
+        WaitUtilsWebDriver.waitABit(2000);
 		return PageFactory.initElements(
 				driver, VNextBOLoginScreenWebPage.class);
 	}
@@ -57,7 +58,7 @@ public class VNextBOConfirmPasswordWebPage extends VNextBOBaseWebPage {
 		wait.until(ExpectedConditions.elementToBeClickable(submitbtn));
 		Actions act = new Actions(driver);
 		act.click(submitbtn).perform();
-		waitABit(300);
+        WaitUtilsWebDriver.waitABit(300);
 		//if (submitbtn.isDisplayed()) {
 		//	submitbtn.click();
 		//}

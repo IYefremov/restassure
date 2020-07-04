@@ -1,16 +1,16 @@
 package com.cyberiansoft.test.vnext.interactions;
 
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.screens.VNextCustomKeyboard;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleModelsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclemakesScreen;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.utils.ControlUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.MobileElement;
+import com.cyberiansoft.test.vnext.webelements.VehicleInfoListElement;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
@@ -21,13 +21,13 @@ public class VehicleInfoScreenInteractions {
         WaitUtils.collectionSizeIsGreaterThan(vehicleInfoScreen.getDataFieldList(), 0);
         //todo: temporary fix for hide keyboard
         WaitUtils.getGeneralFluentWait().until(driver -> {
-            ControlUtils.setValue(vehicleInfoScreen
-                            .getDataFieldList()
-                            .stream()
-                            .filter(element -> element.getAttribute("name").contains(dataField.getValue()))
-                            .findFirst()
-                            .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + dataField.getValue())),
-                    value);
+            vehicleInfoScreen
+                    .getDataFieldList()
+                    .stream()
+                    .filter(element -> element.getFieldName().contains(dataField.getValue()))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + dataField.getValue()))
+                    .setValue(value);
             return true;
         });
     }
@@ -35,33 +35,42 @@ public class VehicleInfoScreenInteractions {
     public static String getDataFieldValue(VehicleDataField dataField) {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.collectionSizeIsGreaterThan(vehicleInfoScreen.getDataFieldList(), 0);
-        return WaitUtils.getGeneralFluentWait().until(driver -> ControlUtils.getElementValue(vehicleInfoScreen
+        return WaitUtils.getGeneralFluentWait().until(driver -> vehicleInfoScreen
                 .getDataFieldList()
                 .stream()
-                .filter(element -> element.getAttribute("name").contains(dataField.getValue()))
+                .filter(element -> element.getFieldName().contains(dataField.getValue()))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + dataField.getValue()))
-        ));
+                .getFieldValue());
     }
 
     public static void selectColor(String color) {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         vehicleInfoScreen.getColorSectionExpandButton().click();
-        WaitUtils.click(By.xpath("//*[@action='select-item' and @data-id='" + color + "']"));
+        WaitUtils.click(By.xpath("//*[@action='select-color' and @data-color-name='" + color + "']"));
+    }
+
+    public static void clickColorCell() {
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        vehicleInfoScreen.getColorSectionExpandButton().click();
+    }
+
+    public static void switchToPaintCodesMode() {
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        vehicleInfoScreen.getPaintCodesModeTab().click();
     }
 
     public static void selectMakeAndModel(String vehicleMake, String vehicleModel) {
-
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        vehicleInfoScreen
-                .getDataFieldList()
-                .stream()
-                .filter(element -> element.getAttribute("name").contains(VehicleDataField.VIN.getValue()))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + VehicleDataField.VIN.getValue())).sendKeys(Keys.TAB);
-        WaitUtils.click(vehicleInfoScreen.getMakeSectionExpandButton());
-        VNextVehiclemakesScreen vehiclemakesScreen = new VNextVehiclemakesScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextVehicleModelsScreen vehicleModelsScreen = vehiclemakesScreen.selectVehicleMake(vehicleMake);
+        try {
+            vehicleInfoScreen.getMakeSectionExpandButton().rootElement.sendKeys(Keys.TAB);
+        } catch (ElementNotInteractableException e) {
+            //
+        }
+        vehicleInfoScreen.getMakeSectionExpandButton().click();
+        VNextVehiclemakesScreen vehicleMakesScreen = new VNextVehiclemakesScreen();
+        vehicleMakesScreen.selectVehicleMake(vehicleMake);
+        VNextVehicleModelsScreen vehicleModelsScreen = new VNextVehicleModelsScreen();
         vehicleModelsScreen.selectVehicleModel(vehicleModel);
     }
 
@@ -70,6 +79,7 @@ public class VehicleInfoScreenInteractions {
     }
 
     public static String getOwnerValue() {
+        BaseUtils.waitABit(2000);
         return new VNextVehicleInfoScreen().getOwnderField().getAttribute("value");
     }
 
@@ -79,11 +89,11 @@ public class VehicleInfoScreenInteractions {
         WaitUtils.waitUntilElementIsClickable(By.name("Vehicle.Year"));
         WaitUtils.click(vehicleInfoScreen.getYearField());
         WaitUtils.getGeneralFluentWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-picker-value='" + yearValue + "']")));
-        WebElement elem = DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//div[@data-picker-value='" + yearValue + "']"));
-        JavascriptExecutor je = (JavascriptExecutor) DriverBuilder.getInstance().getAppiumDriver();
-        je.executeScript("arguments[0].scrollIntoView(true);", elem);
-        WaitUtils.click(By.xpath("//div[@data-picker-value='" + yearValue + "']"));
-        List<MobileElement> closebtns = DriverBuilder.getInstance().getAppiumDriver().findElements(By.xpath("//a[@class='link close-picker']"));
+        BaseUtils.waitABit(2000);
+        Actions act = new Actions(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        act.moveToElement(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//div[@data-picker-value='" + yearValue + "']"))).click()
+                .perform();
+        List<WebElement> closebtns = ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElements(By.xpath("//a[@class='link close-picker']"));
         for (WebElement closebtn : closebtns)
             if (closebtn.isDisplayed()) {
                 WaitUtils.click(closebtn);
@@ -91,34 +101,25 @@ public class VehicleInfoScreenInteractions {
             }
     }
 
-    public static VNextCustomersScreen clickSelectOwnerCell() {
+    //todo rewrite
+    public static void clickSelectOwnerCell() {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        JavascriptExecutor je = (JavascriptExecutor) DriverBuilder.getInstance().getAppiumDriver();
+        JavascriptExecutor je = (JavascriptExecutor) ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
         je.executeScript("arguments[0].scrollIntoView(true);", vehicleInfoScreen.getSelectOwnerButton());
-
         WaitUtils.click(vehicleInfoScreen.getSelectOwnerButton());
-
-        try {
-            if (DriverBuilder.getInstance().getAppiumDriver().findElements(By.xpath("//*[@action='select-owner']")).size() > 0)
-                WaitUtils.click(vehicleInfoScreen.getSelectOwnerButton());
-        } catch (TimeoutException e) {
-            //do nothing
-        }
-        return new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
     }
 
     public static void setMileage(String milage) {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        WebElement milageField = vehicleInfoScreen
+        VehicleInfoListElement milageField = vehicleInfoScreen
                 .getDataFieldList()
                 .stream()
-                .filter(element -> element.getAttribute("name").contains(VehicleDataField.MILAGE.getValue()))
+                .filter(element -> element.getFieldName().contains(VehicleDataField.MILAGE.getValue()))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + VehicleDataField.MILAGE.getValue()));
-
         milageField.click();
-        VNextCustomKeyboard keyboard = new VNextCustomKeyboard(DriverBuilder.getInstance().getAppiumDriver());
-        keyboard.setFieldValue(milageField.getAttribute("value"), milage);
+        VNextCustomKeyboard keyboard = new VNextCustomKeyboard(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        keyboard.setFieldValue(milageField.getFieldValue(), milage);
     }
 
     public static void openTechnicianList() {
@@ -128,7 +129,7 @@ public class VehicleInfoScreenInteractions {
                     vehicleInfoScreen
                             .getDataFieldList()
                             .stream()
-                            .filter(element -> element.getAttribute("name").contains(VehicleDataField.VEHICLE_TECH.getValue()))
+                            .filter(element -> element.getFieldName().contains(VehicleDataField.VEHICLE_TECH.getValue()))
                             .findFirst()
                             .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + VehicleDataField.VEHICLE_TECH.getValue())).click();
                     return true;
@@ -138,7 +139,8 @@ public class VehicleInfoScreenInteractions {
 
     public static void waitPageLoaded() {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
+        WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getVehicleFieldsList(), true);
+        WaitUtils.waitUntilElementIsClickable(vehicleInfoScreen.getVehicleFieldsList());
         WaitUtils.collectionSizeIsGreaterThan(vehicleInfoScreen.getDataFieldList(), 0);
     }
 }

@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens.monitoring;
 
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.webelements.Button;
 import com.cyberiansoft.test.vnext.webelements.ListPicker;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
@@ -13,32 +14,47 @@ public class CommonFilterScreen extends MonitorScreen {
     @FindBy(xpath = "//*[@data-autotests-id=\"search-input\"]")
     private WebElement searchInputField;
 
-    @FindBy(xpath = "//div[contains(@class,\"searchlist-filters-apply\")]")
-    private WebElement searchButton;
+    @FindBy(xpath = "//div[contains(@class,\"common-filters-apply\")]")
+    private Button searchButton;
 
     @FindBy(xpath = "//span[@data-automation-id=\"search-clear\"]")
     private WebElement clearSearchInputButton;
 
-    @FindBy(xpath = "//div[contains(@class,\"searchlist-filters-clear\")]")
-    private WebElement clearFilter;
+    @FindBy(xpath = "//div[contains(@class,'common-filters-clear')]")
+    private Button clearFilter;
 
-    @FindBy(id = "filter_department")
+    @FindBy(xpath = "//*[@data-autotests-id=\"search-cancel\"]")
+    private WebElement cancelSearchInputButton;
+
+    @FindBy(xpath = "//*[@data-name='timeframe']/select")
+    private ListPicker timeframe;
+
+    @FindBy(xpath = "//*[@data-name='dateFrom']")
+    private WebElement dateFrom;
+
+    @FindBy(xpath = "//*[@data-name='dateTo']")
+    private WebElement dateTo;
+
+    @FindBy(xpath = "//*[@data-name='department']/select")
     private ListPicker department;
 
-    @FindBy(id = "filter_phase")
+    @FindBy(xpath = "//*[@data-name='phase']/select")
     private ListPicker phase;
 
-    @FindBy(id = "filter_status")
-    private ListPicker status;
+    @FindBy(xpath = "//*[@data-name='status']/select")
+    private ListPicker repairStatus;
 
-    @FindBy(id = "filter_flag")
+    @FindBy(xpath = "//*[@data-name='flag']/select")
     private ListPicker flag;
 
-    @FindBy(id = "filter_priority")
+    @FindBy(xpath = "//*[@data-name='priority']/select")
     private ListPicker priority;
 
     @FindBy(xpath = "//div[@class=\"searchlist-nothing-found\"]")
     private WebElement nothingFoundLable;
+
+    @FindBy(xpath = "//div[@data-name='savedSearch']/select")
+    private ListPicker savedSearch;
 
     public CommonFilterScreen() {
         PageFactory.initElements(new FiledDecorator(webDriver), this);

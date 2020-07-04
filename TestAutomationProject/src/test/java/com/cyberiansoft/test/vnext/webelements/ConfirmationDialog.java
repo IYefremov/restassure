@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnext.webelements;
 
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,6 +15,6 @@ public class ConfirmationDialog {
     private WebElement cancelDialogButton;
 
     public ConfirmationDialog() {
-        PageFactory.initElements(DriverBuilder.getInstance().getAppiumDriver(), this);
+        PageFactory.initElements(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), this);
     }
 }

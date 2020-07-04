@@ -1,0 +1,114 @@
+{
+
+  "testSRVerifySummaryActionForAppointmentOnSRsCalendar": [
+    {
+      "rowID": "testSRVerifySummaryActionForAppointmentOnSRsCalendar.01",
+      "description": "Test Case 24677:SR: Verify 'Summary' action for appointment on SR's calendar",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88899"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "questionData": {
+            "questionName": "Tax_Point_1",
+            "questionAnswer": "Test Answer 1",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyThatWhenCreateWOFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices": [
+    {
+      "rowID": "testVerifyThatWhenCreateWOFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices.01",
+      "description": "Test Case 30083:SR: Verify that when create WO from SR message that vehicle parts are required is shown for appropriate services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88894"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008",
+          "vehicleMake": "Chrysler",
+          "vehicleModel": "Town and Country",
+          "vehicleYear": "2010"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        },
+        "moneyServices": [
+          {
+            "serviceName": "SR_S1_Money",
+            "vehiclePart": {
+              "vehiclePartName": "Hood"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_Vehicle",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_Panel",
+            "vehiclePart": {
+              "vehiclePartName": "Back Glass"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON": [
+    {
+      "rowID": "testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON.01",
+      "description": "Test Case 36004:SR: Verify that it is possible to accept/decline Appointment when option 'Appointment Acceptance Required' = ON",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88893"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008",
+          "vehicleMake": "Chrysler",
+          "vehicleModel": "Town and Country"
+        }
+      }
+    }
+  ],
+  "testSRAddAppointmentToServiceRequest": [
+    {
+      "rowID": "testSRAddAppointmentToServiceRequest.01",
+      "description": "Test Case 21578:SR: Add appointment to Service Request",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89008"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "questionData": {
+            "questionName": "Tax_Point_1",
+            "questionAnswer": "Test Answer 1",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ]
+}

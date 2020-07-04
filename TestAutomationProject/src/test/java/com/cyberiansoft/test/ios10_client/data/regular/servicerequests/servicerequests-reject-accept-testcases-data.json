@@ -1,0 +1,156 @@
+{
+  "testVerifyThatRejectActionIsDisplayedForSRInStatusScheduledInspOrWOAndAssignForTech": [
+    {
+      "rowID": "testVerifyThatRejectActionIsDisplayedForSRInStatusScheduledInspOrWOAndAssignForTech.01",
+      "description": "Test Case 29022:SR: Verify that Reject action is displayed for SR in Status Scheduled (Insp or WO) and assign for Tech",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88908"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "moneyService": {
+          "serviceName": "Dye"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyThatRejectActionIsDisplayedForSRInStatusOnHoldInspOrWOAndAssignForTech": [
+    {
+      "rowID": "testVerifyThatRejectActionIsDisplayedForSRInStatusOnHoldInspOrWOAndAssignForTech.01",
+      "description": "Test Case 29029:SR: Verify that Reject action is displayed for SR in Status OnHold (Insp or WO) and assign for Tech",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88907"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "moneyService": {
+          "serviceName": "Dye"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyThatRejectActionIsNotDisplayedForSRInStatusOnHoldInspOrWOAndNotAssignForTech": [
+    {
+      "rowID": "testVerifyThatRejectActionIsNotDisplayedForSRInStatusOnHoldInspOrWOAndNotAssignForTech.01",
+      "description": "Test Case 29082:SR: Verify that Reject action is not displayed for SR in Status OnHold (Insp or WO) and not assign for Tech",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88906"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008",
+          "vehicleMake": "Chrysler",
+          "vehicleModel": "Town and Country"
+        }
+      }
+    }
+  ],
+  "testVerifyThatRejectActionIsNotDisplayedForSRInStatusScheduledInspOrWOAndNotAssignForTech": [
+    {
+      "rowID": "testVerifyThatRejectActionIsNotDisplayedForSRInStatusScheduledInspOrWOAndNotAssignForTech.01",
+      "description": "Test Case 29083:SR: Verify that Reject action is not displayed for SR in Status Scheduled (Insp or WO) and not assign for Tech",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88905"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008",
+          "vehicleMake": "Chrysler",
+          "vehicleModel": "Town and Country"
+        },
+        "moneyServices": [
+          {
+            "serviceName": "Oksi_Service_PP_Panel"
+          },
+          {
+            "serviceName": "Oksi_Service_PP_Vehicle"
+          }
+        ],
+        "percentageServices": [
+          {
+            "serviceName": "VPS1"
+          },
+          {
+            "serviceName": "Dye"
+          }
+        ]
+      }
+    }
+  ],
+  "testVerifyThatAcceptDeclineActionsArePresentForTechWhenTechnicianAcceptanceRequiredOptionIsONAndStatusIsProposed": [
+    {
+      "rowID": "testVerifyThatAcceptDeclineActionsArePresentForTechWhenTechnicianAcceptanceRequiredOptionIsONAndStatusIsProposed.01",
+      "description": "Test Case 35951:SR: Verify that Accept/Decline actions are present for tech when 'Technician Acceptance Required' option is ON and status is Proposed",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88903"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008",
+          "vehicleMake": "Chrysler",
+          "vehicleModel": "Town and Country"
+        }
+      }
+    }
+  ],
+  "testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt": [
+    {
+      "rowID": "testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt.01",
+      "description": "Test Case 35954:SR: Verify that SR is not accepted when employee review or update it",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88901"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008",
+          "vehicleMake": "Chrysler",
+          "vehicleModel": "Town and Country",
+          "defaultTechnician": {
+            "technicianFirstName": "Simple",
+            "technicianLastName": "20%"
+          }
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ]
+}

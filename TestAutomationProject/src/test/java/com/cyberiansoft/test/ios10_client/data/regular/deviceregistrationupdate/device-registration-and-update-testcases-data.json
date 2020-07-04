@@ -1,0 +1,25 @@
+{
+
+  "testUpdateDatabase": [
+    {
+      "rowID": "testUpdateDatabase.01",
+      "description": "Test Case 8438:Update database on the device",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89032"
+        }
+      ]
+    }
+  ],
+  "testUpdateVIN": [
+    {
+      "rowID": "testUpdateVIN.01",
+      "description": "Test Case 8437:Updating VIN decoder",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89031"
+        }
+      ]
+    }
+  ]
+}

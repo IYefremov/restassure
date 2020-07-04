@@ -1,19 +1,31 @@
 {
 
-  "testVerifyUserCanPresetRetailCustomer": [
+  "testVerifyUserCanCancelPresetCustomerIfUserGoFromRetailToWholesaleCustomerScreen": [
     {
-      "rowID": "testVerifyUserCanPresetRetailCustomer.01",
-      "description": "Test Case 82203:Verify user can preset retail customer",
+      "rowID": "testVerifyUserCanCancelPresetCustomerIfUserGoFromRetailToWholesaleCustomerScreen.01",
+      "description": "Test Case 92120: Verify 'Preset Customer' canceled if user go from Retail to Wholesale customer screen.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92120",
+          "testCaseTitle": "Verify 'Preset Customer' canceled if user go from Retail to Wholesale customer screen."
+        }
+      ],
       "inspType": "O_Kramar",
       "vihicleInfo": {"vinNumber": "7777777777777"
       }
     }
   ],
 
-  "testVerifyUserCanPresetWholesaleCustomer": [
+  "testVerifyUserCanCancelPresetCustomer": [
     {
-      "rowID": "testVerifyUserCanPresetWholesaleCustomer.01",
-      "description": "Test Case 82204:Verify user can preset wholwsale customer",
+      "rowID": "testVerifyUserCanCancelPresetCustomer.01",
+      "description": "Test Case 92119: Verify user can cancel preset customer.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92119",
+          "testCaseTitle": "Verify user can cancel preset customer."
+        }
+      ],
       "inspType": "O_Kramar",
       "vihicleInfo": {"vinNumber": "7777777777777"
       }
@@ -23,7 +35,13 @@
   "testVerifyUserCanChangePresetCustomer": [
     {
       "rowID": "testVerifyUserCanChangePresetCustomer.01",
-      "description": "Test Case 82205:Verify user can change preset customer",
+      "description": "Test Case 92116: Verify user can change preset customer.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92116",
+          "testCaseTitle": "Verify user can change preset customer."
+        }
+      ],
       "inspType": "O_Kramar",
       "vihicleInfo": {"vinNumber": "7777777777777"
       }
@@ -33,7 +51,13 @@
   "testVerifyUserCanCreateInspectionWithPresetCustomer": [
     {
       "rowID": "testVerifyUserCanCreateInspectionWithPresetCustomer.01",
-      "description": "Test Case 82206:Verify user can Create Inspection with preset customer",
+      "description": "Test Case 92117: Verify user can Create Inspection with preset customer.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92117",
+          "testCaseTitle": "Verify user can Create Inspection with preset customer."
+        }
+      ],
       "inspType": "O_Kramar",
       "vihicleInfo": {"vinNumber": "7777777777777"
       }
@@ -43,27 +67,47 @@
   "testVerifyUserCanCreateWOWithPresetCustomer": [
     {
       "rowID": "testVerifyUserCanCreateWOWithPresetCustomer.01",
-      "description": "Test Case 82207:Verify user can create WO with preset customer.",
-      "workOrderType": "O_Kramar",
+      "description": "Test Case 92118: Verify user can create WO with preset customer.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92118",
+          "testCaseTitle": "Verify user can create WO with preset customer."
+        }
+      ],
       "vihicleInfo": {"vinNumber": "7777777777777"
+      },
+      "moneyService": {
+        "serviceName": "Battery Installation"
       }
     }
   ],
 
-  "testVerifyUserCanCancelPresetCustomer": [
+  "testVerifyUserCanPresetRetailCustomer": [
     {
-      "rowID": "testVerifyUserCanCancelPresetCustomer.01",
-      "description": "Test Case 82208:Verify user can cancel preset customer",
+      "rowID": "testVerifyUserCanPresetRetailCustomer.01",
+      "description": "Test Case 92114: Verify user can preset retail customer.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92114",
+          "testCaseTitle": "Verify user can preset retail customer."
+        }
+      ],
       "inspType": "O_Kramar",
       "vihicleInfo": {"vinNumber": "7777777777777"
       }
     }
   ],
 
-  "testVerifyPresetCustomerCanceledIfUserGoFromRetailToWholesaleCustomerScreen": [
+  "testVerifyUserCanPresetWholesaleCustomer": [
     {
-      "rowID": "testVerifyPresetCustomerCanceledIfUserGoFromRetailToWholesaleCustomerScreen.01",
-      "description": "Test Case 82238:Verify 'Preset Customer' canceled if user go from Retail to Wholesale customer screen",
+      "rowID": "testVerifyUserCanPresetWholesaleCustomer.01",
+      "description": "Test Case 92115: Verify user can preset wholwsale customer.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92115",
+          "testCaseTitle": "Verify user can preset wholwsale customer."
+        }
+      ],
       "inspType": "O_Kramar",
       "vihicleInfo": {"vinNumber": "7777777777777"
       }

@@ -165,8 +165,8 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 		WebElement row = getTableRowWithPriceMatrix(pricematrixname);
 		if (row != null) {
 			pricematrixservice = row.findElement(By.xpath(".//td[6]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + pricematrixname + " price matrix");
+		} else
+			Assert.fail("Can't find " + pricematrixname + " price matrix");
 		return pricematrixservice;
 	}
 	
@@ -175,8 +175,8 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 		WebElement row = getTableRowWithPriceMatrix(pricematrixname);
 		if (row != null) {
 			pricematrixtype = row.findElement(By.xpath(".//td[7]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + pricematrixname + " price matrix");
+		} else
+			Assert.fail("Can't find " + pricematrixname + " price matrix");
 		return pricematrixtype;
 	}
 	
@@ -188,8 +188,8 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 		WebElement row = getTableRowWithPriceMatrix(pricematrix);
 		if (row != null) {
 			clickEditTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + pricematrix + " price matrix");		
+		} else
+			Assert.fail("Can't find " + pricematrix + " price matrix");
 	}
 	
 	public void clickPricesForPriceMatrix(String pricematrix) {
@@ -211,7 +211,7 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 		if (row != null) {
 			deleteTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + pricematrix + " price matrix");	
+			Assert.fail("Can't find " + pricematrix + " price matrix");
 		}
 	}
 	
@@ -220,7 +220,7 @@ public class PriceMatricesWebPage extends WebPageWithPagination {
 		if (row != null) {
 			cancelDeletingTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + pricematrix + " price matrix");	
+			Assert.fail("Can't find " + pricematrix + " price matrix");
 		}
 	}
 	

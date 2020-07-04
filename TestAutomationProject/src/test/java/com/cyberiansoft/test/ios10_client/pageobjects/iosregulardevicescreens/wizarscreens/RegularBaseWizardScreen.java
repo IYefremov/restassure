@@ -10,7 +10,6 @@ import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
 
 public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBaseWizardScreen {
 
@@ -34,6 +33,7 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
     }
 
     public void selectNextScreen(WizardScreenTypes wizardScreenType) {
+
         selectNextScreen(wizardScreenType.getDefaultScreenTypeName());
     }
 
@@ -43,13 +43,6 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
     }
 
     public void clickSave() {
-        /*WaitUtils.elementShouldBeVisible(appiumdriver.findElementByAccessibilityId("viewTitle"), true);
-        List<WebElement> btns = appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElements(MobileBy.className("XCUIElementTypeButton"));
-        for (WebElement bt : btns)
-            System.out.println("========" + bt.getAttribute("value"));
-        if (!btns.get(1).getAttribute("label").equals("Save"))
-            btns.get(1).click();*/
-
         BaseUtils.waitABit(1000);
         if (!elementExists("Save"))
             clickChangeScreen();
@@ -59,7 +52,10 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
     }
 
     public void clickChangeScreen() {
-        WaitUtils.waitUntilElementIsClickable(appiumdriver.findElement(MobileBy.AccessibilityId("WizardStepsButton"))).click();
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            appiumdriver.findElement(MobileBy.AccessibilityId("WizardStepsButton")).click();
+            return true;
+        });
     }
 
     public void clickCancelWizard() {
@@ -83,6 +79,9 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
     }
 
     public void clickNotesButton() {
-        appiumdriver.findElement(MobileBy.AccessibilityId("Compose")).click();
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            appiumdriver.findElement(MobileBy.AccessibilityId("Compose")).click();
+            return true;
+        });
     }
 }

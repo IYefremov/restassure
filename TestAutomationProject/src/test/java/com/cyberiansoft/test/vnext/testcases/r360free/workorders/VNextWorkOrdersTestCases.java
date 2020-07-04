@@ -4,23 +4,20 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehicleVINHistoryScreen;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
+import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.steps.customers.CustomersScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
 import org.json.simple.JSONObject;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -37,30 +34,24 @@ public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistration
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-		VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
-		VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
-		customersScreen.selectCustomer(testcustomer);
+		HomeScreenSteps.openCreateMyWorkOrder();
+		CustomersScreenSteps.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
-		VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
-		vehicleVINHistoryScreen.clickBackButton();
-		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		availableServicesScreen.selectServices(workOrderData.getServicesList());
-		workOrdersScreen = availableServicesScreen.saveWorkOrderViaMenu();
-		final String workOrderNumber = workOrdersScreen.getFirstWorkOrderNumber();
-		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-		workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+		AvailableServicesScreenSteps.selectServices(workOrderData.getServicesList());
+		final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
+		WorkOrderSteps.openMenu(workOrderNumber);
+		MenuSteps.selectMenuItem(MenuItems.EDIT);
 		WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
-		availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+		SelectedServicesScreenSteps.switchToSelectedService();
 		for (ServiceData serviceData : workOrderData.getServicesList())
-			Assert.assertTrue(selectedServicesScreen.isServiceSelected(serviceData.getServiceName()));
-		workOrdersScreen = availableServicesScreen.saveWorkOrderViaMenu();
-		workOrdersScreen.clickBackButton();
+			ListServicesValidations.verifyServiceSelected(serviceData.getServiceName(), true);
+		WorkOrderSteps.saveWorkOrder();
+		ScreenNavigationSteps.pressBackButton();
 	}
 
 }

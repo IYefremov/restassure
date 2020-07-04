@@ -1,22 +1,21 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnextbo.enums.MainMenuItems;
+import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
-import com.cyberiansoft.test.vnextbo.screens.users.VNexBOUsersWebPage;
-import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
-import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBODeviceManagementWebPage;
-import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
+import com.cyberiansoft.test.vnextbo.screens.quicknotes.VNextBOQuickNotesWebPage;
+import com.cyberiansoft.test.vnextbo.validations.general.VNextBOLeftMenuValidations;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import com.cyberiansoft.test.vnextbo.enums.MainMenuItems;
 
 @SuppressWarnings("BooleanMethodIsAlwaysInverted")
 @Getter
@@ -28,7 +27,10 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     @FindBy(id = "menuBtn")
     private WebElement menuButton;
 
-    @FindBy(xpath = "//div[@id='page-wrapper']/parent::body")
+    @FindBy(xpath = "//body[@class='body-mobile--scroll-hidden']")
+    private WebElement closedMenu;
+
+    @FindBy(xpath = "//nav[@class='left-menu__nav']/ul")
     private WebElement body;
 
     @FindBy(xpath = "//*[@data-automation-id='inspections']")
@@ -75,34 +77,17 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
     }
 
+    public WebElement mainMenuItemByName(String menuItemName) {
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[@data-parent='#mainMenu' and contains(text(),'" + menuItemName + "')]"));
+    }
+
+    public WebElement subMenuItemByName(String subMenuItemName) {
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//ul[@data-template='submenu-item-template']//span[text()='" + subMenuItemName + "']/parent::a"));
+    }
+
     public VNextBOInspectionsWebPage selectInspectionsMenu() {
         selectMenuItem(inspectionsMenu, MainMenuItems.OPERATIONS.getMenu());
         return PageFactory.initElements(driver, VNextBOInspectionsWebPage.class);
-    }
-
-    public VNextBOInvoicesWebPage selectInvoicesMenu() {
-        selectMenuItem(invoicesMenu, MainMenuItems.OPERATIONS.getMenu());
-        return PageFactory.initElements(driver, VNextBOInvoicesWebPage.class);
-    }
-
-    public VNextBOPartsManagementWebPage selectPartsManagementMenu() {
-        selectMenuItem(partsManagementMenu, MainMenuItems.OPERATIONS.getMenu());
-        return PageFactory.initElements(driver, VNextBOPartsManagementWebPage.class);
-    }
-
-    public VNexBOUsersWebPage selectUsersMenu() {
-        selectMenuItem(usersMenu, MainMenuItems.SETTINGS.getMenu());
-        return PageFactory.initElements(driver, VNexBOUsersWebPage.class);
-    }
-
-    public VNextBOROWebPage selectRepairOrdersMenu() {
-        selectMenuItem(repairOrdersMenu, MainMenuItems.MONITOR.getMenu());
-        return PageFactory.initElements(driver, VNextBOROWebPage.class);
-    }
-
-    public VNextBOServicesWebPage selectServicesMenu() {
-        selectMenuItem(servicesMenu, MainMenuItems.SETTINGS.getMenu());
-        return PageFactory.initElements(driver, VNextBOServicesWebPage.class);
     }
 
     public VNextBOQuickNotesWebPage selectQuickNotesMenu() {
@@ -110,53 +95,11 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
         return PageFactory.initElements(driver, VNextBOQuickNotesWebPage.class);
     }
 
-    public VNextBOCompanyInfoWebPage selectCompanyInfoMenu() {
-        selectMenuItem(companyInfoMenu, MainMenuItems.SETTINGS.getMenu());
-        return PageFactory.initElements(driver, VNextBOCompanyInfoWebPage.class);
-    }
-
-    public VNextBOClientsWebPage selectClientsMenu() {
-        selectMenuItem(clientsMenu, MainMenuItems.SETTINGS.getMenu());
-        return PageFactory.initElements(driver, VNextBOClientsWebPage.class);
-    }
-
-    public VNextBODeviceManagementWebPage selectDeviceManagementMenu() {
-        selectMenuItem(deviceManagementMenu, MainMenuItems.SETTINGS.getMenu());
-        final VNextBODeviceManagementWebPage deviceManagementWebPage =
-                PageFactory.initElements(driver, VNextBODeviceManagementWebPage.class);
-        WaitUtilsWebDriver.waitForVisibilityIgnoringException(deviceManagementWebPage.getDeviceManagementBreadCrumb(), 5);
-        return deviceManagementWebPage;
-    }
-
     public boolean isUsersMenuItemExists() {
-        if (!isMainMenuExpanded()) {
-            expandMainMenu();
+        if (!VNextBOLeftMenuValidations.isMainMenuExpanded()) {
+            VNextBOLeftMenuInteractions.expandMainMenu();
         }
         return driver.findElement(By.xpath("//*[@data-automation-id='users']")).isDisplayed();
-    }
-
-    public boolean isMainMenuExpanded() {
-        driver.switchTo().defaultContent();
-        wait.until(ExpectedConditions.visibilityOf(body));
-        try {
-            return wait.until(ExpectedConditions.attributeContains(body, "class", "left-menu--open"));
-        } catch (Exception ignored) {
-            return false;
-        }
-    }
-
-    public void expandMainMenu() {
-        if (!isMainMenuExpanded()) {
-            wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
-            wait.until(ExpectedConditions.attributeContains(body, "class", "left-menu--open"));
-        }
-    }
-
-    public void collapseMainMenu() {
-        if (isMainMenuExpanded()) {
-            wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
-            wait.until(ExpectedConditions.attributeToBe(body, "class", "body-mobile--scroll-hidden"));
-        }
     }
 
     private void clickMainMenuItem(String mainMenu) {
@@ -165,39 +108,29 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
                     .elementToBeClickable(this.mainMenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]"))))
                     .click();
         } catch (Exception e) {
-            scrollToElement(this.mainMenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")));
-            clickWithJS(this.mainMenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")));
+            Utils.scrollToElement(this.mainMenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")));
+            Utils.clickWithJS(this.mainMenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")));
         }
-        waitABit(1000);
+        WaitUtilsWebDriver.waitABit(1000);
     }
 
     private void selectMenuItem(WebElement menuitem, String mainMenuItem) {
         try {
             driver.switchTo().frame(tutorialFrame);
-            waitABit(1000);
+            WaitUtilsWebDriver.waitABit(1000);
             wait.until(ExpectedConditions.elementToBeClickable(tutorialSkipButton)).click();
         } catch (Exception ignored) {
         }
 
         driver.switchTo().defaultContent();
-        expandMainMenu();
+        VNextBOLeftMenuInteractions.expandMainMenu();
         clickMainMenuItem(mainMenuItem);
         try {
             wait.until(ExpectedConditions.elementToBeClickable(menuitem)).click();
         } catch (TimeoutException e) {
-            scrollToElement(menuitem);
-            clickWithJS(menuitem);
+            Utils.scrollToElement(menuitem);
+            Utils.clickWithJS(menuitem);
         }
-        waitForLoading();
-    }
-
-    public boolean isMenuButtonDisplayed() {
-        try {
-            wait.until(ExpectedConditions.visibilityOf(menuButton));
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        WaitUtilsWebDriver.waitForLoading();
     }
 }

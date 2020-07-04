@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.steps.dialogs;
 
 import com.cyberiansoft.test.baseutils.Utils;
-
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
 
 public class VNextBOModalDialogSteps {
@@ -12,31 +12,48 @@ public class VNextBOModalDialogSteps {
     }
 
     public static String getDialogInformationMessage() {
+
         return Utils.getText(new VNextBOModalDialog().dialogInformationMessage());
     }
 
     public static void clickOkButton() {
 
-        Utils.clickElement(new VNextBOModalDialog().getConfirmOKButton());
+        VNextBOModalDialog modalDialog = new VNextBOModalDialog();
+        WaitUtilsWebDriver.waitForElementNotToBeStale(modalDialog.getConfirmOKButton());
+        WaitUtilsWebDriver.waitForVisibility(modalDialog.getConfirmOKButton(), 4);
+        Utils.clickElement(modalDialog.getConfirmOKButton());
+        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getConfirmOKButton(), 4);
     }
 
     public static void clickCloseButton() {
 
-        Utils.clickElement(new VNextBOModalDialog().getCloseButton());
+        VNextBOModalDialog modalDialog = new VNextBOModalDialog();
+        WaitUtilsWebDriver.waitForVisibility(modalDialog.getCloseButton(), 4);
+        Utils.clickElement(modalDialog.getCloseButton());
+        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getCloseButton(), 4);
     }
 
     public static void clickYesButton() {
 
-        Utils.clickElement(new VNextBOModalDialog().getYesButton());
+        VNextBOModalDialog modalDialog = new VNextBOModalDialog();
+        WaitUtilsWebDriver.waitForVisibility(modalDialog.getYesButton(), 4);
+        Utils.clickElement(modalDialog.getYesButton());
+        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getYesButton(), 4);
     }
 
     public static void clickNoButton() {
 
-        Utils.clickElement(new VNextBOModalDialog().getNoButton());
+        VNextBOModalDialog modalDialog = new VNextBOModalDialog();
+        WaitUtilsWebDriver.waitForVisibility(modalDialog.getNoButton(), 4);
+        Utils.clickElement(modalDialog.getNoButton());
+        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getNoButton(), 4);
     }
 
     public static void clickCancelButton() {
 
-        Utils.clickElement(new VNextBOModalDialog().getCancelButton());
+        VNextBOModalDialog modalDialog = new VNextBOModalDialog();
+        WaitUtilsWebDriver.waitForVisibility(modalDialog.getCancelButton(), 4);
+        Utils.clickElement(modalDialog.getCancelButton());
+        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getCancelButton(), 4);
     }
 }

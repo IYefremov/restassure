@@ -15,59 +15,62 @@ import java.util.regex.Pattern;
 @Getter
 public class RepairOrderListElement implements IWebElement {
     private WebElement rootElement;
-    private String expandButtonLocator = ".//div[@class=\"status-item-content-toggle\"]";
-    private String repairOrderIdLocator = ".//div[@class=\"accordion-item-content\"]//div[@class=\"status-item-content-subtitle\"]";
-    private String statusValue = ".//div[@class=\"status-item\"]//div[@class=\"status-item-chart\"]";
-    private String phaseTextLocator = "//div[@class=\"status-item-content\"]//div[@class=\"status-item-content-row\"][2]";
-    private String vinTextLocator = "//div[@class=\"status-item-content\"]//div[@class=\"status-item-content-row\"][3]";
+    //String expandButtonLocator = ".//div[@class=\"status-item-content-toggle\"]";
+    String expandButtonLocator = ".//*[@action=\"toggle_item\"]";
+    private String repairOrderIdLocator = ".//div[contains(@class,'order-num')]";
+    private String statusValue = "//div[contains(@class,'ro-item-progress')]";
+    private String stockValue = "//span[@class='content-subtitle-name' and contains(text(), 'Stock')]/..";
+    private String phaseTextLocator = "//div[contains(@class,'active-phase')]";
+    private String vinTextLocator = "//div[contains(@class,'right-vin')]";
     private String statusesListLocator = "//*[@action=\"change-flag\"]";
+    private String repairOrderLocator = ".//*[@action='select']";
 
     public RepairOrderListElement(WebElement rootElement) {
         this.rootElement = rootElement;
     }
 
-    public Boolean isExpanded() {
-        BaseUtils.waitABit(1000);
-        return rootElement.getAttribute("class").contains("expanded");
-    }
-
-    public void expand() {
-        if (!isExpanded())
-            rootElement.findElement(By.xpath(expandButtonLocator)).click();
-    }
-
     public String getRepairOrderId() {
-        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(repairOrderIdLocator)), true);
-        return rootElement.findElement(By.xpath(repairOrderIdLocator)).getText();
+        WaitUtils.waitUntilElementIsClickable(rootElement);
+        if (!rootElement.getAttribute("class").contains("expanded")) {
+            rootElement.findElement(By.xpath(expandButtonLocator)).click();
+            BaseUtils.waitABit(500);
+        }
+        return rootElement.findElement(By.xpath(".//div[@class='accordion-item-content']")).
+                findElement(By.xpath(repairOrderIdLocator)).getText();
+    }
+
+    public String getStockValue() {
+        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(repairOrderLocator)), true);
+        return rootElement.findElement(By.xpath(stockValue)).getText().split(" ")[1];
     }
 
     public String getStatusValue() {
-        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(repairOrderIdLocator)), true);
+        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(repairOrderLocator)), true);
         return rootElement.findElement(By.xpath(statusValue)).getText();
     }
 
     public String getPhase() {
-        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(repairOrderIdLocator)), true);
+        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(repairOrderLocator)), true);
         return rootElement.findElement(By.xpath(phaseTextLocator)).getText().toUpperCase();
     }
 
     public String getVin() {
-        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(repairOrderIdLocator)), true);
+        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(repairOrderLocator)), true);
         return rootElement.findElement(By.xpath(vinTextLocator)).getText().split(" ")[1];
     }
 
     public RepairOrderDto getRepairOrderDto() {
-        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(repairOrderIdLocator)), true);
+        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(repairOrderLocator)), true);
         return new RepairOrderDto(getPhase(), getVin(), getStatusValue());
     }
 
     public void openMenu() {
-        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(vinTextLocator)), true);
-        rootElement.findElement(By.xpath(vinTextLocator)).click();
+        WaitUtils.waitUntilElementIsClickable(rootElement.findElement(By.xpath(repairOrderLocator)));
+        WaitUtils.click(rootElement.findElement(By.xpath(repairOrderLocator)));
     }
 
     public void selectStatus(RepairOrderFlag flag) {
-        this.expand();
+        BaseUtils.waitABit(500);
         rootElement.findElements(By.xpath(statusesListLocator))
                 .stream()
                 .filter((element) -> element.getAttribute("class").contains(flag.getFlagData()))
@@ -81,6 +84,6 @@ public class RepairOrderListElement implements IWebElement {
         Matcher matcher = pattern.matcher(rootElement.getAttribute("class"));
         matcher.find();
         String flagString = matcher.group();
-        return RepairOrderFlag.getFlagFromString(flagString.substring(0,flagString.lastIndexOf("-")));
+        return RepairOrderFlag.getFlagFromString(flagString.substring(0, flagString.lastIndexOf("-")));
     }
 }

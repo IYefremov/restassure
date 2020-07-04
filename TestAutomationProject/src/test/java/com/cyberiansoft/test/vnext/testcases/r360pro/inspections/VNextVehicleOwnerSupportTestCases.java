@@ -1,258 +1,164 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.inspections;
 
+import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.globalutils.GlobalUtils;
-import com.cyberiansoft.test.vnext.enums.VehicleDataField;
+import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
-import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
-import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.steps.customers.CustomersScreenSteps;
+import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
+import com.cyberiansoft.test.vnextbo.steps.users.CustomerServiceSteps;
 import org.apache.commons.lang3.StringUtils;
+import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class VNextVehicleOwnerSupportTestCases extends BaseTestCaseTeamEditionRegistration {
+public class VNextVehicleOwnerSupportTestCases extends BaseTestClass {
 
     final RetailCustomer testcustomer2 = new RetailCustomer("RetailCustomer2", "RetailLast2");
 
 
     @BeforeClass(description = "Vehicle Owner Support Cases")
     public void beforeClass() {
-        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextCustomersScreen customersScreen = homeScreen.clickCustomersMenuItem();
-        customersScreen.switchToRetailMode();
-        if (!customersScreen.isCustomerExists(testcustomer2)) {
-            VNextNewCustomerScreen newcustomerscreen = customersScreen.clickAddCustomerButton();
-            newcustomerscreen.createNewCustomer(testcustomer2);
-            customersScreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
-        }
-        customersScreen.clickBackButton();
+        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getVehicleOwnerSupportTestCasesDataPath();
+        HomeScreenSteps.openCustomers();
+        CustomerServiceSteps.createCustomerIfNotExist(testcustomer2);
+        ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(testName = "Test Case 78390:Verify user can create new customer when select retail owner (Inspection)",
-            description = "Verify user can create new customer when select retail owner (Inspection)")
-    public void testVerifyUserCanCreateNewCustomerWhenSelectRetailOwner_Inspection() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCanCreateNewCustomerWhenSelectRetailOwner_Inspection(String rowID,
+                                                                String description, JSONObject testData) {
 
-        final String vinnumber = "TEST";
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-        inspectionsScreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
-        customersScreen.switchToRetailMode();
-        customersScreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinnumber);
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR, inspectionData);
+
         VehicleInfoScreenInteractions.clickSelectOwnerCell();
-        customersScreen = new VNextCustomersScreen();
-        customersScreen.switchToRetailMode();
-        VNextNewCustomerScreen nextNewCustomerScreen = customersScreen.clickAddCustomerButton();
+
         final String customerFirstName = StringUtils.capitalize(GlobalUtils.getUUID());
         final String customerLastName = StringUtils.capitalize(GlobalUtils.getUUID());
-        nextNewCustomerScreen.createNewCustomer(new RetailCustomer(customerFirstName, customerLastName));
-        vehicleInfoScreen = new VNextVehicleInfoScreen();
-
-        VehicleInfoScreenValidations.ownerShouldBe(customerFirstName + " " + customerLastName);
-        vehicleInfoScreen.saveInspectionViaMenu();
-        inspectionsScreen.clickBackButton();
+        RetailCustomer newRetailCustomer = new RetailCustomer(customerFirstName, customerLastName);
+        CustomerServiceSteps.createCustomerIfNotExist(newRetailCustomer);
+        CustomersScreenSteps.selectCustomer(newRetailCustomer);
+        VehicleInfoScreenValidations.ownerShouldBe(newRetailCustomer.getFullName());
+        InspectionSteps.saveInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(testName = "Test Case 78391:Verify user can select created retail customer when assign owner",
-            description = "Verify user can select created retail customer when assign owner")
-    public void testVerifyUserCanSelectCreatedRetailCustomerWhenAssignOwner() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCanSelectCreatedRetailCustomerWhenAssignOwner(String rowID,
+                                                                                   String description, JSONObject testData) {
 
-        final String vinNumber = "TEST";
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-        inspectionsScreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
-        customersScreen.switchToRetailMode();
-        customersScreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinNumber);
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR, inspectionData);
         VehicleInfoScreenInteractions.clickSelectOwnerCell();
-        customersScreen = new VNextCustomersScreen();
-        customersScreen.switchToRetailMode();
-        customersScreen.selectCustomer(testcustomer2);
-        vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        CustomersScreenSteps.selectCustomer(testcustomer2);
         VehicleInfoScreenValidations.ownerShouldBe(testcustomer2.getFullName());
-        vehicleInfoScreen.saveInspectionViaMenu();
-        inspectionsScreen.clickBackButton();
+        InspectionSteps.saveInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(testName = "Test Case 78392:Verify user can change retail owner to wholesale",
-            description = "Verify user can change retail owner to wholesale")
-    public void testVerifyUserCanChangeRetailOwnerToWholesale() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCanChangeRetailOwnerToWholesale(String rowID,
+                                                                            String description, JSONObject testData) {
 
-        final String vinNumber = "TEST";
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-        inspectionsScreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
-        customersScreen.switchToRetailMode();
-        customersScreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinNumber);
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR, inspectionData);
         VehicleInfoScreenInteractions.clickSelectOwnerCell();
-        customersScreen = new VNextCustomersScreen();
-        customersScreen.switchToRetailMode();
-        customersScreen.selectCustomer(testcustomer2);
-        vehicleInfoScreen = new VNextVehicleInfoScreen();
+        CustomersScreenSteps.selectCustomer(testcustomer2);
         VehicleInfoScreenValidations.ownerShouldBe(testcustomer2.getFullName());
         VehicleInfoScreenInteractions.clickSelectOwnerCell();
-        customersScreen.switchToWholesaleMode();
-        customersScreen.selectCustomer(testwholesailcustomer);
+        CustomersScreenSteps.selectCustomer(testwholesailcustomer);
         VehicleInfoScreenValidations.ownerShouldBe(testwholesailcustomer.getFullName());
-        vehicleInfoScreen.saveInspectionViaMenu();
-        inspectionsScreen.clickBackButton();
+        InspectionSteps.saveInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(testName = "Test Case 78393:Verify user can change wholesale owner to retail",
-            description = "Verify user can change wholesale owner to retail")
-    public void testVerifyUserCanChangeWholesaleOwnerToRetail() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCanChangeWholesaleOwnerToRetail(String rowID,
+                                                              String description, JSONObject testData) {
 
-        final String vinNumber = "TEST";
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-        inspectionsScreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
-        customersScreen.switchToRetailMode();
-        customersScreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinNumber);
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR, inspectionData);
         VehicleInfoScreenInteractions.clickSelectOwnerCell();
-        customersScreen = new VNextCustomersScreen();
-        customersScreen.switchToWholesaleMode();
-        customersScreen.selectCustomer(testwholesailcustomer);
+        CustomersScreenSteps.selectCustomer(testwholesailcustomer);
         VehicleInfoScreenValidations.ownerShouldBe(testwholesailcustomer.getFullName());
 
         VehicleInfoScreenInteractions.clickSelectOwnerCell();
-        customersScreen.switchToRetailMode();
-        customersScreen.selectCustomer(testcustomer2);
-        vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        CustomersScreenSteps.selectCustomer(testcustomer2);
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenValidations.ownerShouldBe(testcustomer2.getFullName());
-        vehicleInfoScreen.saveInspectionViaMenu();
-        inspectionsScreen.clickBackButton();
+        InspectionSteps.saveInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(testName = "Test Case 78394:Verify assigned owner for Inspection displays as selected when user create WO from this Inspection",
-            description = "Verify assigned owner for Inspection displays as selected when user create WO from this Inspection")
-    public void testVerifyAssignedOwnerForInspectionDisplaysAsSelectedWhenUserCreateWOFromThisInspection() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyAssignedOwnerForInspectionDisplaysAsSelectedWhenUserCreateWOFromThisInspection(String rowID,
+                                                              String description, JSONObject testData) {
 
-        final String vinNumber = "TEST";
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-        inspectionsScreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
-        customersScreen.switchToRetailMode();
-        customersScreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinNumber);
-        final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR, inspectionData);
         VehicleInfoScreenInteractions.clickSelectOwnerCell();
-        customersScreen = new VNextCustomersScreen();
-        customersScreen.switchToRetailMode();
-        customersScreen.selectCustomer(testcustomer2);
-        vehicleInfoScreen = new VNextVehicleInfoScreen();
+        CustomersScreenSteps.selectCustomer(testcustomer2);
         VehicleInfoScreenValidations.ownerShouldBe(testcustomer2.getFullName());
-        vehicleInfoScreen.saveInspectionViaMenu();
+        final String inspectionNumber = InspectionSteps.saveInspection();
 
-        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionsMenuScreen.clickApproveInspectionMenuItem();
-        VNextApproveScreen approveScreen = new VNextApproveScreen(DriverBuilder.getInstance().getAppiumDriver());
-        approveScreen.drawSignature();
-        approveScreen.saveApprovedInspection();
-        inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
-        inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionsMenuScreen.clickCreateWorkOrderInspectionMenuItem();
-        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
-        vehicleInfoScreen = new VNextVehicleInfoScreen();
+        SearchSteps.textSearch(inspectionNumber);
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.APPROVE);
+        ApproveSteps.drawSignature();
+        ApproveSteps.saveApprove();
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        InspectionMenuSteps.selectCreateWorkOrder();
+        WorkOrderSteps.createWorkOrder(WorkOrderTypes.KRAMAR_AUTO);
         VehicleInfoScreenValidations.ownerShouldBe(testcustomer2.getFullName());
-        vehicleInfoScreen.saveWorkOrderViaMenu();
-
-        inspectionsScreen.clickBackButton();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(testName = "Test Case 78395:Verify user can change owner when create WO from Inspection",
-            description = "Verify user can change owner when create WO from Inspection")
-    public void testVerifyUserCanChangeOwnerWhenCreateWOFromInspection() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCanChangeOwnerWhenCreateWOFromInspection(String rowID,
+                                                                                                         String description, JSONObject testData) {
 
-        final String vinNumber = "TEST";
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-        inspectionsScreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
-        customersScreen.switchToRetailMode();
-        customersScreen.selectCustomer(testcustomer);
-        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinNumber);
-        final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR, inspectionData);
         VehicleInfoScreenInteractions.clickSelectOwnerCell();
-        customersScreen = new VNextCustomersScreen();
-        customersScreen.switchToRetailMode();
-        customersScreen.selectCustomer(testcustomer2);
-        vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        CustomersScreenSteps.selectCustomer(testcustomer2);
         VehicleInfoScreenValidations.ownerShouldBe(testcustomer2.getFullName());
-        vehicleInfoScreen.saveInspectionViaMenu();
+        final String inspectionNumber = InspectionSteps.saveInspection();
 
-        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionsMenuScreen.clickApproveInspectionMenuItem();
-        VNextApproveScreen approveScreen = new VNextApproveScreen(DriverBuilder.getInstance().getAppiumDriver());
-        approveScreen.drawSignature();
-        approveScreen.saveApprovedInspection();
-        inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
-        inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionsMenuScreen.clickCreateWorkOrderInspectionMenuItem();
-        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(DriverBuilder.getInstance().getAppiumDriver());
-        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.APPROVE);
+        ApproveSteps.drawSignature();
+        ApproveSteps.saveApprove();
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        InspectionMenuSteps.selectCreateWorkOrder();
+        WorkOrderSteps.createWorkOrder(WorkOrderTypes.KRAMAR_AUTO);
         VehicleInfoScreenValidations.ownerShouldBe(testcustomer2.getFullName());
         VehicleInfoScreenInteractions.clickSelectOwnerCell();
-        customersScreen.switchToRetailMode();
-        customersScreen.selectCustomer(testcustomer);
-        vehicleInfoScreen = new VNextVehicleInfoScreen();
+        CustomersScreenSteps.selectCustomer(testcustomer);
         VehicleInfoScreenValidations.ownerShouldBe(testcustomer.getFullName());
 
-        vehicleInfoScreen.saveWorkOrderViaMenu();
-
-        inspectionsScreen.clickBackButton();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 }

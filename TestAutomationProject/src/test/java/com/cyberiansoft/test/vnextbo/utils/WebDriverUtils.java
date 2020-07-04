@@ -1,26 +1,35 @@
 package com.cyberiansoft.test.vnextbo.utils;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.core.BrowserType;
+import com.cyberiansoft.test.core.WebDriverConfigInfo;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeUnit;
 
 public class WebDriverUtils {
-	
-	public static void webdriverGotoWebPage(String url) {
-	    try {
-            DriverBuilder.getInstance().getDriver().manage().window().setSize(new Dimension(1920, 1080));
-        } catch (WebDriverException e) {
-            System.err.println("The window maximize exception:\n" + e);
+
+    public static void webdriverGotoWebPage(String url) {
+        WebDriver driver;
+        try {
+            driver = DriverBuilder.getInstance().getDriver();
+            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        } catch (Exception ignored) {
+            BrowserType browserType = BaseUtils.getBrowserType(WebDriverConfigInfo.getInstance().getDefaultBrowser());
+            DriverBuilder.getInstance()
+                    .setBrowserType(browserType)
+                    .setRemoteWebDriverURL(WebDriverConfigInfo.getInstance().getAzureURL())
+                    .setDriver();
+            driver = DriverBuilder.getInstance().getDriver();
+            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         }
-        DriverBuilder.getInstance().getDriver().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		DriverBuilder.getInstance().getDriver().get(url);
-		if (DriverBuilder.getInstance().getBrowser().equals("ie")) {
-			if (DriverBuilder.getInstance().getDriver().findElements(By.id("overridelink")).size() > 0) {
-				DriverBuilder.getInstance().getDriver().navigate().to("javascript:document.getElementById('overridelink').click()");
-			}
-		}
-	}
+        driver.get(url);
+        if (DriverBuilder.getInstance().getBrowser().equals("ie")) {
+            if (driver.findElements(By.id("overridelink")).size() > 0) {
+                driver.navigate().to("javascript:document.getElementById('overridelink').click()");
+            }
+        }
+    }
 }

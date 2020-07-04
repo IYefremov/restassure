@@ -73,8 +73,8 @@ public class TestListener extends TestListenerAdapter implements IInvokedMethodL
             e.printStackTrace();
         }
         DriverBuilder.getInstance().quitDriver();
-        DriverBuilder.getInstance().setDriver(BaseUtils
-                .getBrowserType(InHouseConfigInfo.getInstance().getDefaultBrowser()));
+        DriverBuilder.getInstance().setBrowserType(BaseUtils
+                .getBrowserType(InHouseConfigInfo.getInstance().getDefaultBrowser())).setDriver();
         ((BaseTestCase) currentClass).setDriver();
     }
 

@@ -2,7 +2,6 @@ package com.cyberiansoft.test.ios10_client.regularvalidations;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularServiceRequestsScreen;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularServiceRequestSteps;
-import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularVehicleInfoScreenSteps;
 import org.testng.Assert;
 
 public class RegularServiceRequestsScreenValidations {
@@ -28,9 +27,6 @@ public class RegularServiceRequestsScreenValidations {
     public static void verifyServiceRequestPresent(String serviceRequestNumber, boolean isPresent) {
         RegularServiceRequestSteps.waitServiceRequestScreenLoaded();
         RegularServiceRequestsScreen serviceRequestsScreen = new RegularServiceRequestsScreen();
-        if (isPresent)
-            Assert.assertTrue(serviceRequestsScreen.isServiceRequestExists(serviceRequestNumber));
-        else
-            Assert.assertFalse(serviceRequestsScreen.isServiceRequestExists(serviceRequestNumber));
+        serviceRequestsScreen.isServiceRequestExists(serviceRequestNumber, isPresent);
     }
 }

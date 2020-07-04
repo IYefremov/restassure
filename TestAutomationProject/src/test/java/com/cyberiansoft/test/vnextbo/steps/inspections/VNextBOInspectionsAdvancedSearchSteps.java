@@ -2,8 +2,8 @@ package com.cyberiansoft.test.vnextbo.steps.inspections;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionAdvancedSearchForm;
+import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -15,6 +15,8 @@ public class VNextBOInspectionsAdvancedSearchSteps {
     public static void clickSearchButton() {
 
         Utils.clickElement(new VNextBOInspectionAdvancedSearchForm().searchButton);
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void clickCloseButton() {
@@ -25,6 +27,7 @@ public class VNextBOInspectionsAdvancedSearchSteps {
     public static void clickSaveButton() {
 
         Utils.clickElement(new VNextBOInspectionAdvancedSearchForm().saveButton);
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void clickClearButton() {
@@ -42,8 +45,9 @@ public class VNextBOInspectionsAdvancedSearchSteps {
         VNextBOInspectionAdvancedSearchForm advancedSearchForm =
                 new VNextBOInspectionAdvancedSearchForm();
         advancedSearchForm.deleteSavedSearchButton.click();
-        DriverBuilder.getInstance().getDriver().switchTo().alert().accept();
-        WaitUtilsWebDriver.waitForInvisibility(advancedSearchForm.advancedSearchFormContent);
+        VNextBOModalDialogSteps.clickYesButton();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static String getValueFromTextInputField(String fieldLabel) {
@@ -118,8 +122,9 @@ public class VNextBOInspectionsAdvancedSearchSteps {
                 new VNextBOInspectionAdvancedSearchForm();
         WebElement fieldWithAutocomplete = advancedSearchForm.autoPopulatedFieldByName(fieldLabel);
         Utils.clearAndType(fieldWithAutocomplete, value);
-        WaitUtilsWebDriver.waitForLoading();
-        Utils.clickWithJS(advancedSearchForm.dropDownFieldOption(value));
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        Utils.clickElement(advancedSearchForm.dropDownFieldOption(value));
     }
 
     public static void setAllAdvancedSearchFields(Map<String, String> listWithValuesForFields) {

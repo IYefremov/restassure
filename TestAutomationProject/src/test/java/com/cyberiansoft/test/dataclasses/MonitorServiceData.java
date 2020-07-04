@@ -3,8 +3,6 @@ package com.cyberiansoft.test.dataclasses;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
-import java.util.List;
-
 @Getter
 public class MonitorServiceData {
 
@@ -12,7 +10,10 @@ public class MonitorServiceData {
     ServiceData monitorService;
 
     @JsonProperty("monitorServiceStatus")
-    private String monitorServiceStatus;
+    String monitorServiceStatus;
+
+    @JsonProperty("serviceVendor")
+    String serviceVendor;
 
     @JsonProperty("startService")
     boolean startService;

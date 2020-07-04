@@ -13,6 +13,7 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
+import javax.net.ssl.*;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -20,18 +21,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Iterator;
-import java.util.Set;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
 import java.security.cert.X509Certificate;
+import java.util.Set;
  
 
 	public class URLStatusChecker {
@@ -159,11 +150,7 @@ import java.security.cert.X509Certificate;
 	        HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 
 	        // Create all-trusting host name verifier
-	        HostnameVerifier allHostsValid = new HostnameVerifier() {
-	            public boolean verify(String hostname, SSLSession session) {
-	              return true;
-	            }
-	        };
+	        HostnameVerifier allHostsValid = (hostname, session) -> true;
 	        // Install the all-trusting host verifier
 	        HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
 	        
@@ -206,15 +193,15 @@ import java.security.cert.X509Certificate;
 	     */
 	    private BasicCookieStore mimicCookieState(Set seleniumCookieSet) {
 	        BasicCookieStore mimicWebDriverCookieStore = new BasicCookieStore();
-	        
-	        for (Iterator iterator = seleniumCookieSet.iterator(); iterator.hasNext();) {
-				Cookie seleniumCookie = (Cookie) iterator.next();
-				 BasicClientCookie duplicateCookie = new BasicClientCookie(seleniumCookie.getName(), seleniumCookie.getValue());
-		            duplicateCookie.setDomain(seleniumCookie.getDomain());
-		            duplicateCookie.setSecure(seleniumCookie.isSecure());
-		            duplicateCookie.setExpiryDate(seleniumCookie.getExpiry());
-		            duplicateCookie.setPath(seleniumCookie.getPath());
-		            mimicWebDriverCookieStore.addCookie(duplicateCookie);
+
+			for (Object o : seleniumCookieSet) {
+				Cookie seleniumCookie = (Cookie) o;
+				BasicClientCookie duplicateCookie = new BasicClientCookie(seleniumCookie.getName(), seleniumCookie.getValue());
+				duplicateCookie.setDomain(seleniumCookie.getDomain());
+				duplicateCookie.setSecure(seleniumCookie.isSecure());
+				duplicateCookie.setExpiryDate(seleniumCookie.getExpiry());
+				duplicateCookie.setPath(seleniumCookie.getPath());
+				mimicWebDriverCookieStore.addCookie(duplicateCookie);
 			}
 	       /* for (Cookie seleniumCookie : seleniumCookieSet) {
 	            BasicClientCookie duplicateCookie = new BasicClientCookie(seleniumCookie.getName(), seleniumCookie.getValue());

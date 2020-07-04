@@ -8,13 +8,14 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
+import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
-import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.GeneralListValidations;
 import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
 import org.json.simple.JSONObject;
@@ -24,11 +25,11 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MonitoringRoActionMenuPhaseAndService extends BaseTestCaseTeamEditionRegistration {
+public class MonitoringRoActionMenuPhaseAndService extends BaseTestClass {
     String workOrderId;
     String inspectionId;
 
-    @BeforeClass(description = "Tech split base test cases")
+    @BeforeClass(description = "Monitoring Ro Action Menu Phase And Service")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringRoActionMenu();
         HomeScreenSteps.openCreateMyInspection();
@@ -55,7 +56,7 @@ public class MonitoringRoActionMenuPhaseAndService extends BaseTestCaseTeamEditi
         ScreenNavigationSteps.pressBackButton();
 
         HomeScreenSteps.openMonitor();
-        SearchSteps.searchByText(workOrderId);
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralListSteps.selectListItems(serviceDataList.stream().map(ServiceData::getServiceName).collect(Collectors.toList()));
@@ -66,7 +67,7 @@ public class MonitoringRoActionMenuPhaseAndService extends BaseTestCaseTeamEditi
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, dependsOnMethods = "verifyUserCanStartServiceFromRoActionMenuForPhaseAndServiceLevel")
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCompleteServiceFromRoActionMenuForPhaseAndServiceLevel(String rowID,
                                                                                     String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
@@ -104,7 +105,7 @@ public class MonitoringRoActionMenuPhaseAndService extends BaseTestCaseTeamEditi
         ScreenNavigationSteps.pressBackButton();
 
         HomeScreenSteps.openMonitor();
-        SearchSteps.searchByText(workOrderId);
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralListSteps.selectListItem(firstService.getServiceName());
@@ -120,7 +121,8 @@ public class MonitoringRoActionMenuPhaseAndService extends BaseTestCaseTeamEditi
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         PhaseScreenValidations.validatePhaseStatus(orderPhaseDto, ServiceStatus.ACTIVE);
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
+        //ScreenNavigationSteps.pressBackButton();
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.COMPLETE);
         GeneralListValidations.elementShouldBePresent(firstService.getServiceName(), false);

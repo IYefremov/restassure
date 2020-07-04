@@ -36,6 +36,9 @@ public class RegularMainScreen extends iOSBaseScreen {
 	@iOSXCUITFindBy(accessibility = "LoginView")
 	private IOSElement loginView;
 
+	@iOSXCUITFindBy(accessibility = "iconStatus")
+	private IOSElement iconStatus;
+
 	public RegularMainScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
@@ -49,10 +52,8 @@ public class RegularMainScreen extends iOSBaseScreen {
 		Helpers.acceptAlert();
 	}
 
-	public void updateVIN() {
-		Helpers.waitUntilCheckLicenseDialogDisappears();
+	public void clickUpdateVINDatabase() {
 		updatevin.click();
-		Helpers.acceptAlert();
 	}
 
 	public void userLogin(String employeeName, String password)  {
@@ -78,7 +79,12 @@ public class RegularMainScreen extends iOSBaseScreen {
 	}
 
 	public LicensesScreen clickLicenses() {
+		WaitUtils.waitUntilElementIsClickable(licenses);
 		licenses.click();
 		return new LicensesScreen();
+	}
+
+	public void clickStatusIcon() {
+		iconStatus.click();
 	}
 }

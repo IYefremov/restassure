@@ -1,30 +1,33 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
+@Getter
 public class VNextDeclineReasonScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@data-page='services-add']")
-	private WebElement approveservicesscreen;
-	
-	public VNextDeclineReasonScreen(AppiumDriver<MobileElement> appiumdriver) {
-		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(approveservicesscreen));
+	private WebElement declineReasonScreen;
+
+	public VNextDeclineReasonScreen() {
+		PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
 	}
-	
+
 	public void selectDeclineReason(String declineReason) {
-		tap(approveservicesscreen.findElement(By.
+		tap(declineReasonScreen.findElement(By.
 				xpath(".//ul/li[@action='select-item']/span[text()='" + declineReason + "']")));
+	}
+
+
+	public String getScreenText () {
+		WaitUtils.waitUntilElementIsClickable(declineReasonScreen);
+		return declineReasonScreen.findElement(By.
+				xpath("//div[@class='navbar-panel-inner']")).getText();
 	}
 
 }

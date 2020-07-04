@@ -1,8 +1,7 @@
 package com.cyberiansoft.test.driverutils;
 
-import org.openqa.selenium.WebDriver;
-
 import com.cyberiansoft.test.core.BrowserType;
+import org.openqa.selenium.WebDriver;
 
 public class WebdriverInicializator {
 	
@@ -20,7 +19,7 @@ public class WebdriverInicializator {
     }
 	
 	public WebDriver initWebDriver(BrowserType browserType) {
-		DriverBuilder.getInstance().setDriver(browserType);
+		DriverBuilder.getInstance().setBrowserType(browserType).setDriver();
 		return DriverBuilder.getInstance().getDriver();
 		}
 

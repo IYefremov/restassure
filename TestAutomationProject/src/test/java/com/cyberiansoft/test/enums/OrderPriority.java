@@ -4,10 +4,10 @@ import lombok.Getter;
 
 @Getter
 public enum OrderPriority {
-    ALL("all"),
-    LOW("low"),
-    NORMAL("normal"),
-    HIGH("high");
+    ALL("All"),
+    LOW("Low"),
+    NORMAL("Normal"),
+    HIGH("High");
 
     private String value;
 

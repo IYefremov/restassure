@@ -26,7 +26,6 @@ public class ClientContactsWebPage extends BaseWebPage {
 	public ClientContactsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-		wait.until(ExpectedConditions.visibilityOf(adduserbtn));
 	}
 
 
@@ -40,9 +39,8 @@ public class ClientContactsWebPage extends BaseWebPage {
 
 
 	public boolean isClientContactPresentInTable(String contactfstname, String contactlstname) {
-		boolean exists = clientcontactstable.getWrappedElement().
+		return clientcontactstable.getWrappedElement().
 				findElements(By.xpath(".//td/b[text()='" + contactfstname + " " + contactlstname + "']")).size() > 0;
-		return exists;
 	}
 
 
@@ -68,7 +66,7 @@ public class ClientContactsWebPage extends BaseWebPage {
 		if (clientstablerow != null) {
 			clientstablerow.findElement(By.xpath(".//td[1]/input")).click();
 		} else {
-			Assert.assertTrue(false, "Can't find client: " + contactfstname);
+			Assert.fail("Can't find client: " + contactfstname);
 		}
 	}
 
@@ -78,7 +76,7 @@ public class ClientContactsWebPage extends BaseWebPage {
 		if (clientstablerow != null) {
 			clientstablerow.findElement(By.xpath(".//td[2]/input")).click();
 		} else {
-			Assert.assertTrue(false, "Can't find client: " + contactfstname);
+			Assert.fail("Can't find client: " + contactfstname);
 		}
 		try {
 			Thread.sleep(3000);
@@ -94,7 +92,7 @@ public class ClientContactsWebPage extends BaseWebPage {
 		if (clientstablerow != null) {
 			return clientstablerow.findElement(By.xpath(".//td[5]/span")).getText();
 		} else {
-			Assert.assertTrue(false, "Can't find client: " + contactfstname);
+			Assert.fail("Can't find client: " + contactfstname);
 		}
 		return null;
 	}
@@ -105,7 +103,7 @@ public class ClientContactsWebPage extends BaseWebPage {
 			String value = clientstablerow.findElement(By.xpath(".//td[5]/span")).getAttribute("style").toLowerCase();
 			return value.substring(value.indexOf(' ') + 1, value.indexOf(';'));
 		} else {
-			Assert.assertTrue(false, "Can't find client: " + contactfstname);
+			Assert.fail("Can't find client: " + contactfstname);
 		}
 		return null;
 	}

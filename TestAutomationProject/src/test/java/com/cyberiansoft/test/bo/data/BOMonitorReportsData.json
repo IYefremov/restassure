@@ -20,6 +20,7 @@
       "vendorTeamName": "02_TimeRep_team",
       "vendorTimeZone": "Pacific Standard Time",
       "vendorDescription": "TF145",
+      "workStatusTracking": "Phase Level Only",
       "vendorTimeSheetType": "ClockIn / ClockOut"
     }
   ],

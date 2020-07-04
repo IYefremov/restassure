@@ -8,10 +8,8 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.HashMap;
@@ -31,12 +29,11 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 		return exists;
 	}
 	
-	public RegularHomeScreen clickHomeButton() {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-
-		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("Back"))).click();
-
-		return new RegularHomeScreen();
+	public void clickHomeButton() {
+		WaitUtils.getGeneralFluentWait().until(driver -> {
+			appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();
+			return true;
+		});
 	}
 	
 	public void clickCancel() {
@@ -62,7 +59,7 @@ public abstract class iOSRegularBaseScreen extends iOSBaseScreen {
 			} else if ((elementtoswipe.getLocation().getY() > screenheight)) {
 
 				JavascriptExecutor js1 = (JavascriptExecutor) appiumdriver;
-				HashMap<String, String> scrollObject1 = new HashMap<String, String>();
+				HashMap<String, String> scrollObject1 = new HashMap<>();
 				scrollObject1.put("direction", "up");
 				js1.executeScript("mobile: swipe", scrollObject1);
 

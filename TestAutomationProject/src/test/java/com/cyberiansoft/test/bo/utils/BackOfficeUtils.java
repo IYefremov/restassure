@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.bo.utils;
 
-import com.cyberiansoft.test.baseutils.DataUtils;
+import com.cyberiansoft.test.enums.DateUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,12 +18,12 @@ public class BackOfficeUtils {
         return LocalDate.now();
     }
 
-    private static LocalDate getCurrentDateLocalized() {
+    public static LocalDate getCurrentDateLocalized() {
         return LocalDate.now(getZoneId());
     }
 
     private static ZoneId getZoneId() {
-        return ZoneId.of(DataUtils.ZONE_ID.getData());
+        return ZoneId.of(DateUtils.ZONE_ID.getFormat());
     }
 
     private static LocalDate getCurrentDatePlusDays(int days) {
@@ -34,16 +34,16 @@ public class BackOfficeUtils {
         return getCurrentDate().minusDays(days);
     }
 
-    private static String getFormattedLocalizedDate(DataUtils format) {
+    private static String getFormattedLocalizedDate(DateUtils format) {
         return getFormattedLocalizedDate(getCurrentDate(), format);
     }
 
-    private static String getFormattedLocalizedDate(LocalDate date, DataUtils format) {
-        return date.format(DateTimeFormatter.ofPattern(format.getData(), Locale.US));
+    private static String getFormattedLocalizedDate(LocalDate date, DateUtils format) {
+        return date.format(DateTimeFormatter.ofPattern(format.getFormat(), Locale.US));
     }
 
-    private static String getFormattedLocalizedDateTime(LocalDateTime dateTime, DataUtils format) {
-        return dateTime.format(DateTimeFormatter.ofPattern(format.getData(), Locale.US));
+    private static String getFormattedLocalizedDateTime(LocalDateTime dateTime, DateUtils format) {
+        return dateTime.format(DateTimeFormatter.ofPattern(format.getFormat(), Locale.US));
     }
 
     private static TemporalField getUSField() {
@@ -51,51 +51,51 @@ public class BackOfficeUtils {
     }
 	
 	public static String getTomorrowLocalizedDateFormattedShort() {
-        return getFormattedLocalizedDate(getCurrentDatePlusDays(1), DataUtils.SHORT_DATE_FORMAT);
+        return getFormattedLocalizedDate(getCurrentDatePlusDays(1), DateUtils.SHORT_DATE_FORMAT);
 	}
 
 	public static String getPreviousLocalizedDateFormattedShort() {
-        return getFormattedLocalizedDate(getCurrentDateMinusDays(1), DataUtils.SHORT_DATE_FORMAT);
+        return getFormattedLocalizedDate(getCurrentDateMinusDays(1), DateUtils.SHORT_DATE_FORMAT);
 	}
 
 	public static String getDayAfterTomorrowLocalizedDateFormattedShort() {
-        return getFormattedLocalizedDate(getCurrentDatePlusDays(2), DataUtils.SHORT_DATE_FORMAT);
+        return getFormattedLocalizedDate(getCurrentDatePlusDays(2), DateUtils.SHORT_DATE_FORMAT);
 	}
 
 	public static String getTomorrowLocalizedDateFormattedTheShortest() {
-        return getFormattedLocalizedDate(getCurrentDatePlusDays(1), DataUtils.THE_SHORTEST_DATE_FORMAT);
+        return getFormattedLocalizedDate(getCurrentDatePlusDays(1), DateUtils.THE_SHORTEST_DATE_FORMAT);
 	}
 
 	public static String getCurrentDateFormatted() {
-        return getFormattedLocalizedDate(DataUtils.SHORT_DATE_FORMAT);
+        return getFormattedLocalizedDate(DateUtils.SHORT_DATE_FORMAT);
 	}
 
-    public static String getCurrentDate(boolean... isLocalized) {
-        if (isLocalized[0]) {
-            return getFormattedLocalizedDate(DataUtils.FULL_DATE_FORMAT);
+    public static String getCurrentDate(boolean isLocalized) {
+        if (isLocalized) {
+            return getFormattedLocalizedDate(DateUtils.FULL_DATE_FORMAT);
         } else {
-            return getCurrentDate().format(DateTimeFormatter.ofPattern(DataUtils.FULL_DATE_FORMAT.getData()));
+            return getCurrentDate().format(DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat()));
         }
     }
 
 	public static String getLocalizedCurrentDateFormattedTheShortest() {
-        return getFormattedLocalizedDate(DataUtils.THE_SHORTEST_DATE_FORMAT);
+        return getFormattedLocalizedDate(DateUtils.THE_SHORTEST_DATE_FORMAT);
 	}
 
 	public static String getLocalizedCurrentDateFormattedDetailed() {
-        return getFormattedLocalizedDate(DataUtils.DETAILED_FULL_DATE_FORMAT);
+        return getFormattedLocalizedDate(DateUtils.DETAILED_FULL_DATE_FORMAT);
 	}
 
     public static String getTomorrowLocalizedDateFormattedDetailed() {
-        return getFormattedLocalizedDate(getCurrentDatePlusDays(1), DataUtils.DETAILED_FULL_DATE_FORMAT);
+        return getFormattedLocalizedDate(getCurrentDatePlusDays(1), DateUtils.DETAILED_FULL_DATE_FORMAT);
     }
 
     public static String getTomorrowDateFormattedFull() {
-        return getFormattedLocalizedDate(getCurrentDatePlusDays(1), DataUtils.FULL_DATE_FORMAT);
+        return getFormattedLocalizedDate(getCurrentDatePlusDays(1), DateUtils.FULL_DATE_FORMAT);
     }
 
     public static String getCurrentTimeWithTimeZoneTheShortest() {
-	    return getFormattedLocalizedDateTime(LocalDateTime.now(getZoneId()), DataUtils.THE_SHORTEST_DATE_FORMAT);
+	    return getFormattedLocalizedDateTime(LocalDateTime.now(getZoneId()), DateUtils.THE_SHORTEST_DATE_FORMAT);
 	}
 
 	private static Calendar getCalendarForNow() {
@@ -179,25 +179,25 @@ public class BackOfficeUtils {
 	}
 
 	public static float getServicePriceValue(String servicePriceString) {
-		if (servicePriceString.contains(DataUtils.MONEY_SYMBOL.getData()))
-			servicePriceString = servicePriceString.replace (DataUtils.MONEY_SYMBOL.getData(), "").trim();
+		if (servicePriceString.contains("$"))
+			servicePriceString = servicePriceString.replace("$", "").trim();
 		else
 			servicePriceString = servicePriceString.trim();
-		return Float.valueOf(servicePriceString).floatValue();
+		return Float.parseFloat(servicePriceString);
 	}
 
 	public static float getServiceQuantityValue(String serviceQuantityString) {
 		String quantityValue = serviceQuantityString.trim();
 		if (quantityValue.equals("0") || quantityValue.equals("0.00"))
 			quantityValue = "1.00";
-		return Float.valueOf(quantityValue).floatValue();
+		return Float.parseFloat(quantityValue);
 	}
 
 	public static String getFormattedServicePriceValue(float servicePrice) {
-		return DataUtils.MONEY_SYMBOL.getData() + String.format("%,.2f", servicePrice);
+		return "$" + String.format(Locale.US, "%.2f", servicePrice);
 	}
 
 	public static String getFormattedServicePriceValue(String servicePrice) {
-		return DataUtils.MONEY_SYMBOL.getData() + String.format("%,.2f", getServicePriceValue(servicePrice));
+		return "$" + String.format("%,.2f", getServicePriceValue(servicePrice));
 	}
 }

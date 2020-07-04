@@ -1,19 +1,16 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
 
 
 public class InspectionTypesVehicleInfoSettingsWebPage extends BaseWebPage {

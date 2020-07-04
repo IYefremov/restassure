@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.screens.monitoring;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.ActiveFiltersLabel;
+import com.cyberiansoft.test.vnext.webelements.Button;
 import com.cyberiansoft.test.vnext.webelements.RepairOrderListElement;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
@@ -24,6 +25,9 @@ public class RepairOrderScreen extends MonitorScreen {
     @FindBy(xpath = "//div[@class=\"searchlist-filters\"]")
     private ActiveFiltersLabel activeFilterslabel;
 
+    @FindBy(xpath = "//*[@data-autotests-id=\"repair-orders-list\"]")
+    private WebElement repairOrderList;
+
     @FindBy(xpath = "//*[@data-autotests-id=\"repair-orders-list\"]/div")
     private List<RepairOrderListElement> repairOrderListElements;
 
@@ -33,8 +37,17 @@ public class RepairOrderScreen extends MonitorScreen {
     @FindBy(xpath = "//div[@class=\"searchlist-common-filters-toggle\"]")
     private WebElement commonFiltersToggle;
 
+    @FindBy(xpath = "//div[@class=\"searchlist-common-filters-container\"]")
+    private WebElement searchFiltersPanel;
+
     @FindBy(xpath = "//div[@class=\"searchlist-nothing-found\"]")
     private WebElement nothingFoundLable;
+
+    @FindBy(xpath = "//div[@class='searchlist-filters-values-text']")
+    private WebElement searchFiltersValue;
+
+    @FindBy(xpath = "//div[@class='searchlist-filters-values-remove']")
+    private Button clearSearchFiltersIcon;
 
     public RepairOrderScreen() {
         PageFactory.initElements(new FiledDecorator(webDriver), this);
@@ -42,10 +55,11 @@ public class RepairOrderScreen extends MonitorScreen {
 
     public RepairOrderListElement getRepairOrderElement(String orderId) {
         BaseUtils.waitABit(2000);
+        WaitUtils.waitUntilElementIsClickable(rootElement);
         return repairOrderListElements
                 .stream()
                 .filter((repairOrder) -> {
-                    repairOrder.expand();
+                    //repairOrder.expand();
                     return orderId.equals(repairOrder.getRepairOrderId());
                 })
                 .findFirst()

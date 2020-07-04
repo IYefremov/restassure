@@ -1,0 +1,415 @@
+{
+
+  "testApproveInspectionOnBackOfficeFullInspectionApproval": [
+    {
+      "rowID": "testApproveInspectionOnBackOfficeFullInspectionApproval.01",
+      "description": "Test Case 8467:Approve inspection on back office (full inspection approval)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88649"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "TESTVINNO",
+          "vehicleMake": "Acura",
+          "vehicleModel": "1.6 EL",
+          "vehicleColor": "Black"
+        }
+      }
+    }
+  ],
+  "testApproveInspectionOnBackOfficeLinebylineApproval": [
+    {
+      "rowID": "testApproveInspectionOnBackOfficeLinebylineApproval.01",
+      "description": "Test Case 8463:Approve inspection on back office (line-by-line approval)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88650"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "TESTVINNO",
+          "vehicleMake": "Acura",
+          "vehicleModel": "1.6 EL",
+          "vehicleColor": "Black"
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "services": [
+          {
+            "serviceName": "Disc_Ex_Service1",
+            "serviceStatus": "Approved"
+          },
+          {
+            "serviceName": "Dye",
+            "serviceStatus": "Declined"
+          }
+        ]
+      }
+    }
+  ],
+  "testVerifyThatOnInspectionApprovalScreenSelectedPriceMatrixValueIsShown": [
+    {
+      "rowID": "testVerifyThatOnInspectionApprovalScreenSelectedPriceMatrixValueIsShown.01",
+      "description": "Test Case 38749:Inspections: Verify that on inspection approval screen selected price matrix value is shown",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88633"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "WDZPE7CD9E5889222",
+          "vehicleMake": "Mercedes-Benz",
+          "vehicleModel": "Sprinter Passenger",
+          "vehicleYear": "2014"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        },
+        "priceMatrixScreensData": [
+          {
+            "screenName": "Price Matrix Zayats",
+            "vehiclePartData": {
+              "vehiclePartName": "VP2 zayats",
+              "vehiclePartSize": "CENT",
+              "vehiclePartSeverity": "LIGHT"
+            },
+            "screenPrice": "$100.00",
+            "screenTotalPrice": "$100.00"
+          },
+          {
+            "screenName": "Hail Matrix",
+            "vehiclePartData": {
+              "vehiclePartName": "L QUARTER",
+              "vehiclePartSize": "DIME",
+              "vehiclePartSeverity": "VERY LIGHT"
+            },
+            "screenTotalPrice": "$165.00",
+            "screenPrice": "$65.00"
+          }
+        ],
+        "servicesToApprove": [
+          {
+            "serviceName": "Dent Removal",
+            "servicePrice": "$65.00"
+          },
+          {
+            "serviceName": "Test service price matrix",
+            "servicePrice": "$100.00"
+          }
+        ],
+        "inspPrice": "$0.00",
+        "inspectionTotalPrice": "$65.00"
+      }
+    }
+  ],
+  "testVerifyThatItIsPossibleToApproveTeamInspectionsUseMultiSelect": [
+    {
+      "rowID": "testVerifyThatItIsPossibleToApproveTeamInspectionsUseMultiSelect.01",
+      "description": "Test Case 33154:Inspections: Verify that it is possible to approve Team Inspections use multi select",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88638"
+        }
+      ],
+      "inspectionsData": [
+        {
+          "vihicleInfo": {
+            "vinNumber": "1D7HW48NX6S507810"
+          },
+          "bundleService": {
+            "bundleServiceName": "SR_S4_Bundle",
+            "bundleServiceAmount": "100"
+          }
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "1D7HW48NX6S507810"
+          },
+          "bundleService": {
+            "bundleServiceName": "SR_S4_Bundle",
+            "bundleServiceAmount": "100"
+          }
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "1D7HW48NX6S507810"
+          },
+          "bundleService": {
+            "bundleServiceName": "SR_S4_Bundle",
+            "bundleServiceAmount": "100"
+          }
+        }
+      ]
+    }
+  ],
+  "testVerifyThatDuringLineApprovalSelectAllButtonsAreWorkingCorrectly": [
+    {
+      "rowID": "testVerifyThatDuringLineApprovalSelectAllButtonsAreWorkingCorrectly.01",
+      "description": "Test Case 34285:Inspections: Verify that during Line approval ''Select All'' buttons are working correctly",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88634"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        },
+        "services": [
+          {
+            "serviceName": "Oksi_Service_PP_Panel",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            }
+          },
+          {
+            "serviceName": "Service_PP_Vehicle_not_multiple",
+            "vehiclePart": {
+              "vehiclePartName": "123"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "testVerifyThatApproveOptionIsNotPresentForApprovedInspectionInMultiselectMode": [
+    {
+      "rowID": "testVerifyThatApproveOptionIsNotPresentForApprovedInspectionInMultiselectMode.01",
+      "description": "Test Case 30012:Inspections: Verify that Approve option is not present for approved inspection in multi-select mode",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88645"
+        }
+      ],
+      "inspectionsData": [
+        {
+          "vihicleInfo": {
+            "vinNumber": "2A4RR4DE2AR286008"
+          },
+          "questionScreenData": {
+            "screenName": "Zayats Section1",
+            "questionData": {
+              "questionName": "Question 2",
+              "questionAnswer": "A3",
+              "screenIndex": 1
+            }
+          }
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "2A4RR4DE2AR286008"
+          },
+          "questionScreenData": {
+            "screenName": "Zayats Section1",
+            "questionData": {
+              "questionName": "Question 2",
+              "questionAnswer": "A3",
+              "screenIndex": 1
+            }
+          }
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "2A4RR4DE2AR286008"
+          },
+          "questionScreenData": {
+            "screenName": "Zayats Section1",
+            "questionData": {
+              "questionName": "Question 2",
+              "questionAnswer": "A3",
+              "screenIndex": 1
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "testVerifyThatApproveOptionIsPresentInMultiselectModeOnlyOneOrMoreNotApprovedInspectionsAreSelected": [
+    {
+      "rowID": "testVerifyThatApproveOptionIsPresentInMultiselectModeOnlyOneOrMoreNotApprovedInspectionsAreSelected.01",
+      "description": "Test Case 30013:Inspections: Verify that Approve option is present in multi-select mode only one or more not approved inspectiontypes are selected",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88514"
+        }
+      ],
+      "inspectionsData": [
+        {
+          "vihicleInfo": {
+            "vinNumber": "2A4RR4DE2AR286008"
+          },
+          "questionScreenData": {
+            "screenName": "Zayats Section1",
+            "questionData": {
+              "questionName": "Question 2",
+              "questionAnswer": "A3",
+              "screenIndex": 1
+            }
+          }
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "2A4RR4DE2AR286008"
+          },
+          "questionScreenData": {
+            "screenName": "Zayats Section1",
+            "questionData": {
+              "questionName": "Question 2",
+              "questionAnswer": "A3",
+              "screenIndex": 1
+            }
+          }
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "2A4RR4DE2AR286008"
+          },
+          "questionScreenData": {
+            "screenName": "Zayats Section1",
+            "questionData": {
+              "questionName": "Question 2",
+              "questionAnswer": "A3",
+              "screenIndex": 1
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListColumnApprovedAmount": [
+    {
+      "rowID": "testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListColumnApprovedAmount.01",
+      "description": "Test Case 32286:Inspections: HD - Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88640"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "moneyServices": [
+          {
+            "serviceName": "SR_S1_Money_Panel",
+            "vehiclePart": {
+              "vehiclePartName": "Hood"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_Vehicle",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            },
+            "serviceStatus": "Approved"
+          }
+        ],
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testUserCanChangeApprovedStatusOfPercentageServiceToDeclinedOnlyUsingDeclineAllOption": [
+    {
+      "rowID": "testUserCanChangeApprovedStatusOfPercentageServiceToDeclinedOnlyUsingDeclineAllOption.01",
+      "description": "Test Case :User can change 'Approved' status of percentage service to 'Declined', only using 'Decline All' option",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "96255"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "percentageService" : {
+          "serviceName": "Little Service"
+        }
+      }
+    }
+  ],
+  "testApproveInspectionsOnDeviceViaAction": [
+    {
+      "rowID": "testApproveInspectionsOnDeviceViaAction.01",
+      "description": "Approve Inspections On Device via Action",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89025"
+        }
+      ],
+      "inspectionsData": [
+        {
+          "vihicleInfo": {
+            "vinNumber": "TESTVINNO",
+            "vehicleMake": "Acura",
+            "vehicleModel": "1.6 EL",
+            "vehicleColor": "Black"
+          }
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "TESTVINNO",
+            "vehicleMake": "Acura",
+            "vehicleModel": "1.6 EL",
+            "vehicleColor": "Black"
+          }
+        }
+      ]
+    }
+  ],
+  "testApproveInspectionOnDevice": [
+    {
+      "rowID": "testApproveInspectionOnDevice.01",
+      "description": "Test Case 8431:Approve inspection on device (Not Line Approval)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89025"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "TESTVINNO",
+        "vehicleMake": "Acura",
+        "vehicleModel": "1.6 EL",
+        "vehicleColor": "Black"
+      }
+    }
+  ]
+}

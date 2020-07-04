@@ -1,9 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -13,11 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
 public class NewInspectionTypeDialogWebPage extends BaseWebPage {
 	
@@ -210,5 +203,18 @@ public class NewInspectionTypeDialogWebPage extends BaseWebPage {
 		waitABit(300);
 		clickAndWait(insertvisulinspbtn);
 		Assert.assertEquals(visualformstable.getTableRowCount(), rowcountbefore+1);
+	}
+
+	public void selectOtherTab() {
+		driver.findElement(By.xpath("//td[@class='ModalDialog']")).findElement(By.xpath(".//span[@class='rtsTxt' and text()='Other']")).click();
+	}
+
+	public void setArbitrationWindowValue(String newArbitrationWindowValue) {
+		driver.findElement(By.xpath("//td[@class='ModalDialog']")).findElement(By.xpath(".//input[contains(@id, 'Card_tbArbitrationWindowInDays')]")).clear();
+		driver.findElement(By.xpath("//td[@class='ModalDialog']")).findElement(By.xpath(".//input[contains(@id, 'Card_tbArbitrationWindowInDays')]")).sendKeys(newArbitrationWindowValue);
+	}
+
+	public void clickOKButton() {
+		driver.findElement(By.xpath("//td[@class='ModalDialog']")).findElement(By.xpath(".//input[contains(@name, 'BtnOk')]")).click();
 	}
 }

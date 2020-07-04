@@ -2,15 +2,17 @@ package com.cyberiansoft.test.inhouse.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.core.BrowserType;
+import com.cyberiansoft.test.core.WebDriverConfigInfo;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.inhouse.config.InHouseConfigInfo;
 import com.cyberiansoft.test.inhouse.pageObject.webpages.LoginPage;
 import com.cyberiansoft.test.inhouse.pageObject.webpages.TeamPortalHeader;
-import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
 
 import java.io.File;
 
@@ -41,14 +43,12 @@ public class BaseTestCase {
 
 
     @BeforeMethod
-    public void teamPortalLogin() throws InterruptedException {
-        browsertype = BaseUtils.getBrowserType(InHouseConfigInfo.getInstance().getDefaultBrowser());
-        try {
-            DriverBuilder.getInstance().setDriver(browsertype);
-        } catch (SessionNotCreatedException e) {
-            Thread.sleep(10000);
-            DriverBuilder.getInstance().setDriver(browsertype);
-        }
+    public void teamPortalLogin() {
+        browsertype = BaseUtils.getBrowserType(WebDriverConfigInfo.getInstance().getDefaultBrowser());
+        DriverBuilder.getInstance()
+                .setBrowserType(browsertype)
+                .setRemoteWebDriverURL(WebDriverConfigInfo.getInstance().getAzureURL())
+                .setDriver();
         webdriver = DriverBuilder.getInstance().getDriver();
         webdriver.navigate().refresh();
         try {

@@ -13,8 +13,14 @@ public class ServiceElement implements IWebElement {
     private String nameLocator = ".//div[contains(@class,'icon-item-entity-name') or contains(@class,'icon-item-content-title') or contains(@class,'icon-item-phase-title')]";
     private String expandElementLocator = ".//*[@action='open-phase-services']";
     private String clockIconLocator = ".//*[@class='icon-svg ']";
-    private String startDateLocator = ".//div[contains(@class,'icon-item-content-title')][2]";
+    private String startDateLocator = ".//div[contains(@class,'icon-item-content-title')]/span[1]";
     private String technicianLocator = ".//div[@data-phase-tech]";
+    private String checkElementLocator = ".//*[@action='check-item']";
+    private String editElementLocator = ".//*[@action='edit-service']";
+    private String notesElementLocator = ".//*[@data-service-notes]";
+    private String startIconLocator = ".//div[@class='icon-item-content-title']/span[@class='icon-item-arrow']";
+    private String editTaskActionButtonLocator = ".//div[@action='edit-task']//span[@class='icon-item-arrow']";
+    private String priceWithQuantityElement = ".//div[contains(@class, 'amount-part-received')]/div";
 
     public ServiceElement(WebElement rootElement) {
         this.rootElement = rootElement;
@@ -22,13 +28,19 @@ public class ServiceElement implements IWebElement {
 
     public String getName() {
         return WaitUtils.getGeneralFluentWait().until(
-                driver -> rootElement.findElement(By.xpath(nameLocator)).getText()
+                driver -> rootElement.findElement(By.xpath(nameLocator)).getText().trim()
         );
     }
 
     public String getTechnician() {
         return WaitUtils.getGeneralFluentWait().until(
-                driver -> rootElement.findElement(By.xpath(technicianLocator)).getText()
+                driver -> rootElement.findElement(By.xpath(technicianLocator)).getText().trim()
+        );
+    }
+
+    public String getNotes() {
+        return WaitUtils.getGeneralFluentWait().until(
+                driver -> rootElement.findElement(By.xpath(notesElementLocator)).getText().trim()
         );
     }
 
@@ -43,5 +55,9 @@ public class ServiceElement implements IWebElement {
 
     public Boolean isStartDatePresent() {
         return WaitUtils.isElementPresent(rootElement.findElement(By.xpath(startDateLocator)));
+    }
+
+    public Boolean isStartIconPresent() {
+        return rootElement.findElements(By.xpath(startIconLocator)).size() > 0;
     }
 }

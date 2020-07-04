@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.bo.validations.ServiceRequestsListVerifications;
 import com.cyberiansoft.test.dataclasses.bo.BOCompanyEditData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -12,7 +13,6 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-//@Listeners(VideoListener.class)
 public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOCompanyEditData.json";
@@ -50,8 +50,8 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.clickDoneButton();
 
 		serviceRequestsListInteractions.saveNewServiceRequest();
-		Assert.assertTrue(
-				serviceRequestsListVerifications.isInsuranceCompanyPresentForFirstServiceRequestFromList(data.getInsuranceCompanyName()));
+		Assert.assertTrue(ServiceRequestsListVerifications
+                .isInsuranceCompanyPresentForFirstServiceRequestFromList(data.getInsuranceCompanyName()));
 
 		companyWebPage = new CompanyWebPage(webdriver);
 		backOfficeHeader.clickCompanyLink();
@@ -513,13 +513,13 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		String mainWindowHandle = webdriver.getWindowHandle();
 		clientspage.clickClientUsersLinkForClient(data.getClientName());
 		clientspage.searchClientUser(data.getFirstSearchParameter());
-		Assert.assertEquals(clientspage.getClientUsersTableRowCount(), 1);
+		Assert.assertEquals(1, clientspage.getClientUsersTableRowCount());
 		clientspage.searchClientUser(data.getSecondSearchParameter());
-		Assert.assertEquals(clientspage.getClientUsersTableRowCount(), 1);
+		Assert.assertEquals(1, clientspage.getClientUsersTableRowCount());
 		clientspage.searchClientUser(data.getThirdSearchParameter());
-		Assert.assertEquals(clientspage.getClientUsersTableRowCount(), 1);
+		Assert.assertEquals(1, clientspage.getClientUsersTableRowCount());
 		clientspage.searchClientUser(data.getLastSearchParameter());
-		Assert.assertEquals(clientspage.getClientUsersTableRowCount(), 0);
+		Assert.assertEquals(0, clientspage.getClientUsersTableRowCount());
 		clientspage.closeClientServicesTab(mainWindowHandle);
 	}
 
@@ -568,7 +568,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testCompanySharingWorkOrderAddRuleTeams(String rowID, String description, JSONObject testData) throws InterruptedException {
+	public void testCompanySharingWorkOrderAddRuleTeams(String rowID, String description, JSONObject testData) {
 
 		BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
@@ -638,7 +638,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testCompanySharingWorkOrderAddRuleEmployees(String rowID, String description, JSONObject testData) throws InterruptedException {
+	public void testCompanySharingWorkOrderAddRuleEmployees(String rowID, String description, JSONObject testData) {
 
 		BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
@@ -712,7 +712,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testCompanySharingWorkOrderAddRuleClients(String rowID, String description, JSONObject testData) throws InterruptedException {
+	public void testCompanySharingWorkOrderAddRuleClients(String rowID, String description, JSONObject testData) {
 
 		BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
@@ -784,7 +784,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testCompanySharingWorkOrderAddRuleServices(String rowID, String description, JSONObject testData) throws InterruptedException {
+	public void testCompanySharingWorkOrderAddRuleServices(String rowID, String description, JSONObject testData) {
 
 		BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
@@ -857,7 +857,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testCompanySharingWorkOrderAddRuleVehicleParts(String rowID, String description, JSONObject testData) throws InterruptedException {
+	public void testCompanySharingWorkOrderAddRuleVehicleParts(String rowID, String description, JSONObject testData) {
 
 		BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
@@ -974,7 +974,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testCompanyExchangeConfigurationSharingEstimateAddRuleClients(String rowID, String description, JSONObject testData) throws InterruptedException {
+	public void testCompanyExchangeConfigurationSharingEstimateAddRuleClients(String rowID, String description, JSONObject testData) {
 
 		BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
@@ -1047,7 +1047,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testCompanyExchangeConfigurationSharingEstimateAddRuleTeams(String rowID, String description, JSONObject testData) throws InterruptedException {
+	public void testCompanyExchangeConfigurationSharingEstimateAddRuleTeams(String rowID, String description, JSONObject testData) {
 
 		BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
@@ -1190,7 +1190,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testCompanyExchangeConfigurationSharingEstimateAddRuleServices(String rowID, String description, JSONObject testData) throws InterruptedException {
+	public void testCompanyExchangeConfigurationSharingEstimateAddRuleServices(String rowID, String description, JSONObject testData) {
 
 		BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
@@ -1262,7 +1262,7 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testCompanyExchangeConfigurationSharingEstimateAddRuleVehicleParts(String rowID, String description, JSONObject testData) throws InterruptedException {
+	public void testCompanyExchangeConfigurationSharingEstimateAddRuleVehicleParts(String rowID, String description, JSONObject testData) {
 
 		BOCompanyEditData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyEditData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);

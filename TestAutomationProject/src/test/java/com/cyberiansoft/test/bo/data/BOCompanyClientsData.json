@@ -57,7 +57,7 @@
     {
       "rowID": "testCompanyClientsClientUsersUpdate.01",
       "description": "Test Case 29760: Company- Clients: Client Users Update",
-      "clientName": "AlExTest",
+      "clientName": "TestAlExTest",
       "userEmail": "test@cyberiansoft.com",
       "userFirstName": "test",
       "userLastName": "automation",
@@ -84,7 +84,7 @@
     {
       "rowID": "testCompanyClientsContactsVerificationDisable.01",
       "description": "Test Case 29762: Company - Clients: Contacts Verification Disable",
-      "clientName": "AlExTest",
+      "clientName": "TestAlExTest",
       "contactEmail": "test1@cyberiansoft.com",
       "contactFirstName": "test1",
       "contactLastName": "automation1",
@@ -106,7 +106,7 @@
     {
       "rowID": "testCompanyClientsContactsUpdate.01",
       "description": "Test Case 29763: Company- Clients: Contacts Update",
-      "clientName": "AlExTest",
+      "clientName": "TestAlExTest",
       "contactEmail": "test@cyberiansoft.com",
       "userFirstName": "test",
       "userLastName": "automation",

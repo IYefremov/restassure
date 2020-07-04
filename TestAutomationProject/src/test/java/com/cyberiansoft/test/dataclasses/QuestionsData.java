@@ -23,8 +23,8 @@ public class QuestionsData {
     private int screenIndex;
     @JsonProperty("screenHDIndex")
     private int screenHDIndex;
-    @JsonProperty("signatureQuestion")
-    private boolean signatureQuestion;
+    //@JsonProperty("signatureQuestion")
+    //private boolean signatureQuestion;
     @JsonProperty("logicalQuestion")
     private boolean logicalQuestion;
     @JsonProperty("logicalQuestionValue")
@@ -33,4 +33,22 @@ public class QuestionsData {
     private boolean textQuestion;
     @JsonProperty("listQuestion")
     private boolean listQuestion;
+    @JsonProperty("imageQuestion")
+    private ImageQuestion imageQuestion;
+    @JsonProperty("imageQuestions")
+    private List<ImageQuestion> imageQuestions;
+    @JsonProperty("datePickerQuestion")
+    private DatePickerQuestion datePickerQuestion;
+    @JsonProperty("timePickerQuestion")
+    private TimePickerQuestion timePickerQuestion;
+    @JsonProperty("signatureQuestion")
+    private SignatureQuestion signatureQuestion;
+    @JsonProperty("textQuestionData")
+    private TextQuestionData textQuestionData;
+    @JsonProperty("logicalQuestionData")
+    private LogicalQuestionData logicalQuestionData;
+    @JsonProperty("selectListOptionQuestion")
+    private SelectListOptionQuestion selectListOptionQuestion;
+    @JsonProperty("selectListOptionQuestions")
+    private List<SelectListOptionQuestion> selectListOptionQuestions;
 }

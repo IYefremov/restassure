@@ -26,33 +26,36 @@
           "testCaseID": "90885"
         }
       ],
-      "statuses": [
-        "New",
-        "Approved"
-      ],
       "note": "12345"
     }
   ],
 
-  "verifyUserCanAddNewParts": [
+  "verifyUserCanAddAndDeleteNewParts": [
     {
-      "rowID": "verifyUserCanAddNewParts.01",
-      "description": "Test Case 83857:User can Add new parts",
+      "rowID": "verifyUserCanAddAndDeleteNewParts.01",
+      "description": "Test Case 83857:User can Add new parts. Test Case 84007:User can Delete the Part",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91187"
+        },
+        {
+          "testCaseID": "91183"
         }
       ],
-      "location": "Best Location Automation",
-      "woNum": "O-000-152414",
-      "service": "_ multiple presets (required, no prefix)",
-      "serviceDescription": "Test123",
-      "serviceCategory": "Accessories and Fluids",
-      "serviceSubcategory": "Books",
-      "partItems": [
-        "Catalog",
-        "Enthusiast Book"
-      ]
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-351-00087"
+      },
+      "partData": {
+        "service": "rozstalnoy_enable_parts",
+        "description": "Auto-test",
+        "category": "Accessories and Fluids",
+        "subcategory": "Books",
+        "partItems": [
+          "Catalog",
+          "Enthusiast Book"
+        ]
+      }
     }
   ],
 
@@ -66,8 +69,9 @@
         }
       ],
       "location": "Best Location Automation",
-      "woNum": "O-000-152414",
-      "status": "Ordered"
+      "searchData": {
+        "woNum": "O-168-00015"
+      }
     }
   ],
 
@@ -80,33 +84,17 @@
           "testCaseID": "91179"
         }
       ],
-      "location": "Best Location Automation",
-      "woNum": "O-000-152414"
-    }
-  ],
-
-  "verifyUserCanDeleteThePart": [
-    {
-      "rowID": "verifyUserCanDeleteThePart.01",
-      "description": "Test Case 84007:User can Delete the Part",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91183"
-        }
-      ],
-      "location": "Best Location Automation",
-      "woNum": "O-000-152414",
-      "partItems": [
-        "Catalog",
-        "Enthusiast Book"
-      ]
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-000-152787"
+      }
     }
   ],
 
   "verifyUserCanAddAndDeleteLabor": [
     {
       "rowID": "verifyUserCanAddAndDeleteLabor.01",
-      "description": "Test Case 83937:User can Add labour. Test Case 83938:User can delete labour.",
+      "description": "Test Case 83937:User can Add labor. Test Case 83938:User can delete labor.",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91139"
@@ -115,8 +103,10 @@
           "testCaseID": "91140"
         }
       ],
-      "location": "Best Location Automation",
-      "woNum": "O-000-152414",
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-351-00087"
+      },
       "labor": "Labor AM"
     }
   ],
@@ -139,46 +129,48 @@
           "testCaseID": "90947"
         }
       ],
-      "company": [
-        "SpainCo",
-        "AMT"
-      ],
-      "addressLine1": [
-        "address",
-        "5001 Birch St."
-      ],
-      "addressLine2": [
-        "address222",
-        "Newport Beach"
-      ],
-      "city": [
-        "Barcelona",
-        "Los Angeles"
-      ],
-      "country": [
-        "Canada",
-        "United States of America"
-      ],
-      "stateProvince": [
-        "Quebec",
-        "Arizona"
-      ],
-      "zip": [
-        "3456",
-        "92660"
-      ],
-      "email": [
-        "barca@gmail.com",
-        "amt@cyberiansoft.com"
-      ],
-      "phoneCode": [
-        "+1",
-        "+359"
-      ],
-      "phone": [
-        "298374",
-        "6145678903"
-      ]
+      "companyInfo": {
+        "company": [
+          "SpainCo",
+          "AMT"
+        ],
+        "addressLine1": [
+          "address",
+          "5001 Birch St."
+        ],
+        "addressLine2": [
+          "address222",
+          "Newport Beach"
+        ],
+        "city": [
+          "Barcelona",
+          "Los Angeles"
+        ],
+        "country": [
+          "Canada",
+          "United States of America"
+        ],
+        "stateProvince": [
+          "Quebec",
+          "Arizona"
+        ],
+        "zip": [
+          "3456",
+          "92660"
+        ],
+        "email": [
+          "barca@gmail.com",
+          "amt@cyberiansoft.com"
+        ],
+        "phoneCode": [
+          "+1",
+          "+359"
+        ],
+        "phone": [
+          "298374",
+          "6145678903"
+        ]
+      }
     }
   ],
 
@@ -291,9 +283,11 @@
       "minutes": "22",
       "hours": "1",
       "nickname": "Autotest",
+      "licenseNumber": "0002-0403",
       "team": "01_TimeRep_team",
       "timeZone": "(UTC-10:00) Hawaii",
-      "technician": "Alex Maximov"
+      "technician": "Alex Maximov",
+      "phoneNumber": "+380951111111"
     }
   ],
 
@@ -306,7 +300,7 @@
           "testCaseID": "90791"
         }
       ],
-      "deviceName": "jj automation do not change"
+      "deviceName": "jj DO NOT DELETE"
     }
   ],
 
@@ -349,7 +343,7 @@
       "timeFrame": "Last Year",
       "service": "b Body Shop (Test Part)",
       "serviceVendorPrices": [
-        "5",
+        "1",
         "100"
       ]
     }
@@ -376,7 +370,7 @@
   "verifyUserCanCheckInRO": [
     {
       "rowID": "verifyUserCanCheckInRO.01",
-      "description": "Test Case 83643: User can see Parts of RO. Test Case 83743: User can Chek - In RO",
+      "description": "Test Case 91261: User can see Parts of RO. Test Case 91258: User can Chek - In RO",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91261"
@@ -389,6 +383,7 @@
       "orderNumber": "O-000-152460"
     }
   ],
+
   "verifyUserCanReportProblemOnPhaseLevel": [
     {
       "rowID": "verifyUserCanReportProblemOnPhaseLevel.01",
@@ -399,9 +394,29 @@
         }
       ],
       "location": "Best Location Automation",
-      "orderNumber": "O-000-147163",
-      "phase": "Detail Station",
-      "reason": "No part"
+      "orderNumber": "O-398-00154",
+      "phase": "PDR Station",
+      "problemReason": "No part"
+    }
+  ],
+
+  "verifyPunchOutFunctionalityIsEnabledByFeatureOnTheAddOnPage": [
+    {
+      "rowID": "verifyPunchOutFunctionalityIsEnabledByFeatureOnTheAddOnPage.01",
+      "description": "Verify the Punch-Out functionality is enabled by the feature on the \"Add-on\" page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "97519",
+          "testCaseTitle": "Verify the Punch-Out functionality is enabled by the feature on the \"Add-on\" page"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-152414"
+      },
+      "addOnsData": {
+        "addOn": "Punch Out Process"
+      }
     }
   ]
 }

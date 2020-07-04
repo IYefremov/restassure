@@ -3,10 +3,8 @@ package com.cyberiansoft.test.vnext.screens.typeselectionlists;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -25,9 +23,9 @@ public class VNextBaseTypeSelectionList extends VNextBaseScreen {
     @FindBy(xpath = "//*[@action='item']")
     private List<WebElement> typeList;
 
-    public VNextBaseTypeSelectionList(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextBaseTypeSelectionList(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
     }
 
     public VNextBaseTypeSelectionList() {

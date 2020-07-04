@@ -2,26 +2,19 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.t
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularOrderMonitorScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.types.invoicestypes.IInvoicesTypes;
+import com.cyberiansoft.test.ios10_client.utils.AppiumWait;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-import java.util.concurrent.TimeUnit;
 
 public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 
@@ -60,7 +53,8 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 
 	public void waitTeamWorkOrdersScreenLoaded() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(By.name("TeamOrdersTable")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("TeamOrdersTable")));
+
 	}
 
 	public void clickCreateInvoiceForWO(String workOrderID) {
@@ -73,12 +67,10 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		waitTeamWorkOrdersScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(workOrderID))).click();
-		//appiumdriver.findElementByAccessibilityId(workOrderID).click();
 	}
 	
-	public RegularOrderMonitorScreen selectWOMonitor() {
+	public void selectWOMonitor() {
 		womonitor.click();
-		return new RegularOrderMonitorScreen();
 	}
 	
 	public void selectEditWO() {
@@ -86,14 +78,14 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public void verifyCreateInvoiceIsActivated(String workOrderID) {
-		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name= '"
-				+ workOrderID + "']/XCUIElementTypeOther[contains(@name, \"EntityInfoButtonChecked\")]").size() > 0);
-		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@name='invoice new']").size() > 0);
+		Assert.assertTrue(teamOrdersTable.findElement(MobileBy.AccessibilityId(workOrderID))
+				.findElements(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeOther' and name CONTAINS 'EntityInfoButtonChecked'")).size() > 0);
+		Assert.assertTrue(appiumdriver.findElementsByAccessibilityId("invoice new").size() > 0);
 	}
 
 	public void clickCreateInvoiceIconForWO(String workOrderNumber)  {
 		teamOrdersTable.findElement(MobileBy.AccessibilityId(workOrderNumber))
-				.findElement(MobileBy.className("XCUIElementTypeOther")).click();
+				.findElement(MobileBy.AccessibilityId("EntityInfoButtonUnchecked, ButtonImageId_79")).click();
 	}
 	
 	public void clickiCreateInvoiceButton()  {
@@ -107,9 +99,8 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		wait.until(ExpectedConditions.elementToBeClickable(searchbtn)).click();
 	}
 	
-	public RegularTeamWorkOrdersScreen clickSearchSaveButton() {
+	public void clickSearchSaveButton() {
 		searccsavebtn.click();
-		return this;
 	}
 	
 	public void selectSearchLocation(String _location) {
@@ -119,9 +110,6 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(_location)));
 		appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.AccessibilityId(_location)).click();
-
-		//wait = new WebDriverWait(appiumdriver, 10);
-		//wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByName(_location))).click();
 	}
 	
 	public void setSearchType(String wotype)  {
@@ -130,14 +118,14 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public void selectWorkOrderForApprove(String workOrderID) {
-
-		teamOrdersTable.findElementByAccessibilityId(workOrderID).findElementByClassName("XCUIElementTypeOther").click();
-		
+		teamOrdersTable.findElementByAccessibilityId(workOrderID).findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeOther' and name CONTAINS 'EntityInfoButton'")).click();
 	}
 	
 	public void approveWorkOrder(String workOrderID, String employee, String pwd) {
 		selectWorkOrderForApprove(workOrderID);
 		selectEmployeeAndTypePassword(employee, pwd);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeNavigationBar' and name = 'Summary'"))).click();
 		approvebtn.click();
 	}
 	
@@ -153,8 +141,6 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 			appiumdriver.
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + workordertype + "']")).click();
 		}
-		//appiumdriver.
-		//		findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + workordertype + "']")).click();
 	}
 	
 	public void selectEmployeeAndTypePassword(String employee, String password) {
@@ -193,19 +179,23 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	public void clickSaveFilter() {
 		appiumdriver.findElementByAccessibilityId("Save").click();
-		new RegularTeamWorkOrdersScreen();
 	}
 	
 	public boolean isWorkOrderExists(String workOrderID) {
-		return appiumdriver.findElements(MobileBy.AccessibilityId(workOrderID)).size() > 0;	
+		waitTeamWorkOrdersScreenLoaded();
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("TeamOrdersTable")));
+		return teamOrdersTable.findElements(MobileBy.AccessibilityId(workOrderID)).size() > 0;
 	}
 	
 	public boolean isWorkOrderHasApproveIcon(String workOrderID) {
-		return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + workOrderID + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_78')]")).size() > 0;
+		waitTeamWorkOrdersScreenLoaded();
+		return teamOrdersTable.findElement(MobileBy.AccessibilityId(workOrderID)).findElements(MobileBy.iOSNsPredicateString("name CONTAINS 'ButtonImageId_78'")).size() > 0;
 	}
 	
 	public boolean isWorkOrderHasActionIcon(String workOrderID) {
-		return teamOrdersTable.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + workOrderID + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_79')]")).size() > 0;
+		waitTeamWorkOrdersScreenLoaded();
+		return teamOrdersTable.findElement(MobileBy.AccessibilityId(workOrderID)).findElements(MobileBy.iOSNsPredicateString("name CONTAINS 'ButtonImageId_79'")).size() > 0;
 	}
 	
 	public String getFirstWorkOrderNumberValue() {		
@@ -219,13 +209,16 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	public void selectWorkOrder(String workOrderID) {
 		waitTeamWorkOrdersScreenLoaded();
-		teamOrdersTable.findElementByAccessibilityId(workOrderID).click();
+		AppiumWait.getGeneralFluentWait(60, 500).until(driver -> {
+			teamOrdersTable.findElementByAccessibilityId(workOrderID).click();
+			return true;
+		});
+		//teamOrdersTable.findElementByAccessibilityId(workOrderID).click();
 
 	}
 
 	public void clickBackButton()  {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("Back"))).click();
 	}
 }

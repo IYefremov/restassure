@@ -1,0 +1,56 @@
+{
+
+  "testVerifyThatAllInstancesOfOneServiceAreCopiedFromInspectionToWO": [
+    {
+      "rowID": "testVerifyThatAllInstancesOfOneServiceAreCopiedFromInspectionToWO.01",
+      "description": "Test Case 44407:Inspections: Regular - Verify that all instances of one service are copied from inspection to WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88595"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "services": [
+          {
+            "serviceName": "3/4\" - Penny Size",
+            "servicePrice": "43",
+            "serviceQuantity": "1.00",
+            "isSelected": true
+          },
+          {
+            "serviceName": "3/4\" - Penny Size",
+            "servicePrice": "33",
+            "serviceQuantity": "4.00",
+            "isSelected": true
+          },
+          {
+            "serviceName": "SR_S1_Money_Panel",
+            "isSelected": false,
+            "vehicleParts": [
+              {
+                "vehiclePartName": "Front Bumper"
+              },
+              {
+                "vehiclePartName": "Grill"
+              },
+              {
+                "vehiclePartName": "Hood"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

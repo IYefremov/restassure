@@ -1,147 +1,84 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
-import com.cyberiansoft.test.baseutils.AppiumUtils;
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.vnext.screens.VNextSelectDamagesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
-import com.cyberiansoft.test.vnext.utils.AppContexts;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.touch.offset.PointOption;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 @Getter
 public class VNextVisualScreen extends VNextBaseWizardScreen {
-	
-	@FindBy(xpath="//div[contains(@data-page, 'visual')]")
-	private WebElement rootElement;
-	
-	@FindBy(xpath="//div[@class='car-image-wrapper']/img")
-	private WebElement carimage;
-	
-	@FindBy(xpath="//div[@class='car-marker']/img")
-	private WebElement carmarker;
-	
-	@FindBy(xpath="//a[@class='floating-button color-red']")
-	private WebElement adddamagesbtn;
-	
-	@FindBy(xpath="//div[@class='list-block breakage-types']")
-	private WebElement damagetypeslist;
-	
-	@FindBy(xpath="//*[@data-tab='default']")
-	private WebElement defaulttab;
-	
-	@FindBy(xpath="//*[@data-tab='custom']")
-	private WebElement customtab;
 
-	@FindBy(xpath="//*[@action='remove-all-breakages']")
-	private WebElement removebreakagesbtn;
-	
-	public VNextVisualScreen(AppiumDriver<MobileElement> appiumdriver) {
-		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@data-page, 'visual')]")));
-		BaseUtils.waitABit(1000);
-		if (checkHelpPopupPresence())
-			if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed())
-				tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
-	}
+    @FindBy(xpath = "//div[contains(@data-page, 'visual')]")
+    private WebElement rootElement;
 
-	public VNextVisualScreen() {
-	}
+    @FindBy(xpath = "//div[@class='car-image-wrapper']/img")
+    private WebElement carImage;
 
-	public VNextSelectDamagesScreen clickAddServiceButton() {
-		tap(adddamagesbtn);
-		tap(appiumdriver.findElement(By.xpath("//*[@action='add-other']")));
-		return new VNextSelectDamagesScreen(appiumdriver);
-	}
-	
-	public void selectDefaultDamage(String damageType) {
-		clickAddServiceButton();
-		clickDefaultDamageType(damageType);
-	}
-	
-	public VNextSelectDamagesScreen clickOtherServiceOption() {		
-		tap(damagetypeslist.findElement(By.xpath(".//span[text()='Other']")));
-		return new VNextSelectDamagesScreen(appiumdriver);
-	}
-	
-	public void clickCarImage() {
-		int servicesAdded = getNumberOfImageMarkers();
-		if (servicesAdded > 0) {
-			clickCarImageSecondTime();
-		} else
-			tap(carimage);
-	}
-	
-	public void clickCarImageSecondTime() {
-		WaitUtils.click(By.xpath("//img[@class='car-image']"));
-		//TODO: Refactoring needed
-//		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-//		BaseUtils.waitABit(300);
-//		TouchAction tch = new TouchAction(appiumdriver);
-//		tch.tap(PointOption.point(Math.round(appiumdriver.manage().window().getSize().getWidth() / 3), Math.round(appiumdriver.manage().window().getSize().getHeight() / 3))).perform();
-//		BaseUtils.waitABit(300);
-//		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-//		if (appiumdriver.findElements(By.xpath("//div[@class='car-marker']")).size() < 2) {
-//			AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-//			tch = new TouchAction(appiumdriver);
-//			tch.tap(PointOption.point(Math.round(appiumdriver.manage().window().getSize().getWidth() / 3), Math.round(appiumdriver.manage().window().getSize().getHeight() / 3))).perform();
-//			BaseUtils.waitABit(300);
-//			AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-//		}
-	}
-	
-	public void clickCarImageACoupleTimes(int touchTimes) {
-		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		BaseUtils.waitABit(1300);
-		
-		for (int i = 0; i < touchTimes; i++) {
-			TouchAction tch = new TouchAction(appiumdriver);
-			tch.tap(PointOption.point(Math.round(appiumdriver.manage().window().getSize().getWidth() / (i+2)), Math.round(appiumdriver.manage().window().getSize().getHeight() / (i+2)))).perform();
-			BaseUtils.waitABit(1000);
-		}
-		
-		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-	}
-	
-	public VNextServiceDetailsScreen clickCarImageMarker() {
-		tap(carmarker);
-		return new VNextServiceDetailsScreen(appiumdriver);
-	}
-	
-	public VNextServiceDetailsScreen clickCarImageMarker(int markerItemIndex) {
-		tap(appiumdriver.findElements(By.xpath("//div[@class='car-marker']/img")).get(markerItemIndex));
-		return new VNextServiceDetailsScreen(appiumdriver);
-	}
-	
-	public void clickDamageCancelEditingButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class='icon cancel-editing-button']")));
-		tap(rootElement.findElement(By.xpath(".//span[@class='icon cancel-editing-button']")));
-	}
-	
-	public int getNumberOfImageMarkers() {
-		return appiumdriver.findElements(By.xpath("//div[@class='car-marker']/img")).size();
-	}
-	
-	public VNextVisualScreen clickDefaultDamageType(String damagetype) {
-		tap(defaulttab);
-		tap(damagetypeslist.findElement(By.xpath(".//span[text()='" + damagetype + "']")));
-		return new VNextVisualScreen(appiumdriver);
-	}
+    @FindBy(xpath = "//div[@class='car-marker']/img")
+    private WebElement carmarker;
 
-	public void clickRemoveAllBreakagesButton() {
-		tap(removebreakagesbtn);
-	}
+    @FindBy(xpath = "//a[@class='floating-button color-red']")
+    private WebElement adddamagesbtn;
+
+    @FindBy(xpath = "//div[@class='list-block breakage-types']")
+    private WebElement damagetypeslist;
+
+    @FindBy(xpath = "//*[@data-tab='default']")
+    private WebElement defaulttab;
+
+    @FindBy(xpath = "//*[@data-tab='custom']")
+    private WebElement customtab;
+
+    @FindBy(xpath = "//*[@action='remove-all-breakages']")
+    private WebElement removebreakagesbtn;
+
+    public VNextVisualScreen() {
+    }
+
+    public void clickAddServiceButton() {
+        tap(adddamagesbtn);
+        tap(appiumdriver.findElement(By.xpath("//*[@action='add-other']")));
+    }
+
+    //todo: rewrite method not to use elements size()
+    public void clickCarImageOnRandom() {
+        WebElement elem = ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//img[@class='car-image']"));
+        Actions act = new Actions(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        //int x = new Random().nextInt(elem.getSize().getWidth() / 2) - new Random().nextInt(elem.getSize().getWidth() / 2);
+        //int y = new Random().nextInt(elem.getSize().getHeight() / 2) - new Random().nextInt(elem.getSize().getHeight() / 2);
+
+        int addedDamages = ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElements(By.xpath("//*[@class='car-marker']")).size()+1;
+        act.moveToElement(elem).moveByOffset(-elem.getSize().getWidth()/2+addedDamages*20, 0).click().perform();
+        //act.moveToElement(elem).moveByOffset(x, y).click().perform();
+    }
+
+    public void clickCarImageMarker() {
+        tap(carmarker);
+    }
+
+    public void clickCarImageMarker(int markerItemIndex) {
+        List<WebElement> markerList = appiumdriver.findElements(By.xpath("//div[@class='car-marker']/img"));
+        WaitUtils.click(markerList.get(markerItemIndex));
+    }
+
+    public void clickDamageCancelEditingButton() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class='icon cancel-editing-button']")));
+        tap(rootElement.findElement(By.xpath(".//span[@class='icon cancel-editing-button']")));
+    }
+
+    public int getNumberOfImageMarkers() {
+        return appiumdriver.findElements(By.xpath("//div[@class='car-marker']/img")).size();
+    }
+
+    public void clickRemoveAllBreakagesButton() {
+        tap(removebreakagesbtn);
+    }
 }

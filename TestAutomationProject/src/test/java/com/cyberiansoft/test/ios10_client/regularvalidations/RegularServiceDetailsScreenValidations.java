@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.regularvalidations;
 
 import com.cyberiansoft.test.dataclasses.ServicePartData;
+import com.cyberiansoft.test.dataclasses.ServiceRateData;
 import com.cyberiansoft.test.dataclasses.ServiceTechnician;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
@@ -14,6 +15,14 @@ public class RegularServiceDetailsScreenValidations {
             Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianSelected(serviceTechnician.getTechnicianFullName()));
         else
             Assert.assertFalse(selectedServiceDetailsScreen.isTechnicianSelected(serviceTechnician.getTechnicianFullName()));
+    }
+
+    public static void verifyTechnicianCellHasValue(ServiceTechnician serviceTechnician, boolean isPresent) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        if (isPresent)
+            Assert.assertTrue(selectedServiceDetailsScreen.getTechniciansValue().contains(serviceTechnician.getTechnicianFullName()));
+        else
+            Assert.assertFalse(selectedServiceDetailsScreen.getTechniciansValue().contains(serviceTechnician.getTechnicianFullName()));
     }
 
     public static void verifyServiceTechnicianPriceValue(ServiceTechnician serviceTechnician, String expactedPrice) {
@@ -46,7 +55,25 @@ public class RegularServiceDetailsScreenValidations {
 
     public static void verifyServicePriceValue(String expectedPrice) {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(expectedPrice));
+        if (expectedPrice.contains("%"))
+            verifyPercentageServicePriceValue(expectedPrice);
+        else
+            Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(expectedPrice));
+    }
+
+    public static void verifyServiceDetailsPriceValue(String expectedPrice){
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        Assert.assertEquals(selectedServiceDetailsScreen.getServiceDetailsPriceValue(), PricesCalculations.getPriceRepresentation(expectedPrice));
+    }
+
+    public static void verifyPercentageServicePriceValue(String expectedPrice) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), expectedPrice);
+    }
+
+    public static void verifyServiceAdjustmentsValue(String expectedAdjustmentValue) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        Assert.assertEquals(selectedServiceDetailsScreen.getServiceAdjustmentsValue(), expectedAdjustmentValue);
     }
 
     public static void verifyLaborServiceTimeValue(String expectedTime) {
@@ -54,8 +81,13 @@ public class RegularServiceDetailsScreenValidations {
         Assert.assertEquals(selectedServiceDetailsScreen.getTimeValue(), expectedTime);
     }
 
-    public static void verifyLaborServiceRateValue(String expectedRate) {
+    public static void verifyLaborServiceRateValue(String expactedRate) {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        Assert.assertEquals(selectedServiceDetailsScreen.getRateValue(), expectedRate);
+        Assert.assertEquals(selectedServiceDetailsScreen.getLaborRateValue(), expactedRate);
+    }
+
+    public static void verifyServiceRateValue(ServiceRateData serviceRateData) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        Assert.assertEquals(selectedServiceDetailsScreen.getRateValue(serviceRateData.getServiceRateName()), serviceRateData.getServiceRateValue());
     }
 }

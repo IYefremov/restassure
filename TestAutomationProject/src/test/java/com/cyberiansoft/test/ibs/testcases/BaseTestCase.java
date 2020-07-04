@@ -4,12 +4,12 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.core.BrowserType;
+import com.cyberiansoft.test.core.WebDriverConfigInfo;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ibs.config.IBSConfigInfo;
 import com.cyberiansoft.test.ibs.pageobjects.webpages.IBSDashboardPage;
 import com.cyberiansoft.test.ibs.pageobjects.webpages.IBSLoginWebPage;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
@@ -48,13 +48,11 @@ public class BaseTestCase {
 
     @BeforeMethod
     public void ibsLogin(Method method) throws InterruptedException {
-        browsertype = BaseUtils.getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser());
-        try {
-            DriverBuilder.getInstance().setDriver(browsertype);
-        } catch (SessionNotCreatedException e) {
-            Thread.sleep(10000);
-            DriverBuilder.getInstance().setDriver(browsertype);
-        }
+        browsertype = BaseUtils.getBrowserType(WebDriverConfigInfo.getInstance().getDefaultBrowser());
+        DriverBuilder.getInstance()
+                .setBrowserType(browsertype)
+                .setRemoteWebDriverURL(WebDriverConfigInfo.getInstance().getAzureURL())
+                .setDriver();
         webdriver = DriverBuilder.getInstance().getDriver();
 
         System.out.printf("\n* Starting test : %s Method : %s\n", getClass(), method.getName());

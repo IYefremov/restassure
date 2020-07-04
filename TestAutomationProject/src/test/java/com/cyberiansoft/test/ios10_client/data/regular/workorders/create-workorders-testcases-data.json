@@ -1,0 +1,412 @@
+{
+
+  "testBlockForTheSameVINIsONVerifyDuplicateVINMessageWhenCreate2WOWithOneVIN": [
+    {
+      "rowID": "testBlockForTheSameVINIsONVerifyDuplicateVINMessageWhenCreate2WOWithOneVIN.01",
+      "description": "Test Case 23428:'Block for the same VIN' is ON. Verify 'Duplicate VIN ' message when create 2 WO with one VIN",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88836"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "workOrderTotalSale": "4"
+      }
+    }
+  ],
+  "testWOVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices": [
+    {
+      "rowID": "testWOVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices.01",
+      "description": "Test Case 25403:WO: Verify that only assigned services on Matrix Panel is available as additional services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88833"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "WDZPE7CD9E5889222",
+          "vehicleMake": "Mercedes-Benz",
+          "vehicleModel": "Sprinter Passenger",
+          "vehicleYear": "2014"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        },
+        "matrixService": {
+          "matrixServiceName": "Test service price matrix",
+          "hailMatrixName": "Price Matrix Zayats",
+          "vehiclePartsData": [
+            {
+              "vehiclePartName": "VP1 zayats",
+              "vehiclePartOption": "PDR",
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "Test service zayats"
+                },
+                {
+                  "serviceName": "Wheel"
+                }
+              ]
+            },
+            {
+              "vehiclePartName": "VP2 zayats",
+              "vehiclePartOption": "PDR",
+              "vehiclePartAdditionalService": {
+                "serviceName": "Dye"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "testNotMultipleServiceWithRequiredPanelsIsAddedOneTimeToWOAfterSelecting": [
+    {
+      "rowID": "testNotMultipleServiceWithRequiredPanelsIsAddedOneTimeToWOAfterSelecting.01",
+      "description": "Test Case 33165:WO: Not multiple Service with required Panels is added one time to WO after selecting",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88819"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "services": [
+          {
+            "serviceName": "Service_PP_Vehicle_not_multiple",
+            "vehicleParts": [
+              {
+                "vehiclePartName": "Back Glass"
+              },
+              {
+                "vehiclePartName": "Deck Lid"
+              }
+            ]
+          },
+          {
+            "serviceName": "Service_PP_Vehicle_not_multiple",
+            "vehicleParts": [
+              {
+                "vehiclePartName": "Back Glass"
+              },
+              {
+                "vehiclePartName": "Deck Lid"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "testRegularWOVerifyThatBundleItemsAreShownWhenCreateWOFromInspection": [
+    {
+      "rowID": "testRegularWOVerifyThatBundleItemsAreShownWhenCreateWOFromInspection.01",
+      "description": "Test Case 34562:WO: Verify that Bundle Items are shown when create WO from inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88817"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "bundleService": {
+          "bundleServiceName": "Bundle1_Disc_Ex",
+          "bundleServiceAmount": "70",
+          "services": [
+            {
+              "serviceName": "Dye",
+              "isSelected": false
+            },
+            {
+              "serviceName": "Wheel",
+              "isSelected": true
+            }
+          ]
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testWOVerifyThatWhenUseCopyServicesActionForWOAllServiceInstancesShouldBeCopied": [
+    {
+      "rowID": "testWOVerifyThatWhenUseCopyServicesActionForWOAllServiceInstancesShouldBeCopied.01",
+      "description": "Test Case 45097:WO: Verify that when use Copy Services action for WO all service instances should be copied",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88813"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        },
+        "services": [
+          {
+            "serviceName": "Oksi_Service_PP_Panel",
+            "vehicleParts": [
+              {
+                "vehiclePartName": "Dashboard"
+              },
+              {
+                "vehiclePartName": "Deck Lid"
+              }
+            ]
+          },
+          {
+            "serviceName": "Test_service_with_QF_PP_Vehicle",
+            "vehicleParts": [
+              {
+                "vehiclePartName": "Dashboard"
+              },
+              {
+                "vehiclePartName": "Deck Lid"
+              }
+            ]
+          }
+        ],
+        "workOrderPrice": "$44.00",
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testWOVerifyThatWONumberIsNotDuplicated": [
+    {
+      "rowID": "testWOVerifyThatWONumberIsNotDuplicated.01",
+      "description": "Test Case 50250:WO: Verify that WO number is not duplicated",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88809"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "workOrderTotalSale": "5"
+      },
+      "invoiceData": {
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        },
+        "poNumber": "123po"
+      }
+    }
+  ],
+  "testWOVerifyThatInCaseValidVINIsDecodedReplaceExistingMakeAndModelWithNewOne": [
+    {
+      "rowID": "testWOVerifyThatInCaseValidVINIsDecodedReplaceExistingMakeAndModelWithNewOne.01",
+      "description": "Test Case 39573:WO: Verify that in case valid VIN is decoded, replace existing make and model with new one",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88838"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        }
+      }
+    }
+  ],
+  "testWOVerifyThatWhenServiceDoNotHaveQuestionsAndSelectSeveralPanelsDoNotUnderlineAnyone": [
+    {
+      "rowID": "testWOVerifyThatWhenServiceDoNotHaveQuestionsAndSelectSeveralPanelsDoNotUnderlineAnyone.01",
+      "description": "Test Case 34626:WO: Verify that when service do not have questions and select several panels do not underline anyone",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88816"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "service": {
+          "serviceName": "Test_service_without_questions_PP_Panel",
+          "vehicleParts": [
+            {
+              "vehiclePartName": "Center Rear Passenger Seat"
+            },
+            {
+              "vehiclePartName": "Dashboard"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "testWOVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen": [
+    {
+      "rowID": "testWOVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen.01",
+      "description": "Test Case 31964:WO: Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88821"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "2A8GP54L87R279721"
+        }
+      }
+    }
+  ],
+  "testWOVerifyThatValidationIsPresentForVehicleTrimField": [
+    {
+      "rowID": "testWOVerifyThatValidationIsPresentForVehicleTrimField.01",
+      "description": "Test Case 45252:WO: Verify that validation is present for vehicle trim field",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88812"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testWOVerifyThatTotalSaleIsNotShownWhenCheckmarkTotalSaleRequiredIsNotSetToOFF": [
+    {
+      "rowID": "testWOVerifyThatTotalSaleIsNotShownWhenCheckmarkTotalSaleRequiredIsNotSetToOFF.01",
+      "description": "Test Case 35375:WO: Verify that Total sale is not shown when checkmark 'Total sale required' is not set to OFF",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88815"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        },
+        "service": {
+          "serviceName": "Tax discount"
+        }
+      }
+    }
+  ],
+  "testWOVerifyThatSearchBarIsPresentForServicePackScreen": [
+    {
+      "rowID": "testWOVerifyThatSearchBarIsPresentForServicePackScreen.01",
+      "description": "Test Case 43408:WO: Verify that search bar is present for service pack screen",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88832"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "services": [
+          {
+            "serviceName": "Test_service_with_QF_PP_Vehicle",
+            "vehiclePart": {
+              "vehiclePartName": "Dashboard"
+            }
+          },
+          {
+            "serviceName": "Sales Tax"
+          }
+        ]
+      }
+    }
+  ],
+  "testWOVerifyThatCancelMessageIsShownForNewOrExistingWO": [
+    {
+      "rowID": "testWOVerifyThatCancelMessageIsShownForNewOrExistingWO.01",
+      "description": "Test Case 42178:WO: Verify that Cancel message is shown for New/Existing WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88814"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        }
+      }
+    }
+  ],
+  "testCreateWorkOrderWithTypeIsAssignedToASpecificClient": [
+    {
+      "rowID": "testCreateWorkOrderWithTypeIsAssignedToASpecificClient.01",
+      "description": "Test Case 8430:Create work order with type is assigned to a specific client",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89024"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "ZWERTYASDFDDXZBVB"
+        },
+        "moneyService": {
+          "serviceName": "Wheel"
+        },
+        "workOrderPrice": "71.40"
+      },
+      "invoiceData": {
+        "poNumber": "1111 2222"
+      }
+    }
+  ]
+}

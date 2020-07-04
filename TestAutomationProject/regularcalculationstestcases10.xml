@@ -4,12 +4,12 @@
     <parameter name="tpsuite.id" value="88991"  />
     <parameter name="tp.integration" value="false"  />
   <listeners>
-      <listener class-name="com.cyberiansoft.test.ios10_client.listeners.iOSregularClientListener"/>
+      <listener class-name="com.cyberiansoft.test.ios10_client.listeners.IOSRegularTestCasesListener"/>
   </listeners>
   <test name="Smoke tests for iOS client" preserve-order="true">
     <classes>
-      <class name="com.cyberiansoft.test.ios10_client.testcases.iOSRegularCalculationsTestCases">
-        <methods>
+      <class name="com.cyberiansoft.test.ios10_client.testcases.iOSRegularCalculationsTestCases"/>
+        <!--<methods>
 
         <include name="testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity" />
         <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices" />
@@ -63,7 +63,7 @@
             <include name="testWOVerifyThatUpChargesAndDiscountsAreCalculatedCorrectlyOnAllLevels" />
             
         </methods>
-      </class>
+      </class>-->
     </classes>
   </test>
 </suite>

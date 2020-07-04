@@ -12,6 +12,10 @@
       "workOrderType": "O_Kramar",
       "vihicleInfo": {
         "vinNumber": "7777777777777"
+      },
+      "moneyService":
+      {
+        "serviceName": "Labor"
       }
     }
   ],
@@ -28,6 +32,10 @@
       "workOrderType": "O_Kramar2",
       "vihicleInfo": {
         "vinNumber": "7777777777777"
+      },
+      "moneyService":
+      {
+        "serviceName": "Labor"
       }
     }
   ],
@@ -45,10 +53,14 @@
       "vihicleInfo": {
         "vinNumber": "7777777777777"
       },
+      "moneyService":
+      {
+        "serviceName": "Labor"
+      },
       "service": {
         "serviceName": "Battery Installation"
       },
-      "workOrderPrice": "$9.00"
+      "workOrderPrice": "$52.29"
     }
   ],
   "testVerifyUserCantCreateNewCustomerOnChangeCustomerScreen": [
@@ -64,6 +76,10 @@
       "workOrderType": "O_Kramar",
       "vihicleInfo": {
         "vinNumber": "7777777777777"
+      },
+      "moneyService":
+      {
+        "serviceName": "Labor"
       }
     }
   ],
@@ -80,6 +96,10 @@
       "workOrderType": "O_Kramar",
       "vihicleInfo": {
         "vinNumber": "7777777777777"
+      },
+      "moneyService":
+      {
+        "serviceName": "Labor"
       }
     }
   ],
@@ -96,6 +116,10 @@
       "workOrderType": "O_Kramar",
       "vihicleInfo": {
         "vinNumber": "7777777777777"
+      },
+      "moneyService":
+      {
+        "serviceName": "Labor"
       }
     }
   ],
@@ -113,6 +137,10 @@
         "workOrderType": "O_Kramar",
         "vihicleInfo": {
           "vinNumber": "7777777777777"
+        },
+        "moneyService":
+        {
+          "serviceName": "Labor"
         }
       },
       "invoiceData": {
@@ -134,6 +162,10 @@
       "workOrderType": "O_Kramar",
       "vihicleInfo": {
         "vinNumber": "7777777777777"
+      },
+      "moneyService":
+      {
+        "serviceName": "Labor"
       }
     }
   ],
@@ -150,6 +182,10 @@
       "workOrderType": "O_Kramar",
       "vihicleInfo": {
         "vinNumber": "7777777777777"
+      },
+      "moneyService":
+      {
+        "serviceName": "Labor"
       }
     }
   ]

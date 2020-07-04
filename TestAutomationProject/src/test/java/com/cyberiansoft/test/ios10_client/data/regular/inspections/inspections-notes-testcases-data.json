@@ -1,0 +1,94 @@
+{
+
+  "testVerifyThatTextNotesAreCopiedToNewInspectionsWhenUseCopyAction": [
+    {
+      "rowID": "testVerifyThatTextNotesAreCopiedToNewInspectionsWhenUseCopyAction.01",
+      "description": "Test Case 33116:Inspections: Verify that text notes are copied to new inspectiontypes when use copy action",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88615"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        }
+      }
+    }
+  ],
+  "testInspectionsVerifyThatServiceLevelNotesAreCopiedFromInspectionToWOWhenItIsAutoCreatedAfterApproval": [
+    {
+      "rowID": "testInspectionsVerifyThatServiceLevelNotesAreCopiedFromInspectionToWOWhenItIsAutoCreatedAfterApproval.01",
+      "description": "Test Case 45128:Inspections: Verify that service level notes are copied from Inspection to WO when it is auto created after approval",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88604"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        },
+        "services": [
+          {
+            "serviceName": "3/4\" - Penny Size",
+            "servicePrice": "10"
+          },
+          {
+            "serviceName": "Discount 5-10%"
+          },
+          {
+            "serviceName": "Sales Tax"
+          }
+        ],
+        "priceMatrixScreensData": [
+          {
+            "screenName": "Default",
+            "vehiclePartData": {
+              "vehiclePartName": "Left Front Door",
+              "vehiclePartSize": "DIME",
+              "vehiclePartSeverity": "VERY LIGHT",
+              "vehiclePartPrice": "100"
+            }
+          },
+          {
+            "screenName": "Matrix Labor",
+            "vehiclePartData": {
+              "vehiclePartName": "Grill",
+              "vehiclePartOption": "PDR",
+              "vehiclePartTime": "12",
+              "vehiclePartAdditionalService": {
+                "serviceName": "SR_S1_Money_Vehicle"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "testEditRetailInspectionNotes": [
+    {
+      "rowID": "testEditRetailInspectionNotes.01",
+      "description": "Test Case 8432:Edit the retail Inspection Notes",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89026"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "TESTVINNO",
+        "vehicleMake": "Acura",
+        "vehicleModel": "1.6 EL",
+        "vehicleColor": "Black"
+      }
+    }
+  ]
+}

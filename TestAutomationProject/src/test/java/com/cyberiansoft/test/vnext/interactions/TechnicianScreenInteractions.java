@@ -35,6 +35,14 @@ public class TechnicianScreenInteractions {
         });
     }
 
+    public static void unSelectTechnician(String technicianName) {
+        if (getTechnicianElement(technicianName).isElementChecked())
+            WaitUtils.getGeneralFluentWait().until(driver -> {
+                getTechnicianElement(technicianName).checkElement();
+                return true;
+            });
+    }
+
     public static void setTechnicianPercentage(String technicianName, String percentage) {
         WaitUtils.getGeneralFluentWait().until(driver -> {
             getTechnicianElement(technicianName).setPercentageAmount(percentage);

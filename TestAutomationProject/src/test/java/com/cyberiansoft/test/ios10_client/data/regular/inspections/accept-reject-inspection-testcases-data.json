@@ -1,0 +1,27 @@
+{
+
+  "testVerifyThatAssignButtonIsPresentWhenSelectSomeTechInCaseDirectAssignOptionIsSetForInspectionType": [
+    {
+      "rowID": "testVerifyThatAssignButtonIsPresentWhenSelectSomeTechInCaseDirectAssignOptionIsSetForInspectionType.01",
+      "description": "Test Case 33918:Inspections: Verify that Assign button is present when select some Tech in case Direct Assign option is set for inspection type",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88578"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ]
+}

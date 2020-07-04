@@ -1,0 +1,186 @@
+{
+  "verifyUserCanAddMoreThanOneNewPart": [
+    {
+      "rowID": "verifyUserCanAddMoreThanOneNewPart.01",
+      "description": "User can add more than 1 new part",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91195"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147532"
+      },
+      "partData": {
+        "service": "IvPartTest_OptionClarif",
+        "description": "Auto-test",
+        "category": "Body",
+        "subcategory": "Adhesives",
+        "partItems": [
+          "Windshield Adhesive Kit",
+          "Back Glass Adhesive Kit"
+        ],
+        "partNames": [
+          "Opt_prefix Windshield Adhesive Kit",
+          "Opt_prefix Back Glass Adhesive Kit"
+        ]
+      }
+    }
+  ],
+  "verifyUserCanFilterParts": [
+    {
+      "rowID": "verifyUserCanFilterParts.01",
+      "description": "Test case 83866: User can filter parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91193"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-163-00040"
+      },
+      "partData": {
+        "service": "Oksi Part service - Category",
+        "description": "Auto-test",
+        "category": "Body",
+        "subcategory": "Doors",
+        "partItems": [
+          "Door"
+        ],
+        "partNames": [
+          "Opt_prefix Windshield Adhesive Kit",
+          "Opt_prefix Back Glass Adhesive Kit"
+        ]
+      }
+    }
+  ],
+  "verifyUserCanTypeService": [
+    {
+      "rowID": "verifyUserCanTypeService.01",
+      "description": "Test case 83863: User can type the \"Service\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91190"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147532"
+      },
+      "partData": {
+        "service": "New"
+      }
+    }
+  ],
+  "verifyUserCanDeletePart": [
+    {
+      "rowID": "verifyUserCanDeletePart.01",
+      "description": "Test case 83921: User can delete the part",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91209"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147532"
+      },
+      "partData": {
+        "service": "IvPartTest_NoneClarif",
+        "description": "Auto-test",
+        "category": "Body",
+        "subcategory": "Doors",
+        "partItems": [
+          "Door Applique Clip"
+        ],
+        "partNames": [
+          "IvPartTest_NoneClarif"
+        ]
+      }
+    }
+  ],
+  "verifyUserCanClickDeleteButtonAndRefuseDeletingThePartUsingXIcon": [
+    {
+      "rowID": "verifyUserCanClickDeleteButtonAndRefuseDeletingThePartUsingXIcon.01",
+      "description": "Test case 83922: User can click \"Delete\" then refuse to delete the part (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91210"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147532"
+      }
+    }
+  ],
+  "verifyUserCanClickDeleteButtonAndRefuseDeletingThePartUsingCancelButton": [
+    {
+      "rowID": "verifyUserCanClickDeleteButtonAndRefuseDeletingThePartUsingCancelButton.01",
+      "description": "Test case 83923: User can click \"Delete\" then refuse to delete the part (No)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91211"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147532"
+      }
+    }
+  ],
+  "verifyUserCanFilterAvailableServicesListByEnteredText": [
+    {
+      "rowID": "verifyUserCanFilterAvailableServicesListByEnteredText.01",
+      "description": "Verify user can filter available services list by entered text",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "115261"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-236-00009"
+      },
+      "partData": {
+        "service": "GS"
+      }
+    }
+  ],
+  "verifyUserCanAddNewOEMPart": [
+    {
+      "rowID": "verifyUserCanAddNewOEMPart.01",
+      "description": "Test case 89086: Verify user add new OEM part",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91194"
+        }
+      ],
+      "location": "Location_Phase_enforc_partial",
+      "searchData": {
+        "woNum": "O-175-00128"
+      },
+      "partData": {
+        "service": "Alexei Part Empty",
+        "description": "Auto-test",
+        "category": "Brake",
+        "subcategory": "Disc Pads and Brake Shoes",
+        "partItems": [
+          "Disc Brake Pad Brake->Disc Pads and Brake Shoes",
+          "Disc Brake Pad Set Brake->Disc Pads and Brake Shoes"
+        ],
+        "oemParts": [
+          "06435-S2A-000",
+          "Disc Brake Pad Set Brake->Disc Pads and Brake Shoes",
+          "MyOwnOEM2"
+        ],
+        "partNames": [
+          "Opt_prefix Windshield Adhesive Kit",
+          "Opt_prefix Back Glass Adhesive Kit"
+        ]
+      }
+    }
+  ]
+}

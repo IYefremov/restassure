@@ -16,10 +16,14 @@ public class QuestionServiceListInteractions {
 
     public static void openServiceDetails(String serviceName) {
         QuestionServiceListScreen questionServiceListScreen = new QuestionServiceListScreen();
-        WaitUtils.click(questionServiceListScreen.getServiceList()
-                .stream()
-                .filter(service -> service.getText().contains(serviceName))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Service not found " + serviceName)));
+        WaitUtils.getGeneralFluentWait().until(__ -> questionServiceListScreen.getServiceList().size() > 0);
+        WaitUtils.getGeneralFluentWait(5, 500).until(driver -> {
+            questionServiceListScreen.getServiceList()
+                    .stream()
+                    .filter(service -> service.getText().contains(serviceName))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("Service not found " + serviceName)).click();
+            return true;
+        });
     }
 }

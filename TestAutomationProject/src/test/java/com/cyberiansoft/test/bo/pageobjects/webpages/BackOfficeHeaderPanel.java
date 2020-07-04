@@ -4,33 +4,32 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import lombok.Getter;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+@Getter
 public class BackOfficeHeaderPanel extends BaseWebPage {
-	@FindBy(id = "ctl00_ctl00_LoginStatus_LoginStatus1")
+
+    @FindBy(id = "ctl00_ctl00_LoginStatus_LoginStatus1")
 	private WebElement logoutlink;
 
 	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Home']")
 	private WebElement hometab;
 
 	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Company']")
-	private WebElement companytab;
+	private WebElement companyTab;
 
 	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Operations']")
-	private WebElement operationstab;
+	private WebElement operationsTab;
 
 	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Monitor']")
-	private WebElement monitortab;
+	private WebElement monitorTab;
 
 	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Super User']")
-	private WebElement superusertab;
+	private WebElement superUserTab;
 
 	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Miscellaneous']")
 	private WebElement miscellaneoustab;
@@ -48,6 +47,15 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
+
+	public BackOfficeHeaderPanel() {
+		super(DriverBuilder.getInstance().getDriver());
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+	}
+
+	public WebElement getTab(String tab) {
+	    return driver.findElement(By.xpath("//span[@class='rtsTxt' and text()='" + tab + "']"));
+    }
 
 	public void clickLogout() {
 		try {
@@ -73,42 +81,54 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 		waitABit(4000);
 	}
 
+    public void clickSuperUserLink() {
+        openSubmenu(superUserTab, "Super User");
+    }
+
 	public void clickOperationsLink() {
-		waitABit(5000);
-        Utils.clickElement(operationstab);
+        openSubmenu(operationsTab, "Operations");
 	}
 
-	public void clickHomeLink() {
+    public void clickMonitorLink() {
+        openSubmenu(monitorTab, "Monitor");
+    }
+
+    public void clickCompanyLink() {
+        openSubmenu(companyTab, "Company");
+    }
+
+    public void clickMiscellaneousLink() {
+        openSubmenu(miscellaneoustab, "Miscellanneous");
+    }
+
+    public void clickReportsLink() {
+        openSubmenu(reportstab, "Reports");
+    }
+
+    public void clickTimesheetsLink() {
+        openSubmenu(timesheetstab, "TimeSheets");
+    }
+
+
+    public void clickHomeLink() {
 		wait.until(ExpectedConditions.elementToBeClickable(hometab)).click();
 	}
-
-	public void clickCompanyLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(companytab)).click();
-	}
-
-	public void clickMonitorLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(monitortab)).click();
-	}
-
-	public void clickSuperUserLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(superusertab)).click();
-	}
-
-	public void clickMiscellaneousLink() {
-		new Actions(driver).moveToElement(miscellaneoustab).click().build().perform();
-	}
-
-	public void clickReportsLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(reportstab)).click();
-	}
-
 	public void refresh() {
 	    Utils.acceptAlertIfPresent();
 		driver.navigate().refresh();
 	}
 
-	public void clickTimesheetsLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(timesheetstab)).click();
-	}
-
+    private void openSubmenu(WebElement menu, String title) {
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        Utils.clickElement(menu);
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        try {
+            WaitUtilsWebDriver.waitUntilTitleContains(title);
+        } catch (Exception e) {
+            Utils.clickElement(menu);
+            WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+            WaitUtilsWebDriver.waitUntilTitleContains(title);
+        }
+        WaitUtilsWebDriver.waitABit(1000);
+    }
 }

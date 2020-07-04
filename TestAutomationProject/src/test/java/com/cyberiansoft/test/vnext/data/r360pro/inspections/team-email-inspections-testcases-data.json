@@ -1,0 +1,105 @@
+{
+  "userCanSendEmailInspectionsWithDifferentCustomers": [
+    {
+      "rowID": "userCanSendEmailInspectionsWithDifferentCustomers.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91774",
+          "testCaseTitle": "User can send Email Inspections with different Customers"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+  "userCanSendEmailInspectionsWithTheSameCustomer": [
+    {
+      "rowID": "userCanSendEmailInspectionsWithTheSameCustomer.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91773",
+          "testCaseTitle": "User can send Email Inspections with the same Customer"
+        }
+      ],
+      "inspectionsData": [
+        {
+          "vihicleInfo": {
+            "vinNumber": "WDBFA67E1SFA946591"
+          }
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "WDBFA67E1SFA946591"
+          }
+        }
+      ]
+    }
+  ],
+  "userCantSendEmailWithoutFilledTOField": [
+    {
+      "rowID": "userCantSendEmailWithoutFilledTOField.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91771",
+          "testCaseTitle": "User can't send Email without filled 'TO' field"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+  "userCantSendEmailsToIncorrectMailboxes": [
+    {
+      "rowID": "userCantSendEmailsToIncorrectMailboxes.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91762",
+          "testCaseTitle": "User can't send Emails to incorrect Mailboxes"
+        },
+        {
+          "testCaseID": "91775",
+          "testCaseTitle": "User can enter incorrect Emails in 'TO', 'CC', 'BCC' fields"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+  "userCanAddMoreThan1CCMailbox": [
+    {
+      "rowID": "userCanAddMoreThan1CCMailbox.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91752",
+          "testCaseTitle": "User can add more than 1 'CC' mailbox"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+  "userCanClearTheFields": [
+    {
+      "rowID": "userCanClearTheFields.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91770",
+          "testCaseTitle": "User can clear the fields"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ]
+}

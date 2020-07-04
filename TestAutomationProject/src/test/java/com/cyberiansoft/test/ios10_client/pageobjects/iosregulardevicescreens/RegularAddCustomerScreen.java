@@ -1,51 +1,50 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 
-	@iOSXCUITFindBy(accessibility = "First Name")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_FirstName")
 	private IOSElement firstnamefld;
 
-	@iOSXCUITFindBy(accessibility = "Last Name")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_LastName")
     private IOSElement lastnamefld;
 
-	@iOSXCUITFindBy(accessibility = "Company")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_Company")
     private IOSElement companyfld;
 
-	@iOSXCUITFindBy(accessibility = "Address 1")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_Address")
     private IOSElement address1fld;
 
-	@iOSXCUITFindBy(accessibility = "Address 2")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_Address2")
 	private IOSElement address2fld;
 
-	@iOSXCUITFindBy(accessibility = "City")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_City")
     private IOSElement cityfld;
 
-	@iOSXCUITFindBy(accessibility = "State\nProvince")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_State")
 	private IOSElement statefld;
 
-	@iOSXCUITFindBy(accessibility = "Country")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_Country")
     private IOSElement countryfld;
 
-	@iOSXCUITFindBy(accessibility = "ZIP\nPostal")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_Zip")
     private IOSElement zipfld;
 
-	@iOSXCUITFindBy(accessibility = "Phone")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_Phone")
     private IOSElement phonefld;
 
-	@iOSXCUITFindBy(accessibility = "Email")
-    private IOSElement mailfld;
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_Email")
+	private IOSElement mailfld;
 	
 	@iOSXCUITFindBy(accessibility = "Save")
     private IOSElement savebtn;
@@ -58,86 +57,84 @@ public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 	}
 
-	public void addCustomer(String firstname, String lastname,
-			String companyname, String address1, String city, String state,
-			String zip, String country, String phone, String mail) {
-		setFirstName(firstname);
-		setLastName(lastname);
-		setCompanyName(companyname);
-		Helpers.waitABit(2000);
-		setMail(mail);
-		setPhone(phone);
-		setAddress1(address1);
-		setCity(city);
-		selectCountry(country);
-		Helpers.waitABit(2000);
-		selectState(state);
-		Helpers.waitABit(4000);
-		setZip(zip);
-			
-		
+	public void addCustomer(RetailCustomer appCustomer) {
+		setFirstName(appCustomer.getFirstName());
+		setLastName(appCustomer.getLastName());
+		setCompanyName(appCustomer.getCompany());
+		setMail(appCustomer.getMailAddress());
+		setPhone(appCustomer.getCustomerPhone());
+		setAddress1(appCustomer.getCustomerAddress1());
+		setCity(appCustomer.getCustomerCity());
+		selectCountry(appCustomer.getCustomerCountry());
+		selectState(appCustomer.getCustomerState());
+		setZip(appCustomer.getCustomerZip());
 	}
 
-	public void editCustomer(String firstname, String lastname,
-			String companyname, String address1, String city, String state,
-			String zip, String country, String phone, String mail) {
-		Helpers.waitABit(1000);
-		setFirstName(firstname);
-		setLastName(lastname);
-		setCompanyName(companyname);
-		Helpers.waitABit(2000);
-		setMail(mail);
-		setPhone(phone);
-		setAddress1(address1);
-		setCity(city);
-		setZip(zip);
+	public void editCustomer(RetailCustomer appCustomer) {
+		setFirstName(appCustomer.getFirstName());
+		setLastName(appCustomer.getLastName());
+		setCompanyName(appCustomer.getCompany());
+		setMail(appCustomer.getMailAddress());
+		setPhone(appCustomer.getCustomerPhone());
+		setAddress1(appCustomer.getCustomerAddress1());
+		setCity(appCustomer.getCustomerCity());
+		setZip(appCustomer.getCustomerZip());
 	}
 
 	public void setFirstName(String firstname) {
-		firstnamefld.clear();
-		firstnamefld.sendKeys(firstname+"\n");
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("CustomerInfoCellEditBox")));
+		WebElement firstNameTxt = firstnamefld.findElementByAccessibilityId("CustomerInfoCellEditBox");
+		firstNameTxt.clear();
+		firstNameTxt.sendKeys(firstname+"\n");
 	}
 
 	public void setLastName(String lastname) {
-		lastnamefld.click();
-		lastnamefld.clear();
-		lastnamefld.sendKeys(lastname + "\n");
+		WebElement lastNameTxt = lastnamefld.findElementByAccessibilityId("CustomerInfoCellEditBox");
+		lastNameTxt.clear();
+		lastNameTxt.sendKeys(lastname + "\n");
 	}
 
 	public void setCompanyName(String companyname) {
-		companyfld.clear();
-		companyfld.sendKeys(companyname + "\n");
+		WebElement companyTxt = companyfld.findElementByAccessibilityId("CustomerInfoCellEditBox");
+		companyTxt.clear();
+		companyTxt.sendKeys(companyname + "\n");
 	}
 
 	public void setAddress1(String address1) {
-		address1fld.clear();
-		address1fld.setValue(address1 + "\n");
+		WebElement addressTxt = address1fld.findElementByAccessibilityId("CustomerInfoCellTextView");
+		addressTxt.clear();
+		addressTxt.sendKeys(address1 + "\n");
 	}
 
 	public void setAddress2(String address2) {
-		address2fld.clear();
-		address2fld.setValue(address2 + "\n");
+		WebElement address2Txt = address2fld.findElementByAccessibilityId("CustomerInfoCellTextView");
+		address2Txt.clear();
+		address2Txt.sendKeys(address2 + "\n");
 	}
 
 	public void setCity(String city) {
-		cityfld.clear();
-		cityfld.sendKeys(city + "\n");
+		WebElement cityTxt = cityfld.findElementByAccessibilityId("CustomerInfoCellEditBox");
+		cityTxt.clear();
+		cityTxt.sendKeys(city + "\n");
 	}
 
 	public void setZip(String zip) {
-		zipfld.clear();
-		zipfld.sendKeys(zip + "\n");
+		WebElement zipTxt = zipfld.findElementByAccessibilityId("CustomerInfoCellEditBox");
+		zipTxt.clear();
+		zipTxt.sendKeys(zip + "\n");
 	}
 
 	public void setPhone(String phone) {
-		phonefld.clear();
-		phonefld.click();
-		phonefld.sendKeys(phone + "\n");
+		WebElement phoneTxt = phonefld.findElementByAccessibilityId("CustomerInfoCellEditBox");
+		phoneTxt.clear();
+		phoneTxt.sendKeys(phone + "\n");
 	}
 
 	public void setMail(String mail) {
-		mailfld.clear();
-		mailfld.sendKeys(mail + "\n");
+		WebElement mailTxt = mailfld.findElementByAccessibilityId("CustomerInfoCellEditBox");
+		mailTxt.clear();
+		mailTxt.sendKeys(mail + "\n");
 	}
 
 	public void selectState(String state) {

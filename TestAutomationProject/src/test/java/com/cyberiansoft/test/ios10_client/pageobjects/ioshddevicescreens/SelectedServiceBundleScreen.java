@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -12,7 +13,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
@@ -50,7 +50,9 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 	public SelectedServiceDetailsScreen openBundleInfo(String bundle) {
 		IOSElement bundleview = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'"));
 		if (!bundleview.findElement(MobileBy.AccessibilityId(bundle)).isDisplayed()) {
-			scrollToElement(bundleview.findElement(MobileBy.AccessibilityId(bundle)));
+			SwipeUtils.swipeToElement(bundleview.
+					findElement(MobileBy.AccessibilityId(bundle)));
+			bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElement(MobileBy.AccessibilityId("custom detail button")).click();
 		}
 
 		bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElement(MobileBy.AccessibilityId("custom detail button")).click();
@@ -99,8 +101,9 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 
 	public void saveSelectedServiceDetails() {
 
-		MobileElement navBar = (MobileElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeNavigationBar' AND visible == 1"));
-		navBar.findElementByAccessibilityId("Save").click();
+		MobileElement saveButton = (MobileElement) appiumdriver.findElementByClassName("XCUIElementTypePopover").
+				findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND name == 'Save'"));
+		saveButton.click();
 	}
 
 	public TechniciansPopup clickTechniciansIcon() {

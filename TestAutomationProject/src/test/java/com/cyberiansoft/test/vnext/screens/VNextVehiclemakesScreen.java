@@ -1,8 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
+import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,21 +11,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextVehiclemakesScreen extends VNextBaseScreen {
 
-    @FindBy(xpath="//*[@data-autotests-id='makes-list']")
-    private WebElement makeslist;;
+    @FindBy(xpath="//*[@data-autotests-id='makes-model-list']")
+    private WebElement makeslist;
 
-    public VNextVehiclemakesScreen(AppiumDriver<MobileElement> appiumdriver) {
-        super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-page='make']")));
+    public VNextVehiclemakesScreen() {
+        PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
     }
 
-    public VNextVehicleModelsScreen selectVehicleMake(String vehicleMake) {
+    public void selectVehicleMake(String vehicleMake) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-make='" + vehicleMake + "']")));
         tap(makeslist.findElement(By.xpath(".//*[@data-make='" + vehicleMake + "']")));
-        return new VNextVehicleModelsScreen(appiumdriver);
     }
 
 }

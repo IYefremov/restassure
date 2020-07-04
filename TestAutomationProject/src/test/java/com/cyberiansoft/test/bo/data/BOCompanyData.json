@@ -16,8 +16,8 @@
     {
       "rowID": "testCompanyEmployeesSearch.01",
       "description": "Test Case 15265:Company-Employees: Search",
-      "employeeName": "+++ ---",
-      "employeeLastName": "---",
+      "employeeName": "_Ira Autotest",
+      "employeeLastName": "Autotest",
       "teamName": "Test Team",
       "page1": "1",
       "page2": "2",
@@ -138,7 +138,7 @@
     {
       "rowID": "testCompanyServicesArchive.01",
       "description": "Test Case 26727:Company- Services: Archive",
-      "serviceName": "test12"
+      "serviceName": "Test123"
     }
   ],
 

@@ -1,8 +1,7 @@
 package com.cyberiansoft.test.bo.webelements.impl;
 
-import org.openqa.selenium.WebElement;
-
 import com.cyberiansoft.test.bo.webelements.IWebElement;
+import org.openqa.selenium.WebElement;
 
 public abstract class AbstractWebElement implements IWebElement {
     protected final WebElement wrappedElement;

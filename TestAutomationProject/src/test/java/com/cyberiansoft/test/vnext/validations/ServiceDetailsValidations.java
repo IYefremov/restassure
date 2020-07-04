@@ -14,6 +14,20 @@ public class ServiceDetailsValidations {
         });
     }
 
+    public static void verifyServiceQuantity(String expectedQuantity) {
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            Assert.assertEquals(ServiceDetailsInteractions.getQuantity(), expectedQuantity);
+            return true;
+        });
+    }
+
+    public static void verifyServiceNotesValue(String expectedNotesText) {
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            Assert.assertEquals(ServiceDetailsInteractions.getNotes(), expectedNotesText);
+            return true;
+        });
+    }
+
     public static void servicePartShouldBe(VehiclePartData vehiclePart) {
         WaitUtils.getGeneralFluentWait().until(driver -> {
             Assert.assertEquals(ServiceDetailsInteractions.getVehiclePartValue(), vehiclePart.getVehiclePartName());
@@ -26,8 +40,19 @@ public class ServiceDetailsValidations {
         Assert.assertEquals(WaitUtils.isElementPresent(serviceDetailsScreen.getPartServiceInfoTitle()), shouldBePresent);
     }
 
+    public static void verifyLaborServicesButtonPresent(boolean shouldBePresent) {
+        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+        Assert.assertEquals(WaitUtils.isElementPresent(serviceDetailsScreen.getLaborServicesButton()), shouldBePresent);
+    }
+
     public static void verifyUserIsOnDetailsPage() {
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
         WaitUtils.elementShouldBeVisible(serviceDetailsScreen.getRootElement(), true);
+    }
+
+    public static void verifyServiceDetailsPageIsOpened() {
+        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+        Assert.assertTrue(serviceDetailsScreen.getRootElement().isDisplayed(),
+                "Service details screen hasn't been displayed");
     }
 }

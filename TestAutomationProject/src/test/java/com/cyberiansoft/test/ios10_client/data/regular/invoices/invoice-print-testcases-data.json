@@ -1,0 +1,104 @@
+{
+
+  "testVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedMyInvoices": [
+    {
+      "rowID": "testVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedMyInvoices.01",
+      "description": "Test Case 26690:Invoices: Verify that print icon is shown next to invoice when it was printed (My Invoices)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88506"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733"
+        },
+        "moneyService" : {
+          "serviceName": "Wheel"
+        },
+        "workOrderTotalSale": "5"
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ],
+  "testVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedTeamInvoices": [
+    {
+      "rowID": "testVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedTeamInvoices.01",
+      "description": "Test Case 26691:Invoices: Verify that print icon is shown next to invoice when it was printed (Team Invoices)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88507"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733"
+        },
+        "moneyService" : {
+          "serviceName": "Wheel"
+        },
+        "workOrderTotalSale": "5"
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ],
+  "testWOVerifyThatOnInvoiceSummaryMainServiceOfThePanelIsDisplayedAsFirstThenAdditionalServices": [
+    {
+      "rowID": "testWOVerifyThatOnInvoiceSummaryMainServiceOfThePanelIsDisplayedAsFirstThenAdditionalServices.01",
+      "description": "Test Case 25421:WO: Verify that on Invoice 'Summary' main service of the panel is displayed as first then additional services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88513"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733"
+        },
+        "matrixService": {
+          "matrixServiceName": "Test service price matrix",
+          "hailMatrixName": "Price Matrix Zayats",
+          "vehiclePartsData": [
+            {
+              "vehiclePartName": "VP1 zayats",
+              "vehiclePartOption": "PDR",
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "Test service zayats"
+                },
+                {
+                  "serviceName": "Wheel"
+                }
+              ]
+            },
+            {
+              "vehiclePartName": "VP2 zayats",
+              "vehiclePartSize": "CENT",
+              "vehiclePartSeverity": "LIGHT",
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "Dye"
+                },
+                {
+                  "serviceName": "Wheel"
+                },
+                {
+                  "serviceName": "Test service zayats"
+                }
+              ]
+            }
+          ]
+        },
+        "workOrderTotalSale": "5"
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ]
+
+}

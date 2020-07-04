@@ -4,7 +4,7 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
-import com.cyberiansoft.test.bo.verifications.ServiceRequestsListVerifications;
+import com.cyberiansoft.test.bo.validations.ServiceRequestsListVerifications;
 import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.dataclasses.WholesailCustomer;
@@ -137,14 +137,14 @@ public class NewTestCases extends BaseTestCase {
 		vehicleScreen.setRO(_ro);
 
 		RegularNavigationSteps.navigateToServicesScreen();
-		RegularServicesScreen servicesScreen = new RegularServicesScreen();
-		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails("Dye_Panel");
-		selectedservicescreen.clickVehiclePartsCell();
-		for (int i = 0; i < vehicleparts.length; i++) {
-			selectedservicescreen.selectVehiclePart(vehicleparts[i]);
+		RegularServicesScreenSteps.openCustomServiceDetails("Dye_Panel");
+		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+		selectedServiceDetailsScreen.clickVehiclePartsCell();
+		for (String vehiclepart : vehicleparts) {
+			selectedServiceDetailsScreen.selectVehiclePart(vehiclepart);
 		}
-		selectedservicescreen.saveSelectedServiceDetails();
-		selectedservicescreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
 		RegularNavigationSteps.navigateToOrderSummaryScreen();
 		RegularWorkOrdersSteps.saveWorkOrder();
@@ -222,7 +222,8 @@ public class NewTestCases extends BaseTestCase {
 		RegularNavigationSteps.navigateToServicesScreen();
 
 		RegularServicesScreen servicesScreen = new RegularServicesScreen();
-		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails("3/4\" - Penny Size");
+		RegularServicesScreenSteps.openCustomServiceDetails("3/4\" - Penny Size");
+		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 		selectedServiceDetailsScreen.setServiceQuantityValue("3");
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		servicesScreen.selectService("SR_Money_Vehicle");
@@ -254,21 +255,20 @@ public class NewTestCases extends BaseTestCase {
 		operationsWebPage.clickNewServiceRequestList();
 		serviceRequestsListInteractions.makeSearchPanelVisible();
 
-        final ServiceRequestsListVerifications serviceRequestsListVerifications = new ServiceRequestsListVerifications();
-        serviceRequestsListVerifications.verifySearchFieldsAreVisible();
+        ServiceRequestsListVerifications.verifySearchFieldsAreVisible();
 		
 		serviceRequestsListInteractions.selectSearchTeam(teamname);
 		serviceRequestsListInteractions.selectSearchTechnician("Test User");
 		serviceRequestsListInteractions.setSearchFreeText(srtowo);
 		serviceRequestsListInteractions.clickFindButton();
-        serviceRequestsListVerifications.verifySearchResultsByServiceName(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
+        ServiceRequestsListVerifications.isServiceNamePresentInFirstSR(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
 		serviceRequestsListInteractions.selectFirstServiceRequestFromList();
 		Assert.assertEquals(serviceRequestsListInteractions.getVINValueForSelectedServiceRequest(), "WERTYU123");
 		Assert.assertEquals(serviceRequestsListInteractions.getCustomerValueForSelectedServiceRequest(), iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
 		Assert.assertEquals(serviceRequestsListInteractions.getEmployeeValueForSelectedServiceRequest(), "Test User (Default team)");
-		Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("SR_S4_Bundle $350.00 (1.00)"));
-		Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("SR_Money_Vehicle $200.00 (1.00)"));
-		Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("3/4\" - Penny Size $18.00 (3.00)"));
+		Assert.assertTrue(ServiceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("SR_S4_Bundle $350.00 (1.00)"));
+		Assert.assertTrue(ServiceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("SR_Money_Vehicle $200.00 (1.00)"));
+		Assert.assertTrue(ServiceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("3/4\" - Penny Size $18.00 (3.00)"));
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
@@ -334,9 +334,10 @@ public class NewTestCases extends BaseTestCase {
 	{
 
 		RegularHomeScreen homeScreen = new RegularHomeScreen();
-		RegularMainScreen mainscreen = homeScreen.clickLogoutButton();
+		RegularHomeScreenSteps.logoutUser();
 		BaseUtils.waitABit(2000);
-		LicensesScreen licensesscreen = mainscreen.clickLicenses();
+		RegularMainScreen mainScreen = new RegularMainScreen();
+		LicensesScreen licensesscreen = mainScreen.clickLicenses();
 		licensesscreen.clickAddLicenseButtonAndAcceptAlert();
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);

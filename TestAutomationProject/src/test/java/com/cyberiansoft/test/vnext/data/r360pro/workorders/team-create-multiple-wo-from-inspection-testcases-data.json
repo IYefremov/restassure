@@ -40,8 +40,16 @@
         {
           "testCaseID": "91934",
           "testCaseTitle": "Verify user can create WO from approved Inspection."
+        },
+        {
+          "testCaseID": "91935",
+          "testCaseTitle": "Verify user can't create WO from not approved Inspection"
         }
-      ]
+      ],
+      "moneyService":
+        {
+          "serviceName": "Battery Installation"
+        }
     }
   ]
 }

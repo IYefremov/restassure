@@ -8,18 +8,12 @@ public class RegularServiceRequestDetalsScreenValidations {
     public static void verifySRSummaryAppointmentsInformationExists(boolean isExists) {
         RegularServiceRequestDetailsScreen serviceRequestDetailsScreen = new RegularServiceRequestDetailsScreen();
         serviceRequestDetailsScreen.waitForServiceRequestDetailsScreenLoaded();
-        if (isExists)
-            Assert.assertTrue(serviceRequestDetailsScreen.isSRSummaryAppointmentsInformationExists());
-        else
-            Assert.assertTrue(serviceRequestDetailsScreen.isSRSummaryAppointmentsInformationExists());
+        Assert.assertTrue(serviceRequestDetailsScreen.isSRSummaryAppointmentsInformationExists());
     }
 
     public static void verifySRSheduledAppointmentExists(boolean isExists) {
         RegularServiceRequestDetailsScreen serviceRequestDetailsScreen = new RegularServiceRequestDetailsScreen();
         serviceRequestDetailsScreen.waitForServiceRequestDetailsScreenLoaded();
-        if (isExists)
-            Assert.assertTrue(serviceRequestDetailsScreen.isSRSheduledAppointmentExists());
-        else
-            Assert.assertTrue(serviceRequestDetailsScreen.isSRSheduledAppointmentExists());
+        Assert.assertTrue(serviceRequestDetailsScreen.isSRSheduledAppointmentExists());
     }
 }

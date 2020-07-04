@@ -1,0 +1,477 @@
+{
+
+  "testCopyInspections": [
+    {
+      "rowID": "testCopyInspections.01",
+      "description": "Test Case 16239:Copy Inspections",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88509"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397",
+          "vehicleMake": "Mitsubishi",
+          "vehicleModel": "Montero Sport",
+          "vehicleYear": "2000"
+        },
+        "visualScreensData": [
+          {
+            "screenName": "Interior",
+            "damageData": {
+              "damageGroupName": "Miscellaneous"
+            }
+          },
+          {
+            "screenName": "Future Audi Car",
+            "damageData": {
+              "damageGroupName": "WHEEL REPAIR"
+            },
+            "screenTotalPrice": "$180.50"
+          },
+          {
+            "screenName": "Exterior",
+            "damageData": {
+              "damageGroupName": "WHEEL REPAIR"
+            },
+            "screenTotalPrice": "$250.50"
+          },
+          {
+            "screenName": "Futire Jet Car",
+            "damageData": {
+              "damageGroupName": "Price Adjustment"
+            },
+            "screenTotalPrice": "$240.50"
+          }
+        ],
+        "questionScreensData": [
+          {
+            "screenName": "Test Section",
+            "questionsData": [
+              {
+                "questionSetionName": "Engine Condition",
+                "questionAnswer": "Really Bad",
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionSetionName": "Just One Possible Answer",
+                "questionAnswer": "One",
+                "screenIndex": 2,
+                "screenHDIndex": 1
+              }
+            ]
+          },
+          {
+            "screenName": "Follow up Requested",
+            "questionsData": [
+              {
+                "signatureQuestion": {
+
+                },
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionSetionName": "Sample Question",
+                "questionAnswer": "Answers 1",
+                "screenIndex": 2,
+                "screenHDIndex": 1
+              }
+            ]
+          },
+          {
+            "screenName": "BATTERY PERFORMANCE",
+            "questionsData": [
+              {
+                "questionSetionName": "Battery Terminals / Cables / Mountings",
+                "questionAnswer": "Immediate Attention Required",
+                "screenIndex": 0,
+                "screenHDIndex": 0,
+                "questionAnswerIndex": 1
+              },
+              {
+                "questionSetionName": "Check Condition of Battery (Storage Capacity Test)",
+                "questionAnswer": "Immediate Attention Required",
+                "screenIndex": 1,
+                "screenHDIndex": 0,
+                "questionAnswerIndex": 2
+              },
+              {
+                "questionName": "Tax_Point_1",
+                "questionAnswer": "Test Answer 1",
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              }
+            ]
+          }
+        ],
+        "moneyService": {
+          "serviceName": "Dye",
+          "servicePrice": "10.00",
+          "serviceAdjustment": {
+            "adjustmentTotalAmaunt": "$0.50"
+          }
+        },
+        "percentageService": {
+          "serviceName": "Disc_Ex_Service1",
+          "servicePrice": "100.00",
+          "serviceAdjustment": {
+            "adjustmentTotalAmaunt": "-$5.00",
+            "adjustmentData": {
+              "adjustmentName": "For_SP_Cl",
+              "adjustmentQuantity": "%-5.000"
+            }
+          }
+        },
+        "bundleService": {
+          "bundleServiceName": "Bundle1_Disc_Ex",
+          "services": [
+            {
+              "serviceName": "Dye",
+              "isSelected": "false"
+            },
+            {
+              "serviceName": "Wheel",
+              "serviceQuantity": "2.00",
+              "isSelected": "true"
+            }
+          ]
+        },
+        "percentageServices": [
+          {
+            "serviceName": "Test Tax"
+          },
+          {
+            "serviceName": "Discount 5-10%"
+          }
+        ],
+        "matrixService": {
+          "matrixServiceName": "Dent Removal",
+          "hailMatrixName": "Hail Matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "HOOD",
+            "vehiclePartSize": "NKL",
+            "vehiclePartSeverity": "VERY LIGHT",
+            "vehiclePartPrice": "$100.00",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "Dye"
+              },
+              {
+                "serviceName": "Discount 5-10%"
+              },
+              {
+                "serviceName": "Discount 10-20$"
+              }
+            ]
+          }
+        },
+        "selectedServices": [
+          {
+            "serviceName": "Dye",
+            "isSelected": true
+          },
+          {
+            "serviceName": "Dent Removal",
+            "isSelected": true
+          },
+          {
+            "serviceName": "Disc_Ex_Service1",
+            "isSelected": true
+          },
+          {
+            "serviceName": "Bundle1_Disc_Ex",
+            "isSelected": true
+          },
+          {
+            "serviceName": "Test Tax",
+            "isSelected": true
+          },
+          {
+            "serviceName": "Discount 5-10%",
+            "isSelected": true
+          }
+        ],
+        "inspPrice": "$837.99"
+      }
+    }
+  ],
+  "testSavingInspectionsWithThreeMatrix": [
+    {
+      "rowID": "testSavingInspectionsWithThreeMatrix.01",
+      "description": "Test Case 23966:Inspections: Test saving inspectiontypes with three matrix, Test Case 24022:Inspections: Test saving inspection copied from one with 3 matrix price",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88673"
+        },
+        {
+          "testCaseID": "88672"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397",
+          "vehicleColor": "Black",
+          "vehicleType": "New",
+          "poNumber": "12345"
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG",
+          "claimNumber": "QWERTY"
+        },
+        "visualScreensData": [
+          {
+            "screenName": "Interior",
+            "damagesData": [
+              {
+                "damageGroupName": "WHEEL REPAIR"
+              },
+              {
+                "damageGroupName": "WHEEL REPAIR"
+              }
+            ],
+            "screenPrice": "$140.00",
+            "screenTotalPrice": "$520.00"
+          },
+          {
+            "screenName": "Exterior",
+            "damageData": {
+              "damageGroupName": "Miscellaneous"
+            },
+            "screenPrice": "$100.00",
+            "screenTotalPrice": "$570.00"
+          }
+        ],
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        },
+        "priceMatrixScreensData": [
+          {
+            "screenName": "Default",
+            "vehiclePartsData": [
+              {
+                "vehiclePartName": "Hood",
+                "vehiclePartOption": "PDR",
+                "vehiclePartTotalPrice": "$6,100.00",
+                "vehiclePartAdditionalServices": [
+                  {
+                    "serviceName": "SR_S5_Mt_Money"
+                  },
+                  {
+                    "serviceName": "SR_S5_Mt_Money_DE_TE"
+                  },
+                  {
+                    "serviceName": "SR_S1_Money",
+                    "serviceQuantity": "3"
+                  }
+                ]
+              },
+              {
+                "vehiclePartName": "Left Roof Rail",
+                "vehiclePartSize": "NKL",
+                "vehiclePartSeverity": "VERY LIGHT",
+                "vehiclePartTotalPrice": "$75.00"
+              }
+            ]
+          },
+          {
+            "screenName": "Matrix Labor",
+            "vehiclePartsData": [
+              {
+                "vehiclePartName": "Back Glass",
+                "vehiclePartSize": "DIME",
+                "vehiclePartSeverity": "LIGHT",
+                "vehiclePartTotalPrice": "$25.00"
+              },
+              {
+                "vehiclePartName": "Front Bumper",
+                "vehiclePartOption": "PDR",
+                "vehiclePartTime": "1",
+                "vehiclePartTotalPrice": "$1,105.50",
+                "vehiclePartAdditionalServices": [
+                  {
+                    "serviceName": "Little Service"
+                  },
+                  {
+                    "serviceName": "Disc_Ex_Service1"
+                  },
+                  {
+                    "serviceName": "SR_S1_Money_Vehicle"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "screenName": "Test matrix33",
+            "vehiclePartsData": [
+              {
+                "vehiclePartName": "Roof",
+                "vehiclePartOption": "PDR",
+                "vehiclePartTotalPrice": "$2,000.00",
+                "vehiclePartAdditionalService": {
+                  "serviceName": "SR_S1_Money"
+                }
+              }
+            ]
+          }
+        ],
+        "service": {
+          "serviceName": "SR_S2_MoneyDisc_TE"
+        },
+        "services": [
+          {
+            "serviceName": "SR_S1_Money",
+            "vehiclePart": {
+              "vehiclePartName": "Roof"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_Vehicle",
+            "vehiclePart": {
+              "vehiclePartName": "Front Bumper"
+            }
+          }
+        ],
+        "visualScreenData": {
+          "screenName": "New_Test_Image",
+          "damageData": {
+            "damageGroupName": "WHEEL REPAIR"
+          },
+          "screenPrice": "$80.00",
+          "screenTotalPrice": "$13,145.50"
+        }
+      }
+    }
+  ],
+  "testInspectionsVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices": [
+    {
+      "rowID": "testInspectionsVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices.01",
+      "description": "Test Case 25011:Inspections: verify that only assigned services on Matrix Panel is available as additional services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88671"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "WDZPE7CD9E5889222",
+          "vehicleMake": "Mercedes-Benz",
+          "vehicleModel": "Sprinter Passenger",
+          "vehicleYear": "2014"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        },
+        "priceMatrixScreenData": {
+          "screenName": "Price Matrix Zayats",
+          "vehiclePartsData": [
+            {
+              "vehiclePartName": "VP1 zayats",
+              "vehiclePartOption": "PDR",
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "Test service zayats"
+                },
+                {
+                  "serviceName": "Wheel"
+                }
+              ]
+            },
+            {
+              "vehiclePartName": "VP2 zayats",
+              "vehiclePartOption": "PDR",
+              "vehiclePartAdditionalService": {
+                "serviceName": "Dye"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "testVerifyThatWhenEditInspectionSelectedVehiclePartsForServicesArePresent": [
+    {
+      "rowID": "testVerifyThatWhenEditInspectionSelectedVehiclePartsForServicesArePresent.01",
+      "description": "Test Case 42376:Inspections: Verify that when edit inspection selected vehicle parts for services are present",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88659"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        },
+        "service": {
+          "serviceName": "SR_S1_Money",
+          "vehicleParts": [
+            {
+              "vehiclePartName": "Deck Lid"
+            },
+            {
+              "vehiclePartName": "Hood"
+            },
+            {
+              "vehiclePartName": "Roof"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "testCreateInspectionFromInvoiceWithTwoWOs": [
+    {
+      "rowID": "testCreateInspectionFromInvoiceWithTwoWOs.01",
+      "description": "Test Case 16640:Create Inspection from Invoice with two WOs",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89020"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397",
+          "vehicleMake": "Mitsubishi",
+          "vehicleModel": "Montero Sport",
+          "vehicleYear": "2000"
+        },
+        "moneyService": {
+          "serviceName": "Dye",
+          "vehicleParts": [
+            {
+              "vehiclePartName": "Cowl, Other"
+            },
+            {
+              "vehiclePartName": "Hood"
+            }
+          ]
+        },
+        "workOrderPrice": "$13.00"
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ]
+}

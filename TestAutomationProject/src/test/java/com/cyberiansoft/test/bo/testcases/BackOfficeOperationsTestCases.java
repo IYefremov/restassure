@@ -3,7 +3,7 @@ package com.cyberiansoft.test.bo.testcases;
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.WebConstants;
-import com.cyberiansoft.test.bo.verifications.ServiceRequestsListVerifications;
+import com.cyberiansoft.test.bo.validations.ServiceRequestsListVerifications;
 import com.cyberiansoft.test.dataclasses.bo.BOOperationsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -12,16 +12,13 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-//@Listeners(VideoListener.class)
 public class BackOfficeOperationsTestCases extends BaseTestCase {
 
 	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOOperationsData.json";
-	private ServiceRequestsListVerifications serviceRequestsListVerifications;
 
 	@BeforeClass
 	public void settingUp() {
 		JSONDataProvider.dataFile = DATA_FILE;
-		serviceRequestsListVerifications = new ServiceRequestsListVerifications();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -37,7 +34,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
         TechnicianCommissionsWebPage techCommissionPage = new TechnicianCommissionsWebPage(webdriver);
 		techCommissionPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		techCommissionPage.setSearchFromDate(data.getFromTime());
-		techCommissionPage.setSearchToDate(CustomDateProvider.getCurrentDateFormatted());
+		techCommissionPage.setSearchToDate(CustomDateProvider.getCurrentDateInShortFormat());
 
 		techCommissionPage.clickFindButton();
 		techCommissionPage.verifyInvoicesTableColumnsAreVisible();
@@ -78,7 +75,6 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		techCommissionPage.verifySearchResults(data.getInvoiceNumber());
 	}
 
-	//todo edge
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testOperationWorkOrdersSearch(String rowID, String description, JSONObject testData) {
 
@@ -94,7 +90,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		wopage.makeSearchPanelVisible();
 		wopage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		wopage.setSearchFromDate(data.getFromTime());
-		wopage.setSearchToDate(CustomDateProvider.getCurrentDateFormatted());
+		wopage.setSearchToDate(CustomDateProvider.getCurrentDateInShortFormat());
 		wopage.clickFindButton();
 		wopage.verifyWorkOrdersTableColumnsAreVisible();
 
@@ -206,16 +202,16 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 
 		serviceRequestsListInteractions.makeSearchPanelVisible();
 
-		serviceRequestsListVerifications.verifySearchFieldsAreVisible();
+		ServiceRequestsListVerifications.verifySearchFieldsAreVisible();
 
 		serviceRequestsListInteractions.selectSearchTeam(data.getTeamName());
 		serviceRequestsListInteractions.setSearchFreeText(data.getTextSearchParameter());
 		serviceRequestsListInteractions.setServiceRequestType(data.getServiceType());
 		serviceRequestsListInteractions.clickFindButton();
-		serviceRequestsListVerifications.verifySearchResultsByServiceName(data.getTextSearchParameter());
+		Assert.assertTrue(ServiceRequestsListVerifications.isServiceNamePresentInFirstSR(data.getTextSearchParameter()));
 
 		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getServiceTypeVit());
-		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickAddServiceRequestButtonWithoutSaving();
 		serviceRequestsListInteractions.clickGeneralInfoEditButton();
 		serviceRequestsListInteractions.setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPOnum(), data.getROnum());
 		serviceRequestsListInteractions.clickDoneButton();
@@ -239,11 +235,12 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.saveNewServiceRequest();
 
 		serviceRequestsListInteractions.makeSearchPanelVisible();
-		serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
-		serviceRequestsListInteractions.setServiceRequestType(data.getServiceTypeVit());
+        serviceRequestsListInteractions.selectSearchTeam(data.getTeamName());
+        serviceRequestsListInteractions.setServiceRequestType(data.getServiceTypeVit());
+        serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
 		serviceRequestsListInteractions.clickFindButton();
-		Assert.assertTrue(serviceRequestsListVerifications.verifySearchResultsByServiceName(data.getNewServiceRequest()));
-		Assert.assertTrue(serviceRequestsListVerifications.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
+		Assert.assertTrue(ServiceRequestsListVerifications.isServiceNamePresentInFirstSR(data.getNewServiceRequest()));
+		Assert.assertTrue(ServiceRequestsListVerifications.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
 
 		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
 		serviceRequestsListInteractions.closeFirstServiceRequestFromTheList();
@@ -251,7 +248,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.makeSearchPanelVisible();
 		serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
 		serviceRequestsListInteractions.clickFindButton();
-		Assert.assertTrue(serviceRequestsListVerifications.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
+		Assert.assertTrue(ServiceRequestsListVerifications.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
 		Assert.assertEquals(serviceRequestsListInteractions.getFirstServiceRequestStatus(), data.getStatus());
 	}
 

@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -67,10 +66,14 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickDeclineAllServicesButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("DeclineAll")));
 		declineallbtn.click();
 	}
 	
 	public void clickSkipAllServicesButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("SkipAll")));
 		skipallbtn.click();
 	}
 
@@ -192,13 +195,9 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 		//appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()['" + inspservice + "'].buttons()['skip little off']")).click();
 	}
 	
-	public void selectInspectionServiceToSkipByIndex(String inspservice, int inspnumber) {
-		((IOSElement) appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='skip little off']")).get(inspnumber)).click();
-	}
-	
 	public void selectInspection(String inspnumber) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		WebElement approvetable = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ApproveInspectionsView")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ApproveInspectionsView")));
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(inspnumber))).click();
 	}
@@ -224,6 +223,8 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public WebElement getTableCell(String cellname) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ApproveAll")));
 		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + cellname + "']/.."));
 	}
 
@@ -243,6 +244,23 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 				selectInspectionServiceToSkip(serviceName);
 				break;
 		}
+	}
+
+	public boolean isServiceApproved(String serviceName) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ApproveAll")));
+		return !appiumdriver.findElementByAccessibilityId(serviceName).findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeButton' and name contains 'approve little'"))
+				.getAttribute("name").contains("off");
+	}
+
+	public boolean isServiceSkipped(String serviceName) {
+		return !appiumdriver.findElementByAccessibilityId(serviceName).findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeButton' and name contains 'skip little'"))
+				.getAttribute("name").contains("off");
+	}
+
+	public boolean isServiceDeclibed(String serviceName) {
+		return !appiumdriver.findElementByAccessibilityId(serviceName).findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeButton' and name contains 'decline little'"))
+				.getAttribute("name").contains("off");
 	}
 
 }

@@ -1,0 +1,25 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Cyberiansoft VNext client tests" verbose="10" configfailurepolicy="continue">
+    <listeners>
+        <listener class-name="com.cyberiansoft.test.vnext.listeners.TestServiceListener"/>
+    </listeners>
+    <parameter name="lic.name" value="IntegrationTests"  />
+    <test name="Tests for VNext client" group-by-instances="true">
+        <classes>
+            <class name="com.cyberiansoft.test.manheimintegration.testcases.FindWorkOrdersTestCase">
+                <methods>
+                    <include name="testVerifyThatTheWOsAreAvailableOnBO" />
+                    <include name="testVerifyThatTheWOsAreAvailableOnMobileDevice" />
+                    <include name="testVerifyTheApprovedServicesMustHaveActiveStatus" />
+                    <include name="testVerifyTheDeclinedServicesMustHaveRefusedStatus" />
+                    <include name="testVerifyVerifyThatApprovedHasActiveStatusAndDeclinedHasRefusedStatus" />
+                    <include name="testVerifyVerifyThatServicesHasOppositeToPreviousStatus" />
+                    <include name="userCanCompletePhasesDevice" />
+                    <include name="userCanResolveProblemOnServiceLevelOnDevice" />
+                    <include name="userCanResolveProblemOnServiceLevelOnBackOffice" />
+                    <include name="userCanStartStopCompleteServices" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

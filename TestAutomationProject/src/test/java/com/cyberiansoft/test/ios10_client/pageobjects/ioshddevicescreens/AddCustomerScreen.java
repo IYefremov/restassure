@@ -1,47 +1,45 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class AddCustomerScreen extends iOSHDBaseScreen {
-
-	final static String scrollviewxpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther";
 	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[1]")
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewFirstNameTextBox")
     private IOSElement firstnamefld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[2]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewLastNameTextBox")
     private IOSElement lastnamefld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[3]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewCompanyTextBox")
     private IOSElement companyfld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[4]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewAddress1TextBox")
     private IOSElement streetfld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[6]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewCityTextBox")
     private IOSElement cityfld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[7]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewStateTextBox")
     private IOSElement statefld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[8]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewZipTextBox")
     private IOSElement zipfld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[9]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewPhoneTextBox")
     private IOSElement phonefld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[10]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewEmailTextbox")
     private IOSElement mailfld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeButton[1]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewStateButton")
     private IOSElement statebtn;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeButton[2]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewCountryButton")
     private IOSElement countrybtn;
 	
 	@iOSXCUITFindBy(accessibility = "Save")
@@ -55,32 +53,28 @@ public class AddCustomerScreen extends iOSHDBaseScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 	}
 
-	public void addCustomer(String firstname, String lastname,
-			String companyname, String street, String city, String state,
-			String zip, String country, String phone, String mail)	{
-		setFirstName(firstname);
-		setLastName(lastname);
-		setCompanyName(companyname);
-		setStreet(street);
-		setCity(city);
-		selectCountry(country);
-		selectState(state);
-		setZip(zip);
-		setPhone(phone);
-		setMail(mail);
+	public void addCustomer(RetailCustomer retailCustomer)	{
+		setFirstName(retailCustomer.getFirstName());
+		setLastName(retailCustomer.getLastName());
+		setCompanyName(retailCustomer.getCompany());
+		setStreet(retailCustomer.getCustomerAddress1());
+		setCity(retailCustomer.getCustomerCity());
+		selectCountry(retailCustomer.getCustomerCountry());
+		selectState(retailCustomer.getCustomerState());
+		setZip(retailCustomer.getCustomerZip());
+		setPhone(retailCustomer.getCustomerPhone());
+		setMail(retailCustomer.getMailAddress());
 	}
 
-	public void editCustomer(String firstname, String lastname,
-			String companyname, String street, String city, String state,
-			String zip, String country, String phone, String mail) {
-		setFirstName(firstname);
-		setLastName(lastname);
-		setCompanyName(companyname);
-		setStreet(street);
-		setCity(city);
-		setZip(zip);
-		setPhone(phone);
-		setMail(mail);
+	public void editCustomer(RetailCustomer retailCustomer) {
+		setFirstName(retailCustomer.getFirstName());
+		setLastName(retailCustomer.getLastName());
+		setCompanyName(retailCustomer.getCompany());
+		setStreet(retailCustomer.getCustomerAddress1());
+		setCity(retailCustomer.getCustomerCity());
+		setZip(retailCustomer.getCustomerZip());
+		setPhone(retailCustomer.getCustomerPhone());
+		setMail(retailCustomer.getMailAddress());
 	}
 
 	public void setFirstName(String firstname) {
@@ -95,7 +89,7 @@ public class AddCustomerScreen extends iOSHDBaseScreen {
 
 	public void setCompanyName(String companyname) {
 		companyfld.clear();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(companyname);
+		companyfld.setValue(companyname);
 	}
 
 	public void setStreet(String street) {
@@ -104,18 +98,18 @@ public class AddCustomerScreen extends iOSHDBaseScreen {
 	}
 
 	public void setCity(String city) {
-		cityfld.clear();	
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(city + "\n");
+		cityfld.clear();
+		cityfld.setValue(city + "\n");
 	}
 
 	public void setState(String state) {
-		statefld.setValue(state);
-		appiumdriver.hideKeyboard();
+		statefld.setValue(state + "\n");
+		//appiumdriver.hideKeyboard();
 	}
 
 	public void setZip(String zip) {
 		zipfld.clear();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(zip + "\n");
+		zipfld.setValue(zip + "\n");
 	}
 
 	public void setPhone(String phone) {
@@ -130,11 +124,15 @@ public class AddCustomerScreen extends iOSHDBaseScreen {
 
 	public void selectState(String state) {
 		statebtn.click();
+		if (!appiumdriver.findElement(MobileBy.AccessibilityId(state)).isDisplayed())
+			appiumdriver.findElement(MobileBy.AccessibilityId(state)).click();
 		appiumdriver.findElement(MobileBy.AccessibilityId(state)).click();
 	}
 
 	public void selectCountry(String country) {
 		countrybtn.click();
+		if (!appiumdriver.findElement(MobileBy.AccessibilityId(country)).isDisplayed())
+			appiumdriver.findElement(MobileBy.AccessibilityId(country)).click();
 		appiumdriver.findElement(MobileBy.AccessibilityId(country)).click();
 	}
 

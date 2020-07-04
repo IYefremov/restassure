@@ -10,65 +10,65 @@ public class VNextBOPageSwitcherSteps extends VNextBOBaseWebPageSteps {
     public static void clickHeaderNextPageButton() {
 
         Utils.clickElement(new VNextBOPageSwitcherElements().getHeaderNextPageBtn());
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void clickFooterNextPageButton() {
 
         Utils.clickElement(new VNextBOPageSwitcherElements().getFooterNextPageBtn());
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void clickHeaderPreviousPageButton() {
 
         Utils.clickElement(new VNextBOPageSwitcherElements().getHeaderPreviousPageBtn());
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void clickFooterPreviousPageButton() {
 
         Utils.clickElement(new VNextBOPageSwitcherElements().getFooterPreviousPageBtn());
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void clickHeaderLastPageButton() {
 
         Utils.clickElement(new VNextBOPageSwitcherElements().getHeaderLastPageBtn());
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void clickFooterLastPageButton() {
 
         Utils.clickElement(new VNextBOPageSwitcherElements().getFooterLastPageBtn());
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void clickHeaderFirstPageButton() {
 
         Utils.clickElement(new VNextBOPageSwitcherElements().getHeaderFirstPageBtn());
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void clickFooterFirstPageButton() {
 
         Utils.clickElement(new VNextBOPageSwitcherElements().getFooterFirstPageBtn());
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void openPageByNumber(int pageNumber) {
 
         Utils.clickElement(new VNextBOPageSwitcherElements().specificPageButton(pageNumber));
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static String getActivePageNumberFromHeaderPager() {
 
-        return Utils.getText(new VNextBOPageSwitcherElements().getActivePageTopPagingElement());
+        return Utils.getText(new VNextBOPageSwitcherElements().getHeaderActivePageNumber());
     }
 
     public static String getActivePageNumberFromFooterPager() {
 
-        return Utils.getText(new VNextBOPageSwitcherElements().getActivePageBottomPagingElement());
+        return Utils.getText(new VNextBOPageSwitcherElements().getFooterActivePageNumber());
     }
 
     public static void changeItemsPerPage(String itemsPerPage) {
@@ -76,7 +76,7 @@ public class VNextBOPageSwitcherSteps extends VNextBOBaseWebPageSteps {
         VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
         Utils.clickElement(switcherElements.getHeaderItemsPerPageField());
         Utils.clickWithJS(switcherElements.itemsPerPageOption(itemsPerPage));
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static String getItemsPerPageNumberFromTopElement() {

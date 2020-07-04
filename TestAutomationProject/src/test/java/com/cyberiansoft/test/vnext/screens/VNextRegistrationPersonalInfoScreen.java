@@ -1,13 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -40,10 +34,10 @@ public class VNextRegistrationPersonalInfoScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//*[@data-automation-id='register-with-code']")
 	private WebElement ihaveregcodelink;
-	
-	public VNextRegistrationPersonalInfoScreen(AppiumDriver<MobileElement> appiumdriver) {
+
+	public VNextRegistrationPersonalInfoScreen(WebDriver appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+		PageFactory.initElements(appiumdriver, this);
 		//VNextRegistrationPersonalInfoScreen.WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		//wait.until(ExpectedConditions. visibilityOf(phonenumberselect));
 	}

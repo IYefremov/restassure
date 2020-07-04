@@ -1,0 +1,51 @@
+{
+  "verifyUserCanAssignTechOnPhaseLevel": [
+    {
+      "rowID": "verifyUserCanAssignTechOnPhaseLevel.01",
+      "description": "Test Case 92363: Verify user can assign the tech on phase level",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92363",
+          "testCaseTitle": "Verify user can assign the tech on phase level"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanClosePhaseEditPage": [
+    {
+      "rowID": "verifyUserCanClosePhaseEditPage.01",
+      "description": "Test Case 92358: Verify user can close \"Phase\" edit page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92358",
+          "testCaseTitle": "Verify user can close \"Phase\" edit page"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSelectTheVendorTeam": [
+    {
+      "rowID": "verifyUserCanSelectTheVendorTeam.01",
+      "description": "Test Case 92382: Verify the user can select the vendor team",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92382",
+          "testCaseTitle": "Verify the user can select the vendor team"
+        }
+      ]
+    }
+  ],
+
+  "testVerifyUserCanReturnFromSelectStatusScreen": [
+    {
+      "rowID": "testVerifyUserCanReturnFromSelectStatusScreen.01",
+      "description": "Test Case 92362: User can return from \"Select Status\" page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92362",
+          "testCaseTitle": "User can return from \"Select Status\" page"
+        }
+      ]
+    }
+  ]
+}

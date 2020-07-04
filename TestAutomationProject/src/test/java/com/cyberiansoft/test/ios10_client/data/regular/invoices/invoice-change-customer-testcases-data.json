@@ -1,0 +1,34 @@
+{
+
+  "testChangeCustomerForInvoice": [
+    {
+      "rowID": "testChangeCustomerForInvoice.01",
+      "description": "Test Case 18439:Change customer for invoice",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89016"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "services": [
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test Tax"
+          },
+          {
+            "serviceName": "VPS1"
+          }
+        ]
+      },
+      "invoiceData": {
+        "poNumber": "first123"
+      }
+    }
+  ]
+
+}

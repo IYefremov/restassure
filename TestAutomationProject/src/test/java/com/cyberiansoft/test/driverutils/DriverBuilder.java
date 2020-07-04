@@ -2,7 +2,6 @@ package com.cyberiansoft.test.driverutils;
 
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
-import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -43,7 +42,8 @@ public class DriverBuilder {
     private ThreadLocal<String> sessionBrowser = new ThreadLocal<>();
     private ThreadLocal<String> sessionVersion = new ThreadLocal<>();
     private ThreadLocal<MobilePlatform> mobilePlatform = new ThreadLocal<>();
-
+    private BrowserType browserType = BrowserType.CHROME;
+    private String remoteWebDriverURL;
 
     private DriverBuilder() {
     }
@@ -55,6 +55,84 @@ public class DriverBuilder {
         return instance;
     }
 
+    public DriverBuilder setBrowserType(BrowserType browserType) {
+        this.browserType = browserType;
+        return this;
+    }
+
+    public DriverBuilder setRemoteWebDriverURL(String remoteWebDriverURL) {
+        this.remoteWebDriverURL = remoteWebDriverURL;
+        return this;
+    }
+
+    @SneakyThrows
+    public final void setDriver() {
+        DesiredCapabilities webcap = null;
+        switch (browserType) {
+            case CHROME:
+                WebDriverManager.chromedriver().setup();
+                webcap = DesiredCapabilities.chrome();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("start-maximized");
+                options.addArguments("enable-automation");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-infobars");
+                options.addArguments("--disable-dev-shm-usage");
+                options.addArguments("--disable-browser-side-navigation");
+                options.addArguments("--disable-gpu");
+                options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+                try {
+                    webDriver.set(new ChromeDriver(options));
+                } catch (SessionNotCreatedException ignored) {
+                    new ThreadLocal<WebDriver>().set(new ChromeDriver(options));
+                }
+                break;
+            case SELENOID_CHROME:
+                ChromeOptions selenoidChromeOptions = new ChromeOptions();
+                Map<String, Object> prefs = new HashMap<>();
+                //1-Allow, 2-Block, 0-default
+                prefs.put("profile.default_content_setting_values.notifications", 1);
+                selenoidChromeOptions.setExperimentalOption("prefs", prefs);
+                selenoidChromeOptions.addArguments("--window-size=1800,1000");
+                DesiredCapabilities capabilities = new SelenoidConfiguration().getCapabilities(selenoidChromeOptions);
+                webcap = capabilities;
+                RemoteWebDriver driver = new RemoteWebDriver(
+                        URI.create(remoteWebDriverURL).toURL(),
+                        capabilities
+                );
+                driver.setFileDetector(new LocalFileDetector());
+                webDriver.set(driver);
+                break;
+            case FIREFOX:
+                WebDriverManager.firefoxdriver().setup();
+                webcap = DesiredCapabilities.firefox();
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.setCapability("browser.autofocus", true);
+                firefoxOptions.setCapability("browser.tabs.remote.autostart.2", false);
+                webDriver.set(new FirefoxDriver(firefoxOptions.merge(webcap)));
+                break;
+        }
+        sessionId.set(((RemoteWebDriver) webDriver.get()).getSessionId().toString());
+        if (webcap != null) {
+            sessionBrowser.set(webcap.getBrowserName());
+            sessionVersion.set(webcap.getVersion());
+        }
+        getDriver().manage().timeouts().implicitlyWait(IMPLICIT_TIMEOUT, TimeUnit.SECONDS);
+        try {
+            getDriver().manage().window().maximize();
+        } catch (WebDriverException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                getDriver().manage().window().setPosition(new Point(0, 0));
+                getDriver().manage().window().setSize(new Dimension(1920, 1080));
+            } catch (Exception e) {
+                setWindowSizeAfterDelay();
+            }
+        }
+    }
+
+    //todo: remove. Use Builder methods!
     @SneakyThrows
     public final void setDriver(BrowserType browserType) {
 
@@ -94,6 +172,7 @@ public class DriverBuilder {
                 options.addArguments("--disable-dev-shm-usage");
                 options.addArguments("--disable-browser-side-navigation");
                 options.addArguments("--disable-gpu");
+                options.setPageLoadStrategy(PageLoadStrategy.EAGER);
                 try {
                     webDriver.set(new ChromeDriver(options));
                 } catch (SessionNotCreatedException ignored) {
@@ -107,19 +186,10 @@ public class DriverBuilder {
                 prefs.put("profile.default_content_setting_values.notifications", 1);
                 selenoidChromeOptions.setExperimentalOption("prefs", prefs);
                 selenoidChromeOptions.addArguments("--window-size=1800,1000");
-                DesiredCapabilities capabilities = new DesiredCapabilities();
-                capabilities.setBrowserName("chrome");
-                capabilities.setVersion("75.0");
-                capabilities.setCapability("enableVNC", true);
-                capabilities.setCapability("enableVideo", false);
-                capabilities.setCapability("sessionTimeout", "2m");
-                capabilities.setCapability("name", "SessionName");
-
-                capabilities.setCapability(ChromeOptions.CAPABILITY, selenoidChromeOptions);
+                DesiredCapabilities capabilities = new SelenoidConfiguration().getCapabilities(selenoidChromeOptions);
                 webcap = capabilities;
-                System.out.println(System.getProperty("azure.url"));
                 RemoteWebDriver driver = new RemoteWebDriver(
-                        URI.create(VNextBOConfigInfo.getInstance().getAzureURL()).toURL(),
+                        URI.create(remoteWebDriverURL).toURL(),
                         capabilities
                 );
                 driver.setFileDetector(new LocalFileDetector());

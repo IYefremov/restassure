@@ -6,10 +6,11 @@ import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.enums.OrderMonitorServiceStatuses;
+import com.cyberiansoft.test.enums.monitor.OrderMonitorServiceStatuses;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
+import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.PriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCarHistoryScreen;
@@ -27,7 +28,11 @@ import com.cyberiansoft.test.ios10_client.types.inspectionstypes.DentWizardInspe
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.DentWizardInvoiceTypes;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.DentWizardWorkOrdersTypes;
-import com.cyberiansoft.test.ios10_client.utils.*;
+import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
+import com.cyberiansoft.test.ios10_client.utils.UtilConstants;
+import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -57,7 +62,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularSettingsScreen settingsScreen = new RegularSettingsScreen();
         settingsScreen.setShowAvailableSelectedServicesOn();
         settingsScreen.setInsvoicesCustomLayoutOff();
-        homescreen = settingsScreen.clickHomeButton();
+        settingsScreen.clickHomeButton();
     }
 
     @BeforeMethod
@@ -607,17 +612,17 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         myInspectionsScreen.clickArchiveInspectionButton();
         myInspectionsScreen.clickFilterButton();
         myInspectionsScreen.clickStatusFilter();
-        Assert.assertTrue(myInspectionsScreen.checkFilterStatusIsSelected(InspectionStatus.NEW.getStatus()));
-        Assert.assertTrue(myInspectionsScreen.checkFilterStatusIsSelected(InspectionStatus.APPROVED.getStatus()));
-        myInspectionsScreen.clickFilterStatus(InspectionStatus.NEW.getStatus());
-        myInspectionsScreen.clickFilterStatus(InspectionStatus.APPROVED.getStatus());
-        myInspectionsScreen.clickFilterStatus(InspectionStatus.ARCHIVED.getStatus());
-        Assert.assertTrue(myInspectionsScreen.checkFilterStatusIsSelected(InspectionStatus.ARCHIVED.getStatus()));
+        Assert.assertTrue(myInspectionsScreen.checkFilterStatusIsSelected(InspectionStatus.NEW));
+        Assert.assertTrue(myInspectionsScreen.checkFilterStatusIsSelected(InspectionStatus.APPROVED));
+        myInspectionsScreen.clickFilterStatus(InspectionStatus.NEW);
+        myInspectionsScreen.clickFilterStatus(InspectionStatus.APPROVED);
+        myInspectionsScreen.clickFilterStatus(InspectionStatus.ARCHIVED);
+        Assert.assertTrue(myInspectionsScreen.checkFilterStatusIsSelected(InspectionStatus.ARCHIVED));
         myInspectionsScreen.clickBackButton();
         myInspectionsScreen.clickSaveFilterDialogButton();
 
         Assert.assertTrue(myInspectionsScreen.checkInspectionExists(inspNumber));
-        Assert.assertEquals(myInspectionsScreen.checkFilterIsApplied(), true);
+        Assert.assertTrue(myInspectionsScreen.checkFilterIsApplied(),"FilterIsApplied is not true");
         myInspectionsScreen.clearFilter();
         myInspectionsScreen.clickSaveFilterDialogButton();
         RegularNavigationSteps.navigateBackScreen();
@@ -635,16 +640,13 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
         RegularVehicleInfoScreenSteps.setStockNumber(workOrderData.getVehicleInfoData().getStockNumber());
         RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+        RegularVehicleInfoValidations.verifyVehicleInfoScreenTechValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
         RegularVehicleInfoScreenSteps.clickTech();
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        RegularServiceDetailsScreenValidations.verifyServiceTechnicianIsSelected(workOrderData.getVehicleInfoData().getDefaultTechnician());
+        RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician());
         RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
-        selectedServiceDetailsScreen.selectTechniciansEvenlyView();
-        String alertText = selectedServiceDetailsScreen
-                .saveSelectedServiceDetailsWithAlert();
-        Assert.assertEquals(
-                alertText,
-                AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
+        RegularServiceDetailsScreenSteps.selectTechniciansEvenlyView();
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
+        RegularAssignTechniciansSteps.assignTechniciansToWorkOrder();
 
         RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
         RegularNavigationSteps.navigateToServicesScreen();
@@ -662,11 +664,11 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
                 RegularServiceDetailsScreenSteps.clickServiceTechniciansIcon();
                 for (ServiceTechnician serviceTechnician : vehiclePartData.getServiceDefaultTechnicians())
                     RegularServiceDetailsScreenValidations.verifyServiceTechnicianIsSelected(serviceTechnician);
-                selectedServiceDetailsScreen.unselecTechnician(vehiclePartData.getServiceDefaultTechnicians().get(1).getTechnicianFullName());
+                RegularServiceDetailsScreenSteps.unselectServiceTechnician(vehiclePartData.getServiceDefaultTechnicians().get(1));
                 RegularServiceDetailsScreenValidations.verifyServiceTechnicianPriceValue(vehiclePartData.getServiceDefaultTechnicians().get(0),
                         vehiclePartData.getVehiclePartPrice());
 
-                selectedServiceDetailsScreen.selecTechnician(vehiclePartData.getServiceNewTechnician().getTechnicianFullName());
+                RegularServiceDetailsScreenSteps.selectServiceTechnician(vehiclePartData.getServiceNewTechnician());
                 RegularServiceDetailsScreenValidations.verifyServiceTechnicianPriceValue(vehiclePartData.getServiceDefaultTechnicians().get(0),
                         vehiclePartData.getServiceDefaultTechnicians().get(0).getTechnicianPriceValue());
                 RegularServiceDetailsScreenValidations.verifyServiceTechnicianPriceValue(vehiclePartData.getServiceNewTechnician(),
@@ -746,7 +748,6 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-        final String fullPercentageValue = "100.00";
         final String defTechPrice = "93.50";
         final String newTechPrice = "16.50";
 
@@ -755,32 +756,24 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
         RegularVehicleInfoScreenSteps.setStockNumber(workOrderData.getVehicleInfoData().getStockNumber());
         RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+        RegularVehicleInfoValidations.verifyVehicleInfoScreenTechValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
         RegularVehicleInfoScreenSteps.clickTech();
-
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        RegularServiceDetailsScreenValidations.verifyServiceTechnicianIsSelected(workOrderData.getVehicleInfoData().getDefaultTechnician());
-
-        selectedServiceDetailsScreen.selectTechniciansCustomView();
-        RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
-        RegularServiceDetailsScreenValidations.verifyServiceTechnicianPercentageValue(workOrderData.getVehicleInfoData().getDefaultTechnician(),
-                fullPercentageValue);
+        RegularServiceDetailsScreenSteps.selectTechniciansCustomView();
+        RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician());
 
         RegularServiceDetailsScreenSteps.setTechnicianCustomPercentageValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
         RegularServiceDetailsScreenValidations.verifyServiceTechnicianPercentageValue(workOrderData.getVehicleInfoData().getDefaultTechnician(),
                 workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianPercentageValue());
 
-        String alertText = selectedServiceDetailsScreen
-                .saveSelectedServiceDetailsWithAlert();
-        Assert.assertTrue(alertText.contains("Total amount is not equal 100%"));
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TOTAL_AMAUNT_NOT_EQUAL100);
+        RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
         RegularServiceDetailsScreenSteps.setTechnicianCustomPercentageValue(workOrderData.getVehicleInfoData().getNewTechnician());
         RegularServiceDetailsScreenValidations.verifyServiceTechnicianPercentageValue(workOrderData.getVehicleInfoData().getNewTechnician(),
                 workOrderData.getVehicleInfoData().getNewTechnician().getTechnicianPercentageValue());
 
-        alertText = selectedServiceDetailsScreen.saveSelectedServiceDetailsWithAlert();
-        Assert.assertEquals(
-                alertText,
-                AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
-
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
+        RegularAssignTechniciansSteps.assignTechniciansToWorkOrder();
         RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreenSteps.selectServiceWithServiceData(workOrderData.getMoneyServiceData());
@@ -794,7 +787,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularServiceDetailsScreenValidations.verifyServiceTechnicianPriceValue(workOrderData.getVehicleInfoData().getNewTechnician(),
                 newTechPrice);
 
-        selectedServiceDetailsScreen.selectTechniciansCustomView();
+        RegularServiceDetailsScreenSteps.selectTechniciansCustomView();
         RegularServiceDetailsScreenSteps.unselectServiceTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician());
         RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getServiceData().getServiceNewTechnician());
         RegularServiceDetailsScreenSteps.setTechnicianCustomPriceValue(workOrderData.getServiceData().getServiceNewTechnician());
@@ -939,6 +932,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
                                                        String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
@@ -954,7 +948,6 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         }
         RegularNavigationSteps.navigateToClaimScreen();
         RegularClaimScreenSteps.setClaimData(workOrderData.getInsuranceCompanyData());
-
         RegularNavigationSteps.navigateToServicesScreen();
         for (ServiceData serviceData : workOrderData.getMoneyServices()) {
             RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
@@ -1203,8 +1196,6 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-        final String fullPercentage = "100.00";
-
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
         RegularQuestionsScreenSteps.waitQuestionsScreenLoaded();
@@ -1212,24 +1203,18 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
         RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
         RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
-
+        RegularVehicleInfoValidations.verifyVehicleInfoScreenTechValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
         RegularVehicleInfoScreenSteps.clickTech();
-        RegularServiceDetailsScreenValidations.verifyServiceTechnicianIsSelected(workOrderData.getVehicleInfoData().getDefaultTechnician());
         RegularServiceDetailsScreenSteps.selectTechniciansCustomView();
-        RegularServiceDetailsScreenValidations.verifyServiceTechnicianPercentageValue(workOrderData.getVehicleInfoData().getDefaultTechnician(),
-                fullPercentage);
+
+        RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician());
         RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
         RegularServiceDetailsScreenSteps.setTechnicianCustomPercentageValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        String alertText = selectedServiceDetailsScreen
-                .saveSelectedServiceDetailsWithAlert();
-        Assert.assertTrue(alertText.contains("Total amount is not equal 100%"));
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TOTAL_AMAUNT_NOT_EQUAL100);
         RegularServiceDetailsScreenSteps.setTechnicianCustomPercentageValue(workOrderData.getVehicleInfoData().getNewTechnician());
-
-        alertText = selectedServiceDetailsScreen.saveSelectedServiceDetailsWithAlert();
-        Assert.assertEquals(
-                alertText,
-                AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
+        RegularAssignTechniciansSteps.assignTechniciansToWorkOrder();
 
         RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
         for (QuestionScreenData questionScreenData : workOrderData.getQuestionScreensData()) {
@@ -1257,6 +1242,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
                 RegularVehiclePartsScreenSteps.openVehiclePartAdditionalServiceDetails(serviceData);
                 BaseUtils.waitABit(1000);
                 if (serviceData.getServicePrice2() != null) {
+                    RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
                     Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), serviceData.getServicePrice2());
                     RegularServiceDetailsScreenSteps.saveServiceDetails();
                     RegularServiceDetailsScreenSteps.saveServiceDetails();
@@ -1267,7 +1253,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
                 if (serviceData.getServicePrice() != null) {
                     RegularServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice());
                     RegularServiceDetailsScreenSteps.clickServiceTechniciansIcon();
-                    selectedServiceDetailsScreen.selectTechniciansEvenlyView();
+                    RegularServiceDetailsScreenSteps.selectTechniciansEvenlyView();
                     for (ServiceTechnician serviceTechnician : serviceData.getServiceDefaultTechnicians()) {
                         RegularServiceDetailsScreenSteps.unselectServiceTechnician(serviceTechnician);
                     }
@@ -1391,9 +1377,9 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
         RegularServicesScreenSteps.switchToSelectedServices();
         RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(workOrderData.getPercentageServiceData().getServiceName());
-        selectedServiceDetailsScreen.setServicePriceValue(workOrderData.getPercentageServiceData().getServicePrice());
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
+        RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getPercentageServiceData().getServiceName());
+        RegularServiceDetailsScreenSteps.setServicePriceValue(workOrderData.getPercentageServiceData().getServicePrice());
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
         RegularSelectedServicesSteps.switchToAvailableServices();
         RegularServicesScreenSteps.selectServiceWithServiceData(workOrderData.getMoneyServiceData());
         RegularNavigationSteps.navigateToOrderSummaryScreen();
@@ -1428,9 +1414,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
         teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber);
         teamWorkOrdersScreen.clickiCreateInvoiceButton();
-        String alertText = Helpers.getAlertTextAndAccept();
-        Assert.assertTrue(alertText.contains(AlertsCaptions.ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO));
-        teamWorkOrdersScreen.clickHomeButton();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO, workOrderNumber));
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1470,7 +1455,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
                 RegularOrderMonitorScreenValidations.verifyServiceStatus(damageData.getMoneyService(), OrderMonitorServiceStatuses.COMPLETED);
             }
         }
-        teamWorkOrdersScreen = orderMonitorScreen.clickBackButton();
+        RegularNavigationSteps.navigateBackScreen();
 
         teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber);
         teamWorkOrdersScreen.verifyCreateInvoiceIsActivated(workOrderNumber);
@@ -1479,7 +1464,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
         Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(workOrderData.getWorkOrderPrice()));
         invoiceInfoScreen.clickSaveAsFinal();
-        teamWorkOrdersScreen.clickHomeButton();
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1547,14 +1532,14 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         for (VehiclePartData vehiclePartData : wheelsDamage.getMoneyService().getVehicleParts())
             RegularOrderMonitorScreenValidations.verifyServiceStatus(wheelsDamage.getMoneyService(), vehiclePartData, OrderMonitorServiceStatuses.COMPLETED);
 
-        teamWorkOrdersScreen = orderMonitorScreen.clickBackButton();
+        RegularNavigationSteps.navigateBackScreen();
         teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber);
         teamWorkOrdersScreen.clickiCreateInvoiceButton();
         RegularInvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
         RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
         Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(workOrderData.getWorkOrderPrice()));
         invoiceInfoScreen.clickSaveAsFinal();
-        teamWorkOrdersScreen.clickHomeButton();
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1740,18 +1725,15 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
         RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
         RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+        RegularVehicleInfoValidations.verifyVehicleInfoScreenTechValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
         RegularVehicleInfoScreenSteps.clickTech();
         RegularServiceDetailsScreenSteps.selectTechniciansCustomView();
-        RegularServiceDetailsScreenValidations.verifyServiceTechnicianIsSelected(workOrderData.getVehicleInfoData().getDefaultTechnician());
+        RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician());
         RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
         RegularServiceDetailsScreenSteps.setTechnicianCustomPercentageValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
         RegularServiceDetailsScreenSteps.setTechnicianCustomPercentageValue(workOrderData.getVehicleInfoData().getNewTechnician());
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        String alertText = selectedServiceDetailsScreen
-                .saveSelectedServiceDetailsWithAlert();
-        Assert.assertEquals(
-                alertText,
-                AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
+        RegularAssignTechniciansSteps.assignTechniciansToWorkOrder();
         RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreenSteps.selectPanelServiceData(workOrderData.getDamageData());
@@ -1805,18 +1787,16 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
         RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
         RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+        RegularVehicleInfoValidations.verifyVehicleInfoScreenTechValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
         RegularVehicleInfoScreenSteps.clickTech();
         RegularServiceDetailsScreenSteps.selectTechniciansCustomView();
-        RegularServiceDetailsScreenValidations.verifyServiceTechnicianIsSelected(workOrderData.getVehicleInfoData().getDefaultTechnician());
+        RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician());
         RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
         RegularServiceDetailsScreenSteps.setTechnicianCustomPercentageValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
         RegularServiceDetailsScreenSteps.setTechnicianCustomPercentageValue(workOrderData.getVehicleInfoData().getNewTechnician());
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        String alertText = selectedServiceDetailsScreen
-                .saveSelectedServiceDetailsWithAlert();
-        Assert.assertEquals(
-                alertText,
-                AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
+        RegularAssignTechniciansSteps.assignTechniciansToWorkOrder();
+
         RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreenSteps.selectPanelServiceData(workOrderData.getDamageData());
@@ -2052,11 +2032,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreenSteps.switchToSelectedServices();
-
-        RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.
-                openCustomServiceDetails(workOrderData.getDamagesData().get(workOrderData.getDamagesData().size() - 1).getMoneyService().getServiceName());
+        RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getDamagesData().get(workOrderData.getDamagesData().size() - 1).getMoneyService().getServiceName());
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.removeService();
         RegularSelectedServicesSteps.switchToAvailableServices();
 
@@ -2107,8 +2084,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
         RegularHomeScreenSteps.navigateToTeamWorkOrdersScreen();
         RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
-        teamWorkOrdersScreen.clickOnWO(workOrderNumber);
-        RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+        RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
+        RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
         orderMonitorScreen.selectPanelToChangeStatus(workOrderData.getDamagesData().get(0).getDamageGroupName());
         orderMonitorScreen.setCompletedPhaseStatus();
 
@@ -2171,8 +2148,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularHomeScreenSteps.navigateToTeamWorkOrdersScreen();
         RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
         for (WorkOrderData workOrderData : workOrdersData ) {
-            teamWorkOrdersScreen.clickOnWO(workOrderData.getWorkOrderID());
-            RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+            RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderData.getWorkOrderID());
+            RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
             for (DamageData damageData : workOrderData.getDamagesData()) {
                 orderMonitorScreen.selectPanelToChangeStatus(damageData.getOrderPanelName());
                 orderMonitorScreen.setCompletedPhaseStatus();
@@ -2260,7 +2237,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         for (DamageData damageData : workOrderData.getDamagesData()) {
             Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(damageData.getMoneyService().getServiceName()));
             Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(damageData.getMoneyService().getServiceName()),
-                    (PricesCalculations.getPriceRepresentation(damageData.getMoneyService().getServicePrice()) + " x 1.00").replaceAll(" ", ""));
+                    (PricesCalculations.getPriceRepresentation(damageData.getMoneyService().getServicePrice()) + " x 1.00"));
         }
         RegularWorkOrdersSteps.saveWorkOrder();
         RegularNavigationSteps.navigateBackScreen();
@@ -2522,8 +2499,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularWorkOrdersSteps.saveWorkOrder();
         teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber);
         teamWorkOrdersScreen.clickiCreateInvoiceButton();
-        String alertText = Helpers.getAlertTextAndAccept();
-        Assert.assertTrue(alertText.contains(AlertsCaptions.ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO));
+        AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO, workOrderNumber));
         teamWorkOrdersScreen.clickHomeButton();
     }
 
@@ -2663,17 +2639,17 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
 
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails("E-Coat");
-        selectedServiceDetailsScreen.setServicePriceValue("20");
-        selectedServiceDetailsScreen.clickNotesCell();
+        RegularServicesScreenSteps.openCustomServiceDetails("E-Coat");
+        RegularServiceDetailsScreenSteps.setServicePriceValue("20");
+        RegularWizardScreensSteps.clickNotesButton();
         notesScreen.addNotesCapture();
         notesScreen.clickSaveButton();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
 
         RegularNavigationSteps.navigateToScreen(UtilConstants.PRICE_MATRIX_SCREEN_CAPTION);
         RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
-        RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix("Roof");
+        priceMatrixScreen.selectPriceMatrix("Roof");
+        RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
         vehiclePartScreen.setSizeAndSeverity(PriceMatrixScreen.NKL_SIZE, PriceMatrixScreen.MODERATE_SEVERITY);
         vehiclePartScreen.saveVehiclePart();
         priceMatrixScreen.clickNotesButton();

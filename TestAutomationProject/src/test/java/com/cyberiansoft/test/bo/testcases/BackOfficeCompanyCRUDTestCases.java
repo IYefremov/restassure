@@ -7,7 +7,6 @@ import com.cyberiansoft.test.dataclasses.bo.BOCompanyCRUDData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -83,7 +82,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 
 		backOfficeHeader.clickCompanyLink();
 
-		TeamsWebPage teamspage = new TeamsWebPage(webdriver);
+		TeamsWebPage teamspage = new TeamsWebPage();
 		companyWebPage.clickTeamsLink();
 		teamspage.makeSearchPanelVisible();
 		teamspage.setTeamLocationSearchCriteria(data.getTeam()).clickFindButton();
@@ -178,7 +177,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		jobsPage.setNewJobDescription(data.getJobDesc());
 		jobsPage.selectJobClient(data.getCustomer());
 		jobsPage.selectJobParentClient(data.getParentCustomer());
-		jobsPage.setNewJobStartDate(CustomDateProvider.getCurrentDateFormatted());
+		jobsPage.setNewJobStartDate(CustomDateProvider.getCurrentDateInShortFormat());
 		jobsPage.setNewJobEndDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		jobsPage.setNewJobAccountingID(data.getJobAccId());
 		jobsPage.setNewJobAccountingID(data.getJobAcc2Id());
@@ -197,7 +196,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		jobsPage.setNewJobDescription(data.getJobDesc());
 		jobsPage.selectJobClient(data.getCustomer());
 		jobsPage.selectJobParentClient(data.getParentCustomer());
-		jobsPage.setNewJobStartDate(CustomDateProvider.getCurrentDateFormatted());
+		jobsPage.setNewJobStartDate(CustomDateProvider.getCurrentDateInShortFormat());
 		jobsPage.setNewJobEndDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		jobsPage.setNewJobAccountingID(data.getJobAccId());
 		jobsPage.setNewJobAccountingID2(data.getJobAcc2Id());
@@ -205,7 +204,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 
 		Assert.assertEquals(data.getJobDesc(), jobsPage.getTableJobDescription(data.getJobEdited()));
 		Assert.assertEquals(data.getCustomer(), jobsPage.getTableJobClient(data.getJobEdited()));
-		Assert.assertEquals(CustomDateProvider.getLocalizedCurrentDateFormattedTheShortest(), jobsPage.getTableJobStartDate(data.getJobEdited()));
+		Assert.assertEquals(CustomDateProvider.getLocalizedCurrentDateInTheShortestFormat(), jobsPage.getTableJobStartDate(data.getJobEdited()));
 		Assert.assertEquals(CustomDateProvider.getTomorrowLocalizedDateFormattedTheShortest(), jobsPage.getTableJobEndDate(data.getJobEdited()));
 		Assert.assertEquals(data.getJobAccId(), jobsPage.getTableJobAccountingID(data.getJobEdited()));
 		Assert.assertEquals(data.getJobAcc2Id(), jobsPage.getTableJobAccountingID2(data.getJobEdited()));
@@ -247,7 +246,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 
 		Assert.assertEquals(data.getFirstName() + " " + data.getLastName(), serviceadvisorspage.getTableServiceAdvisorFullName(data.getFirstName(), data.getLastName()));
 		Assert.assertEquals(data.getEmail(), serviceadvisorspage.getTableServiceAdvisorEmail(data.getFirstName(), data.getLastName()));
-		Assert.assertEquals("..., CA", serviceadvisorspage.getTableServiceAdvisorAddress(data.getFirstName(), data.getLastName()).trim());
+		Assert.assertEquals("..., AZ", serviceadvisorspage.getTableServiceAdvisorAddress(data.getFirstName(), data.getLastName()).trim());
 		Assert.assertEquals("", serviceadvisorspage.getTableServiceAdvisorPhone(data.getFirstName(), data.getLastName()).trim());
 		Assert.assertEquals(data.getRole(), serviceadvisorspage.getTableServiceAdvisorRoles(data.getFirstName(), data.getLastName()));
 		Assert.assertEquals("", serviceadvisorspage.getTableServiceAdvisorAccountingID(data.getFirstName(), data.getLastName()).trim());
@@ -353,7 +352,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		pricematricespage.selectPriceMatrixService(data.getPriceMatrixService());
 		pricematricespage.selectPriceMarixType(data.getPriceMatrixType());
 		pricematricespage.clickCancelNewPriceMatrix();
-		Assert.assertEquals("_testStas1", pricematricespage.getTablePriceMatrixService(data.getPriceMatrixName()));
+		Assert.assertEquals("_testStas13234", pricematricespage.getTablePriceMatrixService(data.getPriceMatrixName()));
 		Assert.assertEquals("Money", pricematricespage.getTablePriceMatrixType(data.getPriceMatrixName()));
 
 		pricematricespage.clickEditPriceMatrix(data.getPriceMatrixName());
@@ -439,7 +438,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testCompanyEmailTemplatesCRUD(String rowID, String description, JSONObject testData) throws Exception {
+	public void testCompanyEmailTemplatesCRUD(String rowID, String description, JSONObject testData) {
 
 		BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
@@ -658,8 +657,8 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		workordertypespage.selectNewWorkOrderyTypeGroupServicesBy(wotypegroupby);
 		workordertypespage.selectNewWorkOrderyTypePriceAccess(wotypepriceaccess);
 		workordertypespage.selectNewWorkOrderyTypeSharing(wotypesharingtype);
-		for (int i = 0; i < wotypeoptions.length; i++) {
-			workordertypespage.chechWOTypeOption(wotypeoptions[i]);
+		for (String wotypeoption : wotypeoptions) {
+			workordertypespage.chechWOTypeOption(wotypeoption);
 		}
 		workordertypespage.setNewWorkOrderTypeMonitorRepairingInformation(true, true, "10");
 		workordertypespage.clickNewWorkOrderTypeCancelButton();
@@ -675,8 +674,8 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		workordertypespage.selectNewWorkOrderyTypeGroupServicesBy(wotypegroupby);
 		workordertypespage.selectNewWorkOrderyTypePriceAccess(wotypepriceaccess);
 		workordertypespage.selectNewWorkOrderyTypeSharing(wotypesharingtype);
-		for (int i = 0; i < wotypeoptions.length; i++) {
-			workordertypespage.chechWOTypeOption(wotypeoptions[i]);
+		for (String wotypeoption : wotypeoptions) {
+			workordertypespage.chechWOTypeOption(wotypeoption);
 		}
 		workordertypespage.setNewWorkOrderTypeMonitorRepairingInformation(true, true, "10");
 		workordertypespage.clickNewWorkOrderTypeOKButton();

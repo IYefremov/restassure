@@ -1,0 +1,117 @@
+{
+  "verifyUserCanSeeTimeReportTabAndSortRecords": [
+    {
+      "rowID": "verifyUserCanSeeTimeReportTabAndSortRecords.01",
+      "description": "Test Case 92540: User can see \"Time Report\" tab and sort the records",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92540",
+          "testCaseTitle": "User can see \"Time Report\" tab and sort the records"
+        }
+      ],
+      "phase": "Rozstalnoy2",
+      "technician": "Yevhenii11 Rozstalnoy"
+    }
+  ],
+  "verifyUserCanAddAndDeleteNewTimeRecord": [
+    {
+      "rowID": "verifyUserCanAddAndDeleteNewTimeRecord.01",
+      "description": "Test Case 92548: User can add and delete new time record",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92548",
+          "testCaseTitle": "User can add and delete new time record"
+        }
+      ],
+      "service": "rozstalnoy_enable_labor",
+      "technician": "Bratan Manager"
+    }
+  ],
+  "verifyUserCanNotAddNewRecordWithoutRequiredFields": [
+    {
+      "rowID": "verifyUserCanNotAddNewRecordWithoutRequiredFields.01",
+      "description": "Test Case 92551: User can't add a new record without required fields",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92551",
+          "testCaseTitle": "User can't add a new record without required fields"
+        }
+      ],
+      "service": "rozstalnoy_enable_labor",
+      "technician": "Bratan Manager"
+    }
+  ],
+  "verifyUserCanStartStopServices": [
+    {
+      "rowID": "verifyUserCanStartStopServices.01",
+      "description": "Test Case 92554: User can start/stop services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92554",
+          "testCaseTitle": "User can start/stop services"
+        }
+      ],
+      "service": "rozstalnoy_enable_labor",
+      "technician": "Bratan Manager"
+    }
+  ],
+  "verifyUserCanNotStartSimultaneouslyTwoOrMoreTimeRecordsForSameTechnician": [
+    {
+      "rowID": "verifyUserCanNotStartSimultaneouslyTwoOrMoreTimeRecordsForSameTechnician.01",
+      "description": "Test Case 93046: User can't start simultaneously 2 or more time records for the same technician. Time reports can't overlaps by the time",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93046",
+          "testCaseTitle": "User can't start simultaneously 2 or more time records for the same technician. Time reports can't overlaps by the time"
+        }
+      ],
+      "service": "rozstalnoy_enable_labor",
+      "technician": "Bratan Manager",
+      "technician1": "Rozstalnoy API Employee"
+    }
+  ],
+  "verifyUserCanStartTwoOrMoreTimeReportsForDifferentTechnicians": [
+    {
+      "rowID": "verifyUserCanStartTwoOrMoreTimeReportsForDifferentTechnicians.01",
+      "description": "Test Case 93048: User can start 2 or more time reports for the service for different technicians in the same time",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93048",
+          "testCaseTitle": "User can start 2 or more time reports for the service for different technicians in the same time"
+        }
+      ],
+      "service": "rozstalnoy_enable_labor",
+      "technician": "Bratan Manager",
+      "technician1": "Rozstalnoy API Employee"
+    }
+  ],
+  "verifyUserCanStartTimeReportsForOneTechnicianInTheSameTimeForDifferentServices": [
+    {
+      "rowID": "verifyUserCanStartTimeReportsForOneTechnicianInTheSameTimeForDifferentServices.01",
+      "description": "Test Case 93049: User can start time reports for 1 technician in the same time for different services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93049",
+          "testCaseTitle": "User can start time reports for 1 technician in the same time for different services"
+        }
+      ],
+      "service": "rozstalnoy_enable_labor",
+      "technician": "Bratan Manager"
+    }
+  ],
+  "verifyUserCanEditValuesOfTimeReport": [
+    {
+      "rowID": "verifyUserCanEditValuesOfTimeReport.01",
+      "description": "Test Case 93054: User can edit values of a time reports",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93054",
+          "testCaseTitle": "User can edit values of a time report"
+        }
+      ],
+      "service": "rozstalnoy_enable_labor",
+      "technician": "Bratan Manager",
+      "technician1": "Rozstalnoy API Employee"
+    }
+  ]
+}

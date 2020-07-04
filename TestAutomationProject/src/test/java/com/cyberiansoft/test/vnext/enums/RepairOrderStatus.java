@@ -4,6 +4,7 @@ import lombok.Getter;
 
 public enum RepairOrderStatus {
     All("All"),
+    IN_PROGRESS_ACTIVE("In Progress - Active"),
     COMPLETED_ALL("Completed - All");
 
     @Getter

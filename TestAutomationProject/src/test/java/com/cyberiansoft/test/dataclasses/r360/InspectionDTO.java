@@ -1,6 +1,9 @@
 package com.cyberiansoft.test.dataclasses.r360;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.HashMap;
 import java.util.List;
@@ -78,7 +81,7 @@ public class InspectionDTO {
     @JsonProperty("Device")
     private DeviceDTO Device;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private Map<String, Object> additionalProperties = new HashMap<>();
 
     @JsonProperty("ClientId")
     public String getClientId() {

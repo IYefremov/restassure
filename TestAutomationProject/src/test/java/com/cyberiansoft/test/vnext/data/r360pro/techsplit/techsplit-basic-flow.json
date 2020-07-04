@@ -1,13 +1,24 @@
 {
-  "userCanAssignMultipleTechniciansToOrder": [
+  "userCanAssignFullAmountOfWOFor1TechnicianEvenlyTeam": [
     {
-      "rowID": "userCanAssignMultipleTechniciansToOrder.01",
-      "description": "TFSID:87874 87875",
+      "rowID": "userCanAssignFullAmountOfWOFor1TechnicianEvenlyTeam.01",
+      "description": "",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91952",
           "testCaseTitle": "User can assign full amount of WO for 1 Technician evenly (Team)"
-        },
+        }
+      ],
+      "technicianSplitData": {
+        "Employee Employee": "100"
+      }
+    }
+  ],
+  "userCanSeparateAmountOfWOFor3TechniciansEvenlyTeam": [
+    {
+      "rowID": "userCanSeparateAmountOfWOFor3TechniciansEvenlyTeam.01",
+      "description": "",
+      "targetProcessTestCaseData": [
         {
           "testCaseID": "91953",
           "testCaseTitle": "User can separate amount of WO for 3 Technicians evenly (Team)"
@@ -22,7 +33,12 @@
           "employeeFirstName": "1111",
           "employeeLastName": "2222"
         }
-      ]
+      ],
+      "technicianSplitData": {
+        "Employee Employee": "33.34",
+        "Test Test": "33.33",
+        "1111 2222": "33.33"
+      }
     }
   ],
   "userCanChangeTechAmountViaEdit": [
@@ -83,6 +99,12 @@
           "testCaseTitle": "User can separate amount of WO for 2 Technicians manually editing WO (Team)"
         }
       ],
+      "technicianList": [
+        {
+          "employeeFirstName": "Test",
+          "employeeLastName": "Test"
+        }
+      ],
       "technicianSplitData": {
         "Test Test": "40",
         "Employee Employee": "60"
@@ -103,6 +125,12 @@
           "testCaseTitle": "User can separate amount of WO for 2 Technicians manually editing WO and cancel it (Team)"
         }
       ],
+      "technicianList": [
+        {
+          "employeeFirstName": "Test",
+          "employeeLastName": "Test"
+        }
+      ],
       "technicianSplitData": {
         "Test Test": "40",
         "Employee Employee": "60"
@@ -119,39 +147,42 @@
           "testCaseTitle": "User can't separate amount of WO for 2 Technicians manually if value is not 100% (Team)"
         }
       ],
-      "technicianSplitData": {
-        "Test Test": "40",
-        "Employee Employee": "40"
-      }
-    },
-    {
-      "rowID": "userCantSpecifyValueNotEqualTo100PercentOnSplit.02",
-      "description": "87995",
-      "targetProcessTestCaseData": [
+      "technicianList": [
         {
-          "testCaseID": "91963",
-          "testCaseTitle": "User can't separate amount of WO for 2 Technicians manually if value is not 100% editing WO (Team)"
+          "employeeFirstName": "Test",
+          "employeeLastName": "Test"
         }
       ],
       "technicianSplitData": {
-        "Test Test": "60",
-        "Employee Employee": "60"
+        "Test Test": "50",
+        "Employee Employee": "50"
       }
     }
   ],
-  "userCanSelectEvenlyAfterCustomPercentageSplit": [
+  "userCanRecalculateAmountOfTheServiceManuallyBetweenTechniciansWhenUserChangeQtyOfTechniciansDifferentThenQtyOfWOTechnicians": [
     {
-      "rowID": "userCanSelectEvenlyAfterCustomPercentageSplit.01",
-      "description": "88087",
+      "rowID": "userCanRecalculateAmountOfTheServiceManuallyBetweenTechniciansWhenUserChangeQtyOfTechniciansDifferentThenQtyOfWOTechnicians.01",
+      "description": "",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91972",
           "testCaseTitle": "User can recalculate amount of the service manually between technicians when user change qty of technicians different then qty of WO technicians"
         }
       ],
+      "technicianList": [
+        {
+          "employeeFirstName": "Test",
+          "employeeLastName": "Test"
+        }
+      ],
       "technicianSplitData": {
         "Test Test": "50",
         "Employee Employee": "50"
+      },
+      "service": {
+        "serviceName": "Expenses_money (AM)",
+        "servicePrice": "100",
+        "serviceQuantity": "2"
       }
     }
   ]

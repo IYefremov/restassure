@@ -22,12 +22,6 @@ public class TechniciansPopup extends iOSHDBaseScreen {
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
     }
 
-    public String saveTechnociansViewWithAlert() {
-        appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Technicians' and type = 'XCUIElementTypeNavigationBar'"))
-                .findElement(MobileBy.AccessibilityId("Save")).click();
-        return Helpers.getAlertTextAndAccept();
-    }
-
     public void selectTechniciansCustomView() {
         appiumdriver.findElementByClassName("XCUIElementTypeSegmentedControl").findElement(MobileBy.AccessibilityId("Custom")).click();
     }
@@ -94,7 +88,7 @@ public class TechniciansPopup extends iOSHDBaseScreen {
         clearSerchTechnician();
         if (!((IOSDriver) appiumdriver).isKeyboardShown())
             appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Technicians']/XCUIElementTypeButton[@name='Search']").click();
-        appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(technician);
+        appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(technician+"\n");
     }
 
     public  void clearSerchTechnician() {
@@ -103,7 +97,7 @@ public class TechniciansPopup extends iOSHDBaseScreen {
     }
 
     public void cancelSearchTechnician() {
-        appiumdriver.findElement(MobileBy.iOSNsPredicateString("name == 'Cancel' AND visible == 1")).click();
+        appiumdriver.findElementByClassName("XCUIElementTypePopover").findElement(MobileBy.iOSNsPredicateString("name == 'Cancel'")).click();
     }
 
     public void unselecTechnician(String technician) {

@@ -17,7 +17,11 @@ public class WizardScreenSteps {
         );
         WaitUtils.elementShouldBeVisible(baseWizardScreen.getRootElement(), true);
         WaitUtils.waitUntilElementIsClickable(baseWizardScreen.getRootElement());
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        switch (screenType) {
+            case VISUAL:
+                HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+                break;
+        }
     }
 
     public static void navigateToWizardScreen(ScreenType screenType, Integer index) {
@@ -30,10 +34,30 @@ public class WizardScreenSteps {
         );
         WaitUtils.elementShouldBeVisible(baseWizardScreen.getRootElement(), true);
         WaitUtils.waitUntilElementIsClickable(baseWizardScreen.getRootElement());
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
     }
 
     public static void saveAction() {
         ListSelectPageInteractions.saveListPage();
+    }
+
+    public static void selectWizardScreen(ScreenType screenType) {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        baseWizardScreen.selectScreen(screenType);
+    }
+
+    public static void clickCancelMenuItem() {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        baseWizardScreen.clickCancelMenuItem();
+    }
+
+    public static void clcikSaveViaMenuAsFinal() {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        baseWizardScreen.clickSaveViaMenuAsFinal();
+    }
+
+    public static void clickNotesMenuButton() {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        baseWizardScreen.clickInspectionNotesOption();
     }
 }

@@ -19,12 +19,101 @@
           "serviceStatus": "Approved"
         },
         {
-          "serviceName": "Aluminum Panel",
+          "serviceName": "Labor Motor",
           "serviceStatus": "Declined"
         },
         {
-          "serviceName": "Anastasia Labor Avarage Data",
+          "serviceName": "Expenses Service",
           "serviceStatus": "Skipped"
+        }
+      ]
+    }
+  ],  "testVerifyUserNeedToSelectReasonForDeclineSkipAllServicesInInspection": [
+    {
+      "rowID": "testVerifyUserNeedToSelectReasonForDeclineSkipAllServicesInInspection.01",
+      "description": "Test Case 71747:Verify user need to select reason for decline/skip all services in Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91706",
+          "testCaseTitle": "Verify user need to select reason for decline/skip all services in Inspection"
+        }
+      ],
+      "inspType": "O_Kramar3",
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "services": [
+        {
+          "serviceName": "Battery Installation",
+          "serviceStatus": "Declined"
+        },
+        {
+          "serviceName": "Labor Motor",
+          "serviceStatus": "Declined"
+        },
+        {
+          "serviceName": "Expenses Service",
+          "serviceStatus": "Skipped"
+        }
+      ]
+    }
+  ],
+  "testVerifyUserCanSelectSeveralInspectionWithLineApproveForApprove": [
+    {
+      "rowID": "testVerifyUserCanSelectSeveralInspectionWithLineApproveForApprove.01",
+      "description": "Test Case 73110:Verify user can select several Inspection with line approve for approve.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91711",
+          "testCaseTitle": "Verify user can select several Inspection with line approve for approve."
+        }
+      ],
+      "inspType": "O_Kramar3",
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "services": [
+        {
+          "serviceName": "Battery Installation",
+          "serviceStatus": "Approved"
+        },
+        {
+          "serviceName": "Labor Motor",
+          "serviceStatus": "Approved"
+        },
+        {
+          "serviceName": "Expenses Service",
+          "serviceStatus": "Approved"
+        }
+      ]
+    }
+  ],
+  "testVerifyUserCantAprroveInspectionsWithDifferentCustomers": [
+    {
+      "rowID": "testVerifyUserCantAprroveInspectionsWithDifferentCustomers.01",
+      "description": "Test Case 74191:Verify user can't aprrove Inspections with different customers.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91718",
+          "testCaseTitle": "Verify user can't aprrove Inspections with different customers."
+        }
+      ],
+      "inspType": "O_Kramar3",
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "services": [
+        {
+          "serviceName": "Battery Installation",
+          "serviceStatus": "Approved"
+        },
+        {
+          "serviceName": "Labor",
+          "serviceStatus": "Approved"
+        },
+        {
+          "serviceName": "Battery Installation",
+          "serviceStatus": "Approved"
         }
       ]
     }
@@ -49,8 +138,7 @@
           "serviceStatus": "Approved"
         },
         {
-          "serviceName": "Aluminum Panel",
-          "serviceStatus": "Declined"
+          "serviceName": "Aluminum Panel"
         },
         {
           "serviceName": "Anastasia Labor Avarage Data",
@@ -58,7 +146,7 @@
         }
       ],
       "inspPrice": "$14.86",
-      "inspApprovedPrice": "$9.00"
+      "inspApprovedPrice": "$11.25"
     }
   ],
   "testVerifyUserCanDeclineAllServiceIfLineApprovalEqualsON": [
@@ -83,7 +171,7 @@
           "serviceName": "Aluminum Panel"
         },
         {
-          "serviceName": "Anastasia Labor Avarage Data"
+          "serviceName": "Expenses Service"
         }
       ],
       "declineReason": "No repair needed"
@@ -131,7 +219,7 @@
           "serviceName": "Aluminum Panel"
         },
         {
-          "serviceName": "Anastasia Labor Avarage Data"
+          "serviceName": "Expenses Service"
         }
       ]
     }
@@ -156,10 +244,12 @@
           "serviceStatus": "Approved"
         },
         {
-          "serviceName": "Aluminum Panel"
+          "serviceName": "Aluminum Panel",
+          "serviceStatus": "Declined"
         },
         {
-          "serviceName": "Anastasia Labor Avarage Data"
+          "serviceName": "Expenses Service",
+          "serviceStatus": "Declined"
         }
       ]
     }
@@ -186,7 +276,7 @@
           "serviceName": "Aluminum Panel"
         },
         {
-          "serviceName": "Anastasia Labor Avarage Data"
+          "serviceName": "Expenses Service"
         }
       ]
     }
@@ -211,8 +301,7 @@
           "serviceStatus": "Approved"
         },
         {
-          "serviceName": "Aluminum Panel",
-          "serviceStatus": "Declined"
+          "serviceName": "Aluminum Panel"
         },
         {
           "serviceName": "Anastasia Labor Avarage Data",
@@ -220,7 +309,7 @@
         }
       ],
       "inspPrice": "$14.86",
-      "inspApprovedPrice": "$9.00"
+      "inspApprovedPrice": "$11.25"
     }
   ],
   "testVerifyUserSeeOnlyTotalAmountForSelectedMatrixWhenApproveInspectionWithLineApprovalEqualsON": [
@@ -346,11 +435,13 @@
           "services": [
             {
               "serviceName": "Battery Installation",
-              "servicePrice": "1"
+              "servicePrice": "1",
+              "serviceStatus": "Approved"
             },
             {
               "serviceName": "Labor",
-              "servicePrice": "5"
+              "servicePrice": "5",
+              "serviceStatus": "Approved"
             },
             {
               "serviceName": "Aluminum Panel",
@@ -366,11 +457,13 @@
           "services": [
             {
               "serviceName": "Battery Installation",
-              "servicePrice": "15"
+              "servicePrice": "15",
+              "serviceStatus": "Approved"
             },
             {
               "serviceName": "Labor",
-              "servicePrice": "20"
+              "servicePrice": "20",
+              "serviceStatus": "Approved"
             },
             {
               "serviceName": "Aluminum Panel",
@@ -458,14 +551,13 @@
             },
             {
               "serviceName": "Labor",
-              "serviceStatus": "Approved"
+              "serviceStatus": "Declined"
             },
             {
-              "serviceName": "Aluminum Panel",
-              "serviceStatus": "Declined"
+              "serviceName": "Aluminum Panel"
             }
           ],
-          "inspApprovedPrice": "$52.29"
+          "inspApprovedPrice": "$11.25"
         },
         {
           "inspType": "O_Kramar3",
@@ -481,15 +573,14 @@
             {
               "serviceName": "Labor",
               "servicePrice": "20",
-              "serviceStatus": "Declined"
+              "serviceStatus": "Approved"
             },
             {
               "serviceName": "Aluminum Panel",
-              "servicePrice": "50",
-              "serviceStatus": "Approved"
+              "servicePrice": "50"
             }
           ],
-          "inspApprovedPrice": "$0.00"
+          "inspApprovedPrice": "$99.90"
         }
       ]
     }
@@ -568,18 +659,17 @@
           "services": [
             {
               "serviceName": "Battery Installation",
-              "serviceStatus": "Approved"
+              "serviceStatus": "Declined"
             },
             {
               "serviceName": "Labor",
               "serviceStatus": "Approved"
             },
             {
-              "serviceName": "Aluminum Panel",
-              "serviceStatus": "Declined"
+              "serviceName": "Aluminum Panel"
             }
           ],
-          "inspApprovedPrice": "$52.29",
+          "inspApprovedPrice": "$54.11",
           "inspectionStatus": "Approved"
         },
         {
@@ -600,8 +690,7 @@
             },
             {
               "serviceName": "Aluminum Panel",
-              "servicePrice": "50",
-              "serviceStatus": "Declined"
+              "servicePrice": "50"
             }
           ],
           "inspApprovedPrice": "$0.00",
@@ -640,23 +729,8 @@
         {
           "inspType": "O_Kramar3",
           "retailCustomer": {
-            "firstName": "RetailCustomer2",
-            "lastName": "RetailLast2"
-          },
-          "vihicleInfo": {
-            "vinNumber": "7777777777777"
-          },
-          "services": [
-            {
-              "serviceName": "Labor"
-            }
-          ]
-        },
-        {
-          "inspType": "O_Kramar3",
-          "retailCustomer": {
-            "firstName": "RetailCustomer2",
-            "lastName": "RetailLast2"
+            "firstName": "O_Kramar3",
+            "lastName": "O_Kramar3"
           },
           "vihicleInfo": {
             "vinNumber": "7777777777777"

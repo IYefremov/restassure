@@ -109,7 +109,7 @@
   ],
   "verifyUserCanSearchByName": [
     {
-      "rowID": "verifyUserCanClearAdvancedSearchFilter.01",
+      "rowID": "verifyUserCanSearchByName.01",
       "description": "Test Case 90848: Verify user can search by name",
       "targetProcessTestCaseData": [
         {

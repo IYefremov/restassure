@@ -1,0 +1,199 @@
+{
+  "verifyUserCanOpenOperationsPartsManagementWithFullSetOfElements": [
+    {
+      "rowID": "verifyUserCanOpenOperationsPartsManagementWithFullSetOfElements.01",
+      "description": "Test Case 91095: Verify user can open \"Operations → Parts Management\" with full set of elements",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91095",
+          "testCaseTitle": "Verify user can open \"Operations → Parts Management\" with full set of elements"
+        }
+      ],
+      "location": "Best Location Automation"
+    }
+  ],
+
+  "verifyUserCanSeePartsDetailsOfDifferentROs": [
+    {
+      "rowID": "verifyUserCanSeePartsDetailsOfDifferentROs.01",
+      "description": "Test Case 91097: User can see Part's details of different RO's",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91097",
+          "testCaseTitle": "User can see Part's details of different RO's"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSelectOrdersWithPastDuePartsParts": [
+    {
+      "rowID": "verifyUserCanSelectOrdersWithPastDuePartsParts.01",
+      "description": "Test Case 91099: User can select orders with \"Past Due Parts\" Parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91099",
+          "testCaseTitle": "User can select orders with \"Past Due Parts\" Parts"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSelectOrdersWithInProgressParts": [
+    {
+      "rowID": "verifyUserCanSelectOrdersWithInProgressParts.01",
+      "description": "Test Case 91100: User can select orders with \"In Progress\" Parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91100",
+          "testCaseTitle": "User can select orders with \"In Progress\" Parts"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSelectOrdersWithCompletedParts": [
+    {
+      "rowID": "verifyUserCanSelectOrdersWithCompletedParts.01",
+      "description": "Test Case 91101: User can select orders with \"Completed\" Parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91101",
+          "testCaseTitle": "User can select orders with \"Completed\" Parts"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSelectOrdersWithPartDuePartsAndInProgressParts": [
+    {
+      "rowID": "verifyUserCanSelectOrdersWithPartDuePartsAndInProgressParts.01",
+      "description": "Test Case 91102: User can select orders with \"Past Due Parts\" + \"In Progress\" Parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91102",
+          "testCaseTitle": "User can select orders with \"Past Due Parts\" + \"In Progress\" Parts"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSelectOrdersWithPartDuePartsAndCompletedParts": [
+    {
+      "rowID": "verifyUserCanSelectOrdersWithPartDuePartsAndCompletedParts.01",
+      "description": "Test Case 91103: User can select orders with \"Past Due Parts\" + \"Completed\" Parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91103",
+          "testCaseTitle": "User can select orders with \"Past Due Parts\" + \"Completed\" Parts"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSelectOrdersWithPartDuePartsAndCompletedParts": [
+    {
+      "rowID": "verifyUserCanSelectOrdersWithPartDuePartsAndCompletedParts.01",
+      "description": "Test Case 91103: User can select orders with \"Past Due Parts\" + \"Completed\" Parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91103",
+          "testCaseTitle": "User can select orders with \"Past Due Parts\" + \"Completed\" Parts"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSelectOrdersWithInProgressAndCompletedParts": [
+    {
+      "rowID": "verifyUserCanSelectOrdersWithInProgressAndCompletedParts.01",
+      "description": "Test Case 91104: User can select orders with \"In Progress\" + \"Completed\" Parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91104",
+          "testCaseTitle": "User can select orders with \"In Progress\" + \"Completed\" Parts"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSelectOrdersWithPastDuePartsInProgressAndCompletedParts": [
+    {
+      "rowID": "verifyUserCanSelectOrdersWithPastDuePartsInProgressAndCompletedParts.01",
+      "description": "Test Case 91105: User can select orders with \"Past Due Parts\" + \"In Progress\" + \"Completed\" Parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91105",
+          "testCaseTitle": "User can select orders with \"Past Due Parts\" + \"In Progress\" + \"Completed\" Parts"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanOpenAndCloseIntercom": [
+    {
+      "rowID": "verifyUserCanOpenAndCloseIntercom.01",
+      "description": "Test Case 91213: User can open and close \"Intercom\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91213",
+          "testCaseTitle": "User can open and close \"Intercom\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanOpenAndCloseTermsAndConditions": [
+    {
+      "rowID": "verifyUserCanOpenAndCloseTermsAndConditions.01",
+      "description": "Test Case 91215: Verify user can open and close \"Terms&Conditions\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91215",
+          "testCaseTitle": "Verify user can open and close \"Terms&Conditions\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanOpenAndClosePrivacyPolicy": [
+    {
+      "rowID": "verifyUserCanOpenAndClosePrivacyPolicy.01",
+      "description": "Test Case 91216: Verify user can open and close \"Privacy Policy\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91216",
+          "testCaseTitle": "Verify user can open and close \"Privacy Policy\""
+        }
+      ]
+    }
+  ],
+
+  "verifyCurrentLocationIsVisibleAfterLocationDropDownIsClicked": [
+    {
+      "rowID": "verifyCurrentLocationIsVisibleAfterLocationDropDownIsClicked.01",
+      "description": "Verify the current location is visible after location drop-down is clicked (\"Parts Management\" page)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "100897",
+          "testCaseTitle": "Verify the current location is visible after location drop-down is clicked (\"Parts Management\" page)"
+        }
+      ],
+      "location": "Best Location Automation"
+    }
+  ],
+
+  "verifyUserCanSelectOrdersWithQuoteReceivedParts": [
+    {
+      "rowID": "verifyUserCanSelectOrdersWithQuoteReceivedParts.01",
+      "description": "User can select orders with \"Quote received\" Parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "109780",
+          "testCaseTitle": "User can select orders with \"Quote received\" Parts"
+        }
+      ],
+      "location": "Rozstalnoy_location"
+    }
+  ]
+}

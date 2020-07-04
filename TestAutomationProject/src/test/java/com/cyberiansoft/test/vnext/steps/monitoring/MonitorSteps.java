@@ -1,26 +1,24 @@
 package com.cyberiansoft.test.vnext.steps.monitoring;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.ConditionWaiter;
 import com.cyberiansoft.test.enums.MenuItems;
-import com.cyberiansoft.test.vnext.dto.RepairOrderDto;
 import com.cyberiansoft.test.vnext.enums.RepairOrderFlag;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
+import com.cyberiansoft.test.vnext.screens.monitoring.DepartmentScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.PhasesScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.SelectLocationScreen;
+import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
 import com.cyberiansoft.test.vnext.steps.MenuSteps;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
+import com.cyberiansoft.test.vnext.steps.commonobjects.TopScreenPanelSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.RepairOrderListElement;
-import org.testng.Assert;
+import org.openqa.selenium.By;
 
 public class MonitorSteps {
-    public static void verifyRepairOrderPresentInList(String repairOrderId) {
-        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
-        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
-        Assert.assertNotNull(repairOrderScreen.getRepairOrderElement(repairOrderId));
-    }
 
     public static void changeLocation(String locationPartialName) {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
@@ -30,22 +28,28 @@ public class MonitorSteps {
         repairOrderScreen.openChangeLocationPage();
         WaitUtils.elementShouldBeVisible(selectLocationScreen.getRootElement(), true);
         WaitUtils.getGeneralFluentWait().until((webdriver) -> selectLocationScreen.getLocationList().size() > 0);
+        BaseUtils.waitABit(1000);
         selectLocationScreen.selectLocationByText(locationPartialName);
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
     }
 
-    public static void verifyRepairOrderValues(String repairOrderId, RepairOrderDto expectedRoValues) {
+    public static void changeDepartment(String department) {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        DepartmentScreen departmentScreen = new DepartmentScreen();
+
+        WaitUtils.elementShouldBeVisible(departmentScreen.getRootElement(), true);
+        WaitUtils.getGeneralFluentWait().until((webdriver) -> departmentScreen.getDepartmentList().size() > 0);
+        BaseUtils.waitABit(1000);
+        departmentScreen.selectDepartmentByText(department);
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
-        Assert.assertEquals(repairOrderScreen.getRepairOrderElement(repairOrderId).getRepairOrderDto(),
-                expectedRoValues);
     }
 
     public static void openItem(String workOrderId) {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         WaitUtils.getGeneralFluentWait().until((webdriver) -> repairOrderScreen.getRepairOrderListElements().size() > 0);
+        BaseUtils.waitABit(1000);
         RepairOrderListElement repairOrder = repairOrderScreen.getRepairOrderElement(workOrderId);
-        WaitUtils.elementShouldBeVisible(repairOrder.getRootElement(), true);
+        WaitUtils.waitUntilElementIsClickable(repairOrder.getRootElement());
         repairOrder.openMenu();
     }
 
@@ -56,30 +60,56 @@ public class MonitorSteps {
         repairOrderScreen.getRepairOrderElement(workOrderId).selectStatus(flag);
     }
 
-    public static void verifyOrderFlag(String workOrderId, RepairOrderFlag repairOrderFlag) {
-        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
-        Assert.assertEquals(
-                repairOrderScreen.getRepairOrderElement(workOrderId).getRepairOrderFlag(),
-                repairOrderFlag);
-    }
-
     public static void editOrder(String workOrderId) {
-        HomeScreenSteps.openWorkQueue();
+        HomeScreenSteps.openMonitor();
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openItem(workOrderId);
-        //MenuSteps.selectMenuItem(MenuItems.EDIT);
-    }
-
-    public static void verifyRepairOrderListIsEmpty() {
-        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
-        WaitUtils.elementShouldBeVisible(repairOrderScreen.getNothingFoundLable(), true);
-        WaitUtils.getGeneralFluentWait().until(driver -> repairOrderScreen.getRepairOrderListElements().isEmpty());
     }
 
     public static void toggleFocusMode(MenuItems focusMode) {
+        clickQuickActionsButton();
+        MenuSteps.selectMenuItem(focusMode);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+    }
+
+    public static void clickQuickActionsButton() {
         PhasesScreen phasesScreen = new PhasesScreen();
         BaseUtils.waitABit(2000);
         WaitUtils.click(phasesScreen.getPhasesMenuButton());
-        MenuSteps.selectMenuItem(focusMode);
+        BaseUtils.waitABit(1000);
+    }
+
+    public static void openCommonFiltersPage() {
+
+        TopScreenPanelSteps.openSearchPanel();
+        WaitUtils.click(new RepairOrderScreen().getCommonFiltersToggle());
+    }
+
+    public static void tapOnFirstOrder() {
+
+        WaitUtils.click(new RepairOrderScreen().getRepairOrderListElements().get(0).getRootElement());
+    }
+
+    public static void clearSearchFilters() {
+
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        repairOrderScreen.getClearSearchFiltersIcon().click();
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+    }
+
+    public static void startRepairOrder(String workOrderId) {
+        MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.START_RO);
+        GeneralSteps.confirmDialog();
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+    }
+
+    public static void waitUntilScreenIsOpenedWithOrders() {
+
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+        ConditionWaiter.create(__ -> repairOrderScreen.getRootElement().isDisplayed()).execute();
+        ConditionWaiter.create(__ -> repairOrderScreen.getRepairOrderListElements().size() > 0).execute();
     }
 }

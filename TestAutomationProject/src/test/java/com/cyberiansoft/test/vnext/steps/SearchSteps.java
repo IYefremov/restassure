@@ -8,6 +8,8 @@ import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
 import com.cyberiansoft.test.vnext.screens.monitoring.CommonFilterScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.By;
 
 public class SearchSteps {
 
@@ -22,44 +24,110 @@ public class SearchSteps {
 
     public static void selectStatus(RepairOrderStatus status) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
-        WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getStatus().getRootElement());
-        commonFilterScreen.getStatus().selectOption(status.getStatusString());
+        commonFilterScreen.getRepairStatus().selectOption(status.getStatusString());
+    }
+
+    public static void clickStatusFilter() {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        WaitUtils.getGeneralFluentWait()
+                .until(driver -> {
+                    commonFilterScreen.getRepairStatus().getRootElement().click();
+                    return true;
+                });
+        WaitUtils.getGeneralFluentWait().until((webDriver) -> webDriver.findElements(By.xpath(commonFilterScreen.getRepairStatus().getElementsLocator())).size() > 0);
+    }
+
+    public static void clickDepartmentFilter() {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        WaitUtils.getGeneralFluentWait()
+                .until(driver -> {
+                    commonFilterScreen.getDepartment().getRootElement().click();
+                    return true;
+                });
+        WaitUtils.getGeneralFluentWait().until((webDriver) -> webDriver.findElements(By.xpath(commonFilterScreen.getDepartment().getElementsLocator())).size() > 0);
+    }
+
+    public static void clickPhaseFilter() {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        WaitUtils.getGeneralFluentWait()
+                .until(driver -> {
+                    commonFilterScreen.getPhase().getRootElement().click();
+                    return true;
+                });
+        WaitUtils.getGeneralFluentWait().until((webDriver) -> webDriver.findElements(By.xpath(commonFilterScreen.getPhase().getElementsLocator())).size() > 0);
+    }
+
+    public static void clickFlagFilter() {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        WaitUtils.getGeneralFluentWait()
+                .until(driver -> {
+                    commonFilterScreen.getFlag().getRootElement().click();
+                    return true;
+                });
+        WaitUtils.getGeneralFluentWait().until((webDriver) -> webDriver.findElements(By.xpath(commonFilterScreen.getFlag().getElementsLocator())).size() > 0);
+    }
+
+    public static void clickPriorityFilter() {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        WaitUtils.getGeneralFluentWait()
+                .until(driver -> {
+                    commonFilterScreen.getPriority().getRootElement().click();
+                    return true;
+                });
+        WaitUtils.getGeneralFluentWait().until((webDriver) -> webDriver.findElements(By.xpath(commonFilterScreen.getPriority().getElementsLocator())).size() > 0);
     }
 
     public static void search() {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
-        WaitUtils.elementShouldBeVisible(commonFilterScreen.getSearchButton(), true);
-        WaitUtils.click(commonFilterScreen.getSearchButton());
+        WaitUtils.elementShouldBeVisible(commonFilterScreen.getSearchButton().rootElement, true);
+        commonFilterScreen.getSearchButton().click();
+        BaseUtils.waitABit(1000);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 
     public static void searchByTextAndStatus(String text, RepairOrderStatus status) {
-        openSearchFilters();
+        BaseUtils.waitABit(35*1000);
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        openSearchMenu();
         fillTextSearch(text);
-        selectStatus(status);
+        clickCommonFiltersToggle();
+        WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getRepairStatus().getRootElement());
+        commonFilterScreen.getRepairStatus().selectOption(status.getStatusString());
         search();
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
+        WaitUtils.waitUntilElementIsClickable(repairOrderScreen.getRootElement());
     }
 
     public static void searchByText(String text) {
-        openSearchFilters();
-        fillTextSearch(text);
-        search();
-        BaseUtils.waitABit(3000);
+        SearchSteps.openSearchMenu();
+        SearchSteps.fillTextSearch(text);
+        SearchSteps.cancelSearch();
     }
 
     public static void searchByFlag(RepairOrderFlag repairOrderFlag) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
 
         openSearchFilters();
-        commonFilterScreen.getFlag().selectOption(repairOrderFlag.name());
+        commonFilterScreen.getFlag().selectOption(StringUtils.capitalize(StringUtils.lowerCase(repairOrderFlag.name())));
         search();
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
     }
 
-    public static void searchByPriority(OrderPriority high) {
+    public static void searchByPriority(OrderPriority orderPriority) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
 
         openSearchFilters();
-        commonFilterScreen.getPriority().selectOption(high.getValue());
+        commonFilterScreen.getPriority().selectOption(orderPriority.getValue());
         search();
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
+    }
+
+    public static void selectPriority(OrderPriority orderPriority) {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        commonFilterScreen.getPriority().selectOption(orderPriority.getValue());
     }
 
     public static void searchByDepartment(String departmentName) {
@@ -68,27 +136,57 @@ public class SearchSteps {
         openSearchFilters();
         commonFilterScreen.getDepartment().selectOption(departmentName);
         search();
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
+    }
+
+    public static void selectDepartment(String departmentName) {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        commonFilterScreen.getDepartment().selectListElement(departmentName);
+    }
+
+    public static void selectFlag(RepairOrderFlag repairOrderFlag) {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        commonFilterScreen.getFlag().selectListElement(repairOrderFlag.name());
     }
 
     public static void searchByPhase(String phaseName) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
-
         openSearchFilters();
         commonFilterScreen.getPhase().selectOption(phaseName);
         search();
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
+    }
+
+    public static void selectPhase(String phaseName) {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        commonFilterScreen.getPhase().selectListElement(phaseName);
     }
 
     public static void clearAllFilters() {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         repairOrderScreen.getActiveFilterslabel().clearAllFilters();
+        BaseUtils.waitABit(1000);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
+    }
+
+    public static void openSearchMenu() {
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        WaitUtils.waitUntilElementIsClickable(repairOrderScreen.getSearchButton());
+        repairOrderScreen.openSearchMenu();
     }
 
     public static void openSearchFilters() {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
-        WaitUtils.waitUntilElementIsClickable(repairOrderScreen.getSearchButton());
-        repairOrderScreen.openSearchMenu();
+        openSearchMenu();
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getCommonFiltersToggle(), true);
+        clickCommonFiltersToggle();
+    }
+
+    public static void clickCommonFiltersToggle() {
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         repairOrderScreen.openCommonFilters();
     }
 
@@ -96,5 +194,20 @@ public class SearchSteps {
         GeneralWizardInteractions.openSearchFilter();
         GeneralWizardInteractions.setSearchText(serviceName);
         GeneralWizardInteractions.closeSearchFilter();
+    }
+
+    public static void textSearchTeam(String serviceName) {
+        textSearch(serviceName);
+        WaitUtils.waitLoadDialogDisappears();
+    }
+
+    public static void clearFilters() {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        commonFilterScreen.getClearFilter().click();
+    }
+
+    public static void cancelSearch() {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        commonFilterScreen.getCancelSearchInputButton().click();
     }
 }

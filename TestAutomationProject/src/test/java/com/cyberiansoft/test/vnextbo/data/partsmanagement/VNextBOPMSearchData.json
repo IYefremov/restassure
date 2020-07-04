@@ -1,0 +1,503 @@
+{
+  "verifyUserCanSearchROUsingSearch": [
+    {
+      "rowID": "verifyUserCanSearchROUsingSearch.01",
+      "description": "Test Case 91107: User can search RO using \"Search\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91107",
+          "testCaseTitle": "User can search RO using \"Search\""
+        },
+        {
+          "testCaseID": "92567",
+          "testCaseTitle": "User can search order by \"RO\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanDeleteSearchOptions": [
+    {
+      "rowID": "verifyUserCanDeleteSearchOptions.01",
+      "description": "Test Case 91108: User can delete search options",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91108",
+          "testCaseTitle": "User can delete search options"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanUseAdvancedSearchForROSearch": [
+    {
+      "rowID": "verifyUserCanUseAdvancedSearchForROSearch.01",
+      "description": "Test Case 91109: User can use Advanced Search to the search of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91109",
+          "testCaseTitle": "User can use Advanced Search to the search of RO"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanCloseAdvancedSearchFormByClickingXIcon": [
+    {
+      "rowID": "verifyUserCanCloseAdvancedSearchFormByClickingXIcon.01",
+      "description": "Test Case 91124: User can close Advanced Search by the clicking on \"X-icon\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91124",
+          "testCaseTitle": "User can close Advanced Search by the clicking on \"X-icon\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanCloseAdvancedSearchFormByClickingOutside": [
+    {
+      "rowID": "verifyUserCanCloseAdvancedSearchFormByClickingOutside.01",
+      "description": "Test Case 91125: User can close Advanced Search by the clicking outside of the Search window",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91125",
+          "testCaseTitle": "User can close Advanced Search by the clicking outside of the Search window"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchROByCustomerUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByCustomerUsingAdvancedSearch.01",
+      "description": "Test Case 91110: User can search RO by \"Customer\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91110",
+          "testCaseTitle": "User can search RO by \"Customer\" using Advanced Search"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchROByPhaseUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByPhaseUsingAdvancedSearch.01",
+      "description": "Test Case 91111: User can search RO by \"Phase\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91111",
+          "testCaseTitle": "User can search RO by \"Phase\" using Advanced Search"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchROByWONumUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByWONumUsingAdvancedSearch.01",
+      "description": "Test Case 91112: User can search RO by \"WO#\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91112",
+          "testCaseTitle": "User can search RO by \"WO#\" using Advanced Search"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchROByWOTypeUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByWOTypeUsingAdvancedSearch.01",
+      "description": "Test Case 91113: User can search RO by \"WO Type\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91113",
+          "testCaseTitle": "User can search RO by \"WO Type\" using Advanced Search"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchROByStockNumUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByStockNumUsingAdvancedSearch.01",
+      "description": "Test Case 91114: User can search RO by \"Stock#\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91114",
+          "testCaseTitle": "User can search RO by \"Stock#\" using Advanced Search"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchROByETAFromUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByETAFromUsingAdvancedSearch.01",
+      "description": "Test Case 91115: User can search RO by \"ETA From\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91115",
+          "testCaseTitle": "User can search RO by \"ETA From\" using Advanced Search"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchROByETAToUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByETAToUsingAdvancedSearch.01",
+      "description": "Test Case 91116: User can search RO by \"ETA To\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91116",
+          "testCaseTitle": "User can search RO by \"ETA To\" using Advanced Search"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchROByVINNumUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByVINNumUsingAdvancedSearch.01",
+      "description": "Test Case 91117: User can search RO by \"VIN\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91117",
+          "testCaseTitle": "User can search RO by \"VIN\" using Advanced Search"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchROByOEMNumUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByOEMNumUsingAdvancedSearch.01",
+      "description": "Test Case 91118: User can search RO by \"Part#\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91118",
+          "testCaseTitle": "User can search RO by \"Part#\" using Advanced Search"
+        }
+      ],
+      "partNum": "ATP-17507"
+    }
+  ],
+
+  "verifyUserCanSearchROByNotesUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByNotesUsingAdvancedSearch.01",
+      "description": "Test Case 91119: User can search RO by \"Notes\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91119",
+          "testCaseTitle": "User can search RO by \"Notes\" using Advanced Search"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchROByOrderedFromUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByOrderedFromUsingAdvancedSearch.01",
+      "description": "Test Case 91122: User can search RO by \"Ordered From\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91122",
+          "testCaseTitle": "User can search RO by \"Ordered From\" using Advanced Search"
+        }
+      ],
+      "orderedFrom": "Advanced Denis"
+    }
+  ],
+
+  "verifyUserCanSearchROByFromOptionUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByFromOptionUsingAdvancedSearch.01",
+      "description": "Test Case 91120: User can search RO by \"From\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91120",
+          "testCaseTitle": "User can search RO by \"From\" using Advanced Search"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchROByToOptionUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROByToOptionUsingAdvancedSearch.01",
+      "description": "Test Case 91121: User can search RO by \"To\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91121",
+          "testCaseTitle": "User can search RO by \"To\" using Advanced Search"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanFillAllFieldsOfAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanFillAllFieldsOfAdvancedSearch.01",
+      "description": "Test Case 91123: User can fill all fields of Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91123",
+          "testCaseTitle": "User can fill all fields of Advanced Search"
+        }
+      ],
+      "customer": "Mike's Techs",
+      "phase": "PDR Station",
+      "woType": "Best",
+      "repairStatus": "In Progress - All",
+      "woNum": "O-062-00068",
+      "stockNum": "Autotests",
+      "etaFromDate": "10/30/2018",
+      "etaToDate": "10/30/2019",
+      "vinNum": "11111",
+      "partNum": "My OEM",
+      "notes": "Autotest",
+      "fromDate": "12/14/2016",
+      "toDate": "12/14/2018",
+      "orderedFrom": "Rozstalnoy_PP",
+      "searchName": "Test91123"
+    }
+  ],
+
+  "verifyUserCanClearAllEnteredFieldsOfAdvancedSearchDialog": [
+    {
+      "rowID": "verifyUserCanClearAllEnteredFieldsOfAdvancedSearchDialog.01",
+      "description": "Test Case 91126: User can clear all entered values",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91126",
+          "testCaseTitle": "User can clear all entered values"
+        }
+      ],
+      "customer": "",
+      "phase": "All",
+      "woType": "All",
+      "woNum": "",
+      "repairStatus": "All",
+      "stockNum": "",
+      "etaFromDate": "",
+      "etaToDate": "",
+      "vinNum": "",
+      "partNum": "",
+      "notes": "",
+      "fromDate": "",
+      "toDate": "",
+      "orderedFrom": "",
+      "searchName": ""
+    }
+  ],
+
+  "verifyUserCanSearchROUsingOptionsOfAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROUsingOptionsOfAdvancedSearch.01",
+      "description": "Test Case 91128: User can search RO using options of the \"Advanced Search\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91128",
+          "testCaseTitle": "User can search RO using options of the \"Advanced Search\""
+        }
+      ],
+      "customer": "Mike's Techs",
+      "phase": "All",
+      "woType": "All",
+      "woNum": "O-000-152292",
+      "repairStatus": "All",
+      "stockNum": "eeqwe",
+      "etaFromDate": "01/25/2019",
+      "etaToDate": "01/25/2019",
+      "vinNum": "32434234234234",
+      "partNum": "sdsfdsfsd",
+      "notes": "aaaaaaaaa",
+      "fromDate": "01/26/2019",
+      "toDate": "01/26/2019",
+      "orderedFrom": "Rozstalnoy_PP",
+      "searchName": "Test91128"
+    }
+  ],
+
+  "verifyUserCanSaveAllOptionsOfAdvancedSearchDialog": [
+    {
+      "rowID": "verifyUserCanSaveAllOptionsOfAdvancedSearchDialog.01",
+      "description": "Test Case 83815: User can Save options of \"Advanced Search\".",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91127",
+          "testCaseTitle": "User can Save options of \"Advanced Search\"."
+        }
+      ],
+      "customer": "Mike's Techs",
+      "phase": "PDR Station",
+      "woType": "Best",
+      "repairStatus": "In Progress - All",
+      "woNum": "O-062-00068",
+      "stockNum": "Autotests",
+      "etaFromDate": "10/30/2018",
+      "etaToDate": "10/30/2019",
+      "vinNum": "11111",
+      "partNum": "My OEM",
+      "notes": "Autotest",
+      "fromDate": "12/14/2016",
+      "toDate": "12/14/2018",
+      "orderedFrom": "Rozstalnoy_PP"
+    }
+  ],
+
+  "verifyUserCanChangeValuesOfTheSavedAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanChangeValuesOfTheSavedAdvancedSearch.01",
+      "description": "Test Case 91130: User can change values of the saved \"Advanced Search\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91130",
+          "testCaseTitle": "User can change values of the saved \"Advanced Search\""
+        }
+      ],
+      "customer": "Mike boll",
+      "phase": "Third",
+      "woType": "_no_sharing",
+      "repairStatus": "In Progress - Active",
+      "woNum": "O-000-152292",
+      "stockNum": "eeqwe",
+      "etaFromDate": "05/30/2019",
+      "etaToDate": "06/01/2019",
+      "vinNum": "32434234234234",
+      "partNum": "sdsfdsfsd",
+      "notes": "aaaaaaaaa",
+      "fromDate": "05/01/2019",
+      "toDate": "06/01/2019",
+      "orderedFrom": "Rozstalnoy_PP",
+      "searchName": "Test91130"
+    }
+  ],
+
+  "verifyUserCanCancelSavedSearchDeletingWithXIcon": [
+    {
+      "rowID": "verifyUserCanCancelSavedSearchDeletingWithXIcon.01",
+      "description": "Test Case 91131: User can click Delete but not deleted saved \"Advances Search\" clicking the \"X-icon\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91131",
+          "testCaseTitle": "User can click Delete but not deleted saved \"Advances Search\" clicking the \"X-icon\""
+        }
+      ],
+      "customer": "Mike boll",
+      "phase": "Third",
+      "woType": "_no_sharing",
+      "repairStatus": "In Progress - Active",
+      "woNum": "O-000-152292",
+      "stockNum": "eeqwe",
+      "etaFromDate": "05/30/2019",
+      "etaToDate": "06/01/2019",
+      "vinNum": "32434234234234",
+      "partNum": "sdsfdsfsd",
+      "notes": "aaaaaaaaa",
+      "fromDate": "05/01/2019",
+      "toDate": "06/01/2019",
+      "orderedFrom": "Rozstalnoy_PP",
+      "searchName": "Test91131"
+    }
+  ],
+
+  "verifyUserCanCancelSavedSearchDeletingWithNoButton": [
+    {
+      "rowID": "verifyUserCanCancelSavedSearchDeletingWithNoButton.01",
+      "description": "Test Case 91132: User can click Delete but not deleted saved \"Advances Search\" clicking \"No\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91132",
+          "testCaseTitle": "User can click Delete but not deleted saved \"Advances Search\" clicking \"No\""
+        }
+      ],
+      "customer": "Mike boll",
+      "phase": "Third",
+      "woType": "_no_sharing",
+      "repairStatus": "In Progress - Active",
+      "woNum": "O-000-152292",
+      "stockNum": "eeqwe",
+      "etaFromDate": "05/30/2019",
+      "etaToDate": "06/01/2019",
+      "vinNum": "32434234234234",
+      "partNum": "sdsfdsfsd",
+      "notes": "aaaaaaaaa",
+      "fromDate": "05/01/2019",
+      "toDate": "06/01/2019",
+      "orderedFrom": "Rozstalnoy_PP",
+      "searchName": "Test91132"
+    }
+  ],
+
+  "verifyUserCanDeleteSavedAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanDeleteSavedAdvancedSearch.01",
+      "description": "Test Case 91133: User can Delete saved \"Advances Search\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91133",
+          "testCaseTitle": "User can Delete saved \"Advances Search\""
+        }
+      ],
+      "customer": "Mike boll",
+      "phase": "Third",
+      "woType": "_no_sharing",
+      "repairStatus": "In Progress - Active",
+      "woNum": "O-000-152292",
+      "stockNum": "eeqwe",
+      "etaFromDate": "05/30/2019",
+      "etaToDate": "06/01/2019",
+      "vinNum": "32434234234234",
+      "partNum": "sdsfdsfsd",
+      "notes": "aaaaaaaaa",
+      "fromDate": "05/01/2019",
+      "toDate": "06/01/2019",
+      "orderedFrom": "Rozstalnoy_PP",
+      "searchName": "Test91133"
+    }
+  ],
+
+  "verifyUserCanSearchROUsingSavedOptionsOfAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROUsingSavedOptionsOfAdvancedSearch.01",
+      "description": "Test Case 91129: User can search RO using saved options of the \"Advanced Search\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91129",
+          "testCaseTitle": "User can search RO using saved options of the \"Advanced Search\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchROByCorePrice": [
+    {
+      "rowID": "verifyUserCanSearchROByCorePrice.01",
+      "description": "Test Case 93081: User can search RO by \"Core Price\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93081",
+          "testCaseTitle": "User can search RO by \"Core Price\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchROByLaborCredit": [
+    {
+      "rowID": "verifyUserCanSearchROByLaborCredit.01",
+      "description": "Test Case 93082: User can search RO by \"Labor Credit\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93082",
+          "testCaseTitle": "User can search RO by \"Labor Credit\""
+        }
+      ]
+    }
+  ]
+}

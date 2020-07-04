@@ -6,8 +6,6 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.concurrent.TimeUnit;
-
 public class DevicesPopupScreen extends iOSHDBaseScreen {
 	
 	@iOSXCUITFindBy(accessibility = "Assign")

@@ -124,8 +124,8 @@ public class TimesheetTypesWebPage extends WebPageWithPagination {
 		WebElement row = getTableRowWithTimesheetType(timesheettype);
 		if (row != null) {
 			tsdescription = row.findElement(By.xpath(".//td[4]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + timesheettype + " timesheet type");
+		} else
+            Assert.fail("Can't find " + timesheettype + " timesheet type");
 		return tsdescription;
 	}
 	
@@ -134,22 +134,21 @@ public class TimesheetTypesWebPage extends WebPageWithPagination {
 		WebElement row = getTableRowWithTimesheetType(timesheettype);
 		if (row != null) {
 			tsentrytype = row.findElement(By.xpath(".//td[5]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + timesheettype + " timesheet type");
+		} else
+            Assert.fail("Can't find " + timesheettype + " timesheet type");
 		return tsentrytype;
 	}
 	
 	public boolean isTimesheetTypeExists(String timesheettype) {
-		boolean exists =  timesheettypestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + timesheettype + "']")).size() > 0;
-		return exists;
+		return timesheettypestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + timesheettype + "']")).size() > 0;
 	}
 	
-	public void clickEditTimesheetType(String timesheettype) throws InterruptedException {
+	public void clickEditTimesheetType(String timesheettype) {
 		WebElement row = getTableRowWithTimesheetType(timesheettype);
 		if (row != null) {
 			clickEditTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + timesheettype + " timesheet type");
+		} else
+            Assert.fail("Can't find " + timesheettype + " timesheet type");
 	}
 	
 	public void deleteTimesheetType(String timesheettype) {
@@ -157,16 +156,16 @@ public class TimesheetTypesWebPage extends WebPageWithPagination {
 		if (row != null) {
 			deleteTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + timesheettype + " timesheet type");	
+            Assert.fail("Can't find " + timesheettype + " timesheet type");
 		}
 	}
 	
-	public void deleteTimesheetTypeAndCancelDeleting(String timesheettype) throws InterruptedException {
+	public void deleteTimesheetTypeAndCancelDeleting(String timesheettype) {
 		WebElement row = getTableRowWithTimesheetType(timesheettype);
 		if (row != null) {
 			cancelDeletingTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + timesheettype + " timesheet type");	
+            Assert.fail("Can't find " + timesheettype + " timesheet type");
 		}
 	}
 

@@ -45,7 +45,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		// String initialpagenumber = invoicespage.getLastPageNumber();
 		invoicespage.setPageSize("1");
 		Assert.assertEquals(invoicespage.getInvoicesTableRowCount(), 1);
-		int numberofrows = Integer.valueOf(invoicespage.getLastPageNumber());
+		int numberofrows = Integer.parseInt(invoicespage.getLastPageNumber());
 
 		String lastpagenumber = invoicespage.getLastPageNumber();
 		invoicespage.clickGoToLastPage(browserType.getBrowserTypeString());
@@ -61,10 +61,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertEquals("1", invoicespage.getGoToPageFieldValue());
 
 		invoicespage.setPageSize("999");
-		if (numberofrows < 500) {
-			Assert.assertEquals(numberofrows, invoicespage.getInvoicesTableRowCount());
-		} else
-			Assert.assertEquals(500, invoicespage.getInvoicesTableRowCount());
+		Assert.assertEquals(Math.min(numberofrows, 500), invoicespage.getInvoicesTableRowCount());
 
 		invoicespage.verifySearchFieldsAreVisible();
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
@@ -114,7 +111,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		InvoicePaymentsTabWebPage invoicepaymentstab = new InvoicePaymentsTabWebPage(webdriver);
 		invoicespage.clickInvoicePayments(data.getInvoiceNumber());
 		Assert.assertTrue(invoicepaymentstab.getInvoicesPaymentsLastTableRowPaidColumnValue()
-				.contains(CustomDateProvider.getCurrentTimeWithTimeZoneTheShortest()));
+				.contains(CustomDateProvider.getTheShortestCurrentDateWithTimeZone()));
 		Assert.assertTrue(invoicepaymentstab.getInvoicesPaymentsLastTableRowDescriptionColumnValue().contains(data.getPo()));
 		invoicepaymentstab.clickNotesForInvoicesPaymentsLastTableRow();
 		Assert.assertEquals(invoicepaymentstab.getInvoicePaymentNoteValue(), data.getNotes());
@@ -226,19 +223,19 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.clickEditInvoice(data.getInvoiceNumber());
 		final String oldivoicenotesvalue = invoiceedittab.getInvoiceNotesValue();
 		// TODO when webdriver version will be updated
-		invoiceedittab.setEditableNotes(CustomDateProvider.getCurrentDateFormatted());
+		invoiceedittab.setEditableNotes(CustomDateProvider.getCurrentDateInShortFormat());
 		invoiceedittab.closeNewTab(mainWindowHandle);
 
 		invoiceedittab = new InvoiceEditTabWebPage(webdriver);
 		invoicespage.clickEditInvoice(data.getInvoiceNumber());
 		Assert.assertEquals(oldivoicenotesvalue, invoiceedittab.getInvoiceNotesValue());
-		invoiceedittab.setEditableNotes(CustomDateProvider.getCurrentDateFormatted());
+		invoiceedittab.setEditableNotes(CustomDateProvider.getCurrentDateInShortFormat());
 		invoiceedittab.clickSaveInvoiceButton();
 		invoiceedittab.closeNewTab(mainWindowHandle);
 
 		invoiceedittab = new InvoiceEditTabWebPage(webdriver);
 		invoicespage.clickEditInvoice(data.getInvoiceNumber());
-		Assert.assertEquals(CustomDateProvider.getCurrentDateFormatted(), invoiceedittab.getInvoiceNotesValue());
+		Assert.assertEquals(CustomDateProvider.getCurrentDateInShortFormat(), invoiceedittab.getInvoiceNotesValue());
 		invoiceedittab.closeNewTab(mainWindowHandle);
 	}
 
@@ -266,7 +263,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.clickEmailActivity(data.getInvoiceNumber());
 		Assert.assertTrue(invoiceemailactivitytab.getFirstRowRecipientsValue().contains(data.getUserMail()));
 		Assert.assertTrue(invoiceemailactivitytab.getFirstRowSentTimeValue()
-				.contains(CustomDateProvider.getCurrentTimeWithTimeZoneTheShortest()));
+				.contains(CustomDateProvider.getTheShortestCurrentDateWithTimeZone()));
 		Assert.assertEquals("true", invoiceemailactivitytab.getFirstRowSendCheckboxValue());
 		invoiceemailactivitytab.closeNewTab(mainWindowHandle);
 	}
@@ -304,7 +301,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.clickEmailActivity(data.getInvoiceNumber());
 		Assert.assertEquals(data.getUserMail(), invoiceemailactivitytab.getFirstRowRecipientsValue());
 		Assert.assertTrue(invoiceemailactivitytab.getFirstRowSentTimeValue()
-				.contains(CustomDateProvider.getCurrentTimeWithTimeZoneTheShortest()));
+				.contains(CustomDateProvider.getTheShortestCurrentDateWithTimeZone()));
 		Assert.assertEquals("true", invoiceemailactivitytab.getFirstRowSendCheckboxValue());
 		invoiceemailactivitytab.closeNewTab(mainWindowHandle);
 	}
@@ -515,7 +512,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
 	}
 
-	//todo fails with batch run ???
+	//todo fails - bug# 107707
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void checkOperationInvoiceEditMarkAsPaid(String rowID, String description, JSONObject testData) {
 		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
@@ -547,6 +544,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
 		invoicesPage.clickFindButton();
 		Assert.assertTrue(invoicesPage.isFirstInvoiceMarkedAsPaid(), "The invoice isn't marked as Paid");
+        invoicesPage.closeSelectDropDown();
 	}
 
 	//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

@@ -169,5 +169,17 @@
         }
       ]
     }
+  ],
+
+  "verifyUserCannotOpenHomePageInAnotherBrowserAfterPastingTheUrlOfTheLoggedUser": [
+    {
+      "rowID": "verifyUserCannotOpenHomePageInAnotherBrowserAfterPastingTheUrlOfTheLoggedUser.01",
+      "description": "Test Case 84401: Repair360 BO - Verify user can't open home page of Repair360 in another browser if paste URL of logged application",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91523"
+        }
+      ]
+    }
   ]
 }

@@ -97,14 +97,23 @@
       "targetProcessTestCaseData": [
         {
           "testCaseID": "92008",
-          "testCaseTitle": "Verify user can't edit final Invoice."
+          "testCaseTitle": "Verify user can't edit final Invoice"
+        },
+        {
+          "testCaseID": "92009",
+          "testCaseTitle": "Verify user can save Final Invoice when create Invoice"
         }
       ],
       "workOrderData": {
         "workOrderType": "O_Kramar",
         "vihicleInfo": {
           "vinNumber": "7777777777777"
-        }
+        },
+        "services": [
+          {
+            "serviceName": "Battery Installation"
+          }
+        ]
       },
       "invoiceData": {
         "invoiceType": "O_Kramar",
@@ -126,7 +135,12 @@
         "workOrderType": "O_Kramar",
         "vihicleInfo": {
           "vinNumber": "7777777777777"
-        }
+        },
+        "services": [
+          {
+            "serviceName": "Battery Installation"
+          }
+        ]
       },
       "invoiceData": {
         "invoiceType": "O_Kramar",
@@ -149,7 +163,12 @@
         "workOrderType": "O_Kramar",
         "vihicleInfo": {
           "vinNumber": "7777777777777"
-        }
+        },
+        "services": [
+          {
+            "serviceName": "Battery Installation"
+          }
+        ]
       },
       "invoiceData": {
         "invoiceType": "O_Kramar",
@@ -172,7 +191,12 @@
         "workOrderType": "O_Kramar",
         "vihicleInfo": {
           "vinNumber": "7777777777777"
-        }
+        },
+        "services": [
+          {
+            "serviceName": "Battery Installation"
+          }
+        ]
       },
       "invoiceData": {
         "invoiceType": "O_Kramar",
@@ -195,7 +219,12 @@
         "workOrderType": "O_Kramar",
         "vihicleInfo": {
           "vinNumber": "7777777777777"
-        }
+        },
+        "services": [
+          {
+            "serviceName": "Battery Installation"
+          }
+        ]
       },
       "invoiceData": {
         "invoiceType": "O_Kramar",
@@ -218,7 +247,12 @@
         "workOrderType": "O_Kramar",
         "vihicleInfo": {
           "vinNumber": "7777777777777"
-        }
+        },
+        "services": [
+          {
+            "serviceName": "Battery Installation"
+          }
+        ]
       },
       "invoiceData": {
         "invoiceType": "O_Kramar",
@@ -241,30 +275,12 @@
         "workOrderType": "O_Kramar",
         "vihicleInfo": {
           "vinNumber": "7777777777777"
-        }
-      },
-      "invoiceData": {
-        "invoiceType": "O_Kramar",
-        "poNumber": "12345",
-        "newPoNumber": "TEST!23"
-      }
-    }
-  ],
-  "testVerifyUserCanCancelInvoiceCreation": [
-    {
-      "rowID": "testVerifyUserCanCancelInvoiceCreation.01",
-      "description": "Test Case 75387:Verify user can cancel Invoice creation",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "",
-          "testCaseTitle": ""
-        }
-      ],
-      "workOrderData": {
-        "workOrderType": "O_Kramar",
-        "vihicleInfo": {
-          "vinNumber": "7777777777777"
-        }
+        },
+        "services": [
+          {
+            "serviceName": "Battery Installation"
+          }
+        ]
       },
       "invoiceData": {
         "invoiceType": "O_Kramar",
@@ -319,25 +335,45 @@
           "workOrderType": "O_Kramar",
           "vihicleInfo": {
             "vinNumber": "7777777777777"
-          }
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation"
+            }
+          ]
         },
         {
           "workOrderType": "O_Kramar",
           "vihicleInfo": {
             "vinNumber": "7777777777777"
-          }
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation"
+            }
+          ]
         },
         {
           "workOrderType": "O_Kramar",
           "vihicleInfo": {
             "vinNumber": "7777777777777"
-          }
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation"
+            }
+          ]
         },
         {
           "workOrderType": "O_Kramar",
           "vihicleInfo": {
             "vinNumber": "7777777777777"
-          }
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation"
+            }
+          ]
         }
       ],
       "invoiceData": {
@@ -362,25 +398,45 @@
           "workOrderType": "O_Kramar",
           "vihicleInfo": {
             "vinNumber": "7777777777777"
-          }
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation"
+            }
+          ]
         },
         {
           "workOrderType": "O_Kramar",
           "vihicleInfo": {
             "vinNumber": "7777777777777"
-          }
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation"
+            }
+          ]
         },
         {
           "workOrderType": "O_Kramar",
           "vihicleInfo": {
             "vinNumber": "7777777777777"
-          }
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation"
+            }
+          ]
         },
         {
           "workOrderType": "O_Kramar",
           "vihicleInfo": {
             "vinNumber": "7777777777777"
-          }
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation"
+            }
+          ]
         }
       ],
       "invoiceData": {
@@ -405,25 +461,45 @@
           "workOrderType": "O_Kramar",
           "vihicleInfo": {
             "vinNumber": "7777777777777"
-          }
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation"
+            }
+          ]
         },
         {
           "workOrderType": "O_Kramar",
           "vihicleInfo": {
             "vinNumber": "7777777777777"
-          }
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation"
+            }
+          ]
         },
         {
           "workOrderType": "O_Kramar",
           "vihicleInfo": {
             "vinNumber": "7777777777777"
-          }
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation"
+            }
+          ]
         },
         {
           "workOrderType": "O_Kramar",
           "vihicleInfo": {
             "vinNumber": "7777777777777"
-          }
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation"
+            }
+          ]
         }
       ],
       "invoiceData": {

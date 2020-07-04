@@ -1,20 +1,14 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextQuestionsScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.util.List;
 
@@ -42,7 +36,7 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	@FindBy(xpath = "//*[@action='part-info']")
 	private WebElement partServiceDetailButton;
 
-	@FindBy(xpath = "//*[@action='labor-services']")
+	@FindBy(xpath = "//*[@action='add-labor-service']")
     private WebElement laborServicesButton;
 
 	@FindBy(xpath = "//*[@action='add-part-service']")
@@ -54,15 +48,27 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@data-name='Amount']")
     private WebElement serviceDetailsPrice;
 
+	@FindBy(xpath = "//*[@data-name='QuantityFloat']")
+	private WebElement serviceDetailsQuantity;
+
+	@FindBy(id = "serviceDetailsNotes")
+	private WebElement serviceDetailsNotes;
+
     @FindBy(xpath = "//div[@class='services-part-info-title']")
     private WebElement partServiceInfoTitle;
 
 	@FindBy(xpath = "//input[@name='question-section']")
 	private List<WebElement> questionSections;
-	
-	public VNextServiceDetailsScreen(AppiumDriver<MobileElement> appiumdriver) {
+
+	@FindBy(xpath = "//*[@data-action-name='startService']")
+	private WebElement startServiceBtn;
+
+	@FindBy(xpath = "//*[@data-action-name='completeService']")
+	private WebElement completeServiceBtn;
+
+    public VNextServiceDetailsScreen(WebDriver appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+		PageFactory.initElements(appiumdriver, this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(rootElement));
 	}
@@ -70,35 +76,18 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	public VNextServiceDetailsScreen() {
 	}
 	
-	public VNextNotesScreen clickServiceNotesOption() {
+	public void clickServiceNotesOption() {
 		tap(notesbutton);
-		return new VNextNotesScreen();
-	}
-	
-	public void clickServiceDetailsBackButton() {
-		clickScreenBackButton();
 	}
 	
 	public void clickServiceDetailsDoneButton() {
 		tap(servicedtailsapplybtn);
-		if (elementExists("//div[@class='modal-text']")) {
+        if (WaitUtils.isElementPresent(By.xpath("//div[@class='modal-text']"))) {
 			VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
 			informationDialog.clickInformationDialogNoButton();
 		}
 	}
-	
-	public void clickDeleteServiceIcon() {
-		tap(rootElement.findElement(By.xpath(".//i[@action='remove']")));;
-	}
-	
-	public VNextAvailableServicesScreen deleteService() {
-		clickDeleteServiceIcon();
-		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-		String msg = informationdlg.clickInformationDialogYesButtonAndGetMessage();
-		Assert.assertTrue(msg.contains(VNextAlertMessages.ARE_YOU_SURE_REMOVE_THIS_ITEM));
-		return new VNextAvailableServicesScreen(appiumdriver) ;
-	}
-	
+
 	public void setServiceAmountValue(String amount) {
 		clickServiceAmountField();	
 		VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
@@ -133,10 +122,9 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 		keyboard.setFieldValue(getServiceQuantityValue(), quantity);
 	}
 
-	public VNextQuestionsScreen clickServiceQuestionSection(String questionSectionName) {
+	public void clickServiceQuestionSection(String questionSectionName) {
 		appiumdriver.findElement(By.xpath("//*[@action='select-question-section']/input[@value='" +
 				questionSectionName + "']")).click();
-		return new VNextQuestionsScreen(appiumdriver);
 	}
 
 	public void clickSelectPanelsAndParts() {

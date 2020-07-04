@@ -1,48 +1,211 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Cyberiansoft R360 ReconPro tests" verbose="10" configfailurepolicy="continue">
-       <!--parallel="classes" thread-count="3"-->>
     <listeners>
         <listener class-name="com.cyberiansoft.test.vnextbo.utils.TestListenerAllure"/>
     </listeners>
-
-  <test name="Back Office Test Cases" preserve-order="true">
-    <classes>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesPartsAndLaborBundleTestCases">
-            <methods>
-                <include name="verifyUserCanAddLaborPriceServiceWithUseLaborTimes"/>
-                <include name="verifyUserCanAddPartPriceServiceWithCategorySubcategoryAndPartName"/>
-                <include name="verifyUserCanChangeSequenceNumberForMoneyServiceOrder"/>
-                <include name="verifyUserCanDeletePartPriceService"/>
-                <include name="verifyUserCanEditLaborPriceService"/>
-                <include name="verifyUserCanRestoreDeletedPartPriceService"/>
-                <include name="verifyUserCannotAddLaborServiceWithClickedRejectIcon"/>
-            </methods>
-        </class>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOInvoiceDetailsTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOQuickNotesTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOOperationsInvoicesTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.repairOrders.VNextBOMonitorTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.repairOrders.VNextBOMonitorAdvancedSearchTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.repairOrders.VNextBOMonitorSimpleSearchTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOHomePage"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOPartsManagementSearchTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOPartsManagementOrderDetailsTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOHomePageAccessRightsTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOLoginTests"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOForgotPasswordTests"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.inspections.VNextBOInspectionsGeneralTests"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.inspections.VNextBOInspectionsDetailsTests"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.inspections.VNextBOInspectionsArchivingTests"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.inspections.VNextBOInspectionsApproveTests"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.inspections.VNextBOInspectionsSearchTests"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.users.VNextBOUsersGeneralTests"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.users.VNextBOAddNewUserAndSearchTests"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsGeneralTests"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsSearchTests"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsArchiveRestoreTests"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsAddNewClientTests"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsEditClientTests"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsClientServicesTests"/>
-    </classes>
-  </test>
+    <test name="Invoice Details Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.invoices.VNextBOInvoiceDetailsTestCases"/>
+        </classes>
+    </test>
+    <test name="Operations Invoices Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.invoices.VNextBOOperationsInvoicesTestCases"/>
+        </classes>
+    </test>
+    <test name="Quick Notes Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.quicknotes.VNextBOQuickNotesTestCases"/>
+        </classes>
+    </test>
+    <test name="Home Page Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.homepage.VNextBOHomePageTestCases"/>
+        </classes>
+    </test>
+    <test name="Home Page Access Rights Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.homepage.VNextBOHomePageAccessRightsTestCases"/>
+        </classes>
+    </test>
+    <test name="Login Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.login.VNextBOLoginTests"/>
+        </classes>
+    </test>
+    <test name="Forgot Password Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.login.VNextBOForgotPasswordTests"/>
+        </classes>
+    </test>
+    <test name="Inspections General Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.inspections.VNextBOInspectionsGeneralTests"/>
+        </classes>
+    </test>
+    <test name="Inspections Details Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.inspections.VNextBOInspectionsDetailsTests"/>
+        </classes>
+    </test>
+    <test name="Inspections Archiving Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.inspections.VNextBOInspectionsArchivingTests"/>
+        </classes>
+    </test>
+    <test name="Inspections Approve Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.inspections.VNextBOInspectionsApproveTests"/>
+        </classes>
+    </test>
+    <test name="Inspections Search Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.inspections.VNextBOInspectionsSearchTests"/>
+        </classes>
+    </test>
+    <test name="Users General Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.users.VNextBOUsersGeneralTests"/>
+        </classes>
+    </test>
+    <test name="Add New User And Users Search Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.users.VNextBOAddNewUserAndSearchTests"/>
+        </classes>
+    </test>
+    <test name="Clients General Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsGeneralTests"/>
+        </classes>
+    </test>
+    <test name="Clients Search Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsSearchBlockTests"/>
+        </classes>
+    </test>
+    <test name="Clients Archive Restore Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsArchiveRestoreTests"/>
+        </classes>
+    </test>
+    <test name="Clients Add New Client Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsAddNewClientTests"/>
+        </classes>
+    </test>
+    <test name="Clients Edit Client Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsEditClientTests"/>
+        </classes>
+    </test>
+    <test name="Clients Client Services Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsClientServicesTests"/>
+        </classes>
+    </test>
+    <test name="Device Management General Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.devicemanagement.VNextBODeviceManagementGeneralTests"/>
+        </classes>
+    </test>
+    <test name="Device Management Search Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.devicemanagement.VNextBODeviceManagementSearchTests"/>
+        </classes>
+    </test>
+    <test name="Device Management Active And Pending Registration Tab Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.devicemanagement.VNextBODMActiveAndPendingRegistrationTabTests"/>
+        </classes>
+    </test>
+    <test name="Money And Percentage Services Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.services.VNextBOMoneyAndPercentageServicesTestCases"/>
+        </classes>
+    </test>
+    <test name="Labor And Part Services Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.services.VNextBOLaborAndPartServicesTestCases"/>
+        </classes>
+    </test>
+<!--    <test name="Parts Management Order Details Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsTestCases"/>
+        </classes>
+    </test>-->
+    <test name="Parts Management Dashboard Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPartsManagementDashboardTestCases"/>
+        </classes>
+    </test>
+    <test name="Parts Management Search Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMSearchTestCases"/>
+        </classes>
+    </test>
+    <test name="Parts Management Order Details Status CheckBox Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsStatusCheckBoxTests"/>
+        </classes>
+    </test>
+    <test name="Parts Management Order Details Parts Details Status Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsPartsDetailsStatusTests"/>
+        </classes>
+    </test>
+    <test name="Parts Management Order Details Parts Details Labor Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsPartsDetailsLaborTests"/>
+        </classes>
+    </test>
+    <!--<test name="Parts Management Generic Part Provider Functionality Tests">-->
+        <!--<classes>-->
+            <!--<class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPartsManagementGenericPartProviderFunctionalityTestCases"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <test name="Monitor Advanced Search Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorAdvancedSearchTestCasesNew"/>
+        </classes>
+    </test>
+    <test name="Monitor Report Problem Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorReportProblemTestCasesNew"/>
+        </classes>
+    </test>
+    <test name="Monitor Simple Search Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorSimpleSearchTestCasesNew"/>
+        </classes>
+    </test>
+    <test name="Monitor Tests Part 1">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTestCasesPart1New"/>
+        </classes>
+    </test>
+    <test name="Monitor Tests Part 2">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTestCasesPart2New"/>
+        </classes>
+    </test>
+    <test name="Monitor Tests Part 3">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTestCasesPart3New"/>
+        </classes>
+    </test>
+    <test name="Monitor Tests Part 4">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTestCasesPart4New"/>
+        </classes>
+    </test>
+    <test name="Monitor Tasks Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTasksTestCases"/>
+        </classes>
+    </test>
+    <test name="Monitor Time Reporting Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTimeReportingTestCases"/>
+        </classes>
+    </test>
 </suite>

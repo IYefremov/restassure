@@ -48,7 +48,7 @@ public class VNextBOClientsClientServicesPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "(//span[@class='k-icon k-i-calendar'])[1]")
     private WebElement firstLineEffectiveDateCalendarIcon;
 
-    @FindBy(xpath = "(//td[contains(@class, 'k-today k-state-focused')])[1]")
+    @FindBy(xpath = "(//td[contains(@class, 'k-today')])[1]")
     private WebElement calendarCurrentDayButton;
 
     @FindBy(xpath = "(//input[@title='Effective Price'])[1]")

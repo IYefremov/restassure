@@ -11,7 +11,6 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Set;
@@ -126,13 +125,13 @@ public class FileDownloader {
      * @throws IOException
      * @throws NullPointerException
      */
-    private String downloader(WebElement element, String attribute) throws IOException, NullPointerException, URISyntaxException {
+    private String downloader(WebElement element, String attribute) throws IOException, NullPointerException {
         String fileToDownloadLocation = element.getAttribute(attribute);
         if (fileToDownloadLocation.trim().equals("")) throw new NullPointerException("The element you have specified does not link to anything!");
  
         URL fileToDownload = new URL(fileToDownloadLocation);
         File downloadedFile = new File(this.localDownloadPath + fileToDownload.getFile().replaceFirst("/|\\\\", ""));
-        if (downloadedFile.canWrite() == false) downloadedFile.setWritable(true);
+        if (!downloadedFile.canWrite()) downloadedFile.setWritable(true);
  
         /*HttpClient client = new DefaultHttpClient();
         BasicHttpContext localContext = new BasicHttpContext();
@@ -157,15 +156,12 @@ public class FileDownloader {
         FileUtils.copyInputStreamToFile(download(fileToDownload), downloadedFile);
         //FileUtils.copyInputStreamToFile(response.getEntity().getContent(), downloadedFile);
         //response.getEntity().getContent().close();
- 
-        String downloadedFileAbsolutePath = downloadedFile.getAbsolutePath();
- 
-        return downloadedFileAbsolutePath;
+
+        return downloadedFile.getAbsolutePath();
     }
     private InputStream download(URL url) throws IOException {
         URLConnection uc = url.openConnection();
         int len = uc.getContentLength();
-        InputStream is = new BufferedInputStream(uc.getInputStream());
         /*try {
             byte[] data = new byte[len];
             int offset = 0;
@@ -184,7 +180,7 @@ public class FileDownloader {
         } finally {
             is.close();
         }*/
-        return is;
+        return new BufferedInputStream(uc.getInputStream());
     }
     private File fileRename(File downloadedFile){
     	String oldFileName = downloadedFile.getName();
@@ -198,14 +194,14 @@ public class FileDownloader {
     	String[] tokens = oldFileName.split(delimiter);
     	String extension = "";
     	String reportNum = "";
-    	for(int i=0; i<tokens.length; i++){
-    		if(tokens[i].equals("text"))
-    			extension = ".txt";
-    		else if (tokens[i].equals("pdf"))
-    			extension = ".pdf";
-    		else if (tokens[i].contains("-"))
-    			reportNum = tokens[i];
-    	}
+        for (String token : tokens) {
+            if (token.equals("text"))
+                extension = ".txt";
+            else if (token.equals("pdf"))
+                extension = ".pdf";
+            else if (token.contains("-"))
+                reportNum = token;
+        }
     	newFileName = "BBMI-Report_" + reportNum + extension;
     	
     	File newFile = new File(path + newFileName);

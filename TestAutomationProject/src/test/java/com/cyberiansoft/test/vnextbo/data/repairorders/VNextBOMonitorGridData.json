@@ -1,0 +1,165 @@
+{
+  "verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase": [
+    {
+      "rowID": "verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase.01",
+      "description": "Test Case 91010: User can see and change Technicians of the current phase",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91376"
+        }
+      ],
+      "monitorData": {
+        "location": "Rozstalnoy_location",
+        "orderNumber": "O-000-152649",
+        "vendor": "Test Team",
+        "status": "Approved",
+        "serviceTabs": [
+          "Rozstalnoy",
+          "Rozstalnoy2"
+        ],
+        "serviceStatuses": [
+          "Completed",
+          "Active"
+        ],
+        "services": [
+          "rozstalnoy_enable_money",
+          "roz_dis_part_money"
+        ]
+      }
+    }
+  ],
+  "verifyUserCanCloseRO": [
+    {
+      "rowID": "verifyUserCanCloseRO.01",
+      "description": "Test Case 91402: User can close RO with \"None\" reason",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91402",
+          "testCaseTitle": "User can close RO with \"None\" reason"
+        }
+      ],
+      "problemReason": "(None)",
+      "phase": "Rozstalnoy"
+    },
+    {
+      "rowID": "verifyUserCanCloseRO.02",
+      "description": "Test Case 91403: User can close RO with \"Completed\" reason",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91403",
+          "testCaseTitle": "User can close RO with \"Completed\" reason"
+        }
+      ],
+      "problemReason": "Completed",
+      "phase": "Rozstalnoy"
+    },
+    {
+      "rowID": "verifyUserCanCloseRO.03",
+      "description": "Test Case 91404: User can close RO with \"Skipped\" reason",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91404",
+          "testCaseTitle": "User can close RO with \"Skipped\" reason"
+        }
+      ],
+      "problemReason": "Skipped",
+      "phase": "Rozstalnoy"
+    }
+  ],
+  "verifyUserCanChangeFlagOfRo": [
+    {
+      "rowID": "verifyUserCanChangeFlagOfRo.01",
+      "description": "Test Case 91395: User can change a Flag of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91395",
+          "testCaseTitle": "User can change a Flag of RO"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanStartCompleteServicesAndPhasesFromTheMainRosPage": [
+    {
+      "rowID": "verifyUserCanStartCompleteServicesAndPhasesFromTheMainRosPage.01",
+      "description": "Test Case 91379: User can start/complete services and phases from the main RO's page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91379",
+          "testCaseTitle": "User can start/complete services and phases from the main RO's page"
+        }
+      ],
+      "phase": "Rozstalnoy"
+    }
+  ],
+  "verifyUserCanPrioritizeRepairOrder": [
+    {
+      "rowID": "verifyUserCanPrioritizeRepairOrder.01",
+      "description": "Test Case 91393: User can prioritize Repair Order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91393",
+          "testCaseTitle": "User can prioritize Repair Order"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCloseUnCloseWorkOrder": [
+    {
+      "rowID": "verifyUserCanCloseUnCloseWorkOrder.01",
+      "description": "Test Case 98842: Verify user can close and unclose work order (RO grid)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98842",
+          "testCaseTitle": "Verify user can close and unclose work order (RO grid)"
+        }
+      ],
+      "problemReason": "Completed",
+      "phase": "Rozstalnoy"
+    }
+  ],
+  "verifyUserCanChangeMoreThanOneTechniciansLinkedToOnePhase": [
+    {
+      "rowID": "verifyUserCanChangeMoreThanOneTechniciansLinkedToOnePhase.01",
+      "description": "Test Case 91377: User can change more than 1 different technicians linked to 1 phase",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91377",
+          "testCaseTitle": "User can change more than 1 different technicians linked to 1 phase"
+        }
+      ],
+      "orderNumber": "O-000-152650",
+      "phase": "Rozstalnoy2",
+      "vendor": "Test Team",
+      "technician": "_Ira Autotest"
+    }
+  ],
+  "verifyUserCanSeeAndCreateNotes": [
+    {
+      "rowID": "verifyUserCanSeeAndCreateNotes.01",
+      "description": "Test Case 91406: User can see and create notes",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91406",
+          "testCaseTitle": "User can see and create notes"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanChangeStockRoPoInvoiceColumn": [
+    {
+      "rowID": "verifyUserCanChangeStockRoPoInvoiceColumn.01",
+      "description": "Test Case 91385: User can change fields of \"Stock# / RO# / PO# / Invoice\" column",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91385",
+          "testCaseTitle": "User can change fields of \"Stock# / RO# / PO# / Invoice\" column"
+        }
+      ],
+      "location": "1111 Automation",
+      "orderNumber": "O-000-152073",
+      "poNum": "Lorem Ipsum",
+      "roNum": "113",
+      "stockNum": "Test1"
+    }
+  ]
+}

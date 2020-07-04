@@ -1,7 +1,7 @@
 {
-  "autoAssignTechToService": [
+  "autoAssignTechToAMoneyService": [
     {
-      "rowID": "01",
+      "rowID": "autoAssignTechToAMoneyService.01",
       "description": "",
       "targetProcessTestCaseData": [
         {
@@ -25,9 +25,11 @@
           }
         }
       ]
-    },
+    }
+  ],
+  "autoAssignTechToALaborService": [
     {
-      "rowID": "02",
+      "rowID": "autoAssignTechToALaborService.01",
       "description": "",
       "targetProcessTestCaseData": [
         {
@@ -39,8 +41,8 @@
         {
           "serviceName": "Paint",
           "serviceDefaultTechnician": {
-            "technicianFirstName": "1111",
-            "technicianLastName": "2222"
+            "technicianFirstName": "test",
+            "technicianLastName": "test"
           }
         },
         {
@@ -51,9 +53,11 @@
           }
         }
       ]
-    },
+    }
+  ],
+  "autoAssignTechToBundleServices": [
     {
-      "rowID": "03",
+      "rowID": "autoAssignTechToBundleServices.01",
       "description": "",
       "targetProcessTestCaseData": [
         {
@@ -63,40 +67,14 @@
       ],
       "services": [
         {
-          "serviceName": "rozstalnoy_disable_labor",
+          "serviceName": "Rock Fun Service",
           "serviceDefaultTechnician": {
             "technicianFirstName": "1111",
             "technicianLastName": "2222"
           }
         },
         {
-          "serviceName": "rozstalnoy_disable_labor",
-          "serviceDefaultTechnician": {
-            "technicianFirstName": "Employee",
-            "technicianLastName": "Employee"
-          }
-        }
-      ]
-    },
-    {
-      "rowID": "04",
-      "description": "",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "94255",
-          "testCaseTitle": "Auto-assign tech to Bundle services"
-        }
-      ],
-      "services": [
-        {
-          "serviceName": "rozstalnoy_disable_money",
-          "serviceDefaultTechnician": {
-            "technicianFirstName": "1111",
-            "technicianLastName": "2222"
-          }
-        },
-        {
-          "serviceName": "rozstalnoy_disable_money",
+          "serviceName": "Rock Fun Service",
           "serviceDefaultTechnician": {
             "technicianFirstName": "Employee",
             "technicianLastName": "Employee"

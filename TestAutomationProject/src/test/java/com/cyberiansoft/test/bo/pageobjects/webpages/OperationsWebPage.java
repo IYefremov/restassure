@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.Assert;
 
 public class OperationsWebPage extends BaseWebPage {
 
@@ -45,6 +46,7 @@ public class OperationsWebPage extends BaseWebPage {
 
 	public void clickInvoicesLink() {
 		wait.until(ExpectedConditions.elementToBeClickable(invoiceslink)).click();
+		BaseUtils.waitABit(500);
 	}
 
 	public void clickWorkOrdersLink() {
@@ -68,6 +70,7 @@ public class OperationsWebPage extends BaseWebPage {
 	}
 
 	public void clickNewServiceRequestList() {
-		WaitUtilsWebDriver.waitForVisibility(newservicerequestlink).click();
+	    WaitUtilsWebDriver.elementShouldBeVisible(newservicerequestlink, true);
+        Utils.clickElement(newservicerequestlink);
 	}
 }

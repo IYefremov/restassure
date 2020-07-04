@@ -1166,7 +1166,42 @@
               }
             }
           ]
-        }
+        },
+        "orderMonitorsData": [
+          {
+            "phaseName": "Start phase",
+            "monitorServicesData": [
+              {
+                "monitorService": {
+                  "serviceName": "Dye_Panel"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "PPP_service"
+                }
+              }
+            ]
+          },
+          {
+            "phaseName": "Repair phase",
+            "monitorServicesData": [
+              {
+                "monitorService": {
+                  "serviceName": "PPV_service"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Service_PP_Vehicle",
+                  "vehiclePart": {
+                    "vehiclePartName": "Front Bumper"
+                  }
+                }
+              }
+            ]
+          }
+        ]
       }
     }
   ],
@@ -1862,7 +1897,7 @@
               "serviceName": "3/4\" - Penny Size"
             },
             {
-              "serviceName": "Oksi_Part_Service_Name"
+              "serviceName": "Oksi_Part_Service_Several"
             },
             {
               "serviceName": "Oksi_Part_Service_None"
@@ -1886,11 +1921,11 @@
             ]
           },
           {
-            "phaseName": "Repair phase",
+            "phaseName": "Order phase",
             "monitorServicesData": [
               {
                 "monitorService": {
-                  "serviceName": "Oksi_Part_Service_Name"
+                  "serviceName": "Oksi_Part_Service_Several"
                 }
               }
             ]
@@ -2101,26 +2136,25 @@
             "laborServicePart": "Remove/Replace Left Front Door Armrest"
           }
         ],
-        "laborService":
-          {
-            "serviceName": "Labor_Vehicle_data_all_Motor",
-            "laborServiceRate": "1",
-            "laborServiceTime": "1",
-            "partServiceDataList": [
-              {
-                "serviceName": "roz_part_with_categories",
-                "category": "Brake",
-                "subCategory": "Disc Pads and Brake Shoes",
-                "partName": {
-                  "partNameList": [
-                    "Disc Brake Pad"
-                  ],
-                  "isMultiSelect": false
-                },
-                "partPosition": "N/A"
-              }
-            ]
-          },
+        "laborService": {
+          "serviceName": "Labor_Vehicle_data_all_Motor",
+          "laborServiceRate": "1",
+          "laborServiceTime": "1",
+          "partServiceDataList": [
+            {
+              "serviceName": "roz_part_with_categories",
+              "category": "Brake",
+              "subCategory": "Disc Pads and Brake Shoes",
+              "partName": {
+                "partNameList": [
+                  "Disc Brake Pad"
+                ],
+                "isMultiSelect": false
+              },
+              "partPosition": "N/A"
+            }
+          ]
+        },
         "insuranceCompany": {
           "insuranceCompanyName": "USG",
           "claimNumber": "QWERTY",
@@ -2213,6 +2247,627 @@
           }
         ],
         "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testVerifyAssignTechUnderMonitor": [
+    {
+      "rowID": "testVerifyAssignTechUnderMonitor.01",
+      "description": "Test Case: 75 - Verify assign tech under Monitor",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83709",
+          "testCaseTitle": "Test Case: 75 - Verify assign tech under Monitor"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "3/4\" - Penny Size"
+            },
+            {
+              "serviceName": "Labor_Vehicle_data_all_Motor"
+            },
+            {
+              "serviceName": "Labor_Vehilce_data_R&R"
+            },
+            {
+              "serviceName": "Labor service - MOTOR source"
+            }
+          ]
+        },
+        "orderMonitorsData": [
+          {
+            "phaseName": "Start phase",
+            "newTechnician": {
+              "technicianFirstName": "Oksi",
+              "technicianLastName": "Manager"
+            },
+            "monitorServicesData": [
+              {
+                "monitorService": {
+                  "serviceName": "3/4\" - Penny Size"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Labor_Vehicle_data_all_Motor"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Labor_Vehilce_data_R&R"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Labor service - MOTOR source"
+                }
+              }
+            ]
+          }
+        ],
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testVerifyAssignVendorTeamForServicesUnderMonitor": [
+    {
+      "rowID": "testVerifyAssignVendorTeamForServicesUnderMonitor.01",
+      "description": "76 - Verify assign vendor team for services under Monitor",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83709",
+          "testCaseTitle": "76 - Verify assign vendor team for services under Monitor"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "3/4\" - Penny Size"
+            },
+            {
+              "serviceName": "Dye_Panel"
+            },
+            {
+              "serviceName": "Labor_Vehilce_data_R&R"
+            }
+          ]
+        },
+        "orderMonitorData": {
+          "phaseName": "Start phase",
+          "monitorServicesData": [
+            {
+              "serviceVendor": "Second vendor",
+              "monitorService": {
+                "serviceName": "3/4\" - Penny Size"
+              }
+            },
+            {
+              "serviceVendor": "Vendor team",
+              "monitorService": {
+                "serviceName": "Dye_Panel"
+              }
+            },
+            {
+              "serviceVendor": "Default team",
+              "monitorService": {
+                "serviceName": "Labor_Vehilce_data_R&R"
+              }
+            }
+          ]
+        },
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testVerifyCalculationAndCorrectDisplayOfArbitrationData": [
+    {
+      "rowID": "testVerifyCalculationAndCorrectDisplayOfArbitrationData.01",
+      "description": "Test Case: 68 - Verify calculation and correct display of Arbitration data",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83702",
+          "testCaseTitle": "Test Case: 68 - Verify calculation and correct display of Arbitration data"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        }
+      }
+    }
+  ],
+  "testVerifyAccessToStatusMenuFromLoginScreen": [
+    {
+      "rowID": "testVerifyAccessToStatusMenuFromLoginScreen.01",
+      "description": "Test Case: 69 - Verify access to Status menu from Login screen",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83703",
+          "testCaseTitle": "Test Case: 69 - Verify access to Status menu from Login screen"
+        }
+      ]
+    }
+  ],
+  "testVerifyReSendDataFromDevice": [
+    {
+      "rowID": "testVerifyReSendDataFromDevice.01",
+      "description": "Test Case: 70 - Verify re-send data from device",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83704",
+          "testCaseTitle": "Test Case: 70 - Verify re-send data from device"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        }
+      },
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        }
+      }
+    }
+  ],
+  "testVerifyThatItIsNotPossibleToAddSupplementForDraftInspection": [
+    {
+      "rowID": "testVerifyThatItIsNotPossibleToAddSupplementForDraftInspection.01",
+      "description": "Test Case: 82 - Inspections: Verify that it is not possible to Add Supplement for Draft Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93620",
+          "testCaseTitle": "Test Case: 82 - Inspections: Verify that it is not possible to Add Supplement for Draft Inspection"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreensData": [
+          {
+            "screenName": "Question for order test",
+            "questionsData": [
+              {
+                "questionAnswer": "Full",
+                "listQuestion": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Yes",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Yes",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              },
+              {
+                "questionAnswer": "Yes",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QWERTY Long Long Long Long Long Long LongLong Long Long Long Long Long Long QUESTION_TextView",
+                "questionAnswer": "Test text",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Immediate Attention Required",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              }
+            ]
+          },
+          {
+            "screenName": "A lot of answers",
+            "questionsData": [
+              {
+                "questionName": "QuestionTypeTrafficLight_Q2",
+                "logicalQuestion": true,
+                "logicalQuestionValue": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeLogical_Q3",
+                "logicalQuestion": true,
+                "logicalQuestionValue": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeMultiSelect_Q5",
+                "questionAnswers": [
+                  "A1",
+                  "A3",
+                  "A5"
+                ],
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeSelect_Q4",
+                "questionAnswer": "A3",
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeText_Q6",
+                "questionAnswer": "Test answer",
+                "textQuestion": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "imageQuestion": {
+                  "questionName": "QuestionTypeImage_Q7",
+                  "numberOFImages": 1
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "datePickerQuestion": {
+                  "questionName": "QuestionTypeDate_Q8"
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "datePickerQuestion": {
+                  "questionName": "QuestionTypeTime_Q9"
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "signatureQuestion": {
+                  "questionName": "QuestionTypeHandwriting_Q10"
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "testVerifyCreatingInspectionAndWOWithALotOfPagesQFVisualPagesPriceMatrixServicePackages": [
+    {
+      "rowID": "testVerifyCreatingInspectionAndWOWithALotOfPagesQFVisualPagesPriceMatrixServicePackages.01",
+      "description": "Test Case: 42 - Verify creating Inspection and WO with a lot of pages (QF, visual pages, price matrix, service packages, )",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "97008",
+          "testCaseTitle": "Test Case: 42 - Verify creating Inspection and WO with a lot of pages (QF, visual pages, price matrix, service packages, )"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreensData": [
+          {
+            "screenName": "Question for order test",
+            "questionsData": [
+              {
+                "questionAnswer": "Full",
+                "listQuestion": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Yes",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Yes",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              },
+              {
+                "questionAnswer": "Yes",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QWERTY Long Long Long Long Long Long LongLong Long Long Long Long Long Long QUESTION_TextView",
+                "questionAnswer": "Test text",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Immediate Attention Required",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              }
+            ]
+          },
+          {
+            "screenName": "A lot of answers",
+            "questionsData": [
+              {
+                "questionName": "QuestionTypeTrafficLight_Q2",
+                "logicalQuestion": true,
+                "logicalQuestionValue": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeLogical_Q3",
+                "logicalQuestion": true,
+                "logicalQuestionValue": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeMultiSelect_Q5",
+                "questionAnswers": [
+                  "A1",
+                  "A3",
+                  "A5"
+                ],
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeSelect_Q4",
+                "questionAnswer": "A3",
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeText_Q6",
+                "questionAnswer": "Test answer",
+                "textQuestion": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "imageQuestion": {
+                  "questionName": "QuestionTypeImage_Q7",
+                  "numberOFImages": 1
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "datePickerQuestion": {
+                  "questionName": "QuestionTypeDate_Q8"
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "datePickerQuestion": {
+                  "questionName": "QuestionTypeTime_Q9"
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "signatureQuestion": {
+                  "questionName": "QuestionTypeHandwriting_Q10"
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              }
+            ]
+          }
+        ],
+        "servicesScreen": {
+          "screenName": "Question Answers",
+          "moneyService": {
+            "serviceName": "SR_Money_Vehicle",
+            "servicePrice": "20",
+            "vehicleParts": [
+              {
+                "vehiclePartName": "Dashboard"
+              }
+            ]
+          }
+        },
+        "inspectionTotalPrice": "$61.00"
+      }
+    }
+  ],
+  "testVerifyThatWhenAddSupplementAfterApproveStatusOfServicesIsChangedToNew": [
+    {
+      "rowID": "testVerifyThatWhenAddSupplementAfterApproveStatusOfServicesIsChangedToNew.01",
+      "description": "Test Case: 83 - Inspections: Verify that when add supplement after approve status of services is changed to New",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "97008",
+          "testCaseTitle": "Test Case: 83 - Inspections: Verify that when add supplement after approve status of services is changed to New"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreensData": [
+          {
+            "screenName": "Question for order test",
+            "questionsData": [
+              {
+                "questionAnswer": "Full",
+                "listQuestion": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Yes",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Yes",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              },
+              {
+                "questionAnswer": "Yes",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QWERTY Long Long Long Long Long Long LongLong Long Long Long Long Long Long QUESTION_TextView",
+                "questionAnswer": "Test text",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Immediate Attention Required",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              }
+            ]
+          },
+          {
+            "screenName": "A lot of answers",
+            "questionsData": [
+              {
+                "questionName": "QuestionTypeTrafficLight_Q2",
+                "logicalQuestion": true,
+                "logicalQuestionValue": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeLogical_Q3",
+                "logicalQuestion": true,
+                "logicalQuestionValue": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeMultiSelect_Q5",
+                "questionAnswers": [
+                  "A1",
+                  "A3",
+                  "A5"
+                ],
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeSelect_Q4",
+                "questionAnswer": "A3",
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeText_Q6",
+                "questionAnswer": "Test answer",
+                "textQuestion": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "imageQuestion": {
+                  "questionName": "QuestionTypeImage_Q7",
+                  "numberOFImages": 1
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "datePickerQuestion": {
+                  "questionName": "QuestionTypeDate_Q8"
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "datePickerQuestion": {
+                  "questionName": "QuestionTypeTime_Q9"
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "signatureQuestion": {
+                  "questionName": "QuestionTypeHandwriting_Q10"
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              }
+            ]
+          }
+        ],
+        "servicesScreen": {
+          "screenName": "Question Answers",
+          "moneyService": {
+            "serviceName": "SR_Money_Vehicle",
+            "servicePrice": "20",
+            "serviceStatus": "Approved",
+            "vehiclePart":
+              {
+                "vehiclePartName": "Dashboard"
+              }
+          }
+        },
+        "moneyService": {
+          "serviceName": "Dye_Panel",
+          "serviceStatus": "Skipped"
+        },
+        "inspectionTotalPrice": "$61.00",
+        "inspApprovedPrice": "$20.00"
       }
     }
   ]

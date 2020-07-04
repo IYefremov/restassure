@@ -3,7 +3,6 @@ package com.cyberiansoft.test.ios10_client.regularvalidations;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularSelectedServicesScreen;
-import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import org.testng.Assert;
 
 import java.util.List;
@@ -37,6 +36,15 @@ public class RegularSelectedServicesScreenValidations {
                     servicesData.getVehiclePart().getVehiclePartName()), expectedPriceValue);
         } else
             Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(servicesData.getServiceName()), expectedPriceValue);
+    }
 
+    public static void verifyServiceDeclinedOrSkipped(String serviceName) {
+        RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
+        Assert.assertTrue(selectedServicesScreen.isServiceDeclinedSkipped(serviceName));
+    }
+
+    public static void verifyServiceApproved(String serviceName) {
+        RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
+        Assert.assertTrue(selectedServicesScreen.isServiceApproved(serviceName));
     }
 }

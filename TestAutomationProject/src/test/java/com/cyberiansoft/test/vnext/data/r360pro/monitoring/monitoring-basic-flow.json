@@ -1,4 +1,26 @@
 {
+  "testResults": [
+    {
+      "testCaseId": "107577",
+      "workOrderNumber": "8668722",
+      "result": true
+    },
+    {
+      "testCaseId": "107579",
+      "workOrderNumber": "8668723",
+      "result": true
+    },
+    {
+      "testCaseId": "107585",
+      "workOrderNumber": "8668724",
+      "result": true
+    },
+    {
+      "testCaseId": "107587",
+      "workOrderNumber": "8668725",
+      "result": true
+    }
+  ],
   "userCanChangeFlagsOfWorkOrder": [
     {
       "rowID": "userCanChangeFlagsOfWorkOrder.01",
@@ -22,15 +44,112 @@
         }
       ],
       "monitoring": {
+        "location": "automationMonitoring",
         "orderInfoDto": {
-          "vin": "777777"
+          "vin": "77777777777777777"
         }
       }
     }
   ],
-  "userCanReportProblemOnServiceLevel": [
+  "testVerifyUserCanCompleteTheOrder": [
     {
-      "rowID": "userCanReportProblemOnServiceLevel.01",
+      "rowID": "testVerifyUserCanCompleteTheOrder.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92386",
+          "testCaseTitle": "Verify the user can complete the order"
+        }
+      ],
+      "damageData": {
+        "damageGroupName": "Other",
+        "moneyServices": [
+          {
+            "serviceName": "olrom"
+          },
+          {
+            "serviceName": "Orom_Money_Service"
+          }
+        ]
+      },
+      "monitoring": {
+        "location": "automationMonitoring",
+        "repairOrderData": {
+          "phaseName": "PHASEANDSERVICELEVEL",
+          "vin": "77777777777777777",
+          "completePercentage": "33%"
+        }
+      }
+    }
+  ],
+  "testVerifyUserCanAddTheNoteUsingQuickNotesInputField": [
+    {
+      "rowID": "testVerifyUserCanAddTheNoteUsingQuickNotesInputField.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92378",
+          "testCaseTitle": "Verify user can add the note using 'Quick Notes' input field"
+        }
+      ],
+      "damageData": {
+        "damageGroupName": "Other",
+        "moneyServices": [
+          {
+            "serviceName": "olrom"
+          },
+          {
+            "serviceName": "Orom_Money_Service"
+          }
+        ]
+      },
+      "monitoring": {
+        "location": "automationMonitoring",
+        "orderInfoDto": {
+          "vin": "77777777777777777"
+        }
+      }
+    }
+  ],
+  "testVerifyUserCanSelectTechnicianOnTheAssignTechPage": [
+    {
+      "rowID": "testVerifyUserCanSelectTechnicianOnTheAssignTechPage.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92381",
+          "testCaseTitle": "Verify user can select technician on the 'Assign Tech' page"
+        }
+      ],
+      "service": {
+        "serviceName": "olrom",
+        "serviceDefaultTechnician": {
+          "technicianFirstName": "1111",
+          "technicianLastName": "2222"
+        }
+      },
+      "damageData": {
+        "damageGroupName": "Other",
+        "moneyServices": [
+          {
+            "serviceName": "olrom"
+          },
+          {
+            "serviceName": "Orom_Money_Service"
+          }
+        ]
+      },
+      "monitoring": {
+        "location": "automationMonitoring",
+        "orderInfoDto": {
+          "vin": "77777777777777777"
+        }
+      }
+    }
+  ],
+  "userCanSetAndResolveProblemOnServiceLevel": [
+    {
+      "rowID": "userCanSetAndResolveProblemOnServiceLevel.01",
       "description": "TFSID: 89573",
       "targetProcessTestCaseData": [
         {
@@ -52,32 +171,9 @@
       }
     }
   ],
-  "userCanResolveProblemOnServiceLevel": [
+  "userCanSetAndResolveProblemOnPhaseLevel": [
     {
-      "rowID": "userCanReportProblemOnServiceLevel.01",
-      "description": "TFSID: 89573",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "92268",
-          "testCaseTitle": "Verify user can set and resolve problem (service level)"
-        }
-      ],
-      "monitoring": {
-        "orderPhaseDto": {
-          "phaseName": "AutomationServiceLevel"
-        },
-        "orderServiceDto": {
-          "serviceName": "Labor AM"
-        }
-      },
-      "service": {
-        "serviceName": "Labor AM"
-      }
-    }
-  ],
-  "userCanReportProblemOnPhaseLevel": [
-    {
-      "rowID": "userCanReportProblemOnPhaseLevel.01",
+      "rowID": "userCanSetAndResolveProblemOnPhaseLevel.01",
       "description": "TFSID: 89595",
       "targetProcessTestCaseData": [
         {
@@ -97,27 +193,7 @@
       }
     }
   ],
-  "userCanResolveProblemOnPhaseLevel": [
-    {
-      "rowID": "userCanReportProblemOnPhaseLevel.01",
-      "description": "TFSID: 89595",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "92269",
-          "testCaseTitle": "Verify user can set and resolve problem (phase level)"
-        }
-      ],
-      "service": {
-        "serviceName": "Expenses_money (AM)"
-      },
-      "monitoring": {
-        "orderPhaseDto": {
-          "phaseName": "AutomationPhaseLevel"
-        }
-      }
-    }
-  ],
-  "userCanStartTimeTrackingOnService": [
+  "userCanStartAndStopServiceTime": [
     {
       "rowID": "userCanStartTimeTrackingOnService.01",
       "description": "TFSID: 89595",
@@ -137,47 +213,7 @@
       }
     }
   ],
-  "userCanStopTimeTrackingOnService": [
-    {
-      "rowID": "userCanStopTimeTrackingOnService.01",
-      "description": "TFSID: 89595",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "92262",
-          "testCaseTitle": "Verify user can start and stop service (time)"
-        }
-      ],
-      "service": {
-        "serviceName": "Labor AM"
-      },
-      "monitoring": {
-        "orderPhaseDto": {
-          "phaseName": "AutomationServiceLevel"
-        }
-      }
-    }
-  ],
-  "userCanStartTimeTrackingOnPhase": [
-    {
-      "rowID": "userCanStopTimeTrackingOnService.01",
-      "description": "TFSID: 89595",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "92261",
-          "testCaseTitle": "Verify user can start and stop phase (time)"
-        }
-      ],
-      "service": {
-        "serviceName": "Labor AM"
-      },
-      "monitoring": {
-        "orderPhaseDto": {
-          "phaseName": "AutomationPhaseLevel"
-        }
-      }
-    }
-  ],
-  "userCanStopTimeTrackingOnPhase": [
+  "userCanStartAndStopPhaseTime": [
     {
       "rowID": "userCanStopTimeTrackingOnService.01",
       "description": "TFSID: 89595",
@@ -289,36 +325,59 @@
       ],
       "monitoring": {
         "orderPhaseDto": {
+          "phaseName": "PhaseAndServiceLevel"
+        }
+      }
+    }
+  ],
+  "userCanSearchByStatus": [
+    {
+      "rowID": "userCanSearchByStatus.01",
+      "description": "TFSID:",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92304",
+          "testCaseTitle": "Verify user can search by \"Status\""
+        }
+      ],
+      "monitoring": {
+        "orderPhaseDto": {
           "phaseName": "AutomationPhaseLevel"
         }
       }
     }
   ],
-  "partServiceShouldNotAffectROCompleteness": [
+  "testСommonFiltersPhaseStatus": [
     {
-      "rowID": "partServiceShouldNotAffectROCompleteness.01",
-      "description": "TFSID: 90010",
+      "rowID": "userCanSearchByPhase.01",
+      "description": "",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92259",
-          "testCaseTitle": "Verify that Skipped, Refused and Parts services are not involved to the complete percentage calculation"
+          "testCaseID": "132714",
+          "testCaseTitle": "Monitor - Сommon Filters - Phase Status"
         }
       ],
-      "service": {
-        "serviceName": "Engine Auxiliary Engine Oil Filter Hose Clamp"
-      },
       "monitoring": {
-        "repairOrderData": {
-          "phaseName": "AUTOMATIONSERVICELEVEL",
-          "vin": "777777",
-          "completePercentage": "0%"
-        }
+        "orderPhaseDto": {
+          "phaseName": "PhaseAndServiceLevel"
+        },
+        "orderPhasesDto": [
+          {
+            "phaseName": "PhaseAndServiceLevel"
+          },
+          {
+            "phaseName": "AutomationPhaseLevel"
+          }
+        ]
+      },
+      "service": {
+        "serviceName": "Labor AM"
       }
     }
   ],
-  "skippedServicesShouldNotAffectCalculation": [
+  "verifyThatSkippedRefusedAndPartsServicesAreNotInvolvedToTheCompletePercentageCalculation": [
     {
-      "rowID": "skippedServicesShouldNotAffectCalculation.01",
+      "rowID": "verifyThatSkippedRefusedAndPartsServicesAreNotInvolvedToTheCompletePercentageCalculation.01",
       "description": "TFSID: 90010",
       "targetProcessTestCaseData": [
         {
@@ -326,42 +385,26 @@
           "testCaseTitle": "Verify that Skipped, Refused and Parts services are not involved to the complete percentage calculation"
         }
       ],
-      "service": {
-        "serviceName": "Labor AM"
-      },
-      "monitoring": {
-        "repairOrderData": {
-          "phaseName": "AUTOMATIONSERVICELEVEL",
-          "vin": "777777",
-          "completePercentage": "0%"
-        },
-        "orderPhaseDto": {
-          "phaseName": "AutomationServiceLevel"
-        }
-      }
-    }
-  ],
-  "refusedServicesShouldNotAffectCalculation": [
-    {
-      "rowID": "skippedServicesShouldNotAffectCalculation.01",
-      "description": "TFSID: 90010",
-      "targetProcessTestCaseData": [
+      "services": [
         {
-          "testCaseID": "92259",
-          "testCaseTitle": "Verify that Skipped, Refused and Parts services are not involved to the complete percentage calculation"
+          "serviceName": "Air Brake Compressor Crank Shaft Bearing"
+        },
+        {
+          "serviceName": "Orom_Money_Service"
+        },
+        {
+          "serviceName": "Auto_adding_Task"
         }
       ],
-      "service": {
-        "serviceName": "Labor AM"
-      },
       "monitoring": {
         "repairOrderData": {
-          "phaseName": "AUTOMATIONSERVICELEVEL",
-          "vin": "777777",
+          "phaseName": "NOT STARTED",
+          "vin": "77777777777777777",
           "completePercentage": "0%"
         },
         "orderPhaseDto": {
-          "phaseName": "AutomationServiceLevel"
+          "phaseName": "PhaseLevel",
+          "status": "COMPLETED"
         }
       }
     }
@@ -428,15 +471,20 @@
           "testCaseTitle": "Verify \"Start\"&&\"Stop\" buttons are visible in active state (\"Work Status Tracking\" = \"Phase level only\")"
         }
       ],
-      "service": {
-        "serviceName": "Labor AM"
+      "damageData": {
+        "damageGroupName": "Other",
+        "moneyServices": [
+          {
+            "serviceName": "olrom"
+          },
+          {
+            "serviceName": "Orom_Money_Service"
+          }
+        ]
       },
       "monitoring": {
         "orderPhaseDto": {
-          "phaseName": "AutomationServiceLevel"
-        },
-        "orderPhaseDto": {
-          "phaseName": "AutomationPhaseLevel",
+          "phaseName": "PhaseLevel",
           "problemReason": "PROBLEM REASON"
         }
       }
@@ -452,8 +500,16 @@
           "testCaseTitle": "Verify \"Start\"&&\"Stop\" buttons are visible in active state (\"Work Status Tracking\" = \"Service And Phase Levels\")"
         }
       ],
-      "service": {
-        "serviceName": "Labor AM"
+      "damageData": {
+        "damageGroupName": "Other",
+        "moneyServices": [
+          {
+            "serviceName": "olrom"
+          },
+          {
+            "serviceName": "Orom_Money_Service"
+          }
+        ]
       },
       "monitoring": {
         "orderPhaseDto": {
@@ -521,7 +577,7 @@
         }
       ],
       "service": {
-        "serviceName": "Bent Wheel",
+        "serviceName": "A new demo service",
         "problemReason": "SOME_PROBLEM"
       },
       "monitoring": {
@@ -530,6 +586,50 @@
           "problemReason": "PROBLEM REASON"
         }
       }
+    }
+  ],
+  "verifyCommonFiltersOpenAsSeparatePage": [
+    {
+      "rowID": "verifyCommonFiltersOpenAsSeparatePage.01",
+      "description": "Test Case 108412: Monitor - Common filters open as separate page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "108412",
+          "testCaseTitle": "Monitor - Common filters open as separate page"
+        }
+      ],
+      "savedSearch": "My Location - Active Work",
+      "timeFrame": "Last 90 days",
+      "department": "Default",
+      "phase": "PhaseAndServiceLevel",
+      "repairStatus": "All",
+      "flag": "All",
+      "priority": "Normal"
+    }
+  ],
+  "verifyActionMenuIsOpenedWithoutLoadingSpinner": [
+    {
+      "rowID": "verifyActionMenuIsOpenedWithoutLoadingSpinner.01",
+      "description": "Test Case 109447: R360 Client - Monitor - POS - Action Menu without loading spinner",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "109447",
+          "testCaseTitle": "R360 Client - Monitor - POS - Action Menu without loading spinner"
+        }
+      ]
+    }
+  ],
+  "verifySearchCanBePerformedByPriorityAndReturnBack": [
+    {
+      "rowID": "verifySearchCanBePerformedByPriorityAndReturnBack.01",
+      "description": "Test Case 92314: ReconPro - Monitor - CommonFilters - Priority - verify if Priority perform search and back from common filters",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92314",
+          "testCaseTitle": "ReconPro - Monitor - CommonFilters - Priority - verify if Priority perform search and back from common filters"
+        }
+      ],
+      "priority": "Normal"
     }
   ]
 }

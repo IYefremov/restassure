@@ -1,0 +1,152 @@
+{
+
+  "testVerifyThatItIsPossibleToSaveAsFinalInspectionLinkedToSR": [
+    {
+      "rowID": "testVerifyThatItIsPossibleToSaveAsFinalInspectionLinkedToSR.01",
+      "description": "Test Case 42388:Inspections: Verify that it is possible to save as Final inspection linked to SR",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88585"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "moneyService": {
+          "serviceName": "Dye"
+        }
+      },
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "service": {
+          "serviceName": "SR_S1_Money",
+          "vehiclePart": {
+            "vehiclePartName": "Hood"
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyThatWhenFinalInspectionIsCopiedServisesAreCopiedWithoutStatuses_Approved_Declined_Skipped": [
+    {
+      "rowID": "testVerifyThatWhenFinalInspectionIsCopiedServisesAreCopiedWithoutStatuses_Approved_Declined_Skipped.01",
+      "description": "Test Case 33117:Inspections: Verify that when final inspection is copied servises are copied without statuses (approved, declined, skipped)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88583"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "bundleService": {
+          "bundleServiceName": "SR_S4_Bundle",
+          "bundleServiceAmount": "100"
+        },
+        "services": [
+          {
+            "serviceName": "Oksi_Service_PP_Vehicle",
+            "vehiclePart": {
+              "vehiclePartName": "Back Glass"
+            },
+            "questionData": {
+              "questionName": "QuestionTypeSelect_Question 2",
+              "questionAnswer": "A1"
+            }
+          },
+          {
+            "serviceName": "Oksi_Service_PP_Panel",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            }
+          }
+        ],
+        "matrixService": {
+          "matrixServiceName": "Test service price matrix",
+          "hailMatrixName": "Price Matrix Zayats",
+          "vehiclePartData": {
+            "vehiclePartName": "VP1 zayats",
+            "vehiclePartSize": "CENT",
+            "vehiclePartSeverity": "MEDIUM",
+            "vehiclePartAdditionalService": {
+              "serviceName": "Test service zayats"
+            }
+          }
+        },
+        "servicesToApprove": [
+          {
+            "serviceName": "SR_S4_Bundle",
+            "isSelected": true
+          },
+          {
+            "serviceName": "Test service price matrix",
+            "isSelected": true
+          },
+          {
+            "serviceName": "Test service zayats",
+            "isSelected": false
+          },
+          {
+            "serviceName": "Oksi_Service_PP_Panel",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            },
+            "isSelected": true
+          },
+          {
+            "serviceName": "Oksi_Service_PP_Vehicle",
+            "vehiclePart": {
+              "vehiclePartName": "Back Glass"
+            },
+            "isSelected": true
+          }
+        ]
+      }
+    }
+  ],
+  "testVerifyThatWhenOptionDraftModeIsSetToONWhenSaveInspectionProvidePromptToAUserToSelectEitherDraftOrFinal": [
+    {
+      "rowID": "testVerifyThatWhenOptionDraftModeIsSetToONWhenSaveInspectionProvidePromptToAUserToSelectEitherDraftOrFinal.01",
+      "description": "Test Case 30853:Inspections: Verify that when option ''Draft Mode'' is set to ON - when save inspection provide prompt to a user to select either Draft or Final, Test Case 30855:Inspections: Regular - Verify that for Draft inspection following options are not available (Approve, Create WO, Create SR, Copy inspection)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88590"
+        },
+        {
+          "testCaseID": "88584"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "services": [
+          {
+            "serviceName": "SR_S1_Money",
+            "vehiclePart": {
+              "vehiclePartName": "Hood"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_Vehicle",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

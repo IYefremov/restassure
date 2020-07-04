@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
-//@Listeners(VideoListener.class)
 public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 
 	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOMonitorReportsData.json";
@@ -34,12 +33,12 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		MonitorWebPage monitorWebPage = new MonitorWebPage(webdriver);
 		monitorWebPage.clickRepairLocationsLink();
 		RepairLocationsWebPage repairLocationsWebPage = new RepairLocationsWebPage(webdriver);
-		repairLocationsWebPage.addNewRepairLocation(data.getRepairLocationName(), data.getApproxRepairTime(), data.getWorkingDay(), data.getStartTime(), data.getFinishTime(), true);
+		repairLocationsWebPage.addNewRepairLocation(data, true);
 		repairLocationsWebPage.makeSearchPanelVisible();
 		repairLocationsWebPage.setSearchLocation(data.getRepairLocationName());
 		repairLocationsWebPage.clickFindButton();
-		repairLocationsWebPage.addPhaseForRepairLocation(data.getRepairLocationName(), data.getPhaseNameStart(), data.getPhaseType(), data.getApproxRepairTime(), data.getApproxRepairTime(), true);
-		repairLocationsWebPage.addPhaseForRepairLocation(data.getRepairLocationName(), data.getPhaseNameOnHold(), data.getPhaseTypeOnHold(), data.getTransitionTime(), data.getRepairTime(), false);
+		repairLocationsWebPage.addPhaseForRepairLocation(data, data.getPhaseNameStart(), data.getPhaseType(), data.getApproxRepairTime(), data.getApproxRepairTime(), true);
+		repairLocationsWebPage.addPhaseForRepairLocation(data, data.getPhaseNameOnHold(), data.getPhaseTypeOnHold(), data.getTransitionTime(), data.getRepairTime(), false);
 		repairLocationsWebPage.assignServiceForRepairLocation(data.getRepairLocationName(), data.getWoType(), data.getServiceNameVacuumCleaner(), data.getPhaseNameOnHold());
 		repairLocationsWebPage.assignServiceForRepairLocation(data.getRepairLocationName(), data.getWoType(), data.getServiceNameWashing(), data.getPhaseNameStart());
 
@@ -86,7 +85,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		repairorderspage.setSearchWoNumber(wonumber);
 		repairorderspage.clickFindButton();
 
-		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(wonumber));
+		repairorderspage.verifyRepairOrderIsDisplayed(wonumber, data.getSearchLocation());
 
 		monitorpage = new MonitorWebPage(webdriver);
 		backOfficeHeader.clickMonitorLink();
@@ -171,7 +170,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		repairorderspage.selectSearchLocation(data.getSearchLocation());
 		repairorderspage.setSearchWoNumber(wonumber);
 		repairorderspage.clickFindButton();
-		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(wonumber));
+		repairorderspage.verifyRepairOrderIsDisplayed(wonumber, data.getSearchLocation());
 
 		monitorpage = new MonitorWebPage(webdriver);
 		backOfficeHeader.clickMonitorLink();

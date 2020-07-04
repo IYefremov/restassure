@@ -1,0 +1,17 @@
+{
+  "customer": "Mike's Techs",
+  "phase": "PDR Station",
+  "woType": "Best",
+  "repairStatus": "In Progress - All",
+  "woNum": "O-062-00068",
+  "stockNum": "Autotests",
+  "etaFromDate": "10/30/2018",
+  "etaToDate": "10/30/2019",
+  "vinNum": "11111",
+  "partNum": "My OEM",
+  "notes": "Autotest",
+  "fromDate": "12/14/2016",
+  "toDate": "12/14/2018",
+  "orderedFrom": "Rozstalnoy_PP",
+  "searchName": "BaseSearchTest"
+}

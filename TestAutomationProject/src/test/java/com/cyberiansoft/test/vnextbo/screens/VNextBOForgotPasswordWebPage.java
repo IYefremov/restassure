@@ -1,21 +1,18 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import org.openqa.selenium.WebDriver;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.concurrent.TimeUnit;
 
 public class VNextBOForgotPasswordWebPage extends VNextBOBaseWebPage {
 
 	@FindBy(id = "confirmEmail")
-	private TextField confirmMailFld;
+	private WebElement confirmMailFld;
 	
 	@FindBy(xpath = "//input[@value='Submit']")
 	private WebElement submitBtn;
@@ -29,29 +26,23 @@ public class VNextBOForgotPasswordWebPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[contains(@data-bind, 'confirmEmail.hasError')]/p")
 	private WebElement errorMessage;
 	
-	public VNextBOForgotPasswordWebPage(WebDriver driver) {
-		super(driver);
-		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(submitBtn));
+	public VNextBOForgotPasswordWebPage() {
+		super(DriverBuilder.getInstance().getDriver());
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 	
 	public VNextBOLoginScreenWebPage sendConfirmationMail(String userMail) {
 		setConfirmationMailFieldValue(userMail);
 		clickSubmitButton();
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(alertOKBtn)).click();
-        } catch (Exception e) {
-            clickWithJS(alertOKBtn);
-        }
+		Utils.clickElement(alertOKBtn);
 
         return PageFactory.initElements(
 				driver, VNextBOLoginScreenWebPage.class);
 	}
 	
 	public void setConfirmationMailFieldValue(String userMail) {
-		confirmMailFld.clearAndType(userMail);
+		WaitUtilsWebDriver.getWait().until(ExpectedConditions.elementToBeClickable(confirmMailFld));
+		Utils.clearAndType(confirmMailFld, userMail);
 	}
 	
 	public boolean isConfirmationMailFieldDisplayed() {
@@ -65,11 +56,11 @@ public class VNextBOForgotPasswordWebPage extends VNextBOBaseWebPage {
 	public boolean isSubmitButtonDisplayed()  { return submitBtn.isDisplayed(); }
 	
 	public void clickSubmitButton() {
-		submitBtn.click();
+	    Utils.clickElement(submitBtn);
 	}
 
 	public void clickLoginLink() {
-		loginLink.click();
+		Utils.clickElement(loginLink);
 	}
 	
 	public String getErrorMessageValue() {

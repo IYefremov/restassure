@@ -1,7 +1,7 @@
 {
-  "verifyUserCanAnswerQuestionsSeparatley": [
+  "testVerifyUserCanAnswerQuestionsSeparatley": [
     {
-      "rowID": "verifyUserCanAnswerQuestionsSeparatley.01",
+      "rowID": "testVerifyUserCanAnswerQuestionsSeparatley.01",
       "description": "TFSID:90014",
       "targetProcessTestCaseData": [
         {
@@ -43,9 +43,9 @@
       }
     }
   ],
-  "verifyValidationOfRequiredQuestionsOnSaveInspection": [
+  "testVerifyValidationOfRequiredQuestionsOnSaveInspection": [
     {
-      "rowID": "verifyUserCanAnswerQuestionsSeparatley.01",
+      "rowID": "testVerifyValidationOfRequiredQuestionsOnSaveInspection.01",
       "description": "TFSID:90021",
       "targetProcessTestCaseData": [
         {
@@ -62,44 +62,24 @@
           {
             "questionName": "Required question2",
             "questionAnswer": "No"
+          },
+          {
+            "questionName": "Image qst"
           }
         ]
       }
     }
   ],
-  "verifyUserCanAnswerTextQuestionsSeparatley": [
+  "testVerifyUserCanAnswerTextQuestionsSeparatley": [
     {
-      "rowID": " .01",
-      "description": "TFSID: ",
-      "questionScreenData": {
-        "questionsData": [
-          {
-            "questionName": "Multi question required",
-            "questionAnswers": [
-              "Answer 1",
-              "Answer 2"
-            ],
-            "questionAnswer": "Answer 1, Answer 2"
-          },
-          {
-            "questionName": "Single question required",
-            "questionAnswer": "Answer 1",
-            "questionAnswers": [
-              "Answer 1"
-            ]
-          },
-          {
-            "questionName": "Free question",
-            "questionAnswer": "SOME_ANSWER"
-          }
-        ]
-      }
-    }
-  ],
-  "verifyValidationOfRequiredTextQuestionsOnSaveInspection": [
-    {
-      "rowID": " .01",
-      "description": "TFSID: ",
+      "rowID": "testVerifyUserCanAnswerTextQuestionsSeparatley.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91825",
+          "testCaseTitle": "Verify that steps are separated for every question section. User can change or clear answers for its (for 'Text' question type)"
+        }
+      ],
       "questionScreenData": {
         "questionsData": [
           {
@@ -125,9 +105,79 @@
       }
     }
   ],
-  "verifyQuestionsHasDefaultAnswers": [
+  "testVerifyValidationForRequiredQuestionsGoingForwardBackFromQuestionSection": [
     {
-      "rowID": " verifyQuestionsHasDefaultAnswers.01",
+      "rowID": "testVerifyValidationForRequiredQuestionsGoingForwardBackFromQuestionSection.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91827",
+          "testCaseTitle": "Verify validation for required questions going forward/back from question section (for 'Text' question type)"
+        }
+      ],
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Multi question required",
+            "questionAnswers": [
+              "Answer 1",
+              "Answer 2"
+            ],
+            "questionAnswer": "Answer 1, Answer 2"
+          },
+          {
+            "questionName": "Single question required",
+            "questionAnswer": "Answer 1",
+            "questionAnswers": [
+              "Answer 1"
+            ]
+          },
+          {
+            "questionName": "Free question required",
+            "questionAnswer": "SOME_ANSWER"
+          }
+        ]
+      }
+    }
+  ],
+  "testVerifyValidationOfRequiredTextQuestionsOnSaveInspection": [
+    {
+      "rowID": "testVerifyValidationOfRequiredTextQuestionsOnSaveInspection.01",
+      "description": "TFSID: ",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91813",
+          "testCaseTitle": "Verify validation for required questions going forward/back from question section (for \"Traffic-light\" and \"Logical\" question types)"
+        }
+      ],
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Multi question required",
+            "questionAnswers": [
+              "Answer 1",
+              "Answer 2"
+            ],
+            "questionAnswer": "Answer 1, Answer 2"
+          },
+          {
+            "questionName": "Single question required",
+            "questionAnswer": "Answer 1",
+            "questionAnswers": [
+              "Answer 1"
+            ]
+          },
+          {
+            "questionName": "Free question required",
+            "questionAnswer": "SOME_ANSWER"
+          }
+        ]
+      }
+    }
+  ],
+  "testVerifyQuestionsHasDefaultAnswers": [
+    {
+      "rowID": " testVerifyQuestionsHasDefaultAnswers.01",
       "description": "TFSID: 87011",
       "targetProcessTestCaseData": [
         {
@@ -143,21 +193,14 @@
           {
             "questionName": "Test",
             "questionAnswer": "Future Attention Needed"
-          },
-          {
-            "questionName": "No need to setup",
-            "questionAnswer": "Please select answer",
-            "questionAnswers": [
-              "Answer 1"
-            ]
           }
         ]
       }
     }
   ],
-  "verifyQFShownForServiceAndEntityLevels": [
+  "testVerifyQFShownForServiceAndEntityLevels": [
     {
-      "rowID": " verifyQFShownForServiceAndEntityLevels.01",
+      "rowID": " testVerifyQFShownForServiceAndEntityLevels.01",
       "description": "TFSID: 87014",
       "targetProcessTestCaseData": [
         {
@@ -171,55 +214,19 @@
       "questionScreenData": {
         "questionsData": [
           {
-            "questionName": "question2",
+            "questionName": "test 1234",
             "questionAnswers": [
-              "answer2"
+              "Yes"
             ],
-            "questionAnswer": "answer2"
+            "questionAnswer": "Yes"
           }
         ]
       }
     }
   ],
-  "verifyPartServiceIsAddedAndLinkedWithLaborAfterQuestionIsAnswered": [
+  "testVerifyPartServiceIsAddedAndNotLinkedWithLaborAfterQuestionIsAnswered": [
     {
-      "rowID": " verifyPartServiceIsAddedWithLaborAfterQuestionIsAnswered.01",
-      "description": "TFSID: 87012",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91817",
-          "testCaseTitle": "R360 Inspection - Verify that when part service is added with labor as answer services , labor is linked to part after configuration part"
-        }
-      ],
-      "questionScreenData": {
-        "questionsData": [
-          {
-            "questionName": "do you the service?",
-            "questionAnswer": "Checked And OK'd"
-          }
-        ]
-      },
-      "services": [
-        {
-          "serviceName": "Oksi Part service"
-        },
-        {
-          "serviceName": "Labor_base_vehicle_data_all"
-        },
-        {
-          "serviceName": "Bumper"
-        }
-      ],
-      "partServiceDataList": [
-        {
-          "partPosition": "Front"
-        }
-      ]
-    }
-  ],
-  "verifyPartServiceIsAddedAndNotLinkedWithLaborAfterQuestionIsAnswered": [
-    {
-      "rowID": " verifyPartServiceIsAddedAndNotLinkedWithLaborAfterQuestionIsAnswered.01",
+      "rowID": " testVerifyPartServiceIsAddedAndNotLinkedWithLaborAfterQuestionIsAnswered.01",
       "description": "TFSID: 87013",
       "targetProcessTestCaseData": [
         {
@@ -237,10 +244,10 @@
       },
       "services": [
         {
-          "serviceName": "Oksi Part service"
+          "serviceName": "Oksi Part service - Category"
         },
         {
-          "serviceName": "Oksi_Part_Service"
+          "serviceName": "Oksi_Part_Service - Several"
         },
         {
           "serviceName": "Labor with vehicle data"
@@ -252,6 +259,92 @@
           "partName": {
             "partNameList": [
               "Bumper"
+            ],
+            "isMultiSelect": false
+          },
+          "partPosition": "Rear"
+        }
+      ]
+    }
+  ],
+  "testVerifyThatItIsPossibleToSaveEntityWithoutAnswerToNotRequiredQuestion": [
+    {
+      "rowID": " testVerifyThatItIsPossibleToSaveEntityWithoutAnswerToNotRequiredQuestion.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91814",
+          "testCaseTitle": "R360 Inspection - Verify that it is possible to save entity without answer to not required question"
+        }
+      ],
+      "services": [
+        {
+          "serviceName": "Discount"
+        }
+      ]
+    }
+  ],
+  "testVerifyThatItIsPossibleToSetDefaultAnswerForQuestion": [
+    {
+      "rowID": " testVerifyThatItIsPossibleToSetDefaultAnswerForQuestion.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91815",
+          "testCaseTitle": "R360 Inspection - Verify that it is possible to set default answer for question"
+        }
+      ],
+      "services": [
+        {
+          "serviceName": "Discount"
+        }
+      ],
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "No need to setup"
+          },
+          {
+            "questionName": "Test"
+          }
+        ]
+      }
+    }
+  ],
+  "testVerifyThatWhenPartServiceIsAddedWithLaborAsAnswerServicesLaborIsLinkedToPartAfterConfigurationPart": [
+    {
+      "rowID": " testVerifyThatWhenPartServiceIsAddedWithLaborAsAnswerServicesLaborIsLinkedToPartAfterConfigurationPart.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91817",
+          "testCaseTitle": "R360 Inspection - Verify that when part service is added with labor as answer services , labor is linked to part after configuration part"
+        }
+      ],
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Part linked ?",
+            "questionAnswer": "No"
+          }
+        ]
+      },
+      "services": [
+        {
+          "serviceName": "ACES_PART_NA"
+        },
+        {
+          "serviceName": "Air Brake Compressor Crank Shaft Bearing"
+        }
+      ],
+      "partServiceDataList": [
+        {
+          "serviceName": "ACES_PART_NA",
+          "category": "Brake",
+          "subCategory": "Bearings",
+          "partName": {
+            "partNameList": [
+              "Air Brake Compressor Crank Shaft Bearing"
             ],
             "isMultiSelect": false
           },

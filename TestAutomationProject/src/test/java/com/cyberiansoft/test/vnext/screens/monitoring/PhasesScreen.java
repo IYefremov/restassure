@@ -28,8 +28,35 @@ public class PhasesScreen extends MonitorScreen {
     @FindBy(xpath = "//*[@action='parts']")
     private WebElement partsScreenButton;
 
+    @FindBy(xpath = "//*[@class='navbar-panel  main-navbar']/.//*[@class='client-mode']")
+    private WebElement workOrderNumber;
+
+    @FindBy(xpath = "//*[@class='vin-number']")
+    private WebElement phasesVINNumber;
+
+    @FindBy(xpath = "//*[@class='stock-number']")
+    private WebElement phasesStockNumber;
+
     @FindBy(xpath = "//*[@action='quick-actions']")
     private WebElement phasesMenuButton;
+
+    @FindBy(xpath = "//*[@data-action-name='startServices']")
+    private WebElement startServicesButton;
+
+    @FindBy(xpath = "//*[@data-action-name='stopServices']")
+    private WebElement stopServicesButton;
+
+    @FindBy(xpath = "//*[@data-action-name='completeServices']")
+    private WebElement completeServicesButton;
+
+    @FindBy(xpath = "//*[@class='floating-button color-red']")
+    private WebElement addButton;
+
+    @FindBy(xpath = "//*[@class='speed-dial-icon task-button']")
+    private WebElement taskButton;
+
+    @FindBy(xpath = "//*[@class='speed-dial-icon all-services-button']")
+    private WebElement allServicesButton;
 
     public PhasesScreen() {
         PageFactory.initElements(new FiledDecorator(webDriver), this);

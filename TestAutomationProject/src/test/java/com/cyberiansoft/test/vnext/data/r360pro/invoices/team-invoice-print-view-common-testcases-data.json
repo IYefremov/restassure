@@ -1,0 +1,18 @@
+{
+  "workOrderData": {
+    "vihicleInfo": {
+      "vinNumber": "3GNAL2EK6DS624120",
+      "vehicleMake": "Chevrolet",
+      "vehicleModel": "Captiva Sport",
+      "vehicleYear": "2013"
+    },
+    "services": [
+      {
+        "serviceName": "Battery Installation"
+      },
+      {
+        "serviceName": "Labor"
+      }
+    ]
+  }
+}

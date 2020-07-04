@@ -8,7 +8,9 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typessc
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -55,6 +57,9 @@ public class HomeScreen extends iOSHDBaseScreen {
 	
 	@iOSXCUITFindBy(accessibility  = "logout")
     private IOSElement logoutbtn;*/
+
+	@iOSXCUITFindBy(accessibility = "viewPrompt")
+	private IOSElement activecustomer;
 	
 	public HomeScreen() {
 		super();
@@ -116,7 +121,7 @@ public class HomeScreen extends iOSHDBaseScreen {
 
 	public MyInvoicesScreen clickMyInvoices() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Invoices")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Invoices")));
 		appiumdriver.findElementByAccessibilityId("Invoices").click();
 		MyInvoicesScreen myinvoicesscreen = new MyInvoicesScreen();
 		myinvoicesscreen.switchToMyView();
@@ -152,7 +157,7 @@ public class HomeScreen extends iOSHDBaseScreen {
 	
 	public void clickStatusButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Status")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Status")));
 		appiumdriver.findElementByAccessibilityId("Status").click();
 	}
 
@@ -191,6 +196,10 @@ public class HomeScreen extends iOSHDBaseScreen {
 	public MainScreen clickLogoutButton() {
 		appiumdriver.findElementByAccessibilityId("logout").click();
 		return new MainScreen();
+	}
+
+	public String getActiveCustomerValue() {
+		return activecustomer.getAttribute("value");
 	}
 
 }

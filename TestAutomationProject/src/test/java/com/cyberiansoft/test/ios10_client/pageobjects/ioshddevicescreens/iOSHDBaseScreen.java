@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 	
 	
@@ -55,12 +54,13 @@ public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 		//TouchAction act = new TouchAction(appiumdriver);
 		//act.press(startx, starty).waitAction(3000) .moveTo(endx, starty).release().perform();
 		JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
-        HashMap<String, String> swipeObject = new HashMap<String, String>();
+        HashMap<String, String> swipeObject = new HashMap<>();
         swipeObject.put("direction", "left");
         js.executeScript("mobile:swipe", swipeObject);
 		
 	}
-	
+
+	//Todo  always  return  true
 	public boolean selectUIAPickerValue(String value) {
 		int defaultwheelnumer = 10;
 		int clicks = 0;
@@ -79,7 +79,7 @@ public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 	
 	public void swipeScreenUp() {
 		JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
-        HashMap<String, String> swipeObject = new HashMap<String, String>();
+        HashMap<String, String> swipeObject = new HashMap<>();
         swipeObject.put("direction", "up");
         js.executeScript("mobile:swipe", swipeObject);
         
@@ -90,7 +90,7 @@ public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 	}
 	
 	public void swipeTableUp(WebElement tableCell, WebElement table) {
-		int tableHeight = (int) (table.getSize().getHeight());
+		int tableHeight = table.getSize().getHeight();
 		boolean swipe = true;
 		
 		while (swipe) {
@@ -99,7 +99,7 @@ public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 				break;
 			} else if ((tableCell.getLocation().getY()*0.9 > tableHeight)) {
 				JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
-				HashMap<String, String> scrollObject = new HashMap<String, String>();
+				HashMap<String, String> scrollObject = new HashMap<>();
 				scrollObject.put("direction", "up");
 				//scrollObject.put("element", ((IOSElement) table).getId());
 				scrollObject.put("element", ((IOSElement) table).getId());
@@ -111,7 +111,7 @@ public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 
 	public void scrollToElement(MobileElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
-		HashMap<String, String> scrollObject = new HashMap<String, String>();
+		HashMap<String, String> scrollObject = new HashMap<>();
 		//scrollObject.put("direction", "down");
 		scrollObject.put("element", element.getId());
 		scrollObject.put("toVisible", "true");

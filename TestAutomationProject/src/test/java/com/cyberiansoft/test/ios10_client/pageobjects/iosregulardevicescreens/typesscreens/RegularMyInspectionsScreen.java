@@ -1,12 +1,8 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens;
 
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularNotesScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.types.inspectionstypes.IInspectionsTypes;
-import com.cyberiansoft.test.ios10_client.types.workorderstypes.IWorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
@@ -14,12 +10,10 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 
@@ -92,7 +86,7 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	}
 
 	public void waitMyInspectionsScreenLoaded() {
-		FluentWait<WebDriver>  wait = new WebDriverWait(appiumdriver, 30);
+		FluentWait<WebDriver>  wait = new WebDriverWait(appiumdriver, 45);
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId("InspectionsTable")));
 	}
 
@@ -139,10 +133,10 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 
 	public void selectReasonToArchive(String reason) {
 		selectUIAPickerValue(reason);
-		if (appiumdriver.findElements(MobileBy.name("Done")).size() > 1)
-			((WebElement) appiumdriver.findElements(MobileBy.name("Done")).get(1)).click();
-		else
-			appiumdriver.findElement(MobileBy.name("Done")).click();
+		appiumdriver.findElementByAccessibilityId("StringPickerVC_Status Reason")
+				.findElement(MobileBy.AccessibilityId("Done")).click();
+		FluentWait<WebDriver>  wait = new WebDriverWait(appiumdriver, 45);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Archiving inspection...")));
 	}
 	
 	public String getInspectionPriceValue(String inspectionnumber) {
@@ -192,13 +186,13 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		appiumdriver.findElementByAccessibilityId("Status").click();
 	}
 
-	public boolean checkFilterStatusIsSelected(String filterstatus) {
+	public boolean checkFilterStatusIsSelected(InspectionStatus inspectionStatus) {
 		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable[@name='StringSelector']/XCUIElementTypeCell[@name='"
-								+ filterstatus + "_Checked" + "']").size() > 0;
+								+ inspectionStatus.getStatusString() + "_Checked" + "']").size() > 0;
 	}
 
-	public void clickFilterStatus(String filterstatus) {
-		appiumdriver.findElementByAccessibilityId(filterstatus).click();
+	public void clickFilterStatus(InspectionStatus inspectionStatus) {
+		appiumdriver.findElementByAccessibilityId(inspectionStatus.getStatusString()).click();
 	}
 
 	public void clickSaveFilterDialogButton() {
@@ -235,13 +229,13 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 
 	public void selectInspectionForAction(String inspectionNumber) {
 		waitMyInspectionsScreenLoaded();
-		inspectionsTable.findElementByAccessibilityId(inspectionNumber).findElement(MobileBy.className("XCUIElementTypeOther")).click();
-	}
+		inspectionsTable.findElementByAccessibilityId(inspectionNumber).findElement(MobileBy.iOSNsPredicateString("name CONTAINS 'EntityInfoButtonUnchecked'")).click();
+}
 
 	public boolean isInspectionIsApproved(String inspectionNumber) {
 		waitMyInspectionsScreenLoaded();
 		return inspectionsTable.findElement(MobileBy.
-				AccessibilityId(inspectionNumber)).findElement(MobileBy.className("XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked");
+				AccessibilityId(inspectionNumber)).findElement(MobileBy.iOSNsPredicateString("name CONTAINS 'EntityInfoButtonUnchecked'")).getAttribute("name").equals("EntityInfoButtonUnchecked");
 	}
 	
 	public boolean isNotesIconPresentForInspection(String inspectionNumber) {

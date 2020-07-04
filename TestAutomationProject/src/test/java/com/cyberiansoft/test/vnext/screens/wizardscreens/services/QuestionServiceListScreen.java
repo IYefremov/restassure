@@ -21,6 +21,6 @@ public class QuestionServiceListScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@action='save']")
     private WebElement saveButton;
 
-    @FindBy(xpath = "//*[@data-entity-service-id]")
+    @FindBy(xpath = "//*[contains(@data-autotests-id, 'services-list')]/div")
     private List<WebElement> serviceList;
 }

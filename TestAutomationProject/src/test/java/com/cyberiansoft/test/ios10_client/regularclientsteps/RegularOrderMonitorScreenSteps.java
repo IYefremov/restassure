@@ -2,13 +2,10 @@ package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
 import com.cyberiansoft.test.dataclasses.OrderMonitorData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.dataclasses.WorkOrderStatuses;
-import com.cyberiansoft.test.enums.OrderMonitorServiceStatuses;
-import com.cyberiansoft.test.enums.OrderMonitorStatuses;
+import com.cyberiansoft.test.dataclasses.ServiceTechnician;
+import com.cyberiansoft.test.enums.monitor.OrderMonitorServiceStatuses;
+import com.cyberiansoft.test.enums.monitor.OrderMonitorStatuses;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularOrderMonitorScreen;
-import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import org.testng.Assert;
 
 public class RegularOrderMonitorScreenSteps {
 
@@ -38,7 +35,6 @@ public class RegularOrderMonitorScreenSteps {
     public static void startWorkOrder() {
         RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
         orderMonitorScreen.clickStartOrderButton();
-        Assert.assertTrue(Helpers.getAlertTextAndAccept().contains(AlertsCaptions.WOULD_YOU_LIKE_TO_START_REPAIR_ORDER));
     }
 
     public static void selectWorkOrderPhaseStatus(OrderMonitorStatuses orderPhaseStatus) {
@@ -50,8 +46,13 @@ public class RegularOrderMonitorScreenSteps {
     public static void changePhaseStatus(OrderMonitorData orderMonitorData, OrderMonitorStatuses orderPhaseStatus) {
         RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
         selectOrderPhase(orderMonitorData);
-        orderMonitorScreen.clickChangeStatus();
+        clickPhaseChangeStatus();
         orderMonitorScreen.selectOrderPhaseStatus(orderPhaseStatus);
+    }
+
+    public static void clickPhaseChangeStatus() {
+        RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
+        orderMonitorScreen.clickChangeStatus();
     }
 
     public static void selectOrderPhase(OrderMonitorData orderMonitorData) {
@@ -59,8 +60,19 @@ public class RegularOrderMonitorScreenSteps {
         orderMonitorScreen.selectOrderPhase(orderMonitorData.getPhaseName());
     }
 
+    public static void assignTechnicianToOrderPhase(OrderMonitorData orderMonitorData, ServiceTechnician serviceTechnician) {
+        selectOrderPhase(orderMonitorData);
+        RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
+        orderMonitorScreen.clickAssignTechnician();
+        if (orderMonitorData.getPhaseVendor() != null)
+            orderMonitorScreen.selectPhaseVendor(orderMonitorData.getPhaseVendor());
+        RegularServiceDetailsScreenSteps.selectServiceTechnician(serviceTechnician);
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
+    }
+
     public static void clickStartService() {
         RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
         orderMonitorScreen.clickStartService();
     }
+
 }

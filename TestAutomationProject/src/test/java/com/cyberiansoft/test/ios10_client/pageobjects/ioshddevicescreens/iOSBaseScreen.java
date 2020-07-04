@@ -9,16 +9,13 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
@@ -31,8 +28,7 @@ public abstract class iOSBaseScreen {
 	}
 
 	protected boolean elementExists(By locator) {
-		boolean exists = appiumdriver.findElements(locator).size() != 0;
-		return exists;
+        return appiumdriver.findElements(locator).size() != 0;
 	}
 	
 	public void waitForAlert() {
@@ -47,8 +43,7 @@ public abstract class iOSBaseScreen {
 	}
 
 	public boolean elementExists(String xpath) {
-		boolean exists = appiumdriver.findElements(By.xpath(xpath)).size() != 0;
-		return exists;
+        return appiumdriver.findElements(By.xpath(xpath)).size() != 0;
 	}
 	
 	public void swipeScreenUp() {
@@ -62,8 +57,12 @@ public abstract class iOSBaseScreen {
 		//Swipe from Bottom to Top.
 		//TouchAction act = new TouchAction(appiumdriver);
 		//act.press(startx, starty).waitAction(2000) .moveTo(startx, endy).release().perform();
-		MobileElement table = (MobileElement) appiumdriver.
-				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/.."));
+
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 10);
+		MobileElement table = (MobileElement)  wait.until(ExpectedConditions.
+				presenceOfElementLocated(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/..")));
+		//MobileElement table = (MobileElement) appiumdriver.
+		//		findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/.."));
 		
 		TouchAction swipe = new TouchAction(appiumdriver).press(element(table, table.getSize().width/2, table.getSize().height-10))
                 .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2))).moveTo(element(table, table.getSize().width/2, 10)).release();
@@ -74,7 +73,7 @@ public abstract class iOSBaseScreen {
 	
 	public void scrollScreenUp() {
 		JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
-		HashMap<String, String> scrollObject = new HashMap<String, String>();
+		HashMap<String, String> scrollObject = new HashMap<>();
 		scrollObject.put("direction", "down");
 		js.executeScript("mobile: scroll", scrollObject);
 	}
@@ -83,7 +82,7 @@ public abstract class iOSBaseScreen {
 		Dimension size = appiumdriver.manage().window().getSize();
 		int startx = (int) (size.width * 0.20);
 		int endx = (int) (size.width * 0.80);
-		int starty = (int) size.height / 2;
+		int starty = size.height / 2;
 		TouchAction swipe = new TouchAction(appiumdriver).press(PointOption.point(endx, starty))
                 .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2))).moveTo(PointOption.point(startx, starty)).release();
         swipe.perform();

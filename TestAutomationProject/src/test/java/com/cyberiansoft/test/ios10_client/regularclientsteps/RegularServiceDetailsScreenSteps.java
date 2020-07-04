@@ -1,10 +1,8 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
 import com.cyberiansoft.test.dataclasses.*;
-import com.cyberiansoft.test.dataclasses.partservice.PartName;
 import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
-import org.testng.Assert;
 
 import java.util.List;
 
@@ -24,13 +22,13 @@ public class RegularServiceDetailsScreenSteps {
         if (serviceData.getServiceNotes() != null)
             setServiceNotes(serviceData.getServiceNotes());
         if (serviceData.getVehiclePart() != null)
-            slectServiceVehiclePart(serviceData.getVehiclePart());
+            selectServiceVehiclePart(serviceData.getVehiclePart());
         if (serviceData.getVehicleParts() != null)
             selectServiceVehicleParts(serviceData.getVehicleParts());
         if (serviceData.getPreExistingDamage() != null)
             selectPreExistingDamage(serviceData.getPreExistingDamage());
         if (serviceData.getQuestionData() != null)
-            selectedServiceDetailsScreen.answerQuestion2(serviceData.getQuestionData());
+            selectedServiceDetailsScreen.answerServiceQuestion(serviceData.getQuestionData());
         if (serviceData.getQuestionsData() != null)
             selectedServiceDetailsScreen.answerQuestions(serviceData.getQuestionsData());
         if (serviceData.getServicePartData() != null) {
@@ -65,7 +63,7 @@ public class RegularServiceDetailsScreenSteps {
         selectedServiceDetailsScreen.setServiceQuantityValue(serviceQuantity);
     }
 
-    public static void slectServiceVehiclePart(VehiclePartData vehiclePartData) {
+    public static void selectServiceVehiclePart(VehiclePartData vehiclePartData) {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.clickVehiclePartsCell();
         selectedServiceDetailsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
@@ -100,6 +98,11 @@ public class RegularServiceDetailsScreenSteps {
         selectedServiceDetailsScreen.selectTechniciansCustomView();
     }
 
+    public static void selectTechniciansEvenlyView() {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.selectTechniciansEvenlyView();
+    }
+
     public static void selectServiceTechnician(ServiceTechnician serviceTechnician) {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.selecTechnician(serviceTechnician.getTechnicianFullName());
@@ -111,8 +114,8 @@ public class RegularServiceDetailsScreenSteps {
     }
 
     public static void selectServiceAdjustment(ServiceAdjustmentData serviceAdjustmentData) {
+        clickAdjustmentsCell();
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        selectedServiceDetailsScreen.clickAdjustments();
         selectedServiceDetailsScreen.selectAdjustment(serviceAdjustmentData.getAdjustmentData().getAdjustmentName());
     }
 
@@ -185,6 +188,21 @@ public class RegularServiceDetailsScreenSteps {
     public static void clickRemoveServiceButton() {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.clickRemoveServiceButton();
+    }
+
+    public static void answerServiceQuestion(QuestionsData questionsData) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.answerServiceQuestion(questionsData);
+    }
+
+    public static void clickAdjustmentsCell() {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.clickAdjustments();
+    }
+
+    public static void clickServicePartCell() {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.clickServicePartCell();
     }
 
 }

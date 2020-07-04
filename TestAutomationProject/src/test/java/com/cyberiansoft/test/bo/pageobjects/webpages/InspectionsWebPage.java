@@ -2,10 +2,10 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
-import com.cyberiansoft.test.baseutils.DataUtils;
-import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.webelements.*;
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.enums.DateUtils;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -132,7 +132,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	@FindBy(xpath = "//a[contains(text(), 'by VIN')]")
 	private WebElement duplicateByVIN;
 
-	@FindBy(xpath = "//a[contains(text(), 'by VIN and RO#')]")
+	@FindBy(xpath = "//a[contains(text(), 'by VIN / RO#')]")
 	private WebElement duplicateByVINandRO;
 
 	@FindBy(xpath = "//input[contains(@id, 'filterer_dpFrom_dateInput') and contains (@type, 'text')]")
@@ -284,7 +284,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		waitForNewTab();
 	}
 
-	public void clickDuplicateByVINandROLink() {
+	public void clickDuplicateByVINAndROLink() {
 		wait.until(ExpectedConditions.elementToBeClickable(duplicateByVINandRO)).click();
 		waitForNewTab();
 	}
@@ -317,7 +317,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		if (row != null) {
 			approved = row.findElement(By.xpath(".//img[@title='Approved']")).isDisplayed();
 		} else {
-			Assert.assertTrue(false, "Can't find " + inspnumber + " inspection");
+			Assert.fail("Can't find " + inspnumber + " inspection");
 		}
 		return approved;
 	}
@@ -361,7 +361,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		if (row != null) {
 			row.findElement(By.xpath(".//a[contains(text(), '" + inspnumber + "')]")).click();
 		} else {
-			Assert.assertTrue(false, "Can't find " + inspnumber + " inspection");
+			Assert.fail("Can't find " + inspnumber + " inspection");
 		}
 	}
 
@@ -371,7 +371,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 			clickApproveMarkerTableRow(row);
 			acceptAlert();
 		} else {
-			Assert.assertTrue(false, "Can't find " + inspnumber + " inspection");
+			Assert.fail("Can't find " + inspnumber + " inspection");
 		}
 	}
 
@@ -389,8 +389,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 			// Thread.sleep(5000);
 			// driver.findElement(By.id("btnDecline")).click();
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("btnDecline"))).click();
-			;
-			// perform actions on new window
+            // perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);
 		}
@@ -401,7 +400,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	public void approveInspectionByNumber(String inspnumber) {
 		makeSearchPanelVisible();
 		selectSearchTimeframe("Custom");
-		setTimeFrame(CustomDateProvider.getCurrentDateFormatted(), CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
+		setTimeFrame(CustomDateProvider.getCurrentDateInShortFormat(), CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		setInspectionNumberSearchCriteria(inspnumber);
 		clickFindButton();
 		waitForLoading();
@@ -500,6 +499,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 			driver.switchTo().window(newwin);
 			BaseUtils.waitABit(2000);
 
+			WaitUtils.waitUntilElementIsClickable(driver.findElement(By.xpath("//tr[@class='custom-total-row']/td[2]/div")));
 			WebElement totalrow = driver.findElements(By.xpath("//tr[@class='custom-total-row']/td[2]/div")).get(driver.findElements(By.xpath("//tr[@class='custom-total-row']/td[2]/div")).size() - 2);
 			totalapproved = totalrow.getText();
 			driver.close();
@@ -509,22 +509,12 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	}
 
 	public void verifyVINIsPresentForInspection(String inspnumber, String VIN) {
-		clickInspectionLink(inspnumber);
-		waitForNewTab();
-		// driver.findElement(By.xpath("//button[contains(text(),'Approve')]"));
-		Set<String> handles = driver.getWindowHandles();
-		Iterator<String> it = handles.iterator();
-		// iterate through your windows
-		while (it.hasNext()) {
-			String parent = it.next();
-			String newwin = it.next();
-			driver.switchTo().window(newwin);
-			waitABit(5000);
-			Assert.assertTrue(driver.findElement(By.xpath("//td[@id='vinBlock']")).getText().contains(VIN));
-			driver.close();
-			driver.switchTo().window(parent);
-		}
-
+		WebElement row = getTableRowWithInspection(inspnumber);
+		Actions move = new Actions(driver);
+		move.moveToElement(row.findElement(By.xpath(".//span[contains(@id, 'lblVin')]"))).perform();
+		Assert.assertTrue(driver.findElement(
+				By.xpath("//div[contains(@id, 'RadToolTipWrapper')]/table/tbody/tr[2]/td[2]")).getText()
+				.contains(VIN));
 	}
 
 	public String getInspectionAmountApproved(String inspnumber) {
@@ -533,7 +523,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		if (row != null) {
 			amaounapproved = row.findElement(By.xpath(".//td[" + getTableRowWithInspectionsApproved() + "]")).getText();
 		} else {
-			Assert.assertTrue(false, "Can't find " + inspnumber + " inspection");
+			Assert.fail("Can't find " + inspnumber + " inspection");
 		}
 		return amaounapproved;
 	}
@@ -544,7 +534,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		if (row != null) {
 			reason = row.findElement(By.xpath(".//td[" + getTableRowWithInspectionsReason() + "]")).getText();
 		} else {
-			Assert.assertTrue(false, "Can't find " + inspnumber + " inspection");
+			Assert.fail("Can't find " + inspnumber + " inspection");
 		}
 		return reason;
 	}
@@ -556,7 +546,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 			status = row.findElement(By.xpath(".//td[" + getTableRowWithInspectionsStatus() + "]/img"))
 					.getAttribute("title");
 		} else {
-			Assert.assertTrue(false, "Can't find " + inspnumber + " inspection");
+			Assert.fail("Can't find " + inspnumber + " inspection");
 		}
 		return status;
 	}
@@ -615,7 +605,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 			act.click(getTableRowWithInspection(inspectionnumber)
 					.findElement(By.xpath(".//span[text()='" + menuitem + "']"))).perform();
 		} else {
-			Assert.assertTrue(false, "Can't find " + inspectionnumber + " incpection");
+			Assert.fail("Can't find " + inspectionnumber + " incpection");
 		}
 	}
 
@@ -652,7 +642,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 				driver.switchTo().window(activeHandle);
 			}
 		}
-		waitForLoading();
+//		waitForLoading();
 	}
 
 	public String getFirstInspectionNumber() {
@@ -672,8 +662,8 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	}
 
 	public String getChangedInspectionDate(int day) {
-		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DataUtils.FULL_DATE_FORMAT.getData());
-		LocalDate localDate = LocalDate.parse(getFirstInspectionDate(), dateFormat.withZone(ZoneId.of(DataUtils.ZONE_ID.getData())));
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat());
+		LocalDate localDate = LocalDate.parse(getFirstInspectionDate(), dateFormat.withZone(ZoneId.of(DateUtils.ZONE_ID.getFormat())));
 		localDate = localDate.minusMonths(1);
 		return localDate.withDayOfMonth(day).format(dateFormat);
 	}

@@ -5,32 +5,31 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.dataclasses.MatrixServiceData;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.ibs.pageobjects.webpages.IBSLoginWebPage;
-import com.cyberiansoft.test.vnext.config.VNextEnvironmentInfo;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.*;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
+import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.steps.customers.CustomersScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
-import com.cyberiansoft.test.vnext.testcases.VNextBaseTestCase;
+import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
+import com.cyberiansoft.test.vnext.testcases.r360free.VNextBaseTestCase;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
-import com.cyberiansoft.test.vnextbo.screens.*;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
+import com.cyberiansoft.test.vnext.validations.SelectedServicesScreenValidations;
+import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOApproveAccountWebPage;
+import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -44,9 +43,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.time.Duration;
 import java.util.List;
 
+
+//todo: This suite should be removed!
 public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 
 
@@ -64,23 +64,22 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
     @AfterClass(description = "Setting up new suite")
     public void tearDown() {
         AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-        //DriverBuilder.getInstance().getAppiumDriver().resetApp();
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().resetApp();
     }
 
     @BeforeMethod(description = "Setting up new suite")
     public void resetApk() throws IOException, UnirestException {
 
-        EnvironmentType envType = EnvironmentType.getEnvironmentType(VNextEnvironmentInfo.getInstance().getEnvironmentType());
+        EnvironmentType envType = EnvironmentType.QC;
         NadaEMailService nada = new NadaEMailService();
         nada.setEmailId(userregmail);
         nada.deleteAllMessages();
         VNextAppUtils.resetApp();
         AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 
-        VNextEditionsScreen editionsScreen = new VNextEditionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextEditionsScreen editionsScreen = new VNextEditionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360");
         environmentSelectionScreen.selectEnvironment(envType);
-        //BaseUtils.waitABit(15*1000);
         AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
         AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
     }
@@ -98,35 +97,35 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         //userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
         //userregmail = usermailprefix + "99999111" + usermailpostbox;
 
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         regscreen.setUserRegistrationInfo(userfirstname, userlastname, userphonecountrycode, userregphone, userregmail);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
         regscreen.clickClearUserButton();
-        VNextModalDialog registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextModalDialog registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
 
         regscreen.clickDoneButton();
-        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
         verificationscreen.clickVerifyButton();
-        //registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        //registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 		
 		/*BaseUtils.waitABit(2000);
-		DriverBuilder.getInstance().getAppiumDriver().switchTo().defaultContent();
+		ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
 		BaseUtils.waitABit(5000);*/
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
         BaseUtils.waitABit(2000);
-        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
         BaseUtils.waitABit(2000);
         newuserpersonalinfoscreen.clickDoneButton();
 
-        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //reglineofbusinessscreen.selectEdition(boeditionname);
         reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
-        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
         Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
         Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), boeditionname);
@@ -134,10 +133,10 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         //Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
         registrationoverviewscreen.clickDoneButton();
         VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen =
-                new VNextRegistrationOverviewLegalInfosScreen(DriverBuilder.getInstance().getAppiumDriver());
+                new VNextRegistrationOverviewLegalInfosScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         registrationoverviewlegalinfoscreen.agreetermsAndconditions();
         registrationoverviewlegalinfoscreen.clickSubmitButton();
-		/*verificationscreen = new VNextVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
+		/*verificationscreen = new VNextVerificationScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		String regcode = VNextWebServicesUtils.getDeviceRegistrationCode(userregmail).replaceAll("\"", "");
 		verificationscreen.setDeviceRegistrationCode(regcode);
 		verificationscreen.clickVerifyButton();*/
@@ -159,9 +158,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         WebDriverUtils.webdriverGotoWebPage(newbourl);
         VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
                 webdriver, VNextBOApproveAccountWebPage.class);
-        VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
-
-        loginpage.userLogin(userregmail, confirmpsw);
+        VNextBOLoginSteps.userLogin(userregmail, confirmpsw);
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         Assert.assertFalse(leftmenu.isUsersMenuItemExists());
@@ -193,37 +190,37 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 
 
         //userregmail = usermailprefix + "99999111" + usermailpostbox;
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         regscreen.setUserRegistrationInfo(newuserfirstname, newuserlastname, userphonecountrycode, userregphone, userregmail);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
         regscreen.clickClearUserButton();
-        VNextModalDialog registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextModalDialog registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
         regscreen.clickDoneButton();
         BaseUtils.waitABit(3000);
-        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
         verificationscreen.clickVerifyButton();
-        //registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        //registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 
         BaseUtils.waitABit(2000);
-        DriverBuilder.getInstance().getAppiumDriver().switchTo().defaultContent();
+        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
         BaseUtils.waitABit(5000);
 
-        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         newuserpersonalinfoscreen.setNewUserPersonaInfo(newusercompanyname,
                 newuseraddress1, newuseraddress2, newusercity, newuserzip, newusercountry, newuserstate);
         newuserpersonalinfoscreen.clickDoneButton();
-        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //reglineofbusinessscreen.selectEdition(boeditionname);
         reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
         //reglineofbusinessscreen.clickDoneButton();
-        DriverBuilder.getInstance().getAppiumDriver().switchTo().defaultContent();
+        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
         BaseUtils.waitABit(2000);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationPaymentInfoScreen registrationpaymentinfoscreen = new VNextRegistrationPaymentInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationPaymentInfoScreen registrationpaymentinfoscreen = new VNextRegistrationPaymentInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         registrationpaymentinfoscreen.setUserPaiymentInfo(userpaymentname, usercardnumber,
                 expmonth, expyear, securitycode);
         registrationpaymentinfoscreen.clickUseRegistrationAddress();
@@ -235,7 +232,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         Assert.assertEquals(registrationpaymentinfoscreen.getUserCountryValue(), newusercountry);
         Assert.assertEquals(registrationpaymentinfoscreen.getUserStateValue(), newuserstate);
         registrationpaymentinfoscreen.clickDoneButton();
-        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), newuserfirstname);
         Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), newuserlastname);
         Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), newusercompanyname);
@@ -244,7 +241,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         registrationoverviewscreen.clickDoneButton();
         //registrationoverviewscreen.waitABit(10000);
         VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen =
-                new VNextRegistrationOverviewLegalInfosScreen(DriverBuilder.getInstance().getAppiumDriver());
+                new VNextRegistrationOverviewLegalInfosScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         registrationoverviewlegalinfoscreen.agreetermsAndconditions();
         registrationoverviewlegalinfoscreen.agreePaymentTerms();
         BaseUtils.waitABit(1000);
@@ -270,9 +267,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         WebDriverUtils.webdriverGotoWebPage(newbourl);
         VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
                 webdriver, VNextBOApproveAccountWebPage.class);
-        VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
-
-        loginpage.userLogin(userregmail, confirmpsw);
+        VNextBOLoginSteps.userLogin(userregmail, confirmpsw);
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         Assert.assertTrue(leftmenu.isUsersMenuItemExists());
@@ -291,33 +286,33 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 
         //userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
         //userregmail = usermailprefix + "99999111" + usermailpostbox;
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         regscreen.setUserRegistrationInfo(userfirstname, userlastname, userphonecountrycode, userregphone, userregmail);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
         regscreen.clickClearUserButton();
-        VNextModalDialog registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextModalDialog registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
 
         regscreen.clickDoneButton();
-        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
         verificationscreen.clickVerifyButton();
-        //registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        //registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 
         BaseUtils.waitABit(2000);
-        DriverBuilder.getInstance().getAppiumDriver().switchTo().defaultContent();
+        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
         BaseUtils.waitABit(5000);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
         newuserpersonalinfoscreen.clickDoneButton();
-        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //reglineofbusinessscreen.selectEdition(boeditionname);
         reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
         //reglineofbusinessscreen.clickDoneButton();
-        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
         Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
         Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), boeditionname);
@@ -325,7 +320,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         //Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
         registrationoverviewscreen.clickDoneButton();
         VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen =
-                new VNextRegistrationOverviewLegalInfosScreen(DriverBuilder.getInstance().getAppiumDriver());
+                new VNextRegistrationOverviewLegalInfosScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         registrationoverviewlegalinfoscreen.agreetermsAndconditions();
         registrationoverviewlegalinfoscreen.clickSubmitButton();
 
@@ -335,19 +330,19 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 
         AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 
-        VNextEditionsScreen editionsScreen = new VNextEditionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextEditionsScreen editionsScreen = new VNextEditionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360");
         environmentSelectionScreen.selectEnvironment(envType);
         //BaseUtils.waitABit(15*1000);
         AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
         AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-        regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        regscreen = new VNextRegistrationPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         regscreen.setFirstName(userfirstname);
         regscreen.setLastName(userlastname);
         regscreen.setPhoneNumber("3182324555");
         regscreen.setEmail(userregmail);
         regscreen.clickDoneButton();
-        VNextPhoneMismatchDialog phonemismatchdlg = new VNextPhoneMismatchDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextPhoneMismatchDialog phonemismatchdlg = new VNextPhoneMismatchDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertTrue(phonemismatchdlg.getInformationDialogBodyMessage().contains("Phone doesn't match this email"));
         phonemismatchdlg.clickEmailMeMyPhoneButton();
 
@@ -376,32 +371,32 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         final String bolineofbusiness = "PDR/Hail";
         final String userstate = "California";
 
-        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         regscreen.setUserRegistrationInfo(userfirstname, userlastname, userphonecountrycode, userregphone, userregmail);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
         regscreen.clickClearUserButton();
-        VNextModalDialog registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextModalDialog registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
 
         regscreen.clickDoneButton();
-        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
         verificationscreen.clickVerifyButton();
-        //registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        //registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 
         BaseUtils.waitABit(2000);
-        DriverBuilder.getInstance().getAppiumDriver().switchTo().defaultContent();
+        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
         BaseUtils.waitABit(5000);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
         newuserpersonalinfoscreen.clickDoneButton();
-        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //reglineofbusinessscreen.selectEdition(boeditionname);
         reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
         //reglineofbusinessscreen.clickDoneButton();
-        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
         Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
         Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), boeditionname);
@@ -409,7 +404,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         //Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
         registrationoverviewscreen.clickDoneButton();
         VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen =
-                new VNextRegistrationOverviewLegalInfosScreen(DriverBuilder.getInstance().getAppiumDriver());
+                new VNextRegistrationOverviewLegalInfosScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         registrationoverviewlegalinfoscreen.agreetermsAndconditions();
         registrationoverviewlegalinfoscreen.clickSubmitButton();
 
@@ -417,22 +412,22 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         VNextAppUtils.resetApp();
         BaseUtils.waitABit(10 * 1000);
         AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
 
-        VNextEditionsScreen editionsScreen = new VNextEditionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextEditionsScreen editionsScreen = new VNextEditionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360");
         environmentSelectionScreen.selectEnvironment(envType);
         //BaseUtils.waitABit(15*1000);
         AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
         AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
 
-        regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        regscreen = new VNextRegistrationPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         regscreen.setFirstName(userfirstname);
         regscreen.setLastName(userlastname);
         regscreen.setPhoneNumber(userregphone);
         regscreen.setEmail("nonexistent@gmail.com");
         regscreen.clickDoneButton();
-        VNextEmailMismatchDialog mailmismatchdlg = new VNextEmailMismatchDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextEmailMismatchDialog mailmismatchdlg = new VNextEmailMismatchDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertTrue(mailmismatchdlg.getInformationDialogBodyMessage().contains("Email doesn't match this phone"));
         mailmismatchdlg.clickTextEmailAddressButton();
     }
@@ -447,32 +442,32 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         final String bolineofbusiness = "PDR/Hail";
         final String userstate = "California";
 
-        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         regscreen.setUserRegistrationInfo(userfirstname, userlastname, userphonecountrycode, userregphone, userregmail);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
         regscreen.clickClearUserButton();
-        VNextModalDialog registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextModalDialog registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
 
         regscreen.clickDoneButton();
-        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
         verificationscreen.clickVerifyButton();
-        //registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        //registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 
         BaseUtils.waitABit(2000);
-        DriverBuilder.getInstance().getAppiumDriver().switchTo().defaultContent();
+        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
         BaseUtils.waitABit(5000);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
         newuserpersonalinfoscreen.clickDoneButton();
-        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //reglineofbusinessscreen.selectEdition(boeditionname);
         reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
         //reglineofbusinessscreen.clickDoneButton();
-        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
         Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
         Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), boeditionname);
@@ -480,7 +475,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         //Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
         registrationoverviewscreen.clickDoneButton();
         VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen =
-                new VNextRegistrationOverviewLegalInfosScreen(DriverBuilder.getInstance().getAppiumDriver());
+                new VNextRegistrationOverviewLegalInfosScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         registrationoverviewlegalinfoscreen.agreetermsAndconditions();
         registrationoverviewlegalinfoscreen.clickSubmitButton();
 
@@ -488,19 +483,19 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         VNextAppUtils.resetApp();
         BaseUtils.waitABit(10 * 1000);
         AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-        VNextEditionsScreen editionsScreen = new VNextEditionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextEditionsScreen editionsScreen = new VNextEditionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360");
         environmentSelectionScreen.selectEnvironment(envType);
         AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
         AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        regscreen = new VNextRegistrationPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         regscreen.setFirstName(userfirstname);
         regscreen.setLastName(userlastname);
         regscreen.setPhoneNumber("3182324584");
         regscreen.setEmail("mpstart@gmail.com");
         regscreen.clickDoneButton();
-        VNextEmailMismatchDialog mailmismatchdlg = new VNextEmailMismatchDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextEmailMismatchDialog mailmismatchdlg = new VNextEmailMismatchDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertTrue(mailmismatchdlg.getInformationDialogBodyMessage().contains("Email doesn't match this phone"));
         mailmismatchdlg.clickTextEmailAddressButton();
 
@@ -508,7 +503,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         regscreen.setEmail(userregmail);
         regscreen.setPhoneNumber("3127641152");
         regscreen.clickDoneButton();
-        VNextPhoneMismatchDialog phonemismatchdialog = new VNextPhoneMismatchDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextPhoneMismatchDialog phonemismatchdialog = new VNextPhoneMismatchDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(phonemismatchdialog.getInformationDialogBodyMessage(), "Warning\nPhone doesn't match this email Email me my phone number");
         phonemismatchdialog.clickEmailMeMyPhoneButton();
     }
@@ -527,34 +522,34 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 
         //userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
         //userregmail = usermailprefix + "99999111" + usermailpostbox;
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         regscreen.setUserRegistrationInfo(userfirstname, userlastname, userphonecountrycode, userregphone, userregmail);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
         regscreen.clickClearUserButton();
-        VNextModalDialog registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextModalDialog registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
 
         regscreen.clickDoneButton();
         BaseUtils.waitABit(2000);
-        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
         verificationscreen.clickVerifyButton();
-        //registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        //registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 
         BaseUtils.waitABit(2000);
-        DriverBuilder.getInstance().getAppiumDriver().switchTo().defaultContent();
+        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
         BaseUtils.waitABit(5000);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
         newuserpersonalinfoscreen.clickDoneButton();
-        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //reglineofbusinessscreen.selectEdition(boeditionname);
         reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
         //reglineofbusinessscreen.clickDoneButton();
-        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
         Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
         Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), boeditionname);
@@ -562,7 +557,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         //Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
         registrationoverviewscreen.clickDoneButton();
         VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen =
-                new VNextRegistrationOverviewLegalInfosScreen(DriverBuilder.getInstance().getAppiumDriver());
+                new VNextRegistrationOverviewLegalInfosScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         registrationoverviewlegalinfoscreen.agreetermsAndconditions();
         registrationoverviewlegalinfoscreen.clickSubmitButton();
         AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
@@ -584,9 +579,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         WebDriverUtils.webdriverGotoWebPage(newbourl);
         VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
                 webdriver, VNextBOApproveAccountWebPage.class);
-        VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
-
-        loginpage.userLogin(userregmail, confirmpsw);
+        VNextBOLoginSteps.userLogin(userregmail, confirmpsw);
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         Assert.assertFalse(leftmenu.isUsersMenuItemExists());
@@ -650,37 +643,35 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         final String[] vehiclepartseverities = {"6-15", "Light 6 to 15", "Light 6 to 15"};
 
         //userregmail = usermailprefix + "99999111" + usermailpostbox;
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         regscreen.setUserRegistrationInfo(newuserfirstname, newuserlastname, userphonecountrycode, userregphone, userregmail);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
         regscreen.clickClearUserButton();
-        VNextModalDialog registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextModalDialog registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
         regscreen.clickDoneButton();
         BaseUtils.waitABit(3000);
-        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
         verificationscreen.clickVerifyButton();
-        //registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
-        //Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 
         BaseUtils.waitABit(2000);
-        DriverBuilder.getInstance().getAppiumDriver().switchTo().defaultContent();
+        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
         BaseUtils.waitABit(5000);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         newuserpersonalinfoscreen.setNewUserPersonaInfo(newusercompanyname,
                 newuseraddress1, newuseraddress2, newusercity, newuserzip, newusercountry, newuserstate);
         newuserpersonalinfoscreen.clickDoneButton();
-        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //reglineofbusinessscreen.selectEdition(boeditionname);
         reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
         //reglineofbusinessscreen.clickDoneButton();
-        DriverBuilder.getInstance().getAppiumDriver().switchTo().defaultContent();
+        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
         BaseUtils.waitABit(2000);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationPaymentInfoScreen registrationpaymentinfoscreen = new VNextRegistrationPaymentInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationPaymentInfoScreen registrationpaymentinfoscreen = new VNextRegistrationPaymentInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         registrationpaymentinfoscreen.setUserPaiymentInfo(userpaymentname, usercardnumber,
                 expmonth, expyear, securitycode);
         registrationpaymentinfoscreen.clickUseRegistrationAddress();
@@ -692,16 +683,14 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         Assert.assertEquals(registrationpaymentinfoscreen.getUserCountryValue(), newusercountryselected);
         Assert.assertEquals(registrationpaymentinfoscreen.getUserStateValue(), newuserstate);
         registrationpaymentinfoscreen.clickDoneButton();
-        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), newuserfirstname);
         Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), newuserlastname);
         Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), newusercompanyname);
         Assert.assertEquals(registrationoverviewscreen.getUserEmailValue(), userregmail);
-        //Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
         registrationoverviewscreen.clickDoneButton();
-        //registrationoverviewscreen.waitABit(10000);
         VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen =
-                new VNextRegistrationOverviewLegalInfosScreen(DriverBuilder.getInstance().getAppiumDriver());
+                new VNextRegistrationOverviewLegalInfosScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         registrationoverviewlegalinfoscreen.agreetermsAndconditions();
         registrationoverviewlegalinfoscreen.agreePaymentTerms();
         Assert.assertEquals(registrationoverviewlegalinfoscreen.getPaymentPriceValue(), "$ 60.00");
@@ -710,46 +699,42 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 
         VNextAppUtils.restartApp();
 
-        WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 240);
+        WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 240);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
-        VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationdlg.clickInformationDialogOKButton();
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-
-        VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-        VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-        newcustomerscreen.setCustomerFirstName(firstname);
-        newcustomerscreen.setCustomerLastName(lastname);
-        newcustomerscreen.setCustomerEmail(customeremail);
-        newcustomerscreen.setCustomerAddress(customeraddress);
-        newcustomerscreen.setCustomerCity(customercity);
-        newcustomerscreen.setCustomerZIP(customerzip);
-        newcustomerscreen.clickSaveCustomerButton();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        HomeScreenSteps.openCreateMyInspection();
+        CustomersScreenSteps.clickAddCustomerButton();
+        VNextNewCustomerScreen newCustomerScreen = new VNextNewCustomerScreen();
+        newCustomerScreen.setCustomerFirstName(firstname);
+        newCustomerScreen.setCustomerLastName(lastname);
+        newCustomerScreen.setCustomerEmail(customeremail);
+        newCustomerScreen.setCustomerAddress(customeraddress);
+        newCustomerScreen.setCustomerCity(customercity);
+        newCustomerScreen.setCustomerZIP(customerzip);
+        newCustomerScreen.clickSaveCustomerButton();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, testVIN);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
-        VNextClaimInfoScreen claimscren = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        claimscren.selectInsuranceCompany("Test Insurance Company");
+        ClaimInfoSteps.selectInsuranceCompany("Test Insurance Company");
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         for (int i = 0; i < availablepricematrixes.length; i++) {
             MatrixServiceData matrixServiceData = new MatrixServiceData();
             AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
-            VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
-            VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclePartsScreen.selectVehiclePart(vehiclepartname);
-            vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
-            vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverities[i]);
-            vehiclepartinfoscreen.clickSaveVehiclePartInfo();
-            vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
-            inspservicesscreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
-            VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
-            Assert.assertTrue(selectedServicesScreen.isPriceMatrixValuePresentForSelectedServicesByName(matrixservice, availablepricematrixes[i]));
-            inspservicesscreen = selectedServicesScreen.switchToAvalableServicesView();
+            VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+            vehiclePartsScreen.selectVehiclePart(vehiclepartname);
+            VNextVehiclePartInfoScreen vehiclePartInfoPage = new VNextVehiclePartInfoScreen();
+            vehiclePartInfoPage.selectVehiclePartSize(vehiclepartsize);
+            vehiclePartInfoPage.selectVehiclePartSeverity(vehiclepartseverities[i]);
+            vehiclePartInfoPage.clickSaveVehiclePartInfo();
+            vehiclePartsScreen.clickVehiclePartsSaveButton();
+            SelectedServicesScreenSteps.switchToSelectedService();
+            SelectedServicesScreenValidations.validateMatrixServiceIsSelectedForService(matrixservice, availablepricematrixes[i]);
+            AvailableServicesScreenSteps.switchToAvailableServices();
         }
-        inspectionsscreen = inspservicesscreen.cancelInspection();
-        inspectionsscreen.clickBackButton();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(testName = "Test Case 63612:Verify user can create Repair Free Edition, "
@@ -784,36 +769,36 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 
 
         //userregmail = usermailprefix + "99999111" + usermailpostbox;
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         regscreen.setUserRegistrationInfo(newuserfirstname, newuserlastname, userphonecountrycode, userregphone, userregmail);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
         regscreen.clickClearUserButton();
-        VNextModalDialog registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextModalDialog registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
         regscreen.clickDoneButton();
         BaseUtils.waitABit(3000);
-        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
         verificationscreen.clickVerifyButton();
-        //registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        //registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 
         BaseUtils.waitABit(2000);
-        DriverBuilder.getInstance().getAppiumDriver().switchTo().defaultContent();
+        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
         BaseUtils.waitABit(5000);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         newuserpersonalinfoscreen.setNewUserPersonaInfo(newusercompanyname,
                 newuseraddress1, newuseraddress2, newusercity, newuserzip, newusercountry, newuserstate);
         newuserpersonalinfoscreen.clickDoneButton();
-        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //reglineofbusinessscreen.selectEdition(boeditionname);
         reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
         //reglineofbusinessscreen.clickDoneButton();
-        DriverBuilder.getInstance().getAppiumDriver().switchTo().defaultContent();
+        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
 
-        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), newuserfirstname);
         Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), newuserlastname);
         Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), newusercompanyname);
@@ -827,41 +812,41 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         Assert.assertEquals(registrationoverviewscreen.getCountryValue(), newusercountry);
         registrationoverviewscreen.clickDoneButton();
         VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen =
-                new VNextRegistrationOverviewLegalInfosScreen(DriverBuilder.getInstance().getAppiumDriver());
+                new VNextRegistrationOverviewLegalInfosScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         registrationoverviewlegalinfoscreen.agreetermsAndconditions();
         registrationoverviewlegalinfoscreen.clickSubmitButton();
 
         BaseUtils.waitABit(10000);
         VNextAppUtils.restartApp();
-        WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 90);
+        WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 90);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
-        VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationdlg.clickInformationDialogOKButton();
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen();
         Assert.assertTrue(homescreen.isUpgrateToProBannerVisible());
 
 
         //todo: Test Case 63613:Verify Repair 360 Free Edition user can select only one matrix type not valid anymore
 		/*VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-		newcustomerscreen.setCustomerFirstName(firstname);
-		newcustomerscreen.setCustomerLastName(lastname);
-		newcustomerscreen.setCustomerEmail(customeremail);
-		newcustomerscreen.setCustomerAddress(customeraddress);
-		newcustomerscreen.setCustomerCity(customercity);
-		newcustomerscreen.setCustomerZIP(customerzip);
-		newcustomerscreen.clickSaveCustomerButton();
+		VNextCustomersScreen customersScreen = inspectionsscreen.clickAddInspectionButton();
+		VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
+		newCustomerScreen.setCustomerFirstName(firstname);
+		newCustomerScreen.setCustomerLastName(lastname);
+		newCustomerScreen.setCustomerEmail(customeremail);
+		newCustomerScreen.setCustomerAddress(customeraddress);
+		newCustomerScreen.setCustomerCity(customercity);
+		newCustomerScreen.setCustomerZIP(customerzip);
+		newCustomerScreen.clickSaveCustomerButton();
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenInteractions.setVin(testVIN);
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextClaimInfoScreen claimscren = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-		claimscren.selectInsuranceCompany("Test Insurance Company");		
+		VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		claimInfoScreen.selectInsuranceCompany("Test Insurance Company");		
 		vehicleinfoscreen.swipeScreensLeft(2);			
-		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
-		inspservicesscreen.selectMatrixService(matrixservice);
-		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		availableServicesScreen.selectMatrixService(matrixservice);
+		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), availablepricematrix);
 
 		Assert.assertTrue(selectedServicesScreen.isServiceSelected(matrixservice));
@@ -890,34 +875,34 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 
         //userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
         //userregmail = usermailprefix + "99999111" + usermailpostbox;
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         regscreen.setUserRegistrationInfo(userfirstname, userlastname, userphonecountrycode, userregphone, userregmail);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
         regscreen.clickClearUserButton();
-        VNextModalDialog registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextModalDialog registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
 
         regscreen.clickDoneButton();
         BaseUtils.waitABit(4000);
-        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
         verificationscreen.clickVerifyButton();
-        //registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        //registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 
         BaseUtils.waitABit(2000);
-        DriverBuilder.getInstance().getAppiumDriver().switchTo().defaultContent();
+        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
         BaseUtils.waitABit(5000);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
         newuserpersonalinfoscreen.clickDoneButton();
-        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //reglineofbusinessscreen.selectEdition(boeditionname);
         reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
         //reglineofbusinessscreen.clickDoneButton();
-        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
         Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
         Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), boeditionname);
@@ -925,19 +910,19 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         //Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
         registrationoverviewscreen.clickDoneButton();
         VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen =
-                new VNextRegistrationOverviewLegalInfosScreen(DriverBuilder.getInstance().getAppiumDriver());
+                new VNextRegistrationOverviewLegalInfosScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         registrationoverviewlegalinfoscreen.agreetermsAndconditions();
         registrationoverviewlegalinfoscreen.clickSubmitButton();
 
         BaseUtils.waitABit(15000);
         VNextAppUtils.restartApp();
-        WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 90);
+        WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 90);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
-        VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationdlg.clickInformationDialogOKButton();
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
-        VNextFeedbackScreen feedbackscreen = statusscreen.clickFeedbackButton();
+        HomeScreenSteps.openStatus();
+        StatusScreenSteps.openFeedBackScreen();
+        VNextFeedbackScreen feedbackscreen = new VNextFeedbackScreen();
         feedbackscreen.selectFeedbackType(feedbackType);
         feedbackscreen.selectArea(feedbackArea, subArea);
         feedbackscreen.setFeedbackSubject(feedbackSubject);
@@ -951,142 +936,6 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
                         .withSubject("Test Feedback Repair360");
         Assert.assertTrue(nada.waitForMessage(searchParametersBuilder));
 
-    }
-
-    @Test(testName = "Test Case 64407:R360: submit Customer Feedback from Repair360 ediition (upgraded from free)",
-            description = "Submit Customer Feedback from Repair360 ediition (upgraded from free)")
-    public void testSubmitCustomerFeedbackFromRepair360FreeEdiitionUpgratedFromFree() throws Exception {
-
-        final String userfirstname = "QA";
-        final String userlastname = "QA";
-        final String boeditionname = "Repair360 Free";
-        final String bolineofbusiness = "PDR/Hail";
-        final String userstate = "California";
-
-
-        final String edition = "Repair360";
-        final String userfullname = "Oleksandr Kramar";
-        final String cardnumber = "4242424242424242";
-        final String expirationmonth = "09";
-        final String expirationyear = "2021";
-        final String cvccode = "122";
-        final String billindaddressline1 = "First street 21/13";
-        final String billindcity = "New York";
-        final String billindzip = "79031";
-        final String billingcountry = "United States of America";
-        final String billingstate = "California";
-
-        final String feedbackType = "Feature Request";
-        final String feedbackArea = "Customers";
-        final String subArea = "Create/Edit customer";
-        final String feedbackSubject = "Test Feedback Repair360";
-        final String feedbackDesc = "Testing kayako ticket creation from feedback send from Repair360 Free";
-
-
-        //userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
-        //userregmail = usermailprefix + "99999111" + usermailpostbox;
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        regscreen.setUserRegistrationInfo(userfirstname, userlastname, userphonecountrycode, userregphone, userregmail);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        regscreen.clickClearUserButton();
-        VNextModalDialog registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
-        Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
-
-        regscreen.clickDoneButton();
-        BaseUtils.waitABit(4000);
-        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
-        verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
-        verificationscreen.clickVerifyButton();
-        //registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
-        //Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
-
-        BaseUtils.waitABit(2000);
-        DriverBuilder.getInstance().getAppiumDriver().switchTo().defaultContent();
-        BaseUtils.waitABit(5000);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
-        newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
-        newuserpersonalinfoscreen.clickDoneButton();
-        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(DriverBuilder.getInstance().getAppiumDriver());
-        //reglineofbusinessscreen.selectEdition(boeditionname);
-        reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
-        //reglineofbusinessscreen.clickDoneButton();
-        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(DriverBuilder.getInstance().getAppiumDriver());
-        Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
-        Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
-        Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), boeditionname);
-        Assert.assertEquals(registrationoverviewscreen.getUserEmailValue(), userregmail);
-        //Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
-        registrationoverviewscreen.clickDoneButton();
-        VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen =
-                new VNextRegistrationOverviewLegalInfosScreen(DriverBuilder.getInstance().getAppiumDriver());
-        registrationoverviewlegalinfoscreen.agreetermsAndconditions();
-        registrationoverviewlegalinfoscreen.clickSubmitButton();
-
-        BaseUtils.waitABit(25000);
-        VNextAppUtils.restartApp();
-        WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 90);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
-        VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
-        informationdlg.clickInformationDialogOKButton();
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        //homescreen.clickUpgrateToProBanner();
-        VNextStatusScreen statuscsreen = homescreen.clickStatusMenuItem();
-        VNextEmailVerificationScreen emailverificationscren = statuscsreen.goToBackOfficeButton();
-        emailverificationscren.setEmailAddress(userregmail);
-        emailverificationscren.clickActivateButton();
-
-        NadaEMailService nada = new NadaEMailService();
-        nada.setEmailId(userregmail);
-        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
-                new NadaEMailService.MailSearchParametersBuilder()
-                        .withSubject("Repair360 Free: REGISTRATION");
-        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
-        nada.deleteMessageWithSubject("Repair360 Free: REGISTRATION");
-        String linkText = "Click here";
-        List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText);
-
-        String newbourl = allMatches.get(0).substring(0, allMatches.get(0).indexOf("\" style"));
-
-        WebDriver
-                webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-        WebDriverUtils.webdriverGotoWebPage(newbourl);
-        VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
-                webdriver, VNextBOApproveAccountWebPage.class);
-        VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
-
-        loginpage.userLogin(userregmail, confirmpsw);
-        VNexBOLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
-                VNexBOLeftMenuPanel.class);
-        leftMenuPanel.expandMainMenu();
-        VNextBOHeaderPanelSteps.clickUpgradeNowBanner();
-        VNextUpgradeInfoWebPage upgradeinfopage = new VNextUpgradeInfoWebPage(webdriver);
-
-        VNextPaymentInfoWebPage paymentinfopage = upgradeinfopage.clickUnlockRepair360EditionButton();
-
-        paymentinfopage.setUserPaymentsInfo(edition, userfullname, cardnumber,
-                expirationmonth, expirationyear, cvccode, billindaddressline1,
-                billindcity, billindzip, billingcountry, billingstate);
-
-        paymentinfopage.clickSaveAndCloseCongratsModal();
-        webdriver.quit();
-
-        VNextStatusScreen statusscreen = new VNextStatusScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextFeedbackScreen feedbackscreen = statusscreen.clickFeedbackButton();
-        feedbackscreen.selectFeedbackType(feedbackType);
-        feedbackscreen.selectArea(feedbackArea, subArea);
-        feedbackscreen.setFeedbackSubject(feedbackSubject);
-        feedbackscreen.setFeedbackDescription(feedbackDesc);
-        statusscreen = feedbackscreen.clickSendButton();
-        statusscreen.clickBackButton();
-
-        nada = new NadaEMailService();
-        nada.setEmailId(userregmail);
-        searchParametersBuilder =
-                new NadaEMailService.MailSearchParametersBuilder()
-                        .withSubject("Test Feedback Repair360").waitTimeForMessage(Duration.ofMinutes(10), Duration.ofSeconds(30));
-        Assert.assertTrue(nada.waitForMessage(searchParametersBuilder));
     }
 
     @Test(testName = "Test Case 64408:R360: submit Customer Feedback from Repair360 ediition",
@@ -1118,37 +967,37 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         final String feedbackDesc = "Testing kayako ticket creation from feedback send from Repair360 Free";
 
         //userregmail = usermailprefix + "99999111" + usermailpostbox;
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         regscreen.setUserRegistrationInfo(newuserfirstname, newuserlastname, userphonecountrycode, userregphone, userregmail);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
         regscreen.clickClearUserButton();
-        VNextModalDialog registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextModalDialog registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
         regscreen.clickDoneButton();
         BaseUtils.waitABit(3000);
-        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
         verificationscreen.clickVerifyButton();
-        //registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        //registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 
         BaseUtils.waitABit(2000);
-        DriverBuilder.getInstance().getAppiumDriver().switchTo().defaultContent();
+        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
         BaseUtils.waitABit(5000);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         newuserpersonalinfoscreen.setNewUserPersonaInfo(newusercompanyname,
                 newuseraddress1, newuseraddress2, newusercity, newuserzip, newusercountry, newuserstate);
         newuserpersonalinfoscreen.clickDoneButton();
-        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         reglineofbusinessscreen.selectEdition(boeditionname);
         reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
         reglineofbusinessscreen.clickDoneButton();
-        DriverBuilder.getInstance().getAppiumDriver().switchTo().defaultContent();
+        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
         BaseUtils.waitABit(2000);
-        //DriverBuilder.getInstance().getAppiumDriver().switchTo().frame(DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationPaymentInfoScreen registrationpaymentinfoscreen = new VNextRegistrationPaymentInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
+        VNextRegistrationPaymentInfoScreen registrationpaymentinfoscreen = new VNextRegistrationPaymentInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         registrationpaymentinfoscreen.setUserPaiymentInfo(userpaymentname, usercardnumber,
                 expmonth, expyear, securitycode);
         registrationpaymentinfoscreen.clickUseRegistrationAddress();
@@ -1160,7 +1009,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         Assert.assertEquals(registrationpaymentinfoscreen.getUserCountryValue(), newusercountry);
         Assert.assertEquals(registrationpaymentinfoscreen.getUserStateValue(), newuserstate);
         registrationpaymentinfoscreen.clickDoneButton();
-        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), newuserfirstname);
         Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), newuserlastname);
         Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), newusercompanyname);
@@ -1169,7 +1018,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         registrationoverviewscreen.clickDoneButton();
         //registrationoverviewscreen.waitABit(10000);
         VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen =
-                new VNextRegistrationOverviewLegalInfosScreen(DriverBuilder.getInstance().getAppiumDriver());
+                new VNextRegistrationOverviewLegalInfosScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         registrationoverviewlegalinfoscreen.agreetermsAndconditions();
         registrationoverviewlegalinfoscreen.agreePaymentTerms();
         Assert.assertEquals(registrationoverviewlegalinfoscreen.getPaymentPriceValue(), "$ 19.00");
@@ -1178,19 +1027,19 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         BaseUtils.waitABit(10000);
         VNextAppUtils.restartApp();
 
-        WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 90);
+        WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 90);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
-        VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationdlg.clickInformationDialogOKButton();
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
-        VNextFeedbackScreen feedbackscreen = statusscreen.clickFeedbackButton();
+        HomeScreenSteps.openStatus();
+        StatusScreenSteps.openFeedBackScreen();
+        VNextFeedbackScreen feedbackscreen = new VNextFeedbackScreen();
         feedbackscreen.selectFeedbackType(feedbackType);
         feedbackscreen.selectArea(feedbackArea, subArea);
         feedbackscreen.setFeedbackSubject(feedbackSubject);
         feedbackscreen.setFeedbackDescription(feedbackDesc);
-        statusscreen = feedbackscreen.clickSendButton();
-        statusscreen.clickBackButton();
+        feedbackscreen.clickSendButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(testName = "Test Case 83887:Repair360 - Key verification (invalid key)," +
@@ -1204,14 +1053,14 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         final String wrongRegCode = "QAQA";
         final String emptyString = "";
 
-        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         regscreen.setUserRegistrationInfo(userfirstname, userlastname, userphonecountrycode, userregphone, userregmail);
         regscreen.clickClearUserButton();
-        VNextModalDialog registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextModalDialog registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
 
         regscreen.clickDoneButton();
-        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         verificationscreen.setDeviceRegistrationCode(emptyString);
         verificationscreen.clickVerifyButton();
         Assert.assertTrue(verificationscreen.isRegCodeErrorMessageVisible());
@@ -1220,7 +1069,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         verificationscreen.setDeviceRegistrationCode(wrongRegCode);
         verificationscreen.clickVerifyButton();
 
-        VNextModalDialog modalDialog = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextModalDialog modalDialog = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(modalDialog.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.VERIFICATION_CODE_IS_NOT_VALID);
         Assert.assertEquals(verificationscreen.getEnteredDeviceRegistrationCodeValue(), wrongRegCode);
@@ -1239,10 +1088,10 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         final String userlastname = "QA";
         final String wrongRegCode = "QAQA";
 
-        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         regscreen.setUserRegistrationInfo(userfirstname, userlastname, userphonecountrycode, userregphone, userregmail);
         regscreen.clickClearUserButton();
-        VNextModalDialog registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextModalDialog registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
         regscreen.setPhoneNumber("6667777999");
         //regscreen.setEmail("test@cyberiansoft.com");
@@ -1250,7 +1099,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         regscreen.clickDoneButton();
 
 
-        VNextModalDialog modalDialog = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextModalDialog modalDialog = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         System.out.println("==============" + modalDialog.clickInformationDialogOKButtonAndGetMessage());
 
     }
@@ -1264,10 +1113,10 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         final String userlastname = "QA";
         final String emptyString = "";
 
-        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         regscreen.setUserRegistrationInfo(userfirstname, userlastname, userphonecountrycode, userregphone, userregmail);
         regscreen.clickClearUserButton();
-        VNextModalDialog registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextModalDialog registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
         regscreen.setPhoneNumber(emptyString);
         regscreen.clickDoneButton();
@@ -1308,21 +1157,21 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 
         final String bolineofbusiness = "PDR/Hail";
 
-        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         regscreen.setUserRegistrationInfo(userfirstname, userlastname, userphonecountrycode, userregphone, userregmail);
         regscreen.clickClearUserButton();
-        VNextModalDialog registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextModalDialog registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
         regscreen.clickDoneButton();
         BaseUtils.waitABit(4000);
-        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
         verificationscreen.clickVerifyButton();
 
         BaseUtils.waitABit(4000);
-        DriverBuilder.getInstance().getAppiumDriver().switchTo().defaultContent();
+        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
         BaseUtils.waitABit(5000);
-        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         newuserpersonalinfoscreen.clickDoneButton();
         Assert.assertEquals(newuserpersonalinfoscreen.getStateProvinceErrorMessage(),
                 VNextAlertMessages.PLEASE_SELECT_A_STATE_OR_PROVINCE);
@@ -1332,21 +1181,21 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
                 newuseraddress1, newuseraddress2, newusercity, newuserzip, newusercountry, newuserstate);
         newuserpersonalinfoscreen.clickDoneButton();
         BaseUtils.waitABit(4000);
-        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         reglineofbusinessscreen.clickDoneButton();
 
-        registrationinformationdlg = new VNextModalDialog(DriverBuilder.getInstance().getAppiumDriver());
+        registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.PLEASE_SELECT_LINE_OF_BUSINESS);
 
 
         reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
 
-        DriverBuilder.getInstance().getAppiumDriver().switchTo().defaultContent();
+        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
         BaseUtils.waitABit(2000);
 
 
-        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
         Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
         Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), newusercompanyname);
@@ -1359,7 +1208,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         Assert.assertEquals(registrationoverviewscreen.getCountryValue(), newusercountry);
         registrationoverviewscreen.clickDoneButton();
         VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen =
-                new VNextRegistrationOverviewLegalInfosScreen(DriverBuilder.getInstance().getAppiumDriver());
+                new VNextRegistrationOverviewLegalInfosScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         registrationoverviewlegalinfoscreen.agreetermsAndconditions();
         registrationoverviewlegalinfoscreen.clickSubmitButton();
         BaseUtils.waitABit(25 * 1000);
@@ -1370,10 +1219,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
             AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
         }
 
-        WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 340);
+        WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 340);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
-        VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationdlg.clickInformationDialogOKButton();
-        new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
     }
 }

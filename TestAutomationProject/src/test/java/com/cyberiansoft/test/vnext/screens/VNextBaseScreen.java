@@ -1,27 +1,23 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
-import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 @Getter
 public class VNextBaseScreen {
 
-    protected AppiumDriver<MobileElement> appiumdriver;
+    protected WebDriver appiumdriver;
 
     @FindBy(xpath = "//*[@action='show_topbar_popover']")
     private WebElement showTopBarPopover;
@@ -32,73 +28,27 @@ public class VNextBaseScreen {
     @FindBy(xpath = "//*[@action='logout']")
     private WebElement logoutButton;
 
-    public VNextBaseScreen(AppiumDriver<MobileElement> driver) {
+    public VNextBaseScreen(WebDriver driver) {
         this.appiumdriver = driver;
+        PageFactory.initElements(appiumdriver, this);
     }
 
     public VNextBaseScreen() {
-        appiumdriver = DriverBuilder.getInstance().getAppiumDriver();
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        appiumdriver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
+        PageFactory.initElements(appiumdriver, this);
     }
 
     public void tap(WebElement element) {
-        BaseUtils.waitABit(300);
         WaitUtils.click(element);
     }
 
-    private float[] getElementCenter(WebElement element) {
-        AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-        JavascriptExecutor js = (JavascriptExecutor) appiumdriver;
-
-        Long webviewWidth = (Long) js.executeScript("return screen.width");
-        Long webviewHeight = (Long) js.executeScript("return screen.height");
-
-        int elementLocationX = element.getLocation().getX();
-        int elementLocationY = element.getLocation().getY();
-
-        int elementWidthCenter = element.getSize().getWidth() / 2;
-        int elementHeightCenter = element.getSize().getHeight() / 2;
-        int elementWidthCenterLocation = elementWidthCenter + elementLocationX;
-        int elementHeightCenterLocation = elementHeightCenter + elementLocationY;
-
-        AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-        float deviceScreenWidth, deviceScreenHeight;
-
-        int offset = 84;
-
-        deviceScreenWidth = appiumdriver.manage().window().getSize().getWidth();
-        deviceScreenHeight = appiumdriver.manage().window().getSize().getHeight();
-
-        float ratioWidth = deviceScreenWidth / webviewWidth.intValue();
-        float ratioHeight = deviceScreenHeight / webviewHeight.intValue();
-
-        float elementCenterActualX = elementWidthCenterLocation * ratioWidth;
-        float elementCenterActualY = (float) 0.0;
-        if ((elementHeightCenterLocation * ratioHeight) > 1000)
-            elementCenterActualY = (elementHeightCenterLocation * ratioHeight) + offset * 2;
-        else
-            elementCenterActualY = (elementHeightCenterLocation * ratioHeight) + offset;
-        float[] elementLocation = {elementCenterActualX, elementCenterActualY};
-
-        AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-        return elementLocation;
-    }
 
     public void setValue(WebElement element, String value) {
         element.clear();
         element.sendKeys(value);
-        //appiumdriver.getKeyboard().sendKeys(value);
-        try {
-            appiumdriver.hideKeyboard();
-        } catch (WebDriverException e) {
-            //todo:
-        }
-        BaseUtils.waitABit(500);
     }
 
     public void tapListElement(WebElement scrollablelist, String value) {
-
-
         WebElement elem = scrollablelist.findElement(By.xpath(".//div[contains(text(), '" + value + "')]"));
         JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
         je.executeScript("arguments[0].scrollIntoView(true);", elem);
@@ -124,7 +74,10 @@ public class VNextBaseScreen {
         String backButtonLocator = "//*[@action=\"back\"]";
         WaitUtils.getGeneralFluentWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath(backButtonLocator)));
         WaitUtils.waitUntilElementIsClickable(By.xpath(backButtonLocator));
-        WaitUtils.click(By.xpath(backButtonLocator));
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            appiumdriver.findElement(By.xpath(backButtonLocator)).click();
+            return true;
+        });
     }
 
     public void clickScreenForwardButton() {
@@ -135,20 +88,12 @@ public class VNextBaseScreen {
         tap(forwardBtn);
     }
 
-    protected boolean checkHelpPopupPresence() {
-        appiumdriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        boolean exists = false;
-        try {
-            exists = appiumdriver.findElementsByXPath("//div[@class='help-button' and text()='OK, got it']").size() > 0;
-        } catch (NoSuchElementException ignored) {
-            exists = false;
-        }
-        appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        return exists;
-    }
-
     public void changeScreen(ScreenType screen) {
         clickScreenTitleCaption();
+        WaitUtils.click(changeScrenPopover.findElement(By.xpath(".//span[text()='" + screen.getScreenIdentificator() + "']")));
+    }
+
+    public void selectScreen(ScreenType screen) {
         WaitUtils.click(changeScrenPopover.findElement(By.xpath(".//span[text()='" + screen.getScreenIdentificator() + "']")));
     }
 
@@ -164,16 +109,7 @@ public class VNextBaseScreen {
     public void clickScreenTitleCaption() {
         WaitUtils.getGeneralFluentWait().until(driver -> {
             WaitUtils.click(showTopBarPopover);
-            return changeScrenPopover.isDisplayed();
+            return WaitUtils.isElementPresent(changeScrenPopover);
         });
-
-    }
-
-    public boolean elementExists(String xpath) {
-        boolean exists = false;
-        appiumdriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-        exists = appiumdriver.findElementsByXPath(xpath).size() > 0;
-        appiumdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        return exists;
     }
 }

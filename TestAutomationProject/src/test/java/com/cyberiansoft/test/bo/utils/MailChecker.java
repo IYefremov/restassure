@@ -58,7 +58,6 @@ private static boolean textIsHtml = false;
                 if (bp.isMimeType("text/plain")) {
                     if (text == null)
                         text = getText(bp);
-                    continue;
                 } else if (bp.isMimeType("text/html")) {
                     String s = getText(bp);
                     if (s != null)
@@ -210,7 +209,7 @@ private static boolean textIsHtml = false;
                     	System.out.println("Current "+ i + " :"+ "Subject:"+ email);
                     	
                     	if(message.getSubject().contains(subjectKeyword) && email.equals(fromEmail) && diffMinutes<=103){
-                    		List<File> attachments = new ArrayList<File>();
+                    		List<File> attachments = new ArrayList<>();
                     		Multipart multipart = (Multipart) message.getContent();
                     		for (int j = 0; j < multipart.getCount(); j++) {
                     	        BodyPart bodyPart = multipart.getBodyPart(j);
@@ -331,7 +330,7 @@ private static boolean textIsHtml = false;
         try {
             Folder[] f = store.getDefaultFolder().list();
             for (Folder fd : f) {
-                Folder t[] = fd.list();
+                Folder[] t = fd.list();
                 for (Folder f1 : t) {
                     System.out.println("==========" + f1.getName());
                 }

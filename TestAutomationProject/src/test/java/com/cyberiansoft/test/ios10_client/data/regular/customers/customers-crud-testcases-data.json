@@ -1,0 +1,21 @@
+{
+
+  "testCreateRetailCustomer": [
+    {
+      "rowID": "testCreateRetailCustomer.01",
+      "description": "Test Case 8441:Add Retail Customer in regular build",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89034"
+        },
+        {
+          "testCaseID": "89033"
+        },
+        {
+          "testCaseID": "89037"
+        }
+      ]
+    }
+  ]
+
+}

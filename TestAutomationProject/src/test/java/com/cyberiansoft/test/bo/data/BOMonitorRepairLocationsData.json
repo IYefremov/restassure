@@ -62,6 +62,7 @@
       "repairLocationPhaseDescription": "Test Description",
       "repairLocationPhaseType": "In Progress",
       "repairLocationPhaseCheckoutType": "Optional",
+      "workStatusTracking": "Phase Level Only",
       "approxTransTime": "2.0",
       "approxRepairTime": "8.0",
 
@@ -69,6 +70,7 @@
       "repairLocationPhaseDescriptionNew": "Test Description New",
       "repairLocationPhaseTypeNew": "On Hold",
       "repairLocationPhaseCheckoutTypeNew": "Required",
+      "workStatusTrackingNew": "Service And Phase Levels",
       "approxTransTimeNew": "3.0",
       "approxRepairTimeNew": "5.0"
     }
@@ -119,7 +121,7 @@
       "repairLocationName": "test_loc",
       "repairLocationStatus": "Active",
       "repairLocationTimeZone": "Pacific Standard Time",
-      "checkboxesAmount": 28
+      "checkboxesAmount": 126
     }
   ],
 

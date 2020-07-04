@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.ios10_client.hdvalidations;
 
+import com.cyberiansoft.test.dataclasses.OrderMonitorData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.dataclasses.VehiclePartData;
-import com.cyberiansoft.test.enums.OrderMonitorStatuses;
+import com.cyberiansoft.test.enums.monitor.OrderMonitorStatuses;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.OrderMonitorScreen;
 import org.testng.Assert;
 
@@ -26,5 +26,13 @@ public class OrderMonitorScreenValidations {
     public static void verifyOrderPhaseStatus(OrderMonitorStatuses expectedStatus) {
         OrderMonitorScreen orderMonitorScreen = new OrderMonitorScreen();
         Assert.assertEquals(orderMonitorScreen.getOrderMonitorPhaseStatusValue(), expectedStatus.getValue());
+    }
+
+    public static void verifyOrderPhasePresent(OrderMonitorData orderMonitorData, boolean isPresent) {
+        OrderMonitorScreen orderMonitorScreen = new OrderMonitorScreen();
+        if (isPresent)
+            Assert.assertTrue(orderMonitorScreen.isPhaseExists(orderMonitorData.getPhaseName()));
+        else
+            Assert.assertFalse(orderMonitorScreen.isPhaseExists(orderMonitorData.getPhaseName()));
     }
 }

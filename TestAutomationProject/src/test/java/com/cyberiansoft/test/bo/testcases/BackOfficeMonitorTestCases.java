@@ -381,6 +381,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
         Assert.assertTrue(activeVehicleByPhasePage.countLocationsInResultTable() > 0);
 		activeVehicleByPhasePage.setLocationFilter(data.getSearchLocation());
 		Assert.assertTrue(activeVehicleByPhasePage.checkTimeFrameFilter());
+        activeVehicleByPhasePage.setTimeFrameFilter(data.getSearchTimeFrame());
 		activeVehicleByPhasePage.clickFindButton();
         Assert.assertEquals(1, activeVehicleByPhasePage.countLocationsInResultTable());
 		Assert.assertTrue(activeVehicleByPhasePage.checkPhasesInRowCheckBox());
@@ -433,7 +434,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		activeVechicleByPhasePage.clickPhasesInRow();
 		activeVechicleByPhasePage.clickFindButton();
 		Assert.assertTrue(activeVechicleByPhasePage.checkThatAllPhasesAreInStatus("PDR Station", "Active"));
-		SubscriptionsWebPage subscriptionsPege = activeVechicleByPhasePage.clickSubscriptionsButton();
+		BOSubscriptionsPage subscriptionsPege = activeVechicleByPhasePage.clickSubscriptionsButton();
 		Assert.assertTrue(subscriptionsPege.checkGrid());
 		subscriptionsPege.clickAddButton();
 		Assert.assertTrue(subscriptionsPege.checkAddPopUpContent());

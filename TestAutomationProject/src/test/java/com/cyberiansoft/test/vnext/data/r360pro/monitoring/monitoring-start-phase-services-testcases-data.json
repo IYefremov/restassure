@@ -1,0 +1,107 @@
+{
+
+  "testVerifyUserCanChangeStatusForPhase": [
+    {
+      "rowID": "testVerifyUserCanChangeStatusForPhase.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92361",
+          "testCaseTitle": "Verify user can change status for phase"
+        }
+      ],
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "AutomationPhaseLevel",
+          "status": "COMPLETED",
+          "phaseServices": [
+            {
+              "monitorService": {
+                "serviceName": "Expenses_money (AM)"
+              },
+              "monitorServiceStatus": "Completed"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "testVerifyUserCanChangeServicesStatus": [
+    {
+      "rowID": "testVerifyUserCanChangeServicesStatus.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92367",
+          "testCaseTitle": "Verify user can change service's status"
+        },
+        {
+          "testCaseID": "92364",
+          "testCaseTitle": "Verify user can reach the page with the services edit icons"
+        }
+      ],
+      "damageData": {
+        "damageGroupName": "Other",
+        "moneyServices": [
+          {
+            "serviceName": "olrom"
+          },
+          {
+            "serviceName": "Orom_Money_Service"
+          }
+        ]
+      },
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "PhaseAndServiceLevel",
+          "status": "SKIPPED",
+          "phaseServices": [
+            {
+              "monitorService": {
+                "serviceName": "Orom_Money_Service"
+              },
+              "monitorServiceStatus": "Completed"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "testVerifyUserCanStartStopAndCompleteServicesUsingMultiSelects": [
+    {
+      "rowID": "testVerifyUserCanStartStopAndCompleteServicesUsingMultiSelects.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92344",
+          "testCaseTitle": "Verify user can start, stop and complete services using multi select"
+        }
+      ],
+      "damageData": {
+        "damageGroupName": "Other",
+        "moneyServices": [
+          {
+            "serviceName": "olrom"
+          },
+          {
+            "serviceName": "Orom_Money_Service"
+          }
+        ]
+      },
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "PhaseAndServiceLevel",
+          "status": "SKIPPED",
+          "phaseServices": [
+            {
+              "monitorService": {
+                "serviceName": "Orom_Money_Service"
+              },
+              "monitorServiceStatus": "Completed"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

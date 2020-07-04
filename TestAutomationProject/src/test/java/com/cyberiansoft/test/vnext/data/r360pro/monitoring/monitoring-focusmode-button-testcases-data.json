@@ -1,0 +1,64 @@
+{
+
+  "testVerifyTheFocusModeButtonAllowToSeeAndHideSkippedAndCompletedServices_ServiceAndPhaseLevels": [
+    {
+      "rowID": "testVerifyTheFocusModeButtonAllowToSeeAndHideSkippedAndCompletedServices_ServiceAndPhaseLevels.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92334",
+          "testCaseTitle": "Verify the 'Focus mode' button allow to see and hide skipped and completed services(Service And Phase Levels)"
+        }
+      ],
+      "service": {
+        "serviceName": "Labor AM"
+      },
+      "monitoring": {
+        "orderInfoDto": {
+          "vin": "777777"
+        }
+      }
+    }
+  ],
+
+  "testVerifyTheFocusModeButtonAllowToSeeAndHideSkippedAndCompletedServices_ServiceLevelOnly": [
+    {
+      "rowID": "testVerifyTheFocusModeButtonAllowToSeeAndHideSkippedAndCompletedServices_ServiceLevelOnly.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92336",
+          "testCaseTitle": "Verify the 'Focus mode' button allow to see and hide skipped and completed services(Service Level Only)"
+        }
+      ],
+      "service": {
+        "serviceName": "Labor AM"
+      },
+      "monitoring": {
+        "orderInfoDto": {
+          "vin": "777777"
+        }
+      }
+    }
+  ],
+  "testVerifyTheFocusModeButtonAllowToSeeAndHideSkippedAndCompletedServices_PhaseLevelOnly": [
+    {
+      "rowID": "testVerifyTheFocusModeButtonAllowToSeeAndHideSkippedAndCompletedServices_PhaseLevelOnly.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92335",
+          "testCaseTitle": "Verify the 'Focus mode' button allow to see and hide skipped and completed services(Phase Level Only)"
+        }
+      ],
+      "service": {
+        "serviceName": "Labor AM"
+      },
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "AutomationPhaseLevel"
+        }
+      }
+    }
+  ]
+}

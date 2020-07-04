@@ -122,7 +122,7 @@ public class ServiceContractsWebPage extends WebPageWithPagination {
 		waitABit(1000);
 	}
 	
-	public void clickClaimDataButton() throws InterruptedException {
+	public void clickClaimDataButton() {
 		wait.until(ExpectedConditions.elementToBeClickable(repairlocationstable.getWrappedElement()));
 		click(claimdatabtn);
 		waitABit(1000);
@@ -141,12 +141,8 @@ public class ServiceContractsWebPage extends WebPageWithPagination {
 			String url = el.findElement(By.xpath(".//a")).getAttribute("href");
 			urlChecker.setURIToCheck(url);
 		    urlChecker.setHTTPRequestMethod(RequestMethod.GET);
-		    if (browsertype == "ie") {
-		    	Assert.assertEquals(urlChecker.getHTTPSStatusCode(), 200);
-		    } else {
-		    	Assert.assertEquals(urlChecker.getHTTPSStatusCode(), 200);
-		    }
-		}
+            Assert.assertEquals(urlChecker.getHTTPSStatusCode(), 200);
+        }
 	}
 	
 	public void verifyPortfolioOptionsAreOpened() {

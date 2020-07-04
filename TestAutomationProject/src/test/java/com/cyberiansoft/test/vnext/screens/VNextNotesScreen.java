@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,18 +36,17 @@ public class VNextNotesScreen extends VNextBaseScreen {
 
     public void selectQuickNote(String quickNoteText) {
         quickNotesList.stream()
-                .filter(element -> element.getText().contains(quickNoteText))
+                .filter(element -> element.getText().equals(quickNoteText))
                 .findFirst().orElseThrow(() -> new RuntimeException("Quick note not found " + quickNoteText))
                 .click();
     }
 
     public void setNoteText(String noteText) {
-        clearNoteButton.click();
         noteEditField.sendKeys(noteText);
     }
 
     public void switchToQuickNotes() {
-        switchToQuickNotes.click();
+        WaitUtils.click(switchToQuickNotes);
     }
 }
 

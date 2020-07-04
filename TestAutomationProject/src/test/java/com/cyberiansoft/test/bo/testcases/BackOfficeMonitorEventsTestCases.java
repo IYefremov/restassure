@@ -7,11 +7,9 @@ import com.cyberiansoft.test.dataclasses.bo.BOMonitorEventsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-//@Listeners(VideoListener.class)
 public class BackOfficeMonitorEventsTestCases extends BaseTestCase {
 
 	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOMonitorEventsData.json";

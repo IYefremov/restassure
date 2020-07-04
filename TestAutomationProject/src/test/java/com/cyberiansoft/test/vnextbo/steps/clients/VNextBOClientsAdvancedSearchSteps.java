@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnextbo.steps.clients;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsAdvancedSearchForm;
 
 public class VNextBOClientsAdvancedSearchSteps {
@@ -9,13 +8,11 @@ public class VNextBOClientsAdvancedSearchSteps {
     public static void clickSearchButton() {
 
         Utils.clickElement(new VNextBOClientsAdvancedSearchForm().getSearchButton());
-        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickCloseButton() {
 
         Utils.clickElement(new VNextBOClientsAdvancedSearchForm().getCloseButton());
-        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void setNameField(String name) {

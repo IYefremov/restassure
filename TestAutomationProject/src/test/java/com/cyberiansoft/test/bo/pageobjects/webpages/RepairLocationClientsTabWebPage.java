@@ -85,7 +85,7 @@ public class RepairLocationClientsTabWebPage extends BaseWebPage {
 		if (row != null) {
 			clickDeleteTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + clientname + " repair location client");	
+            Assert.fail("Can't find " + clientname + " repair location client");
 		}
 	}
 

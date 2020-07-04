@@ -12,19 +12,19 @@ public class TypesScreenFactory {
 
     private static final Map<TypeScreenContext, Supplier<ITypeScreen>> screensMap = new HashMap<>();
 
-    private static  final Supplier<ITypeScreen> myWorkOrdersScreenSupplier = () -> new MyWorkOrdersScreen();
+    private static  final Supplier<ITypeScreen> myWorkOrdersScreenSupplier = MyWorkOrdersScreen::new;
 
-    private static  final Supplier<ITypeScreen> myInspectionsScreenSupplier = () -> new MyInspectionsScreen();
+    private static  final Supplier<ITypeScreen> myInspectionsScreenSupplier = MyInspectionsScreen::new;
 
-    private static  final Supplier<ITypeScreen> myInvoicesScreenSupplier = () -> new MyInvoicesScreen();
+    private static  final Supplier<ITypeScreen> myInvoicesScreenSupplier = MyInvoicesScreen::new;
 
-    private static  final Supplier<ITypeScreen> serviceRequestsScreenSupplier = () -> new ServiceRequestsScreen();
+    private static  final Supplier<ITypeScreen> serviceRequestsScreenSupplier = ServiceRequestsScreen::new;
 
-    private static  final Supplier<ITypeScreen> teamWorkOrdersScreenSupplier = () -> new TeamWorkOrdersScreen();
+    private static  final Supplier<ITypeScreen> teamWorkOrdersScreenSupplier = TeamWorkOrdersScreen::new;
 
-    private static  final Supplier<ITypeScreen> teamInspectionsScreenSupplier = () -> new TeamInspectionsScreen();
+    private static  final Supplier<ITypeScreen> teamInspectionsScreenSupplier = TeamInspectionsScreen::new;
 
-    private static  final Supplier<ITypeScreen> invoicesInfoScreenSupplier = () -> new InvoiceInfoScreen();
+    private static  final Supplier<ITypeScreen> invoicesInfoScreenSupplier = InvoiceInfoScreen::new;
 
     static {
         screensMap.put(TypeScreenContext.WORKORDER, myWorkOrdersScreenSupplier);

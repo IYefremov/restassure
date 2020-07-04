@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens;
 
 import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -62,7 +61,6 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Cancel")).click();
 	}
 
-	
 	public String getServicePriceValue(String servicename) {
 		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeStaticText[3]")).getAttribute("value").replaceAll("[^a-zA-Z0-9$.%]", "");
 	}
@@ -102,6 +100,7 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 	}
 	
 	public void selectService(String servicename) {
+		waitServicesScreenLoaded();
 		WebElement searchFild = appiumdriver.findElementByClassName("XCUIElementTypeSearchField");
 		searchFild.clear();
 
@@ -125,58 +124,41 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 	public void selectServiceSubSrvice(String servicesubsrvicename) {
 		appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.AccessibilityId(servicesubsrvicename)).click();
 	}
-	
-	public WebElement getServiceTableCell(String servicename) {
-		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + servicename + "']/.."));
-	}
 
-	public RegularSelectedServiceDetailsScreen openCustomServiceDetails(String servicename) {
+	public void openCustomServiceDetails(String serviceName) {
 
 		WebElement searchFild = appiumdriver.findElementByClassName("XCUIElementTypeSearchField");
 		if (!(searchFild.getAttribute("value") == null))
 			searchFild.clear();
 
 		IOSElement servicecell = (IOSElement) availableservicestbl.
-				findElement(MobileBy.AccessibilityId(servicename));
+				findElement(MobileBy.AccessibilityId(serviceName));
 		if (!servicecell.isDisplayed()) {
-			searchFild.sendKeys(servicename + "\n");
+			searchFild.sendKeys(serviceName + "\n");
 		}
-		IOSElement el = (IOSElement) availableservicestbl.findElement(MobileBy.AccessibilityId(servicename))
+		IOSElement el = (IOSElement) availableservicestbl.findElement(MobileBy.AccessibilityId(serviceName))
 				.findElementByAccessibilityId("custom detail button");
 		TouchAction action = new TouchAction(appiumdriver);
 		action.tap(PointOption.point(el.getLocation().getX()+2, el.getLocation().getY()+2)).perform();
-
-		return new RegularSelectedServiceDetailsScreen();
 	}
 
-	public RegularPriceMatrixScreen selectServicePriceMatrices(String servicepricematrices) {
-		appiumdriver.findElementByAccessibilityId("PriceMatrixesTable").findElement(MobileBy.AccessibilityId(servicepricematrices)).click();
-		return new RegularPriceMatrixScreen();
-	}
-	
-	public boolean priceMatricesPopupIsDisplayed() {
-		return appiumdriver.findElement(MobileBy.AccessibilityId("Price Matrices")).isDisplayed();
-	}
-
-	public RegularPriceMatrixScreen selectPriceMatrices(String pricematrice) {
+	public void selectPriceMatrices(String pricematrice) {
 		appiumdriver.findElementByAccessibilityId(pricematrice).click();
-		return new RegularPriceMatrixScreen();
 	}
 
 	public void clickVehiclePartsButton() {
 		appiumdriver.findElement(MobileBy.name("Vehicle Parts")).click();
 	}
 
-	public RegularServicesScreen clickBackServicesButton() {
+	public void clickBackServicesButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Service Types")));
 		appiumdriver.findElement(MobileBy.name("Service Types")).click();
-		return this;
 	}
 
 	public String getListOfSelectedVehicleParts() {
-		WebElement par = getServiceTableCell("Vehicle Part");	
-		return par.findElement(MobileBy.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
+		return appiumdriver.findElementByAccessibilityId("ClarificationBox_VehiclePartSelector")
+				.findElement(MobileBy.className("XCUIElementTypeStaticText")).getAttribute("value");
 	}
 	
 	public void clickTechnicianToolbarIcon() {
@@ -190,7 +172,6 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 		appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView").
 			findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='"
 				+ techname + "']/XCUIElementTypeButton[@name='unselected']")).click();
-		//}
 		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Technicians']/XCUIElementTypeButton[@name='Save']").click();
 		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Service Types']/XCUIElementTypeButton[@name='Save']").click();
 	}

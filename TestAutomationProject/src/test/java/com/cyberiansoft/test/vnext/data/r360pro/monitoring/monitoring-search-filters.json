@@ -1,0 +1,108 @@
+{
+
+  "verifyUserCanClearCommonFilters": [
+    {
+      "rowID": "verifyUserCanClearCommonFilters.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92250",
+          "testCaseTitle": "Verify user can enter to 'Monitor'"
+        },
+        {
+          "testCaseID": "92283",
+          "testCaseTitle": "Verify user can reach to 'Search' input field"
+        },
+        {
+          "testCaseID": "92289",
+          "testCaseTitle": "Verify user can open 'Common filters'"
+        },
+        {
+          "testCaseID": "92292",
+          "testCaseTitle": "Verify user can fill in 'From' and 'To' input fields"
+        },
+        {
+          "testCaseID": "92293",
+          "testCaseTitle": "Verify user can clear 'Common filters'"
+        }
+      ]
+    }
+  ],
+  "verifyUserSearchByFromAndTo": [
+    {
+      "rowID": "verifyUserSearchByFromAndTo.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92295",
+          "testCaseTitle": "Verify user can search by \"From\" and \"To\""
+        }
+      ]
+    }
+  ],
+  "userCanFindTheNecessaryPriority": [
+    {
+      "rowID": "userCanFindTheNecessaryPriority.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92313",
+          "testCaseTitle": "Verify the user can find the necessary priority"
+        }
+      ]
+    }
+  ],
+  "userCanFindTheNecessaryStatus": [
+    {
+      "rowID": "userCanFindTheNecessaryStatus.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92305",
+          "testCaseTitle": "Verify the user can find the necessary status"
+        }
+      ]
+    }
+  ],
+  "userCanFindTheNecessaryPhase": [
+    {
+      "rowID": "userCanFindTheNecessaryPhase.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92301",
+          "testCaseTitle": "Verify the user can find the necessary phase"
+        }
+      ],
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "AutomationPhaseLevel"
+        }
+      }
+    }
+  ],
+  "userCanFindTheNecessaryDepartment": [
+    {
+      "rowID": "userCanFindTheNecessaryDepartment.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92297",
+          "testCaseTitle": "Verify the user can find the necessary department"
+        }
+      ]
+    }
+  ],
+  "userCanFindTheNecessaryFlag": [
+    {
+      "rowID": "userCanFindTheNecessaryFlag.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92309",
+          "testCaseTitle": "Verify the user can find the necessary flag"
+        }
+      ]
+    }
+  ]
+}

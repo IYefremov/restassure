@@ -11,7 +11,7 @@ import com.cyberiansoft.test.vnext.steps.questionform.QuestionFormSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
-import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
 import com.cyberiansoft.test.vnext.validations.ServiceDetailsValidations;
 import org.json.simple.JSONObject;
@@ -20,8 +20,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class BasicVehiclePartsTests extends BaseTestCaseTeamEditionRegistration {
-    @BeforeClass(description = "Team Monitoring Basic Flow Test")
+public class BasicVehiclePartsTests extends BaseTestClass {
+    @BeforeClass(description = "Basic Vehicle Parts Tests")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getVehiclePartsCasesDataPath();
     }
@@ -37,6 +37,7 @@ public class BasicVehiclePartsTests extends BaseTestCaseTeamEditionRegistration 
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.openServiceDetails(serviceData.getServiceName());
         ServiceDetailsScreenSteps.selectVehiclePart(serviceData.getVehiclePart());
+        ServiceDetailsScreenSteps.saveServiceDetails();
         ServiceDetailsScreenSteps.saveServiceDetails();
         SelectedServicesScreenSteps.openServiceDetails(serviceData.getServiceName());
         ServiceDetailsValidations.servicePartShouldBe(serviceData.getVehiclePart());
@@ -88,7 +89,7 @@ public class BasicVehiclePartsTests extends BaseTestCaseTeamEditionRegistration 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZSTALNOY_IT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
-        VisualScreenSteps.addDamage(damageData);
+        VisualScreenSteps.addNonDefaultDamage(damageData, damageData.getMoneyService().getServiceName());
         VisualScreenSteps.openEditDamage();
         ServiceDetailsScreenSteps.selectVehiclePart(damageData.getMoneyService().getVehiclePart());
         ServiceDetailsValidations.servicePartShouldBe(damageData.getMoneyService().getVehiclePart());

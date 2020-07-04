@@ -1,0 +1,23 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Cyberiansoft VNext client tests" verbose="10" configfailurepolicy="continue">
+    <listeners>
+        <listener class-name="com.cyberiansoft.test.vnext.listeners.TestServiceListener"/>
+    </listeners>
+    <parameter name="lic.name" value="Automation_lic2"  />
+    <test name="Tests for VNext client" group-by-instances="true">
+        <classes>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersChangeCustomerTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersList"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersTechniciansTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextQuestionAnswerTextImageComments"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamDraftWOTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoicesTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextPayInvoicesTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoiceEditingTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoicesEditWOInInvoiceTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoicePrintViewTestCases"/>
+        </classes>
+    </test>
+</suite>

@@ -1,9 +1,8 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import com.cyberiansoft.test.vnext.utils.ControlUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -11,7 +10,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextTeamEditionVerificationScreen extends VNextBaseScreen {
-	
+
+	private static final String XPATH_REG_COMMON = "//*[@data-autotests-id='reg-code']";
+
 	@FindBy(xpath="//*[@class='verification-form']")
 	private WebElement phonevereficationform;
 	
@@ -23,21 +24,22 @@ public class VNextTeamEditionVerificationScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//*[@data-autotests-id='reg-code-3']")
 	private WebElement regfld3;
+
+	@FindBy(xpath=XPATH_REG_COMMON)
+	private WebElement tbRegComomn;
 	
 	@FindBy(xpath="//*[@action='verify']")
 	private WebElement verifyBtn;
-	
-	public VNextTeamEditionVerificationScreen(AppiumDriver<MobileElement> appiumdriver) {
+
+    public VNextTeamEditionVerificationScreen(WebDriver appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
 	}
 	
 	public void setDeviceRegistrationCode(String regCode) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='reg-code-1']")));
-		setValue(regfld1, regCode.substring(0, 4));
-		setValue(regfld2, regCode.substring(5, 9));
-		setValue(regfld3, regCode.substring(10, 14));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPATH_REG_COMMON)));
+        ControlUtils.setValue(tbRegComomn, regCode);
 	}
 	
 	public void clickVerifyButton() {

@@ -71,9 +71,7 @@ public class FiledDecorator extends DefaultFieldDecorator {
                                            Class<IWebElement> clazz) {
         InvocationHandler handler =
                 new ListInvocationHandler(locator, clazz);
-        List<IWebElement> elements =
-                (List<IWebElement>) Proxy.newProxyInstance(
-                        loader, new Class[]{List.class}, handler);
-        return elements;
+        return (List<IWebElement>) Proxy.newProxyInstance(
+                loader, new Class[]{List.class}, handler);
     }
 }

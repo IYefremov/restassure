@@ -1,0 +1,82 @@
+{
+
+  "testVerifyThatQuestionSectionIsShownPerServiceForFirstSelectedPanelWhenQFIsNotRequired": [
+    {
+      "rowID": "testVerifyThatQuestionSectionIsShownPerServiceForFirstSelectedPanelWhenQFIsNotRequired.01",
+      "description": "Test Case 31451:Inspection - Verify that question section is shown per service for first selected panel when QF is not required",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88541"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "service": {
+          "serviceName": "SR_S1_Money_Vehicle",
+          "vehicleParts": [
+            {
+              "vehiclePartName": "Front Bumper"
+            },
+            {
+              "vehiclePartName": "Grill"
+            },
+            {
+              "vehiclePartName": "Hood"
+            },
+            {
+              "vehiclePartName": "Left Fender"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "testInspectionsVerifyThatQuestionSectionIsShownPerServiceWithMustPanelsWhenQuestionsAreRequired": [
+    {
+      "rowID": "testInspectionsVerifyThatQuestionSectionIsShownPerServiceWithMustPanelsWhenQuestionsAreRequired.01",
+      "description": "Test Case 32989:Inspections: Verify that question section is shown per service with must panels when questions are required",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88543"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        },
+        "service": {
+          "serviceName": "Oksi_Service_PP_Vehicle",
+          "vehicleParts": [
+            {
+              "vehiclePartName": "Back Glass"
+            },
+            {
+              "vehiclePartName": "Deck Lid"
+            },
+            {
+              "vehiclePartName": "Driver Seat"
+            },
+            {
+              "vehiclePartName": "Hood"
+            }
+          ],
+          "questionData": {
+            "questionName": "QuestionTypeSelect_Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ]
+}

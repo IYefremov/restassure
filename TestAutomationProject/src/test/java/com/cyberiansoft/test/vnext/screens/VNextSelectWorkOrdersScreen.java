@@ -1,9 +1,10 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
+import com.cyberiansoft.test.vnext.webelements.WorkOrderListElement;
+import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -21,14 +22,21 @@ public class VNextSelectWorkOrdersScreen extends VNextBaseScreen {
     @FindBy(xpath="//*[@action='save']")
     private WebElement addworkordersbtn;
 
+    @FindBy(xpath = "//*[@data-autotests-id='-list']/div")
+    private List<WorkOrderListElement> workOrdersList;
+
     @FindBy(xpath="//*[@data-autotests-id='-list']")
     private WebElement workorderslist;
 
-    public VNextSelectWorkOrdersScreen(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextSelectWorkOrdersScreen(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
         wait.until(ExpectedConditions. presenceOfElementLocated(selectworkordersscreen));
+    }
+
+    public VNextSelectWorkOrdersScreen() {
+        PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
     }
 
     public WebElement getWorkOrderCell(String wonumber) {
@@ -52,8 +60,7 @@ public class VNextSelectWorkOrdersScreen extends VNextBaseScreen {
             tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
     }
 
-    public VNextInvoiceInfoScreen clickAddWorkOrders() {
+    public void clickAddWorkOrders() {
         tap(addworkordersbtn);
-        return new VNextInvoiceInfoScreen(appiumdriver);
     }
 }

@@ -1,8 +1,10 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.bo.webelements.WebTable;
+import io.appium.java_client.functions.ExpectedCondition;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,8 +31,8 @@ public class EmailTemplatesWebPage extends BaseWebPage {
 	@FindBy(xpath = "//input[contains(@id, 'Card_tbEmailSubject')]")
 	private TextField emailtemplatesubjectfld;
 	
-	@FindBy(xpath = "//textarea[contains(@id, 'Card_tbEmailBody')]")
-	private TextField emailtemplatebodyfld;
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_tbEditorCenter")
+	private WebElement emailtemplatebodyfld;
 	
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl02_BtnOk")
 	private WebElement newemailtemplateOKbtn;
@@ -57,7 +59,7 @@ public class EmailTemplatesWebPage extends BaseWebPage {
 	}
 	
 	public void setNewEmailTemplateBody(String templatebody) {
-		clearAndType(emailtemplatebodyfld, templatebody);		
+        Utils.clearAndType(emailtemplatebodyfld, templatebody);
 	}
 	
 	public void clickNewEmailTemplateOKButton() {
@@ -101,22 +103,28 @@ public class EmailTemplatesWebPage extends BaseWebPage {
 		WebElement row = getTableRowWithEmailTemplate(templatename);
 		if (row != null) {
 			subject = row.findElement(By.xpath(".//td[5]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + templatename + " email template");
+		} else
+			Assert.fail("Can't find " + templatename + " email template");
 		return subject;
 	}
 	
 	public boolean isEmailTemplateExists(String templatename) {
-		boolean exists =  emailtemplatestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + templatename + "']")).size() > 0;
-		return exists;
+        try {
+            wait.until((ExpectedCondition<Boolean>) driver ->
+                    emailtemplatestable.getWrappedElement().findElements(
+                            By.xpath(".//tr/td[text()='" + templatename + "']")).size() > 0);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
 	}
 	
-	public void clickEditEmailTemplate(String templatename) throws InterruptedException {
+	public void clickEditEmailTemplate(String templatename) {
 		WebElement row = getTableRowWithEmailTemplate(templatename);
 		if (row != null) {
 			clickEditTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + templatename + " email template");
+		} else
+			Assert.fail("Can't find " + templatename + " email template");
 	}
 	
 	public void deleteEmailTemplate(String templatename) {
@@ -124,16 +132,16 @@ public class EmailTemplatesWebPage extends BaseWebPage {
 		if (row != null) {
 			deleteTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + templatename + " email template");	
+			Assert.fail("Can't find " + templatename + " email template");
 		}
 	}
 	
-	public void deleteEmailTemplateAndCancelDeleting(String templatename) throws InterruptedException {
+	public void deleteEmailTemplateAndCancelDeleting(String templatename) {
 		WebElement row = getTableRowWithEmailTemplate(templatename);
 		if (row != null) {
 			cancelDeletingTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + templatename + " email template");	
+			Assert.fail("Can't find " + templatename + " email template");
 		}
 	}
 

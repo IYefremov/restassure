@@ -14,7 +14,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
@@ -88,7 +87,7 @@ public class RepairLocationPhaseServicesTabWebPage extends BaseWebPage {
 		List<WebElement> rows = getPhaseServicesTableRows();
 		int checked = 0;
 		if (getBrowserType().contains("edge")) {
-            return rows.stream().map(e -> e.getAttribute("checked")).collect(Collectors.toList()).size(); //todo check!!!
+            return (int) rows.stream().map(e -> e.getAttribute("checked")).count(); //todo check!!!
         } else {
             for (WebElement row : rows) {
                 if (isCheckboxChecked(row.findElement(By.xpath("./td/input")))) {

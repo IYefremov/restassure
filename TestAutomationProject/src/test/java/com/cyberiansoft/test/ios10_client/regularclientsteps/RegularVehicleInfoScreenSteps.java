@@ -1,8 +1,7 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
-import com.cyberiansoft.test.dataclasses.ServiceTechnician;
+import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.VehicleInfoData;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularVehicleScreen;
 import org.testng.Assert;
 
@@ -26,6 +25,11 @@ public class RegularVehicleInfoScreenSteps {
     public static void selectColor(String vehicleColor) {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         vehicleScreen.setColor(vehicleColor);
+    }
+
+    public static void selectLocation(String locationValue) {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        vehicleScreen.selectLocation(locationValue);
     }
 
     public static void setMileage(String mileage) {
@@ -130,15 +134,24 @@ public class RegularVehicleInfoScreenSteps {
         return vehicleScreen.getWorkOrderNumber();
     }
 
-    public static void selectAdditionalTechnician(ServiceTechnician technician) {
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        clickTech();
-        vehicleScreen.selectAdditionalTechnician(technician.getTechnicianFullName());
-        RegularWizardScreensSteps.clickSaveButton();
-    }
-
     public static void clickTech() {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         vehicleScreen.clickTech();
+    }
+
+    public static String getDateValue() {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        return vehicleScreen.getDateValue();
+    }
+
+    public static String getArbitrationDateValue() {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        return vehicleScreen.getArbitrationDateValue();
+    }
+
+    public static void selectOwner(AppCustomer vehicleOwner) {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        vehicleScreen.clickOwnerCell();
+        RegularSelectCustomerSteps.selectCustomer(vehicleOwner);
     }
 }

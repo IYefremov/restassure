@@ -1,0 +1,146 @@
+{
+
+  "testCreateWorkOrderWithTeamSharingOption": [
+    {
+      "rowID": "testCreateWorkOrderWithTeamSharingOption.01",
+      "description": "Test Case 8429:Creating complex calculation WO, Test Case 8428:Copy services of WO (regular version)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89022"
+        },
+        {
+          "testCaseID": "89023"
+        }
+      ],
+      "workOrdersData": [
+        {
+          "vihicleInfo": {
+            "vinNumber": "JA4LS31H8YP047397"
+          },
+          "moneyService": {
+            "serviceName": "Dye",
+            "servicePrice": "10.00",
+            "serviceQuantity": "3.00",
+            "serviceAdjustment": {
+              "adjustmentTotalAmaunt": "$0.50"
+            }
+          },
+          "percentageService": {
+            "serviceName": "Disc_Ex_Service1",
+            "servicePrice": "100.00",
+            "serviceAdjustment": {
+              "adjustmentTotalAmaunt": "-$5.00",
+              "adjustmentData": {
+                "adjustmentName": "For_SP_Cl",
+                "adjustmentQuantity": "%-5.000"
+              }
+            }
+          },
+          "bundleService": {
+            "bundleServiceName": "Bundle1_Disc_Ex",
+            "services": [
+              {
+                "serviceName": "Dye",
+                "isSelected": "false"
+              },
+              {
+                "serviceName": "Wheel",
+                "serviceQuantity": "2.00",
+                "isSelected": "true"
+              }
+            ]
+          },
+          "percentageServices": [
+            {
+              "serviceName": "Test Tax"
+            },
+            {
+              "serviceName": "Discount 5-10%"
+            }
+          ],
+          "matrixService": {
+            "matrixServiceName": "Dent Removal",
+            "hailMatrixName": "Hail Matrix",
+            "vehiclePartData": {
+              "vehiclePartName": "HOOD",
+              "vehiclePartSize": "NKL",
+              "vehiclePartSeverity": "VERY LIGHT",
+              "vehiclePartPrice": "$100.00",
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "Dye"
+                },
+                {
+                  "serviceName": "Discount 5-10%"
+                },
+                {
+                  "serviceName": "Discount 10-20$"
+                }
+              ]
+            }
+          },
+          "selectedServices": [
+            {
+              "serviceName": "Dye",
+              "isSelected": true
+            },
+            {
+              "serviceName": "Dent Removal",
+              "isSelected": true
+            },
+            {
+              "serviceName": "Disc_Ex_Service1",
+              "isSelected": true
+            },
+            {
+              "serviceName": "Bundle1_Disc_Ex",
+              "isSelected": true
+            },
+            {
+              "serviceName": "Test Tax",
+              "isSelected": true
+            },
+            {
+              "serviceName": "Discount 5-10%",
+              "isSelected": true
+            }
+          ],
+          "workOrderPrice": "$346.23"
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "JA4LS31H8YP047397"
+          },
+          "selectedServices": [
+            {
+              "serviceName": "Dye",
+              "isSelected": false
+            },
+            {
+              "serviceName": "Dent Removal",
+              "isSelected": true
+            },
+            {
+              "serviceName": "Disc_Ex_Service1",
+              "isSelected": false
+            },
+            {
+              "serviceName": "Bundle1_Disc_Ex",
+              "isSelected": false
+            },
+            {
+              "serviceName": "Test Tax",
+              "isSelected": true
+            },
+            {
+              "serviceName": "Discount 5-10%",
+              "isSelected": false
+            }
+          ],
+          "workOrderPrice": "$91.80"
+        }
+      ]
+    }
+  ]
+
+}

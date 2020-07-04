@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnext.steps;
 
-import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 
 public class ScreenNavigationSteps {
@@ -9,7 +8,16 @@ public class ScreenNavigationSteps {
         vNextBaseScreen.clickScreenBackButton();
     }
 
+    public static void pressForwardButton() {
+        VNextBaseScreen vNextBaseScreen = new VNextBaseScreen();
+        vNextBaseScreen.clickScreenForwardButton();
+    }
+
+    public static void acceptScreen() {
+        WizardScreenSteps.saveAction();
+    }
+
     public static void pressHardwareBackButton() {
-        AppiumUtils.clickHardwareBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 }

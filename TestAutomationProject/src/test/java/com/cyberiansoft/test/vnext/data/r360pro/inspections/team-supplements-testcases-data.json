@@ -39,7 +39,11 @@
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91724",
-          "testCaseTitle": "Verify user can add supplement after approve Inspection."
+          "testCaseTitle": "Verify user can add supplement after approve Inspection"
+        },
+        {
+          "testCaseID": "91730",
+          "testCaseTitle": "Verify Inspectin status changed to New after ceation supplement"
         }
       ],
       "inspType": "O_Kramar",
@@ -99,6 +103,34 @@
       ]
     }
   ],
+  "testVerifyUserCanAddSupplementWhenCreateInspection": [
+    {
+      "rowID": "testVerifyUserCanAddSupplementWhenCreateInspection.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91722",
+          "testCaseTitle": "Verify user can add supplement when create Inspection"
+        }
+      ],
+      "inspType": "O_Kramar",
+      "vihicleInfo": {
+        "vinNumber": "TEST"
+      },
+      "services": [
+        {
+          "serviceName": "Battery Installation",
+          "servicePrice": "30",
+          "serviceQuantity": "3"
+        },
+        {
+          "serviceName": "Labor",
+          "servicePrice": "50",
+          "serviceQuantity": "2"
+        }
+      ]
+    }
+  ],
   "testVerifyUserCanAddSupplementsOnlyForApprovedOrNewInspection": [
     {
       "rowID": "testVerifyUserCanAddSupplementsOnlyForApprovedOrNewInspection.01",
@@ -114,7 +146,8 @@
         "vinNumber": "TEST"
       },
       "service": {
-        "serviceName": "Damage Service"
+        "serviceName": "Damage Service",
+        "servicePrice": "30"
       },
       "services": [
         {
@@ -124,6 +157,102 @@
           "serviceName": "Labor"
         }
       ]
+    }
+  ],
+  "testVerifyAmountForNewServiceInSupplement": [
+    {
+      "rowID": "testVerifyAmountForNewServiceInSupplement.01",
+      "description": "Verify amount for new service in supplement",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91729",
+          "testCaseTitle": "Verify amount for new service in supplement."
+        }
+      ],
+      "inspType": "O_Kramar",
+      "vihicleInfo": {
+        "vinNumber": "YV4982CZ9A1538968"
+      },
+      "moneyService": {
+        "serviceName": "Battery Installation",
+        "servicePrice": "50",
+        "serviceQuantity": "3",
+        "servicePrice2": "60"
+      },
+      "service": {
+        "serviceName": "Damage Service",
+        "servicePrice": "30"
+      }
+    }
+  ],
+  "testVerifyInspectionPDFDoesntIncludeSupplement": [
+    {
+      "rowID": "testVerifyInspectionPDFDoesntIncludeSupplement.01",
+      "description": "Verify Inspection pdf doesn't include supplement",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91728",
+          "testCaseTitle": "Verify Inspection pdf doesn't include supplement"
+        }
+      ],
+      "inspType": "O_Kramar",
+      "vihicleInfo": {
+        "vinNumber": "YV4982CZ9A1538968"
+      },
+      "newVinNumber": "TESTNEW",
+      "moneyServices": [
+        {
+          "serviceName": "Battery Installation",
+          "servicePrice": "50",
+          "serviceQuantity": "3"
+        },
+        {
+          "serviceName": "Damage Service",
+          "servicePrice": "30"
+        }
+      ]
+    }
+  ],
+  "testVerifyUserCanViewSupplement": [
+    {
+      "rowID": "testVerifyUserCanViewSupplement.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91725",
+          "testCaseTitle": "Verify user can View supplement"
+        }
+      ],
+      "inspType": "O_Kramar",
+      "vihicleInfo": {
+        "vinNumber": "TEST"
+      },
+      "service": {
+        "serviceName": "Battery Installation",
+        "servicePrice": "9",
+        "serviceStatus": "New"
+      }
+    }
+  ],
+  "testVerifyUserCanSendSupplement": [
+    {
+      "rowID": "testVerifyUserCanSendSupplement.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91726",
+          "testCaseTitle": "Verify user can send supplement"
+        }
+      ],
+      "inspType": "O_Kramar",
+      "vihicleInfo": {
+        "vinNumber": "TEST"
+      },
+      "service": {
+        "serviceName": "Battery Installation",
+        "servicePrice": "9",
+        "serviceStatus": "New"
+      }
     }
   ]
 }

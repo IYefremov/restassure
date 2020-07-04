@@ -120,32 +120,31 @@ public class ServiceContractTypesWebPage extends BaseWebPage {
 	}
 	
 	public boolean isServiceContractTypeExists(String servicecontacttype) {
-		boolean exists =  servicecontracttypestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + servicecontacttype + "']")).size() > 0;
-		return exists;
+        return servicecontracttypestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + servicecontacttype + "']")).size() > 0;
 	}
 	
 	public void clickEditServiceContractType(String servicecontacttype) {
 		WebElement row = getTableRowWithServiceContractType(servicecontacttype);
 		if (row != null) {
 			clickEditTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + servicecontacttype + " service contact type");
+		} else
+            Assert.fail("Can't find " + servicecontacttype + " service contact type");
 	}
 	
 	public void deleteServiceContractType(String servicecontacttype) {
 		WebElement row = getTableRowWithServiceContractType(servicecontacttype);
 		if (row != null) {
 			deleteTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + servicecontacttype + " service contact type");		
+		} else
+            Assert.fail("Can't find " + servicecontacttype + " service contact type");
 	}
 	
 	public void deleteServiceContractTypeAndCancelDeleting(String servicecontacttype) {
 		WebElement row = getTableRowWithServiceContractType(servicecontacttype);
 		if (row != null) {
 			cancelDeletingTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + servicecontacttype + " service contact type");		
+		} else
+            Assert.fail("Can't find " + servicecontacttype + " service contact type");
 	}
 	
 	public void setNewServiceContractTypeName(String servicecontracttypename) {

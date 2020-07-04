@@ -3,13 +3,13 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizard
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.TechniciansPopup;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -106,7 +106,9 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 		MobileElement priceCell = (MobileElement) appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetailsCellPrice");
 		if (!priceCell.isDisplayed()) {
 			MobileElement table = getMaqtrixPanel();
-			scrollToElement(table.findElementByAccessibilityId("PriceMatrixItemDetailsCellPrice"));
+			SwipeUtils.swipeToElement(table.findElementByAccessibilityId("PriceMatrixItemDetailsCellPrice"));
+			priceCell.click();
+			//scrollToElement(table.findElementByAccessibilityId("PriceMatrixItemDetailsCellPrice"));
 		}
 		priceCell.click();
 		priceCell.findElementByClassName("XCUIElementTypeTextField").clear();

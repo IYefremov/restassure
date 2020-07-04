@@ -4,7 +4,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typessc
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.TeamInvoicesScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -13,7 +12,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public class CarHistoryScreen extends BaseAppScreen {
 	
@@ -44,7 +42,7 @@ public class CarHistoryScreen extends BaseAppScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Search")));
 		searchbtn.click();
-		((IOSDriver) appiumdriver).getKeyboard().pressKey(car);
+		appiumdriver.getKeyboard().pressKey(car);
 		closesearchbtn.click();
 		//wait = new WebDriverWait(appiumdriver, 60);
 		//wait.until(ExpectedConditions.elementToBeClickable(closesearchbtn)).click();

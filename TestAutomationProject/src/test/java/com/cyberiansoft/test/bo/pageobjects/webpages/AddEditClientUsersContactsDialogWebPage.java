@@ -1,9 +1,11 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.dataclasses.bo.BOCompanyClientsData;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -73,11 +75,6 @@ public class AddEditClientUsersContactsDialogWebPage extends BaseWebPage {
 	public AddEditClientUsersContactsDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-		try {
-			wait.until(ExpectedConditions.visibilityOf(buttoncnsl));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 
@@ -182,6 +179,8 @@ public class AddEditClientUsersContactsDialogWebPage extends BaseWebPage {
 	}
 
 	public void selectStateProvince(String stateprovince) {
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitABit(1000);
 		selectComboboxValue(contactstateprovincecmb, contactstateprovincedd, stateprovince);
 	}
 
@@ -255,22 +254,18 @@ public class AddEditClientUsersContactsDialogWebPage extends BaseWebPage {
 
 	}
 
-	public void createContactWithAllFields(String contactfirstname,
-										   String contactlastname, String contactemail, String contactcompany, String contactphone,
-										   String contactadress, String contactadress2, String contactcity, String contactcountry,
-										   String contactstateprovince, String contactzippostcode) {
-
-		setContactFirstName(contactfirstname);
-		setContactLastName(contactlastname);
-		setContactEmail(contactemail);
-		setContactCompany(contactcompany);
-		setContactPhone(contactphone);
-		setContactCity(contactcity);
-		setContactAdress(contactadress);
-		setContactAdress2(contactadress2);
-		selectCountry(contactcountry);
-		selectStateProvince(contactstateprovince);
-		setContactZipPostCode(contactzippostcode);
+	public void createContactWithAllFields(BOCompanyClientsData data) {
+		setContactFirstName(data.getUserFirstName());
+		setContactLastName(data.getUserLastName());
+		setContactEmail(data.getContactEmail());
+		setContactCompany(data.getCompanyName());
+		setContactPhone(data.getContactPhone());
+		setContactCity(data.getUserCity());
+		setContactAdress(data.getUserAddress());
+		setContactAdress2(data.getUserAddress2());
+		selectCountry(data.getUserCountry());
+		selectStateProvince(data.getUserStateProvince());
+		setContactZipPostCode(data.getUserZipPostCode());
 		clickButtonOk();
 
 	}

@@ -2,10 +2,9 @@ package com.cyberiansoft.test.vnextbo.steps.inspections;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOConfirmationDialogInteractions;
+import com.cyberiansoft.test.vnextbo.screens.commonobjects.VNextBOConfirmationDialog;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsApprovalWebPage;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import java.util.Arrays;
@@ -14,7 +13,8 @@ public class VNextBOInspectionsApprovalPageSteps {
 
     public static boolean isApprovePrintPageButtonDisplayed() {
 
-        return Utils.isElementDisplayed(new VNextBOInspectionsApprovalWebPage().getApproveServiceButton());
+        return WaitUtilsWebDriver.elementShouldBeVisible(
+                new VNextBOInspectionsApprovalWebPage().getApproveServiceButton(), true, 2);
     }
 
     public static void clickInspectionApprovePrintPageButton() {
@@ -23,29 +23,27 @@ public class VNextBOInspectionsApprovalPageSteps {
                 new VNextBOInspectionsApprovalWebPage();
         if (isApprovePrintPageButtonDisplayed()) {
             Utils.clickElement(inspectionsApprovalWebPage.getApproveServiceButton());
-            WaitUtilsWebDriver.waitForVisibility(inspectionsApprovalWebPage.getGeneralApproveButton());
+            WaitUtilsWebDriver.waitForVisibility(inspectionsApprovalWebPage.getGeneralApproveWithNoteButton());
         } else {
             Utils.clickElement(inspectionsApprovalWebPage.getApproveAndCompleteServiceButton());
-            WaitUtilsWebDriver.waitForLoading();
+            //WaitUtilsWebDriver.waitForLoading();
         }
     }
 
-    private static VNextBOInspectionsApprovalWebPage setPrintPageNotes(String notes) {
+    private static void setPrintPageNotes(String notes) {
 
         Utils.clearAndType(new VNextBOInspectionsApprovalWebPage().getNotesTextArea(), notes);
-        return PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOInspectionsApprovalWebPage.class);
     }
 
-    public static VNextBOInspectionsApprovalWebPage clickConfirmApprovePrintPageButtonIfDisplayed() {
+    public static void clickConfirmApprovePrintPageButtonIfDisplayed() {
 
         VNextBOInspectionsApprovalWebPage inspectionsApprovalWebPage =
                 new VNextBOInspectionsApprovalWebPage();
-        if (Utils.isElementDisplayed(inspectionsApprovalWebPage.getGeneralApproveButton())) {
-            Utils.clickElement(inspectionsApprovalWebPage.getGeneralApproveButton());
-            WaitUtilsWebDriver.waitForLoading();
+        if (WaitUtilsWebDriver.elementShouldBeVisible(inspectionsApprovalWebPage.getGeneralApproveWithNoteButton(), true, 4)) {
+            Utils.clickElement(inspectionsApprovalWebPage.getGeneralApproveWithNoteButton());
+            WaitUtilsWebDriver.waitForPageToBeLoaded();
         }
         WaitUtilsWebDriver.waitForVisibility(inspectionsApprovalWebPage.getInspectionStatus());
-        return PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOInspectionsApprovalWebPage.class);
     }
 
     public static String getPrintPageInspectionStatus() {
@@ -65,7 +63,8 @@ public class VNextBOInspectionsApprovalPageSteps {
 
     public static boolean isNotesTextAreaDisplayed() {
 
-        return Utils.isElementDisplayed(new VNextBOInspectionsApprovalWebPage().getNotesTextArea());
+        return WaitUtilsWebDriver.elementShouldBeVisible(
+                new VNextBOInspectionsApprovalWebPage().getNotesTextArea(), true, 2);
     }
 
     public static void setNotesIfDisplayed(String ...notes) {
@@ -95,7 +94,7 @@ public class VNextBOInspectionsApprovalPageSteps {
 
         String parent = Utils.getParentTab();
         VNextBOInspectionsPageSteps.clickTheApproveInspectionButton();
-        VNextBOConfirmationDialogInteractions.clickYesButton();
+        VNextBOConfirmationDialogInteractions.clickModalDialogButton(new VNextBOConfirmationDialog().getYesButton());
         Utils.getNewTab(parent);
 
         completeApprovingPrintPageInspection(note);

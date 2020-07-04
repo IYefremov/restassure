@@ -73,6 +73,6 @@ public class InvoiceFactory extends BasePooledObjectFactory<InvoiceDTO> {
     @Override
     public PooledObject<InvoiceDTO> wrap(InvoiceDTO invoiceDTO) {
         // TODO Auto-generated method stub
-        return new DefaultPooledObject<InvoiceDTO>(invoiceDTO);
+        return new DefaultPooledObject<>(invoiceDTO);
     }
 }

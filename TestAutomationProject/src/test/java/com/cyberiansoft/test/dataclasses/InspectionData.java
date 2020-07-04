@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.dataclasses;
 
+import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
@@ -72,6 +73,7 @@ public class InspectionData {
     @JsonProperty("inspectionNumber")
     String inspectionNumber;
 
+    @Getter
     @JsonProperty("inspectionStatus")
     String inspectionStatus;
 
@@ -133,6 +135,14 @@ public class InspectionData {
     @Getter
     @JsonProperty("servicesScreens")
     List<ServicesScreenData> servicesScreens;
+
+    @Getter
+    @JsonProperty("partServiceDataList")
+    private List<PartServiceData> partServiceDataList;
+
+    @Getter
+    @JsonProperty("matrixServiceDataList")
+    List<com.cyberiansoft.test.dataclasses.MatrixServiceData> matrixServiceDataList;
 
     @Getter
     @JsonProperty("isDraft")
@@ -233,10 +243,6 @@ public class InspectionData {
     public void setInspectionNumber(String inspNumber) {
 
         this.inspectionNumber = inspNumber;
-    }
-
-    public InspectionStatus getInspectionStatus() {
-        return InspectionStatus.getStatus(inspectionStatus);
     }
 
     public RetailCustomer getInspectionRetailCustomer() {

@@ -41,9 +41,7 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
             String targetProcessSuiteID = context.getSuite().getParameter("tpsuite.id");
             try {
                 testPlanRunDTO = tpIntegrationService.createTestPlanRun(targetProcessSuiteID);
-            } catch (UnirestException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (UnirestException | IOException e) {
                 e.printStackTrace();
             }
         }
@@ -83,6 +81,7 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
 
     @Override
     public synchronized void onTestSuccess(ITestResult testResult) {
+        setTestCaseAutomatedField(testResult);
         extentTest.get().log(Status.PASS, "<font color=#00af00>" + Status.PASS.toString().toUpperCase() + "</font>");
         extentTest.get().getModel().setEndTime(getTime(testResult.getEndMillis()));
         setTestCaseStatusInTargetProcess(testResult, TestCaseRunStatus.PASSED);
@@ -90,6 +89,7 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
 
     @Override
     public synchronized void onTestFailure(ITestResult testResult) {
+        setTestCaseAutomatedField(testResult);
         setTestCaseStatusInTargetProcess(testResult, TestCaseRunStatus.FAILED);
         extentTest.get().log(Status.FAIL, "<font color=#F7464A>" + Status.FAIL.toString().toUpperCase() + "</font>");
         extentTest.get().log(Status.INFO, "EXCEPTION = [" + testResult.getThrowable().getMessage() + "]");
@@ -117,6 +117,7 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
 
     @Override
     public synchronized void onTestSkipped(ITestResult testResult) {
+        setTestCaseAutomatedField(testResult);
         setTestCaseStatusInTargetProcess(testResult, TestCaseRunStatus.NOT_RUN);
         extentTest.get().log(Status.SKIP, "<font color=#2196F3>" + Status.SKIP.toString().toUpperCase() + "</font>");
         extentTest.get().log(Status.INFO, "EXCEPTION = [" + testResult.getThrowable().getMessage() + "]");
@@ -153,10 +154,7 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
                                 try {
                                     tpIntegrationService.setTestCaseRunStatus(testCaseRunDTO.getId().toString(), testCaseRunStatus, "");
                                     break;
-                                } catch (UnirestException e) {
-                                    e.printStackTrace();
-                                    break;
-                                } catch (IOException e) {
+                                } catch (UnirestException | IOException e) {
                                     e.printStackTrace();
                                     break;
                                 }
@@ -186,5 +184,20 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
 
+    }
+
+    private void setTestCaseAutomatedField(ITestResult testResult) {
+        TestCaseData testCaseData = getTestCasesData(testResult);
+        if (testCaseData != null) {
+            if (testCaseData.getTargetProcessTestCaseData() != null) {
+                for (TargetProcessTestCaseData targetProcessTestCaseData : testCaseData.getTargetProcessTestCaseData()) {
+                    try {
+                        tpIntegrationService.setTestCaseAutomatedField(targetProcessTestCaseData.getTestCaseID());
+                    } catch (UnirestException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
     }
 }

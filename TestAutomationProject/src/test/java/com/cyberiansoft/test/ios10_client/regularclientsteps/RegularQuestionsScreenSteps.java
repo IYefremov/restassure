@@ -2,11 +2,7 @@ package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
 import com.cyberiansoft.test.dataclasses.QuestionScreenData;
 import com.cyberiansoft.test.dataclasses.QuestionsData;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.iOSBaseScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularOrderSummaryScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularQuestionsScreen;
-import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 
 import java.util.List;
 
@@ -48,9 +44,24 @@ public class RegularQuestionsScreenSteps {
             questionsScreen.selectListQuestion(questionData);
         else if (questionData.getQuestionAnswer() != null)
             questionsScreen.answerQuestion(questionData);
-        else if (questionData.isSignatureQuestion())
-            questionsScreen.drawRegularSignature();
-        else
+        else if (questionData.getImageQuestion() != null) {
+            if (questionData.getImageQuestion().getQuestionName() != null)
+                questionsScreen.clickQuestionCell(questionData.getImageQuestion().getQuestionName());
+            RegularNotesScreenSteps.addImegesFromLibrary(questionData.getImageQuestion().getNumberOFImages());
+            RegularNotesScreenSteps.clickBackButton();
+        } else if (questionData.getDatePickerQuestion() != null) {
+            if (questionData.getDatePickerQuestion().getQuestionName() != null)
+                questionsScreen.clickQuestionCell(questionData.getDatePickerQuestion().getQuestionName());
+            questionsScreen.clickDoneButton();
+        }
+        else if (questionData.getSignatureQuestion() != null) {
+            if (questionData.getSignatureQuestion().getQuestionName() != null) {
+                questionsScreen.clickQuestionCell(questionData.getSignatureQuestion().getQuestionName());
+                questionsScreen.drawQuestionFormSignature();
+                questionsScreen.clickSave();
+            } else
+                questionsScreen.drawSignature();
+        } else
             questionsScreen.answerQuestion(questionData);
     }
 

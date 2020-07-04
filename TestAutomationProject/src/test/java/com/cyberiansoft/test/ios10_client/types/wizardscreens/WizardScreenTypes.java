@@ -12,6 +12,7 @@ public enum WizardScreenTypes {
     ENTERPRISE_BEFORE_DAMAGE("Enterprise Before Damage"),
     PRICE_MATRIX("Price Matrix"),
     VISUAL_EXTERIOR("Exterior"),
+    VISUAL("Visual"),
     VISUAL_INTERIOR("Interior");
 
 

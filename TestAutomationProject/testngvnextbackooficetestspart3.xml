@@ -1,0 +1,41 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Cyberiansoft R360 ReconPro tests suite 3" verbose="10" configfailurepolicy="continue">
+    <listeners>
+        <listener class-name="com.cyberiansoft.test.vnextbo.utils.TestListenerAllure"/>
+    </listeners>
+    <test name="Monitor Grid Tests">
+        <parameter name="userName" value="test.automation4@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorGridTestCases"/>
+        </classes>
+    </test>
+    <test name="Monitor Advanced Search Tests">
+        <parameter name="userName" value="test.automation3@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorAdvancedSearchTestCasesNew"/>
+        </classes>
+    </test>
+    <test name="Monitor Report Problem Tests">
+        <parameter name="userName" value="test.automation3@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorReportProblemTestCasesNew"/>
+        </classes>
+    </test>
+    <test name="Monitor Simple Search Tests">
+        <parameter name="userName" value="test.automation3@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorSimpleSearchTestCasesNew"/>
+        </classes>
+    </test>
+    <test name="Monitor Tasks Tests">
+        <parameter name="userName" value="test.automation3@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTasksTestCases"/>
+        </classes>
+    </test>
+</suite>

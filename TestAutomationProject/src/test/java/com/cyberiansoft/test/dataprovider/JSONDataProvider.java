@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class JSONDataProvider {
@@ -28,19 +27,19 @@ public class JSONDataProvider {
 		List<JSONObject> testDataList = new ArrayList<>();
 
 		JSONArray testData = (JSONArray) extractData_JSON(OsUtils.getOSSafePath(dataFile)).get(method.getName());
-		for (int i = 0; i < testData.size(); i++) {
-			testDataList.add((JSONObject) testData.get(i));
+		for (Object testDatum : testData) {
+			testDataList.add((JSONObject) testDatum);
 		}
 
 		// include Filter
 		if (System.getProperty("includePattern") != null) {
 			String include = System.getProperty("includePattern");
-			List<JSONObject> newList = new ArrayList<JSONObject>();
-			List<String> tests = Arrays.asList(include.split(",", -1));
+			List<JSONObject> newList = new ArrayList<>();
+			String[] tests = include.split(",", -1);
 			for (String getTest : tests) {
-				for (int i = 0; i < testDataList.size(); i++) {
-					if (testDataList.get(i).toString().contains(getTest)) {
-						newList.add(testDataList.get(i));
+				for (JSONObject jsonObject : testDataList) {
+					if (jsonObject.toString().contains(getTest)) {
+						newList.add(jsonObject);
 					}
 				}
 			}
@@ -52,7 +51,7 @@ public class JSONDataProvider {
 		// exclude Filter
 		if (System.getProperty("excludePattern") != null) {
 			String exclude = System.getProperty("excludePattern");
-			List<String> tests = Arrays.asList(exclude.split(",", -1));
+			String[] tests = exclude.split(",", -1);
 
 			for (String getTest : tests) {
 				// start at end of list and work backwards so index stays in sync

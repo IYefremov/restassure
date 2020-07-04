@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,17 +38,16 @@ public class InspectionEditorWebPage extends BaseWebPage {
 	@FindBy(xpath = "//p[text()='Inspection was sent to saving queue!']")
 	private WebElement successfulSaveNotification;
 
+	@FindBy(xpath = "//b[contains(@class, 'custom-estimation-number')]")
+	private WebElement estimationNumber;
+
 	public InspectionEditorWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 
 	public boolean isDateInputDisplayed() {
-		try {
-			return wait.until(ExpectedConditions.visibilityOf(dateInput)).isDisplayed();
-		} catch (Exception ignored) {
-			return false;
-		}
+	    return WaitUtilsWebDriver.elementShouldBeVisible(dateInput, true);
 	}
 
 	public void clickDateInput() {
@@ -76,12 +77,8 @@ public class InspectionEditorWebPage extends BaseWebPage {
 		}
 	}
 
-	public boolean isInspectionEditorOpened(String inspection) {
-		try {
-			return isTitleDisplayed(inspection);
-		} catch (Exception ignored) {
-			return false;
-		}
+	public boolean isInspectionDisplayedInEditor(String inspection) {
+	    return Utils.getText(estimationNumber).contains(inspection);
 	}
 
 	private Boolean isTitleDisplayed(String inspection) {

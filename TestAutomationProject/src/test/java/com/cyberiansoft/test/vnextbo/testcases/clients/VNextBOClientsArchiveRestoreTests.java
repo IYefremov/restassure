@@ -1,155 +1,127 @@
 package com.cyberiansoft.test.vnextbo.testcases.clients;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
-import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
+import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
+import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.verifications.clients.VNextBOClientsPageValidations;
-import com.cyberiansoft.test.vnextbo.verifications.dialogs.VNextBOModalDialogValidations;
+import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientsPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.WebDriverException;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
-
 public class VNextBOClientsArchiveRestoreTests extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/clients/VNextBOClientsArchiveRestoreData.json";
-    private VNextBOLoginScreenWebPage loginPage;
-    String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-    String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
+    String testClientName = "RozstalnoyCO";
 
     @BeforeClass
     public void settingUp() {
-
-        JSONDataProvider.dataFile = DATA_FILE;
-        browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
-        try {
-            DriverBuilder.getInstance().setDriver(browserType);
-        } catch (WebDriverException e) {
-            e.printStackTrace();
-        }
-        webdriver = DriverBuilder.getInstance().getDriver();
-
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-
-        loginPage = new VNextBOLoginScreenWebPage();
-        loginPage.userLogin(userName, userPassword);
-        VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
-        leftMenuInteractions.selectClientsMenu();
+        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getClientsArchiveRestoreTD();
+        VNextBOLeftMenuInteractions.selectClientsMenu();
     }
 
-    @AfterClass
-    public void backOfficeLogout() {
-        VNextBOHeaderPanelSteps.logout();
-
-        if (DriverBuilder.getInstance().getDriver() != null) {
-            DriverBuilder.getInstance().quitDriver();
-        }
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCancelArchiveXIcon(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelSteps.searchByText("RozstalnoyCO");
-        VNextBOClientsPageSteps.clickActionsButtonForClient("RozstalnoyCO");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(testClientName);
+        VNextBOClientsPageSteps.clickActionsButtonForClient(testClientName);
         VNextBOClientsPageSteps.clickArchiveDropMenuButton();
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
-        VNextBOModalDialogValidations.isDialogDisplayed();
-        VNextBOModalDialogValidations.isOkButtonDisplayed();
-        VNextBOModalDialogValidations.isCloseButtonDisplayed();
-        VNextBOModalDialogValidations.isCancelButtonDisplayed();
+        VNextBOModalDialogValidations.verifyDialogIsDisplayed();
+        VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
+        VNextBOModalDialogValidations.verifyCloseButtonIsDisplayed();
+        VNextBOModalDialogValidations.verifyCancelButtonIsDisplayed();
         VNextBOModalDialogSteps.clickCloseButton();
-        VNextBOModalDialogValidations.isDialogClosed(confirmationDialog);
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Client", "RozstalnoyCO");
-        VNextBOClientsPageValidations.isCorrectRecordsAmountDisplayed(1);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", testClientName);
+        VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCancelArchiveCancelButton(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelSteps.searchByText("RozstalnoyCO");
-        VNextBOClientsPageSteps.clickActionsButtonForClient("RozstalnoyCO");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(testClientName);
+        VNextBOClientsPageSteps.clickActionsButtonForClient(testClientName);
         VNextBOClientsPageSteps.clickArchiveDropMenuButton();
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
         VNextBOModalDialogSteps.clickCancelButton();
-        VNextBOModalDialogValidations.isDialogClosed(confirmationDialog);
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Client", "RozstalnoyCO");
-        VNextBOClientsPageValidations.isCorrectRecordsAmountDisplayed(1);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", testClientName);
+        VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanArchiveClient(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelSteps.searchByText("RozstalnoyCO");
-        VNextBOClientsPageSteps.archiveClient("RozstalnoyCO");
-        VNextBOClientsPageValidations.isClientsNotFoundMessageDisplayed();
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOClientsPageSteps.archiveClient(testClientName);
+        VNextBOClientsPageValidations.verifyClientsNotFoundMessageIsDisplayed();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOClientsPageSteps.openArchivedTab();
-        VNextBOSearchPanelSteps.searchByText("RozstalnoyCO");
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Client", "RozstalnoyCO");
-        VNextBOClientsPageValidations.isCorrectRecordsAmountDisplayed(1);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(testClientName);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", testClientName);
+        VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOClientsPageSteps.restoreClient(testClientName);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOClientsPageSteps.openActiveTab();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCancelRestoreXIcon(String rowID, String description, JSONObject testData) {
 
+        VNextBOClientsPageSteps.archiveClient(testClientName);
         VNextBOClientsPageSteps.openArchivedTab();
-        VNextBOSearchPanelSteps.searchByText("RozstalnoyCO");
-        VNextBOClientsPageSteps.clickActionsButtonForClient("RozstalnoyCO");
+        VNextBOClientsPageSteps.clickActionsButtonForClient(testClientName);
         VNextBOClientsPageSteps.clickRestoreDropMenuButton();
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
-        VNextBOModalDialogValidations.isDialogDisplayed();
-        VNextBOModalDialogValidations.isOkButtonDisplayed();
-        VNextBOModalDialogValidations.isCloseButtonDisplayed();
-        VNextBOModalDialogValidations.isCancelButtonDisplayed();
+        VNextBOModalDialogValidations.verifyDialogIsDisplayed();
+        VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
+        VNextBOModalDialogValidations.verifyCloseButtonIsDisplayed();
+        VNextBOModalDialogValidations.verifyCancelButtonIsDisplayed();
         VNextBOModalDialogSteps.clickCloseButton();
-        VNextBOModalDialogValidations.isDialogClosed(confirmationDialog);
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Client", "RozstalnoyCO");
-        VNextBOClientsPageValidations.isCorrectRecordsAmountDisplayed(1);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", testClientName);
+        VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
+        VNextBOClientsPageSteps.restoreClient(testClientName);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOClientsPageSteps.openActiveTab();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCancelRestoreCancelButton(String rowID, String description, JSONObject testData) {
 
+        VNextBOClientsPageSteps.archiveClient(testClientName);
         VNextBOClientsPageSteps.openArchivedTab();
-        VNextBOSearchPanelSteps.searchByText("RozstalnoyCO");
-        VNextBOClientsPageSteps.clickActionsButtonForClient("RozstalnoyCO");
+        VNextBOClientsPageSteps.clickActionsButtonForClient(testClientName);
         VNextBOClientsPageSteps.clickRestoreDropMenuButton();
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
         VNextBOModalDialogSteps.clickCancelButton();
-        VNextBOModalDialogValidations.isDialogClosed(confirmationDialog);
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Client", "RozstalnoyCO");
-        VNextBOClientsPageValidations.isCorrectRecordsAmountDisplayed(1);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", testClientName);
+        VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
+        VNextBOClientsPageSteps.restoreClient(testClientName);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOClientsPageSteps.openActiveTab();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanRestoreClient(String rowID, String description, JSONObject testData) {
 
+        VNextBOClientsPageSteps.archiveClient(testClientName);
         VNextBOClientsPageSteps.openArchivedTab();
-        VNextBOSearchPanelSteps.searchByText("RozstalnoyCO");
-        VNextBOClientsPageSteps.restoreClient("RozstalnoyCO");
-        VNextBOClientsPageValidations.isClientsNotFoundMessageDisplayed();
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOClientsPageSteps.restoreClient(testClientName);
+        VNextBOClientsPageValidations.verifyClientsNotFoundMessageIsDisplayed();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOClientsPageSteps.openActiveTab();
-        VNextBOSearchPanelSteps.searchByText("RozstalnoyCO");
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Client", "RozstalnoyCO");
-        VNextBOClientsPageValidations.isCorrectRecordsAmountDisplayed(1);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(testClientName);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", testClientName);
+        VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 }

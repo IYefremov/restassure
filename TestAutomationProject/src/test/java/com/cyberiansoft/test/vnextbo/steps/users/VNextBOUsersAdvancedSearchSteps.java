@@ -2,8 +2,8 @@ package com.cyberiansoft.test.vnextbo.steps.users;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.users.VNextBOUsersAdvancedSearchForm;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VNextBOUsersAdvancedSearchSteps {
 
@@ -11,14 +11,14 @@ public class VNextBOUsersAdvancedSearchSteps {
         VNextBOUsersAdvancedSearchForm advancedSearchForm =
                 new VNextBOUsersAdvancedSearchForm();
         Utils.clickElement(advancedSearchForm.searchButton);
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void clickCloseButton() {
         VNextBOUsersAdvancedSearchForm advancedSearchForm =
                 new VNextBOUsersAdvancedSearchForm();
         Utils.clickElement(advancedSearchForm.closeButton);
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.invisibilityOf(advancedSearchForm.closeButton));
     }
 
     public static void setEmailField(String email) {

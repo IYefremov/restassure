@@ -90,7 +90,8 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	
 	public void selectInvoice(String invoiceNumber) {
 		waitMyInvoicesScreenLoaded();
-		invoicestable.findElementByAccessibilityId(invoiceNumber ).click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.elementToBeClickable(invoicestable.findElementByAccessibilityId(invoiceNumber))).click();
 	}
 
 	public String getPriceForInvoice(String invoiceNumber) {
@@ -260,8 +261,7 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name = '" +
 				invoicenumber + "' and type = 'XCUIElementTypeNavigationBar'")));
-		boolean approved = appiumdriver.findElements(MobileBy.AccessibilityId("Approve")).size() > 0;
-		return approved;	
+        return appiumdriver.findElements(MobileBy.AccessibilityId("Approve")).size() > 0;
 	}
 	
 	public boolean isInvoiceApproveRedButtonExists(String invoicenumber) {

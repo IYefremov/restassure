@@ -33,8 +33,11 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
     @FindBy(id = "lbAddServiceRequest")
     private WebElement addServiceRequestButton;
 
-    @FindBy(className = "command-accept")
+    @FindBy(xpath = "//a[@title='Accept']")
     private WebElement serviceRequestsAcceptButton;
+
+    @FindBy(xpath = "//a[@title='Reject']")
+    private WebElement serviceRequestsRejectButton;
 
     // Search Panel
     @FindBy(id = "ctl00_ctl00_Content_Main_ctl01_rbxPhases_Input")
@@ -169,6 +172,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
     @FindBy(className = "description-reason")
     private WebElement descriptionDocuments;
 
+    @FindBy(xpath = "//div[@class='infoBlock description']//span[@data-for='Card_hfNotes']")
+    private WebElement descriptionTextBlock;
+
     @FindBy(id = "linkAnswers")
     private WebElement descriptionAnswers;
 
@@ -212,10 +218,10 @@ public class ServiceRequestsListWebPage extends BaseWebPage {
     private WebElement addAppointmentButton;
 
     @FindBy(id = "ctl00_ctl00_Content_Main_rcbTechnician_Input")
-    private TextField addservicerequesapptechcmb;
+    private TextField addSRAppTechCombobox;
 
     @FindBy(id = "ctl00_ctl00_Content_Main_rcbTechnician_DropDown")
-    private DropDown addservicerequesapptechdd;
+    private DropDown addSRAppTechnicianDropDown;
 
     @FindBy(className = "addAppointmentLink")
     private WebElement addAppointmentBTNfromSRedit;

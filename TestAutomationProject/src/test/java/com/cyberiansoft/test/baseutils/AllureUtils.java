@@ -29,6 +29,18 @@ public class AllureUtils {
         return screenshotAs;
     }
 
+    @Attachment(value = "Page screenshot", type = "image/png")
+    public static byte[] attachScreenshot(WebDriver webDriver) {
+        byte[] screenshotAs = null;
+        try {
+            WebDriver augmentedDriver = new Augmenter().augment(webDriver);
+            screenshotAs = ((TakesScreenshot) augmentedDriver).getScreenshotAs(OutputType.BYTES);
+        } catch (Exception e) {
+            failToSaveScreenshot(e);
+        }
+        return screenshotAs;
+    }
+
     @Attachment(value = "Unable to save screenshot")
     public static String failToSaveScreenshot(Exception e) {
         return String.format("%s\n%s\n%s", "Failed to save screenshot",

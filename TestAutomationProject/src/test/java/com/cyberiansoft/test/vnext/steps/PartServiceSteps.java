@@ -9,20 +9,18 @@ import com.cyberiansoft.test.vnext.interactions.PartInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.services.LaborServiceScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.PartInfoScreen;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
 public class PartServiceSteps {
     public static void selectPartService(PartServiceData partServiceData) {
         AvailableServicesScreenSteps.openServiceDetails(partServiceData.getServiceName());
-        PartServiceSteps.selectpartServiceDetails(partServiceData);
+        PartServiceSteps.selectPartServiceDetails(partServiceData);
+        ServiceDetailsScreenSteps.saveServiceDetails();
+
     }
 
-    public static void changeCategory(PartServiceData partServiceData) {
-        WaitUtils.click(PartInfoScreenInteractions.getPartInfoScreenField(PartInfoScreenField.CATEGORY));
-        PartServiceSteps.selectpartServiceDetails(partServiceData);
-    }
-
-    public static void selectpartServiceDetails(PartServiceData partServiceData) {
+    public static void selectPartServiceDetails(PartServiceData partServiceData) {
         if (partServiceData.getCategory() != null)
             PartServiceSteps.selectCategory(partServiceData.getCategory());
         if (partServiceData.getSubCategory() != null)
@@ -33,8 +31,18 @@ public class PartServiceSteps {
             PartServiceSteps.selectPartPosition(partServiceData.getPartPosition());
     }
 
+    public static void selectPartServiceDetailsWithOpenedDetails(PartServiceData partServiceData) {
+        if (partServiceData.getSubCategory() != null)
+            PartServiceSteps.selectSubCategory(partServiceData.getSubCategory());
+        if (partServiceData.getPartName() != null)
+            PartServiceSteps.selectPartName(partServiceData.getPartName());
+        if (partServiceData.getPartPosition() != null && partServiceData.getPartPosition() != "")
+            PartServiceSteps.selectPartPosition(partServiceData.getPartPosition());
+    }
+
     public static void selectCategory(String category) {
-        ListSelectPageInteractions.waitListPageReady(PartServiceWizardScreen.CATEGORY.getValue());
+        //ListSelectPageInteractions.waitListPageReady(PartServiceWizardScreen.CATEGORY.getValue());
+        ListSelectPageInteractions.waitForList("category-list");
         ListSelectPageInteractions.selectItem(category);
     }
 
@@ -55,6 +63,16 @@ public class PartServiceSteps {
         ListSelectPageInteractions.selectItem(partPosition);
     }
 
+    public static void changePartPosition(String partPosition) {
+        PartInfoScreen partInfoScreen = new PartInfoScreen();
+        partInfoScreen.getPartPositionField().click();
+        selectPartPosition(partPosition);
+    }
+
+    public static void changeCategory(PartServiceData partServiceData) {
+        WaitUtils.click(PartInfoScreenInteractions.getPartInfoScreenField(PartInfoScreenField.CATEGORY));
+        PartServiceSteps.selectPartServiceDetails(partServiceData);
+    }
 
     public static void acceptDetailsScreen() {
         ListSelectPageInteractions.saveListPage();
@@ -63,7 +81,6 @@ public class PartServiceSteps {
     public static void confirmPartInfo() {
         PartInfoScreen partInfoScreen = new PartInfoScreen();
         WaitUtils.click(partInfoScreen.getSaveButton());
-        WaitUtils.elementShouldBeVisible(partInfoScreen.getRootElement(), false);
     }
 
     public static void addLaborService() {

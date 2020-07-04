@@ -163,9 +163,9 @@
     {
       "rowID": "testCompanyClientsClientUsersSearch.01",
       "description": "Test Case 29761:Company- Clients: Client Users Search",
-      "clientName": "AlExTest",
-      "firstSearchParameter": "name",
-      "secondSearchParameter": "test2",
+      "clientName": "Test_Ivan",
+      "firstSearchParameter": "client_name",
+      "secondSearchParameter": "client-test2",
       "thirdSearchParameter": "name@testmail.com",
       "lastSearchParameter": "test3"
     }
@@ -411,7 +411,7 @@
       "tabName": "Sending",
       "profileName": "Estimate JST",
       "documentType": "Estimation",
-      "entityType": "Default"
+      "entityType": "Best"
     }
   ],
 
@@ -424,7 +424,7 @@
       "tabName": "Sending",
       "profileName": "Estimate JST",
       "documentType": "Estimation",
-      "entityType": "Default",
+      "entityType": "Best",
       "ruleName": "Include Selected Clients",
       "ruleEntityType": "Clients",
       "ruleFilterType": "Include Selected",
@@ -442,7 +442,7 @@
       "tabName": "Sending",
       "profileName": "Estimate JST",
       "documentType": "Estimation",
-      "entityType": "Default",
+      "entityType": "Best",
       "ruleName": "Include Selected Teams",
       "ruleEntityType": "Teams",
       "ruleFilterType": "Include Selected",
@@ -460,7 +460,7 @@
       "tabName": "Sending",
       "profileName": "Estimate JST",
       "documentType": "Estimation",
-      "entityType": "Default",
+      "entityType": "Best",
       "ruleName": "Include Selected Employees",
       "ruleEntityType": "Employees",
       "ruleFilterType": "Include Selected",
@@ -496,7 +496,7 @@
       "tabName": "Sending",
       "profileName": "Estimate JST",
       "documentType": "Estimation",
-      "entityType": "Default",
+      "entityType": "Best",
       "ruleName": "Include Selected Vehicle Parts",
       "ruleEntityType": "Vehicle Parts",
       "ruleFilterType": "Include Selected",

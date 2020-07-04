@@ -9,8 +9,16 @@
         }
       ],
       "description": "91017",
-      "service": {
-        "serviceName": "Labor AM"
+      "damageData": {
+        "damageGroupName": "Other",
+        "moneyServices": [
+          {
+            "serviceName": "olrom"
+          },
+          {
+            "serviceName": "Orom_Money_Service"
+          }
+        ]
       }
     }
   ],
@@ -26,14 +34,25 @@
       ],
       "monitoring": {
         "orderPhaseDto": {
-          "phaseName": "AutomationPhaseLevel"
+          "phaseName": "PhaseLevel"
         }
+      },
+      "damageData": {
+        "damageGroupName": "Other",
+        "moneyServices": [
+          {
+            "serviceName": "olrom"
+          },
+          {
+            "serviceName": "Orom_Money_Service"
+          }
+        ]
       }
     }
   ],
   "userCanResetStartDateOnServiceLevel": [
     {
-      "rowID": "userCanSeeTimeReportOnPhaseLevel.01",
+      "rowID": "userCanResetStartDateOnServiceLevel.01",
       "description": "91006",
       "targetProcessTestCaseData": [
         {
@@ -42,13 +61,14 @@
         }
       ],
       "service": {
-        "serviceName": "Labor AM"
+        "serviceName": "Labor AM",
+        "serviceStatus": "STARTED"
       }
     }
   ],
   "userCanResetStartDateOnPhaseLevel": [
     {
-      "rowID": "userCanSeeTimeReportOnPhaseLevel.01",
+      "rowID": "userCanResetStartDateOnPhaseLevel.01",
       "description": "91007",
       "targetProcessTestCaseData": [
         {

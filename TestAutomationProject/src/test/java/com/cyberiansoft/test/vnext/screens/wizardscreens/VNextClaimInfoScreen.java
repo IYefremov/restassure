@@ -1,98 +1,58 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.VNextCustomKeyboard;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
+@Getter
 public class VNextClaimInfoScreen extends VNextBaseWizardScreen {
+
+	@FindBy(xpath="//div[@class='pages']/div[@data-page='claim']")
+	private WebElement claimScreen;
 	
-	@FindBy(name="Estimations.PolicyNumber")
-	private WebElement policyfld;
+	@FindBy(xpath="//*[@data-field='PolicyNumber']/input")
+	private WebElement policyFld;
 	
-	@FindBy(name="Estimations.OtherInsuranceName")
-	private WebElement insurancecompanyfld;
-	
-	@FindBy(name="Estimations.ClaimNumber")
-	private WebElement claimfld;
+	@FindBy(xpath="//*[@data-field='Insurance']")
+	private WebElement insuranceCompanyFld;
+
+	@FindBy(xpath="//*[@data-field='ClaimNumber']/input")
+	private WebElement claimFld;
 	
 	@FindBy(name="Estimations.Deductible")
-	private WebElement deductiblefld;
+	private WebElement deductibleFld;
 	
 	@FindBy(name="Estimations.AccidentDate")
-	private WebElement accidentdatefld;
-	
-	public VNextClaimInfoScreen(AppiumDriver<MobileElement> appiumdriver) {
-		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(policyfld));
-	}
-	
-	public void setPolicyNumber(String policynum) {
-		tap(policyfld);
-		policyfld.sendKeys(policynum);
-		//appiumdriver.hideKeyboard();
-	}
-	
-	public String getPolicyNumber() {
-		return policyfld.getAttribute("value");
-	}
-	
-	public boolean isPolicyNumberFieldVisible() {
-		return policyfld.isDisplayed();
-	}
-	
-	public void setClaimNumber(String claimnum) {
-		tap(claimfld);
-		claimfld.sendKeys(claimnum);
-	}
-	
-	public String getClaimNumber() {
-		return claimfld.getAttribute("value");
-	}
-	
-	public boolean isClaimNumberFieldVisible() {
-		return claimfld.isDisplayed();
-	}	
-	
-	public void selectInsuranceCompany (String insuranceCompany) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(insurancecompanyfld));
-		insurancecompanyfld.sendKeys(insuranceCompany);
+	private WebElement accidentdateFld;
 
+	@FindBy(xpath="//*[@data-autotests-id='companies-list']")
+	private WebElement companiesList;
+
+	public VNextClaimInfoScreen() {
+		PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
 	}
 	
-	public String getInsuranceCompany() {
-		return insurancecompanyfld.getAttribute("value");
-	}
-	
-	public boolean isInsuranceCompanyFieldVisible() {
-		return insurancecompanyfld.isDisplayed();
-	}
-	
-	public void setDeductibleValue(String deductiblevalue) {
-		tap(appiumdriver.findElement(By.xpath("//*[@action='select-deductible']")));
+	public void setDeductibleValue(String deductible) {
 		tap(appiumdriver.findElement(By.xpath("//*[@action='select-deductible']")));
 		VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
-		keyboard.setFieldValue(deductiblefld.getAttribute("value"), deductiblevalue);
+		keyboard.setFieldValue(deductibleFld.getAttribute("value"), deductible);
 	}
-	
-	public String getDeductibleValue() {
-		return deductiblefld.getAttribute("value");
+
+	public void openInsuranceCompaniesList() {
+		insuranceCompanyFld.findElement(By.xpath(".//*[@class='formfield-item-arrow']")).click();
 	}
-	
-	public boolean isDeductibleFieldVisible() {
-		return deductiblefld.isDisplayed();
+
+	public String getInsuranceCompanyValue() {
+		return  insuranceCompanyFld.findElement(By.xpath(".//input[contains(@name, 'InsuranceName')]")).
+				getAttribute("value").trim();
 	}
-	
-	public String getAccidentDateValue() {
-		return accidentdatefld.getAttribute("value");
+
+	public void selectInsuranceCompany(String insuranceCompany) {
+		companiesList.findElement(By.xpath(".//div[contains(text(), '" + insuranceCompany + "')]")).click();
 	}
 }

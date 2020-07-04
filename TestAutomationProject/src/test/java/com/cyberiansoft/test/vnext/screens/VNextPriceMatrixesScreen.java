@@ -1,10 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.vnext.steps.GeneralSteps;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
+import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,22 +17,9 @@ public class VNextPriceMatrixesScreen extends VNextBaseScreen {
 
 	@FindBy(xpath="//*[@data-autotests-id='matrices-list']")
 	private WebElement matriceslist;
-	
-	public VNextPriceMatrixesScreen(AppiumDriver<MobileElement> appiumdriver) {
-		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-	}
 
 	public VNextPriceMatrixesScreen() {
-	}
-
-	public boolean isPriceMatrixExistsInTheList(String pricematrix) {
-		return matriceslist.findElements(By.xpath(".//*[@action='select-matrix' and contains(text(), '" + pricematrix + "')]")).size() > 0;
-	}
-	
-	public VNextVehiclePartInfoPage selectPriceMatrix(String pricematrix) {
-		tap(matrixpartslist.findElement(By.xpath(".//*[@class='checkbox-item-title' and contains(text(), '" + pricematrix + "')]")));
-		return new VNextVehiclePartInfoPage(appiumdriver);
+		PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
 	}
 
 	public void selectHailMatrix(String pricematrix) {

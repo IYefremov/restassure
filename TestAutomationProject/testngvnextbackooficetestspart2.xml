@@ -1,0 +1,111 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Cyberiansoft R360 ReconPro tests suite 2" verbose="10" configfailurepolicy="continue">
+    <listeners>
+        <listener class-name="com.cyberiansoft.test.vnextbo.utils.TestListenerAllure"/>
+    </listeners>
+    <test name="Login Tests">
+        <parameter name="userName" value="test.automation2@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.login.VNextBOLoginTests"/>
+        </classes>
+    </test>
+    <test name="Forgot Password Tests">
+        <parameter name="userName" value="test.automation2@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.login.VNextBOForgotPasswordTests"/>
+        </classes>
+    </test>
+    <test name="Home Page Tests">
+        <parameter name="userName" value="test.automation2@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.homepage.VNextBOHomePageTestCases"/>
+        </classes>
+    </test>
+    <test name="Home Page Access Rights Tests">
+        <parameter name="userName" value="test.automation2@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.homepage.VNextBOHomePageAccessRightsTestCases"/>
+        </classes>
+    </test>
+    <test name="Users General Tests">
+        <parameter name="userName" value="test.automation2@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.users.VNextBOUsersGeneralTests"/>
+        </classes>
+    </test>
+    <test name="Add New User And Users Search Tests">
+        <parameter name="userName" value="test.automation2@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.users.VNextBOAddNewUserAndSearchTests"/>
+        </classes>
+    </test>
+    <test name="Clients General Tests">
+        <parameter name="userName" value="test.automation2@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsGeneralTests"/>
+        </classes>
+    </test>
+    <test name="Clients Search Tests">
+        <parameter name="userName" value="test.automation2@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsSearchBlockTests"/>
+        </classes>
+    </test>
+    <test name="Clients Archive Restore Tests">
+        <parameter name="userName" value="test.automation2@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsArchiveRestoreTests"/>
+        </classes>
+    </test>
+    <test name="Clients Add New Client Tests">
+        <parameter name="userName" value="test.automation2@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsAddNewClientTests"/>
+        </classes>
+    </test>
+    <test name="Clients Edit Client Tests">
+        <parameter name="userName" value="test.automation2@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsEditClientTests"/>
+        </classes>
+    </test>
+    <test name="Clients Client Services Tests">
+        <parameter name="userName" value="test.automation2@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsClientServicesTests"/>
+        </classes>
+    </test>
+    <test name="Device Management General Tests">
+        <parameter name="userName" value="test.automation2@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.devicemanagement.VNextBODeviceManagementGeneralTests"/>
+        </classes>
+    </test>
+    <test name="Device Management Search Tests">
+        <parameter name="userName" value="test.automation2@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.devicemanagement.VNextBODeviceManagementSearchTests"/>
+        </classes>
+    </test>
+    <test name="Device Management Active And Pending Registration Tab Tests">
+        <parameter name="userName" value="test.automation2@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.devicemanagement.VNextBODMActiveAndPendingRegistrationTabTests"/>
+        </classes>
+    </test>
+</suite>

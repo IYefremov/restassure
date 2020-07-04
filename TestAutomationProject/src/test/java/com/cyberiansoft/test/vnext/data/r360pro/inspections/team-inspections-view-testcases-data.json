@@ -1,0 +1,137 @@
+{
+  "testVerifyCorrectDateTimeInfoIsShownOnPrinting": [
+    {
+      "rowID": "testVerifyCorrectDateTimeInfoIsShownOnPrinting.01",
+      "description": "Verify correct DateTime Info is shown on Printing",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91900",
+          "testCaseTitle": "Verify correct DateTime Info is shown on Printing"
+        }
+      ],
+      "inspType": "O_Kramar",
+      "vihicleInfo": {
+        "vinNumber": "YV4982CZ9A1538968"
+      }
+    }
+  ],
+  "testVerifyCorrectCustomerInfoIsShownOnPrinting": [
+    {
+      "rowID": "testVerifyCorrectCustomerInfoIsShownOnPrinting.01",
+      "description": "Verify correct Customer Info is shown on Printing",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91901",
+          "testCaseTitle": "Verify correct Customer Info is shown on Printing"
+        }
+      ],
+      "inspType": "O_Kramar",
+      "vihicleInfo": {
+        "vinNumber": "YV4982CZ9A1538968"
+      }
+    }
+  ],
+  "testVerifyBackButtonDoesntSaveInfoForVehiclePartPrinting": [
+    {
+      "rowID": "testVerifyBackButtonDoesntSaveInfoForVehiclePartPrinting.01",
+      "description": "Verify 'Back' button doesn't save info for Vehicle Part - Printing",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91902",
+          "testCaseTitle": "Verify 'Back' button doesn't save info for Vehicle Part - Printing"
+        }
+      ],
+      "inspType": "O_Kramar",
+      "vihicleInfo": {
+        "vinNumber": "YV4982CZ9A1538968"
+      },
+      "matrixService": {
+        "matrixServiceName": "Hail Damage Repair",
+        "hailMatrixName": "Progressive-Tech",
+        "vehiclePartsData": [
+          {
+            "vehiclePartName": "Trunk Lid"
+          },
+          {
+            "vehiclePartName": "Left Fender"
+          }
+        ]
+      }
+    }
+  ],
+
+  "testVerifyInformationIsUpdatedOnViewScreenIfUserEditInspection": [
+    {
+      "rowID": "testVerifyInformationIsUpdatedOnViewScreenIfUserEditInspection.01",
+      "description": "Verify information is updated on View screen if user edit Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91899",
+          "testCaseTitle": "Verify information is updated on View screen if user edit Inspection"
+        }
+      ],
+      "inspType": "O_Kramar",
+      "vihicleInfo": {
+        "vinNumber": "YV4982CZ9A1538968"
+      },
+      "matrixService": {
+        "matrixServiceName": "Hail Damage Repair",
+        "hailMatrixName": "Progressive-Tech",
+        "vehiclePartsData": [
+          {
+            "vehiclePartName": "Trunk Lid",
+            "vehiclePartSize": "DIME",
+            "vehiclePartSeverity": "Light 6 to 15",
+            "laborService":
+            {
+              "serviceName": "R&I Labor",
+              "laborServicePanel": "Front Door",
+              "laborServicePart": "Remove/Install Left Front Ctr Door Molding"
+            }
+          },
+          {
+            "vehiclePartName": "Left Fender",
+            "vehiclePartSize": "Nickel",
+            "vehiclePartSeverity": "Moderate 31 to 50",
+            "vehiclePartAdditionalService":
+            {
+              "serviceName": "Large Dent"
+            }
+          }
+        ]
+      }
+    }
+  ],
+
+  "testVerifyNotesForAdditionalServicesInPriceMatrixIsShownOnMobile": [
+    {
+      "rowID": "testVerifyNotesForAdditionalServicesInPriceMatrixIsShownOnMobile.01",
+      "description": "Verify notes for Additional services in Price Matrix is shown on Mobile",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91905",
+          "testCaseTitle": "Verify notes for Additional services in Price Matrix is shown on Mobile"
+        }
+      ],
+      "inspType": "O_Kramar",
+      "vihicleInfo": {
+        "vinNumber": "YV4982CZ9A1538968"
+      },
+      "matrixService": {
+        "matrixServiceName": "Hail Damage Repair",
+        "hailMatrixName": "Progressive-Tech",
+        "vehiclePartsData": [
+          {
+            "vehiclePartName": "Left Fender",
+            "vehiclePartSize": "Nickel",
+            "vehiclePartSeverity": "Moderate 31 to 50",
+            "vehiclePartAdditionalService":
+            {
+              "serviceName": "Large Dent"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

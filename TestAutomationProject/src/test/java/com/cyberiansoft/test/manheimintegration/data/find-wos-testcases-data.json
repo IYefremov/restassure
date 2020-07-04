@@ -1,0 +1,1666 @@
+{
+  "testVerifyTheApprovedServicesMustHaveActiveStatus": [
+    {
+      "rowID": "testVerifyTheApprovedServicesMustHaveActiveStatus.01",
+      "description": "",
+      "workOrderData": {
+        "monitoring": {
+          "location": "Manheim Pennsylvania",
+          "stockNumber": "8668722",
+          "repairOrderData": {
+            "phaseName": "PARTS",
+            "vin": "SS228962",
+            "completePercentage": "0%"
+          },
+          "orderPhasesDto": [
+            {
+              "phaseName": "Mechaical Repair",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Air Suspension"
+                  },
+                  "monitorServiceStatus": "STARTED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - LR Tire"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Oil"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "Body",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Deck Lid Latch"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Wet Sand - Front Bumper"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Touch Up - Hood"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Repair - L Qtr Panel"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "Paint",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Paint - L Qtr Panel"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Paint - Roof"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "Parts Install",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - LF Seat"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "Mech Diagnostic",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Mech Ck - Engine"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Mech Ck - Left Front Brakes"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Mech Ck - LF Strut, Loose"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "Glass",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Windshield"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "Keys",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Master/Door Key"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "Audit",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Audit"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "QC",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "QC"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "testVerifyTheDeclinedServicesMustHaveRefusedStatus": [
+    {
+      "rowID": "testVerifyTheDeclinedServicesMustHaveRefusedStatus.01",
+      "description": "",
+      "workOrderData": {
+        "monitoring": {
+          "location": "Manheim Pennsylvania",
+          "stockNumber": "8668723",
+          "repairOrderData": {
+            "phaseName": "PARTS",
+            "vin": "SS228962",
+            "completePercentage": "0%"
+          },
+          "orderPhasesDto": [
+            {
+              "phaseName": "Mechaical Repair",
+              "status": "REFUSED",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Air Suspension"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - LR Tire"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Oil"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                }
+              ]
+            },
+            {
+              "phaseName": "Body",
+              "status": "REFUSED",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Deck Lid Latch"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Wet Sand - Front Bumper"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Touch Up - Hood"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Repair - L Qtr Panel"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                }
+              ]
+            },
+            {
+              "phaseName": "Paint",
+              "status": "REFUSED",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Paint - L Qtr Panel"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Paint - Roof"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                }
+              ]
+            },
+            {
+              "phaseName": "Parts Install",
+              "status": "REFUSED",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - LF Seat"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                }
+              ]
+            },
+            {
+              "phaseName": "Mech Diagnostic",
+              "status": "REFUSED",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Mech Ck - Engine"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Mech Ck - Left Front Brakes"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Mech Ck - LF Strut"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                }
+              ]
+            },
+            {
+              "phaseName": "Glass",
+              "status": "REFUSED",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Windshield"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                }
+              ]
+            },
+            {
+              "phaseName": "Keys",
+              "status": "REFUSED",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Master/Door Key"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "testVerifyVerifyThatApprovedHasActiveStatusAndDeclinedHasRefusedStatus": [
+    {
+      "rowID": "testVerifyVerifyThatApprovedHasActiveStatusAndDeclinedHasRefusedStatus.01",
+      "description": "",
+      "workOrderData": {
+        "monitoring": {
+          "location": "Manheim Pennsylvania",
+          "stockNumber": "8668724",
+          "repairOrderData": {
+            "phaseName": "PARTS",
+            "vin": "SS228962",
+            "completePercentage": "0%"
+          },
+          "orderPhasesDto": [
+            {
+              "phaseName": "Mechaical Repair",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Air Suspension"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - LR Tire, Worn"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Oil"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                }
+              ]
+            },
+            {
+              "phaseName": "Body",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Deck Lid Latch"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Wet Sand - Front Bumper"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Touch Up - Hood"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Repair - L Qtr Panel"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "Paint",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Paint - L Qtr Panel"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Paint - Roof"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "Parts Install",
+              "status": "REFUSED",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - LF Seat"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                }
+              ]
+            },
+            {
+              "phaseName": "Mech Diagnostic",
+              "status": "REFUSED",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Mech Ck - Engine"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Mech Ck - Left Front Brakes"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Mech Ck - LF Strut"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                }
+              ]
+            },
+            {
+              "phaseName": "Glass",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Windshield"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "Keys",
+              "status": "REFUSED",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Master/Door Key"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                }
+              ]
+            },
+            {
+              "phaseName": "Audit",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Audit"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "QC",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "QC"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "testVerifyVerifyThatServicesHasOppositeToPreviousStatus": [
+    {
+      "rowID": "testVerifyVerifyThatServicesHasOppositeToPreviousStatus.01",
+      "description": "",
+      "workOrderData": {
+        "monitoring": {
+          "location": "Manheim Pennsylvania",
+          "stockNumber": "8668725",
+          "repairOrderData": {
+            "phaseName": "PARTS",
+            "vin": "SS228962",
+            "completePercentage": "0%"
+          },
+          "orderPhasesDto": [
+            {
+              "phaseName": "Mechaical Repair",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Air Suspension"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - LR Tire"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Oil"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "Body",
+              "status": "REFUSED",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Deck Lid Latch"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Wet Sand - Front Bumper"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Touch Up - Hood"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Repair - L Qtr Panel"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                }
+              ]
+            },
+            {
+              "phaseName": "Paint",
+              "status": "REFUSED",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Paint - L Qtr Panel"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Paint - Roof"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                }
+              ]
+            },
+            {
+              "phaseName": "Parts Install",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - LF Seat"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "Mech Diagnostic",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Mech Ck - Engine"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Mech Ck - Left Front Brakes"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Mech Ck - LF Strut"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "Glass",
+              "status": "REFUSED",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Windshield"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                }
+              ]
+            },
+            {
+              "phaseName": "Keys",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Master/Door Key"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "Audit",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Audit"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "QC",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "QC"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "testVerifyThatTheWOsAreAvailableOnBO": [
+    {
+      "rowID": "testVerifyThatTheWOsAreAvailableOnBO.01",
+      "description": "",
+      "workOrdersData": [
+        {
+          "monitoring": {
+            "location": "Manheim Pennsylvania",
+            "stockNumber": "8668722"
+          }
+        },
+        {
+          "monitoring": {
+            "location": "Manheim Pennsylvania",
+            "stockNumber": "8668723"
+          }
+        },
+        {
+          "monitoring": {
+            "location": "Manheim Pennsylvania",
+            "stockNumber": "8668724"
+          }
+        },
+        {
+          "monitoring": {
+            "location": "Manheim Pennsylvania",
+            "stockNumber": "8668725"
+          }
+        }
+      ]
+    }
+  ],
+  "testVerifyThatTheWOsAreAvailableOnMobileDevice": [
+    {
+      "rowID": "testVerifyThatTheWOsAreAvailableOnMobileDevice.01",
+      "description": "",
+      "workOrdersData": [
+        {
+          "monitoring": {
+            "location": "Manheim Pennsylvania",
+            "stockNumber": "8668722"
+          }
+        },
+        {
+          "monitoring": {
+            "location": "Manheim Pennsylvania",
+            "stockNumber": "8668723"
+          }
+        },
+        {
+          "monitoring": {
+            "location": "Manheim Pennsylvania",
+            "stockNumber": "8668724"
+          }
+        },
+        {
+          "monitoring": {
+            "location": "Manheim Pennsylvania",
+            "stockNumber": "8668725"
+          }
+        }
+      ]
+    }
+  ],
+  "userCanFindWorkOrdersOnBOAndDevice": [
+    {
+      "rowID": "userCanFindWorkOrdersOnBOAndDevice.01",
+      "description": "",
+      "workOrdersData": [
+        {
+          "monitoring": {
+            "location": "Manheim Pennsylvania",
+            "stockNumber": "8668722",
+            "repairOrderData": {
+              "phaseName": "PARTS",
+              "vin": "SS228962",
+              "completePercentage": "0%"
+            },
+            "orderPhasesDto": [
+              {
+                "phaseName": "Mechaical Repair",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Air Suspension"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - LR Tire"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Oil"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Body",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Deck Lid Latch"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Wet Sand - Front Bumper"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Touch Up - Hood"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Repair - L Qtr Panel"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Paint",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Paint - L Qtr Panel"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Paint - Roof"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Parts Install",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - LF Seat"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Mech Diagnostic",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Mech Ck - Engine"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Mech Ck - Left Front Brakes"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Mech Ck - LF Strut, Loose"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Glass",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Windshield"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Keys",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Master/Door Key"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Audit",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Audit"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              },
+              {
+                "phaseName": "QC",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "QC"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "monitoring": {
+            "location": "Manheim Pennsylvania",
+            "stockNumber": "8668723",
+            "repairOrderData": {
+              "phaseName": "PARTS",
+              "vin": "SS228962",
+              "completePercentage": "0%"
+            },
+            "orderPhasesDto": [
+              {
+                "phaseName": "Mechaical Repair",
+                "status": "REFUSED",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Air Suspension"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - LR Tire"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Oil"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Body",
+                "status": "REFUSED",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Deck Lid Latch"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Wet Sand - Front Bumper"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Touch Up - Hood"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Repair - L Qtr Panel"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Paint",
+                "status": "REFUSED",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Paint - L Qtr Panel"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Paint - Roof"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Parts Install",
+                "status": "REFUSED",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - LF Seat"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Mech Diagnostic",
+                "status": "REFUSED",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Mech Ck - Engine"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Mech Ck - Left Front Brakes"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Mech Ck - LF Strut"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Glass",
+                "status": "REFUSED",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Windshield"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Keys",
+                "status": "REFUSED",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Master/Door Key"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "monitoring": {
+            "location": "Manheim Pennsylvania",
+            "stockNumber": "8668724",
+            "repairOrderData": {
+              "phaseName": "PARTS",
+              "vin": "SS228962",
+              "completePercentage": "0%"
+            },
+            "orderPhasesDto": [
+              {
+                "phaseName": "Mechaical Repair",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Air Suspension"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - LR Tire, Worn"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Oil"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Body",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Deck Lid Latch"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Wet Sand - Front Bumper"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Touch Up - Hood"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Repair - L Qtr Panel"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Paint",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Paint - L Qtr Panel"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Paint - Roof"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Parts Install",
+                "status": "REFUSED",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - LF Seat"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Mech Diagnostic",
+                "status": "REFUSED",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Mech Ck - Engine"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Mech Ck - Left Front Brakes"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Mech Ck - LF Strut"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Glass",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Windshield"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Keys",
+                "status": "REFUSED",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Master/Door Key"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Audit",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Audit"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              },
+              {
+                "phaseName": "QC",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "QC"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "monitoring": {
+            "location": "Manheim Pennsylvania",
+            "stockNumber": "8668725",
+            "repairOrderData": {
+              "phaseName": "PARTS",
+              "vin": "SS228962",
+              "completePercentage": "0%"
+            },
+            "orderPhasesDto": [
+              {
+                "phaseName": "Mechaical Repair",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Air Suspension"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - LR Tire"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Oil"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Body",
+                "status": "REFUSED",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Deck Lid Latch"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Wet Sand - Front Bumper"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Touch Up - Hood"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Repair - L Qtr Panel"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Paint",
+                "status": "REFUSED",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Paint - L Qtr Panel"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Paint - Roof"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Parts Install",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - LF Seat"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Mech Diagnostic",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Mech Ck - Engine"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Mech Ck - Left Front Brakes"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  },
+                  {
+                    "monitorService": {
+                      "serviceName": "Mech Ck - LF Strut"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Glass",
+                "status": "REFUSED",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Windshield"
+                    },
+                    "monitorServiceStatus": "REFUSED"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Keys",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Replace - Master/Door Key"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              },
+              {
+                "phaseName": "Audit",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "Audit"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              },
+              {
+                "phaseName": "QC",
+                "status": "ACTIVE",
+                "phaseServices": [
+                  {
+                    "monitorService": {
+                      "serviceName": "QC"
+                    },
+                    "monitorServiceStatus": "ACTIVE"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "userCanCompletePhasesDevice": [
+    {
+      "rowID": "userCanCompletePhasesDevice.01",
+      "description": "",
+      "workOrderData": {
+        "monitoring": {
+          "location": "Manheim Pennsylvania",
+          "stockNumber": "8668722",
+          "repairOrderData": {
+            "phaseName": "PARTS",
+            "vin": "SS228962",
+            "completePercentage": "0%"
+          },
+          "orderPhasesDto": [
+            {
+              "phaseName": "Mechaical Repair",
+              "status": "COMPLETED",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Air Suspension"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - LR Tire"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Oil"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "Body",
+              "status": "COMPLETED",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Deck Lid Latch"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Wet Sand - Front Bumper"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Touch Up - Hood"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Repair - L Qtr Panel"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "userCanResolveProblemOnServiceLevelOnDevice": [
+    {
+      "rowID": "userCanResolveProblemOnServiceLevelOnDevice.01",
+      "description": "",
+      "workOrderData": {
+        "monitoring": {
+          "location": "Manheim Pennsylvania",
+          "stockNumber": "8668724"
+        },
+        "service": {
+          "serviceName": "Replace - Air Suspension",
+          "problemReason": "Incorrect part"
+        }
+      }
+    }
+  ],
+  "userCanResolveProblemOnServiceLevelOnBackOffice": [
+    {
+      "rowID": "userCanResolveProblemOnServiceLevelOnBackOffice.01",
+      "description": "",
+      "workOrderData": {
+        "monitoring": {
+          "location": "Manheim Pennsylvania",
+          "stockNumber": "8668724",
+          "orderPhaseDto": {
+            "phaseName": "Mechaical Repair",
+            "phaseServices": [
+              {
+                "monitorService": {
+                  "serviceName": "Replace - Oil",
+                  "problemReason": "Incorrect part"
+                },
+                "monitorServiceStatus": "Active"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "userCanStartStopCompleteServices": [
+    {
+      "rowID": "userCanStartStopCompleteServices.01",
+      "description": "",
+      "workOrderData": {
+        "monitoring": {
+          "location": "Manheim Pennsylvania",
+          "stockNumber": "8668725",
+          "repairOrderData": {
+            "phaseName": "PARTS",
+            "vin": "SS228962",
+            "completePercentage": "0%"
+          },
+          "orderPhasesDto": [
+            {
+              "phaseName": "Mechaical Repair",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Air Suspension"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - LR Tire, Worn"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Oil"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                }
+              ]
+            },
+            {
+              "phaseName": "Body",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Deck Lid Latch"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Wet Sand - Front Bumper"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Touch Up - Hood"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Repair - L Qtr Panel"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "Paint",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Paint - L Qtr Panel"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Paint - Roof"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "Parts Install",
+              "status": "REFUSED",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - LF Seat"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                }
+              ]
+            },
+            {
+              "phaseName": "Mech Diagnostic",
+              "status": "REFUSED",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Mech Ck - Engine"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Mech Ck - Left Front Brakes"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                },
+                {
+                  "monitorService": {
+                    "serviceName": "Mech Ck - LF Strut"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                }
+              ]
+            },
+            {
+              "phaseName": "Glass",
+              "status": "ACTIVE",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Windshield"
+                  },
+                  "monitorServiceStatus": "ACTIVE"
+                }
+              ]
+            },
+            {
+              "phaseName": "Keys",
+              "status": "REFUSED",
+              "phaseServices": [
+                {
+                  "monitorService": {
+                    "serviceName": "Replace - Master/Door Key"
+                  },
+                  "monitorServiceStatus": "REFUSED"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

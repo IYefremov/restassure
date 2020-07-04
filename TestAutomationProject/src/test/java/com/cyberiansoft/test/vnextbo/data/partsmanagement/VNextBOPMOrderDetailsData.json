@@ -1,0 +1,243 @@
+{
+  "verifyUserCanAddAndDeleteLabor": [
+    {
+      "rowID": "verifyUserCanAddAndDeleteLabor.01",
+      "description": "Test Case 83937:User can Add labor. Test Case 83938:User can delete labor. Test Case 83939:User can cancel deleting (X-icon). Test Case 83940:User can cancel deleting (No)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91139"
+        },
+        {
+          "testCaseID": "91140"
+        },
+        {
+          "testCaseID": "91141"
+        },
+        {
+          "testCaseID": "91142"
+        }
+      ],
+      "location": "Best Location Automation",
+      "woNum": "O-000-152414",
+      "labor": "Labor AM"
+    }
+  ],
+  "verifyUserCanChangeStatusOfThePart": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfThePart.01",
+      "description": "Test Case 83965-83973, 89749:User can change Status of the Part",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91162"
+        },
+        {
+          "testCaseID": "91163"
+        },
+        {
+          "testCaseID": "91164"
+        },
+        {
+          "testCaseID": "91165"
+        },
+        {
+          "testCaseID": "91166"
+        },
+        {
+          "testCaseID": "91167"
+        },
+        {
+          "testCaseID": "91168"
+        },
+        {
+          "testCaseID": "91169"
+        },
+        {
+          "testCaseID": "91170"
+        },
+        {
+          "testCaseID": "91171"
+        }
+      ],
+      "location": "Best Location Automation",
+      "woNum": "O-000-152414",
+      "statuses": [
+        "On Hold",
+        "Problem",
+        "Return to Vendor (RTV)",
+        "Quote Received",
+        "Ordered",
+        "Re-Ordered",
+        "Received",
+        "RTV Complete",
+        "Refused",
+        "Audited"
+      ]
+    }
+  ],
+  "verifyTheSameStatusesAreDisplayedOnRODetailsAndPMPages": [
+    {
+      "rowID": "verifyTheSameStatusesAreDisplayedOnRODetailsAndPMPages.01",
+      "description": "Show the same statuses at ROD and Parts Management page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "107622"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147524"
+      },
+      "partData": {
+        "service": "IvPartTest_OptionClarif",
+        "description": "Auto-test",
+        "category": "Body",
+        "subcategory": "Adhesives",
+        "partItems": [
+          "Windshield Adhesive Kit"
+        ],
+        "partNames": [
+          "Opt_prefix Windshield Adhesive Kit"
+        ]
+      }
+    }
+  ],
+  "verifyThePONumberFieldIsDisplayedAndEditableOnThePMPage": [
+    {
+      "rowID": "verifyThePONumberFieldIsDisplayedAndEditableOnThePMPage.01",
+      "description": "Verify the \"PO#\" field is presented and editable on the \"Parts Management\" page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "105752"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-236-00019"
+      }
+    }
+  ],
+  "verifyUserCanChangePartForSpecifiedParts": [
+    {
+      "rowID": "verifyUserCanChangePartForSpecifiedParts.01",
+      "description": "User can change \"#Part\" for the specified parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93088"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-236-00009"
+      },
+      "partData": {
+        "partNames": [
+          "Part: Bumper"
+        ]
+      },
+      "partNumber": "04711-SNH-A90ZZ"
+    }
+  ],
+  "verifyUserCanChangeCoreStatus": [
+    {
+      "rowID": "verifyUserCanChangeCoreStatus.01",
+      "description": "User can change Core Status",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93080"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-374-00003"
+      }
+    }
+  ],
+  "verifyUserCanSelectPartConditions": [
+    {
+      "rowID": "verifyUserCanSelectPartConditions.01",
+      "description": "User can select Part Conditions",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93042"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-374-00003"
+      }
+    }
+  ],
+  "verifyUserCanChangePartValues": [
+    {
+      "rowID": "verifyUserCanChangePartValues.01",
+      "description": "Test Case 83960: User can change \"Quantity\". Test Case 83959: User can change \"Price\". Test Case 83961: User can change \"ETA\". Test Case 83957: User can change \"Vendor Price\". Test Case 83974: User can change Provider of the Part. User can change Labor Credit. User can change Core Price.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91158"
+        },
+        {
+          "testCaseID": "91173"
+        },
+        {
+          "testCaseID": "93077"
+        },
+        {
+          "testCaseID": "93074"
+        },
+        {
+          "testCaseID": "91156"
+        },
+        {
+          "testCaseID": "91160"
+        },
+        {
+          "testCaseID": "91154"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-152414"
+      },
+      "provider": "VK TEAM"
+    }
+  ],
+  "verifyUserCanSelectAndDeselectThePartByActivatingAndDeactivatingTheCheckbox": [
+    {
+      "rowID": "verifyUserCanSelectAndDeselectThePartByActivatingAndDeactivatingTheCheckbox.01",
+      "description": "Test Case 83951:User can select the Part by activating the check-box",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91150"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-152414"
+      }
+    }
+  ],
+  "verifyUserCanChangeStatusForMultipleServices": [
+    {
+      "rowID": "verifyUserCanChangeStatusForMultipleServices.01",
+      "description": "Test Case 122527:Verify user can change status for multiple services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "122527"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-163-00040"
+      },
+      "partData": {
+        "service": "Oksi Part service - Part name",
+        "description": "Auto-test",
+        "category": "Body",
+        "subcategory": "Bumper",
+        "partItems": [
+          "Bumper Cover Support"
+        ]
+      }
+    }
+  ]
+}
