@@ -55,8 +55,8 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
     @AfterMethod
     public void afterMethod() {
         HomeScreenSteps.openMonitor();
-        MonitorSteps.changeLocation("automationMonitoring");
         SearchSteps.clearAllFilters();
+        SearchSteps.searchByText("");
         ScreenNavigationSteps.pressBackButton();
     }
 
