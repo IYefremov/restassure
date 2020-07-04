@@ -7,8 +7,6 @@
     <test name="Tests for VNext client" group-by-instances="true">
         <classes>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringBaseCase"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringCommonFilters"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitoringSearchFiltersTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringCalculations"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.problemreporting.VNextTeamMonitoringProblemReporting"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.problemreporting.VNextTeamProblemEnforcement"/>
@@ -26,6 +24,8 @@
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorStartPhaseServicesTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorFocusModeButtonTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorFlagsAddDeleteServicesTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringCommonFilters"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitoringSearchFiltersTestCases"/>
         </classes>
     </test>
 </suite>
