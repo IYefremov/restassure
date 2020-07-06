@@ -5,6 +5,7 @@ import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -180,8 +181,10 @@ public class MyAssureClass {
 
                 .then()
                 .log().body()
+                .log().all()
                 .statusCode(404)
-                .time(lessThan(5000L));
+                .time(lessThan(5000L))
+                .body("isEmpty()", Matchers.is(true));
     }
 
     @Test
