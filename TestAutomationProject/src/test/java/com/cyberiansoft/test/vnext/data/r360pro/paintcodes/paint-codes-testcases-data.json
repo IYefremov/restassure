@@ -1,0 +1,41 @@
+{
+  "testInspectionsVerifyPaintCodesFunctionality": [
+    {
+      "rowID": "testInspectionsVerifyPaintCodesFunctionality.01",
+      "description": "Inspections - Paint Codes functionality",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "133720",
+          "testCaseTitle": "Inspections - Paint Codes functionality"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "2HKYF186X5H004048",
+        "vehicleMake": "BMW",
+        "vehicleModel": "750I XDRIVE",
+        "vehicleYear": "2017"
+      }
+    }
+  ],
+  "testWorkOrdersVerifyPaintCodesFunctionality": [
+    {
+      "rowID": "testWorkOrdersVerifyPaintCodesFunctionality.01",
+      "description": "Work Orders - Paint Codes functionality",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "133721",
+          "testCaseTitle": "Work Orders - Paint Codes functionality"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "2HKYF186X5H004048",
+        "vehicleMake": "BMW",
+        "vehicleModel": "750I XDRIVE",
+        "vehicleYear": "2017"
+      },
+      "moneyService": {
+        "serviceName": "Battery Installation"
+      }
+    }
+  ]
+}

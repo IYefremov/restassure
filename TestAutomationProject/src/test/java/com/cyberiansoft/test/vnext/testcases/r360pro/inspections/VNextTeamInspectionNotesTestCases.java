@@ -180,7 +180,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         NotesSteps.addQuickNote(quickNoteText2);
         NotesValidations.verifyNoteIsPresent(noteText + '\n' + quickNoteText1 + '\n' + quickNoteText2);
         ScreenNavigationSteps.pressHardwareBackButton();
-        BaseUtils.waitABit(10000);
+        BaseUtils.waitABit(15000);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesValidations.verifyNoteIsPresent(noteText + '\n' + quickNoteText1 + '\n' + quickNoteText2);
