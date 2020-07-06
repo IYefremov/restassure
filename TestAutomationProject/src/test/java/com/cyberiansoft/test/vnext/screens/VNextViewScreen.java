@@ -129,7 +129,7 @@ public class VNextViewScreen extends VNextBaseScreen {
 
 	public boolean isPainCodePresent(String painCodeValue) {
 		ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(viewscreen.findElement(By.xpath(".//iframe[@class='printing-viewer']")));
-		boolean exists = viewscreen.getText().contains(painCodeValue);
+		boolean exists = contentTable.getText().contains(painCodeValue);
 		ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
 		return  exists;
 	}

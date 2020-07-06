@@ -13,7 +13,6 @@
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamArchiveInspectionsTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionsServicesTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionsChangeCustomerTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextInspectionsPainCodesTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionsLineApprovalTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamCalculationsTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextLaborServiceTestCases"/>

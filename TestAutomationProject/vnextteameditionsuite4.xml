@@ -6,6 +6,7 @@
     <parameter name="lic.name" value="Automation_lic4"  />
     <test name="Tests for VNext client" group-by-instances="true">
         <classes>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.paintcodes.VNextPainCodesTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.techsplit.VNextTeamTechSplitBaseCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.techsplit.VNextTeamTechSplitTeamCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.techsplit.VNextTeamTechSplitServiceCases"/>
